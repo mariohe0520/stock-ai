@@ -677,7 +677,7 @@ html,body{
   --glow-gold:0 0 18px rgba(245,166,35,.3),0 0 6px rgba(245,166,35,.15);
 }
 
-html,[data-theme="dark"] body{
+html[data-theme="dark"],html[data-theme="dark"] body{
   background:linear-gradient(168deg,#0a0e17 0%,#141b2d 100%);
 }
 
@@ -934,6 +934,18 @@ html,[data-theme="dark"] body{
 
 /* END PREMIUM OVERHAUL */
 
+/* Premium → light theme fixes (must come after premium overhaul) */
+[data-theme="light"] .detail-overlay{background:var(--bg)}
+[data-theme="light"] .modal-sheet{background:var(--bg2);backdrop-filter:blur(40px);border-color:rgba(0,0,0,.08);box-shadow:0 -4px 20px rgba(0,0,0,.08)}
+[data-theme="light"] .toast{background:var(--bg2)!important;border-color:rgba(0,0,0,.08)!important;box-shadow:0 4px 20px rgba(0,0,0,.1)!important}
+[data-theme="light"] .stock-row{background:rgba(0,0,0,.02);box-shadow:0 1px 3px rgba(0,0,0,.06),inset 0 1px 0 rgba(255,255,255,.5)}
+[data-theme="light"] .glass-card,[data-theme="light"] .advisor-card,[data-theme="light"] .news-card,[data-theme="light"] .chain-insight,[data-theme="light"] .chain-stat-card{background:rgba(255,255,255,.85);box-shadow:0 1px 4px rgba(0,0,0,.06);border-color:rgba(0,0,0,.06)}
+[data-theme="light"] .chain-node-bg{fill:url(#nodeGradientLight)!important}
+[data-theme="light"] .detail-metrics{background:rgba(0,0,0,.02);box-shadow:none}
+[data-theme="light"] .detail-metric{background:var(--bg)}
+[data-theme="light"] .portfolio-summary{background:linear-gradient(135deg,rgba(99,102,241,.06),rgba(16,185,129,.04));box-shadow:0 2px 8px rgba(0,0,0,.04)}
+[data-theme="light"] .btn-primary{background:linear-gradient(135deg,#f5a623,#e09520);box-shadow:0 2px 8px rgba(245,166,35,.2)}
+
 /* ============================================================
    TAB BAR — 6 tabs responsive
    ============================================================ */
@@ -1152,7 +1164,7 @@ html,[data-theme="dark"] body{
     <div class="me-header">
       <div class="me-avatar">👤</div>
       <div class="me-name" id="meName">投资者</div>
-      <div class="me-sub" id="meSub">StockAI Pro · v6.0</div>
+      <div class="me-sub" id="meSub">StockAI Pro · v7.0</div>
     </div>
     <div id="meContent"></div>
   </div>
@@ -2437,7 +2449,7 @@ function renderMe(){
       <div class="me-menu-left"><span class="me-menu-icon">📖</span><span class="me-menu-text">关于 StockAI</span></div>
       <div class="me-menu-right"><span class="me-menu-arrow">›</span></div>
     </div>
-    <div style="text-align:center;padding:24px 0;font-size:11px;color:var(--dim2)">StockAI v6.0 · Made with 🤖 by OpenClaw</div>
+    <div style="text-align:center;padding:24px 0;font-size:11px;color:var(--dim2)">StockAI v7.0 · Made with 🤖 by OpenClaw</div>
   `;
 }
 
@@ -2498,9 +2510,17 @@ function renderChain(){
 
   let svg=`<div class="chain-wrap"><svg viewBox="0 0 ${W} ${H}" class="chain-svg" xmlns="http://www.w3.org/2000/svg">`;
 
-  // Defs — shadow filter
+  // Defs — shadow filter + node gradient
   svg+=`<defs>
     <filter id="chainShadow"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity=".2"/></filter>
+    <radialGradient id="nodeGradient" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#252d45"/>
+      <stop offset="100%" stop-color="#141b2d"/>
+    </radialGradient>
+    <radialGradient id="nodeGradientLight" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f0f0f5"/>
+    </radialGradient>
   </defs>`;
 
   // Connection lines (behind everything)
