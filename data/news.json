@@ -1,10 +1,10 @@
 {
-  "updated": "2026-02-17T20:13:36Z",
+  "updated": "2026-02-17T20:43:35Z",
   "count": 13,
   "news": [
     {
-      "headline": "美股三大指数承压下行 — S&P -1.3% 纳指-3.8% 道指+0.4%",
-      "summary": "标普500报6,852点，收跌1.3%。纳斯达克-3.8%，道指+0.4%。",
+      "headline": "美股三大指数承压下行 — S&P -1.3% 纳指-3.9% 道指+0.4%",
+      "summary": "标普500报6,847点，收跌1.3%。纳斯达克-3.9%，道指+0.4%。",
       "category": "market",
       "sentiment": "bearish",
       "tickers": [
@@ -12,35 +12,46 @@
         "^IXIC",
         "^DJI"
       ],
-      "time": "2026-02-17T20:13:36Z",
+      "time": "2026-02-17T20:43:35Z",
       "priority": 10
     },
     {
-      "headline": "PayPal Holdings, Inc.(PYPL)暴跌28.0% 受宏观数据影响",
-      "summary": "PayPal Holdings, Inc.报$40.98，跌28.0%。成为今日跌幅最深个股之一。",
+      "headline": "PayPal Holdings, Inc.(PYPL)暴跌28.2% 受宏观数据影响",
+      "summary": "PayPal Holdings, Inc.报$40.82，跌28.2%。成为今日跌幅最深个股之一。",
       "category": "stock",
       "sentiment": "bearish",
       "tickers": [
         "PYPL"
       ],
-      "time": "2026-02-17T20:13:36Z",
+      "time": "2026-02-17T20:43:35Z",
       "priority": 8
     },
     {
-      "headline": "📊 板块轮动信号：资金从创新流向能源 价差26.3%",
-      "summary": "能源板块领涨+12.6%，创新板块垫底-13.7%。板块间价差达26.3%，轮动信号明显。",
+      "headline": "📊 板块轮动信号：资金从创新流向能源 价差26.6%",
+      "summary": "能源板块领涨+12.7%，创新板块垫底-13.9%。板块间价差达26.6%，轮动信号明显。",
       "category": "rotation",
       "sentiment": "neutral",
       "tickers": [
         "XLE",
         "ARKK"
       ],
-      "time": "2026-02-17T20:13:36Z",
+      "time": "2026-02-17T20:43:35Z",
       "priority": 8
     },
     {
-      "headline": "板块轮动：能源领涨(+12.6%) 创新垫底(-13.7%)",
-      "summary": "今日板块：能源+12.6%、半导体+3.8%、医疗+1.2%、科技-3.9%、金融-4.0%、创新-13.7%。分化明显。",
+      "headline": "VIX升至20.2 市场波动加剧",
+      "summary": "恐慌指数报20.2（+27.3%），高于20警戒线。注意仓位管理。",
+      "category": "volatility",
+      "sentiment": "bearish",
+      "tickers": [
+        "^VIX"
+      ],
+      "time": "2026-02-17T20:43:35Z",
+      "priority": 7
+    },
+    {
+      "headline": "板块轮动：能源领涨(+12.7%) 创新垫底(-13.9%)",
+      "summary": "今日板块：能源+12.7%、半导体+3.5%、医疗+1.1%、金融-4.1%、科技-4.1%、创新-13.9%。分化明显。",
       "category": "sector",
       "sentiment": "neutral",
       "tickers": [
@@ -51,12 +62,12 @@
         "SOXX",
         "ARKK"
       ],
-      "time": "2026-02-17T20:13:36Z",
+      "time": "2026-02-17T20:43:35Z",
       "priority": 7
     },
     {
-      "headline": "半导体板块集体走强 NVDA跌0.2%",
-      "summary": "芯片股集体走强，板块均涨2.3%。英伟达$185.85。AI算力需求持续为焦点。",
+      "headline": "半导体板块集体走强 NVDA跌0.6%",
+      "summary": "芯片股集体走强，板块均涨2.0%。英伟达$185.14。AI算力需求持续为焦点。",
       "category": "theme",
       "sentiment": "bullish",
       "tickers": [
@@ -66,12 +77,12 @@
         "AVGO",
         "ASML"
       ],
-      "time": "2026-02-17T20:13:36Z",
+      "time": "2026-02-17T20:43:35Z",
       "priority": 7
     },
     {
-      "headline": "中概股下挫 板块均-3.2% — 2/9只上涨",
-      "summary": "阿里-5.8%，拼多多-4.2%。海外监管不确定性持续。",
+      "headline": "中概股下挫 板块均-3.3% — 2/9只上涨",
+      "summary": "阿里-5.7%，拼多多-4.3%。海外监管不确定性持续。",
       "category": "theme",
       "sentiment": "bearish",
       "tickers": [
@@ -81,25 +92,25 @@
         "BIDU",
         "NIO"
       ],
-      "time": "2026-02-17T20:13:36Z",
+      "time": "2026-02-17T20:43:35Z",
       "priority": 7
     },
     {
-      "headline": "今日领涨：ARM、ON、LI",
-      "summary": "涨幅居前：Arm Holdings plc(ARM) +19.5%；ON Semiconductor Corporation(ON) +19.1%；Li Auto Inc.(LI) +13.4%。",
+      "headline": "今日领涨：ON、ARM、LI",
+      "summary": "涨幅居前：ON Semiconductor Corporation(ON) +19.2%；Arm Holdings plc(ARM) +18.9%；Li Auto Inc.(LI) +13.6%。",
       "category": "movers",
       "sentiment": "bullish",
       "tickers": [
-        "ARM",
         "ON",
+        "ARM",
         "LI"
       ],
-      "time": "2026-02-17T20:13:36Z",
+      "time": "2026-02-17T20:43:35Z",
       "priority": 6
     },
     {
       "headline": "跌幅居前：PYPL、SHOP、PATH",
-      "summary": "跌幅居前：PayPal Holdings, Inc.(PYPL) -28.0%；Shopify Inc.(SHOP) -27.4%；UiPath, Inc.(PATH) -24.0%。",
+      "summary": "跌幅居前：PayPal Holdings, Inc.(PYPL) -28.2%；Shopify Inc.(SHOP) -27.5%；UiPath, Inc.(PATH) -23.4%。",
       "category": "movers",
       "sentiment": "bearish",
       "tickers": [
@@ -107,11 +118,11 @@
         "SHOP",
         "PATH"
       ],
-      "time": "2026-02-17T20:13:36Z",
+      "time": "2026-02-17T20:43:35Z",
       "priority": 6
     },
     {
-      "headline": "金融板块走弱 均-11.3% 摩根大通+0.0%",
+      "headline": "金融板块走弱 均-11.4% 摩根大通+0.0%",
       "summary": "金融股受利率下行和信贷担忧拖累。",
       "category": "theme",
       "sentiment": "bearish",
@@ -120,7 +131,7 @@
         "MA",
         "PYPL"
       ],
-      "time": "2026-02-17T20:13:36Z",
+      "time": "2026-02-17T20:43:35Z",
       "priority": 6
     },
     {
@@ -131,12 +142,12 @@
       "tickers": [
         "ISRG"
       ],
-      "time": "2026-02-17T20:13:36Z",
+      "time": "2026-02-17T20:43:35Z",
       "priority": 6
     },
     {
-      "headline": "科技巨头齐跌 平均-5.9%",
-      "summary": "Apple Inc.(AAPL) +3.7%、Microsoft Corporation(MSFT) -13.7%、Amazon.com, Inc.(AMZN) -15.9%、Meta Platforms, Inc.(META) +3.4%、NVIDIA Corporation(NVDA) -0.2%、Tesla, Inc.(TSLA) -6.2%、Netflix, Inc.(NFLX) -12.6%。",
+      "headline": "科技巨头齐跌 平均-6.1%",
+      "summary": "Apple Inc.(AAPL) +3.4%、Microsoft Corporation(MSFT) -13.7%、Amazon.com, Inc.(AMZN) -16.1%、Meta Platforms, Inc.(META) +3.1%、NVIDIA Corporation(NVDA) -0.6%、Tesla, Inc.(TSLA) -5.9%、Netflix, Inc.(NFLX) -12.6%。",
       "category": "theme",
       "sentiment": "bearish",
       "tickers": [
@@ -147,30 +158,19 @@
         "NVDA",
         "TSLA"
       ],
-      "time": "2026-02-17T20:13:36Z",
+      "time": "2026-02-17T20:43:35Z",
       "priority": 6
     },
     {
       "headline": "30日趋势：标普500高位整理 近5日低于前5日0.3%",
-      "summary": "多空博弈加剧。近5日均价6,881，前5日均价6,899。",
+      "summary": "多空博弈加剧。近5日均价6,880，前5日均价6,899。",
       "category": "analysis",
       "sentiment": "neutral",
       "tickers": [
         "^GSPC"
       ],
-      "time": "2026-02-17T20:13:36Z",
+      "time": "2026-02-17T20:43:35Z",
       "priority": 5
-    },
-    {
-      "headline": "VIX报19.9（+25.7%）波动正常",
-      "summary": "恐慌指数处于15-20正常区间。",
-      "category": "volatility",
-      "sentiment": "neutral",
-      "tickers": [
-        "^VIX"
-      ],
-      "time": "2026-02-17T20:13:36Z",
-      "priority": 3
     }
   ]
 }
