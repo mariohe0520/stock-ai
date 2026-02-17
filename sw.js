@@ -1,4 +1,4 @@
-const CACHE_NAME = 'stockai-v5';
+const CACHE_NAME = 'stockai-v6';
 const ASSETS = [
   './',
   './index.html',

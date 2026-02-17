@@ -933,6 +933,133 @@ html,[data-theme="dark"] body{
 ::selection{background:rgba(245,166,35,.25);color:#fff}
 
 /* END PREMIUM OVERHAUL */
+
+/* ============================================================
+   TAB BAR — 6 tabs responsive
+   ============================================================ */
+.tab-bar{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab-item{padding:6px 8px;min-width:44px;flex-shrink:0}
+
+/* ============================================================
+   PORTFOLIO ENHANCEMENTS — allocation bars + delete
+   ============================================================ */
+.alloc-bar-wrap{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.alloc-bar-label{font-size:12px;font-weight:700;min-width:48px}
+.alloc-bar-track{flex:1;height:8px;background:var(--glass);border-radius:4px;overflow:hidden}
+.alloc-bar-fill{height:100%;border-radius:4px;transition:width .5s}
+.alloc-bar-pct{font-size:11px;color:var(--dim);min-width:42px;text-align:right}
+.position-row{position:relative}
+.position-delete{
+  width:32px;height:32px;border:none;border-radius:8px;
+  background:rgba(239,68,68,.1);color:var(--red);font-size:13px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-left:8px;font-family:var(--font);
+}
+.position-delete:active{background:rgba(239,68,68,.2)}
+
+/* ============================================================
+   EDUCATION MODULE — lessons, quizzes, badges
+   ============================================================ */
+.edu-progress-bar{
+  background:var(--glass);border-radius:20px;height:8px;overflow:hidden;margin:8px 0 4px;
+}
+.edu-progress-fill{
+  height:100%;border-radius:20px;
+  background:linear-gradient(90deg,var(--acc),var(--pri));
+  transition:width .6s cubic-bezier(.25,.1,.25,1);
+}
+.edu-progress-text{font-size:11px;color:var(--dim);text-align:center;margin-bottom:16px}
+.edu-lesson-card{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;background:var(--card);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);
+  border-radius:var(--r);margin-bottom:8px;cursor:pointer;
+  transition:transform .12s,background .2s;
+}
+.edu-lesson-card:active{transform:scale(.98)}
+.edu-lesson-card.locked{opacity:.5;cursor:default;pointer-events:none}
+.edu-lesson-card.completed{border-left:3px solid var(--pri)}
+.edu-lesson-icon{font-size:28px;flex-shrink:0;width:40px;text-align:center}
+.edu-lesson-info{flex:1;min-width:0}
+.edu-lesson-title{font-size:14px;font-weight:700}
+.edu-lesson-sub{font-size:11px;color:var(--dim);margin-top:2px}
+.edu-lesson-badge{font-size:20px;flex-shrink:0}
+.edu-lesson-lock{font-size:16px;color:var(--dim);flex-shrink:0}
+
+.edu-detail{padding:0;animation:pageIn .32s cubic-bezier(.25,.1,.25,1)}
+.edu-back-btn{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:8px 14px;border-radius:20px;font-size:13px;font-weight:600;
+  background:var(--glass);border:1px solid var(--glass-border);
+  color:var(--txt);cursor:pointer;margin-bottom:14px;
+  font-family:var(--font);border:none;
+}
+.edu-back-btn:active{opacity:.7}
+.edu-section{
+  background:var(--card);border:1px solid var(--glass-border);
+  border-radius:var(--r);padding:16px;margin-bottom:12px;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+.edu-section h3{font-size:15px;font-weight:800;margin-bottom:10px}
+.edu-section p{font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:10px}
+.edu-section p:last-child{margin-bottom:0}
+.edu-example{
+  background:linear-gradient(135deg,rgba(99,102,241,.08),rgba(16,185,129,.05));
+  border:1px solid rgba(99,102,241,.12);
+  border-radius:var(--r);padding:16px;margin-bottom:12px;
+}
+.edu-example h3{font-size:14px;font-weight:700;margin-bottom:8px;color:var(--acc)}
+.edu-example p{font-size:13px;color:var(--txt2);line-height:1.7}
+.quiz-section{
+  background:var(--card);border:1px solid var(--glass-border);
+  border-radius:var(--r);padding:16px;margin-bottom:12px;
+  backdrop-filter:blur(20px);
+}
+.quiz-section h3{font-size:15px;font-weight:800;margin-bottom:14px}
+.quiz-q{margin-bottom:16px}
+.quiz-q-text{font-size:13px;font-weight:700;margin-bottom:8px}
+.quiz-q-num{font-size:11px;color:var(--dim);margin-bottom:4px}
+.quiz-opt{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;border-radius:var(--r-sm);margin-bottom:6px;
+  background:var(--glass);border:2px solid transparent;
+  cursor:pointer;transition:all .2s;font-size:13px;color:var(--txt);
+}
+.quiz-opt:active{transform:scale(.98)}
+.quiz-opt.selected{border-color:var(--acc);background:rgba(99,102,241,.1)}
+.quiz-opt.correct{border-color:var(--up);background:rgba(0,211,149,.1);color:var(--up)}
+.quiz-opt.wrong{border-color:var(--red);background:rgba(255,71,87,.1);color:var(--red)}
+.quiz-radio{
+  width:18px;height:18px;border-radius:50%;border:2px solid var(--dim);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  transition:border-color .2s;
+}
+.quiz-opt.selected .quiz-radio{border-color:var(--acc)}
+.quiz-opt.selected .quiz-radio::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--acc)}
+.quiz-opt.correct .quiz-radio{border-color:var(--up)}
+.quiz-opt.correct .quiz-radio::after{content:'✓';font-size:11px;color:var(--up);font-weight:700}
+.quiz-opt.wrong .quiz-radio{border-color:var(--red)}
+.quiz-opt.wrong .quiz-radio::after{content:'✗';font-size:11px;color:var(--red);font-weight:700}
+.quiz-result{
+  text-align:center;padding:16px;border-radius:var(--r);margin-top:12px;
+}
+.quiz-result.perfect{background:rgba(0,211,149,.1);border:1px solid rgba(0,211,149,.2)}
+.quiz-result.good{background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.2)}
+.quiz-result.retry{background:rgba(255,71,87,.08);border:1px solid rgba(255,71,87,.15)}
+.quiz-result-score{font-size:28px;font-weight:900;margin-bottom:4px}
+.quiz-result-text{font-size:13px;color:var(--txt2)}
+.quiz-result-badge{font-size:40px;margin-bottom:8px}
+
+/* Light theme edu overrides */
+[data-theme="light"] .edu-lesson-card{background:var(--card)}
+[data-theme="light"] .edu-lesson-card.locked{opacity:.4}
+[data-theme="light"] .edu-section{background:var(--card)}
+[data-theme="light"] .edu-example{background:linear-gradient(135deg,rgba(99,102,241,.05),rgba(16,185,129,.03))}
+[data-theme="light"] .quiz-section{background:var(--card)}
+[data-theme="light"] .quiz-opt{background:rgba(0,0,0,.03)}
+[data-theme="light"] .position-delete{background:rgba(239,68,68,.08)}
 </style>
 </head>
 <body>
@@ -1025,9 +1152,19 @@ html,[data-theme="dark"] body{
     <div class="me-header">
       <div class="me-avatar">👤</div>
       <div class="me-name" id="meName">投资者</div>
-      <div class="me-sub" id="meSub">StockAI Pro · v5.0</div>
+      <div class="me-sub" id="meSub">StockAI Pro · v6.0</div>
     </div>
     <div id="meContent"></div>
+  </div>
+
+  <!-- ===== PAGE: 学堂 (Education) ===== -->
+  <div class="page" id="page-edu">
+    <div style="padding:4px 0 12px">
+      <h2 style="font-size:20px;font-weight:800">📚 投资学堂</h2>
+      <p style="font-size:12px;color:var(--dim);margin-top:4px">每天解锁一课，系统学习投资知识</p>
+    </div>
+    <div id="eduProgress"></div>
+    <div id="eduContent"></div>
   </div>
 </div>
 
@@ -1037,6 +1174,7 @@ html,[data-theme="dark"] body{
   <button class="tab-item" data-page="advisor"><span class="tab-icon">🤖</span>AI投顾</button>
   <button class="tab-item" data-page="portfolio"><span class="tab-icon">💼</span>持仓</button>
   <button class="tab-item" data-page="chain"><span class="tab-icon">🔗</span>产业链</button>
+  <button class="tab-item" data-page="edu"><span class="tab-icon">📚</span>学堂</button>
   <button class="tab-item" data-page="me"><span class="tab-icon">👤</span>我的</button>
 </div>
 
@@ -1063,7 +1201,7 @@ html,[data-theme="dark"] body{
     <div class="modal-title">添加持仓</div>
     <div class="form-group">
       <label class="form-label">股票代码</label>
-      <input class="form-input" id="formTicker" placeholder="例如 NVDA" autocapitalize="characters">
+      <select class="form-input" id="formTicker"><option value="">选择股票...</option></select>
     </div>
     <div class="form-row">
       <div class="form-group">
@@ -1818,17 +1956,43 @@ function renderPortfolio(){
     </div>
     ${positions.map((pos,i)=>{
       const up=pos.pl>=0;
-      return `<div class="position-row" onclick="showDetail('${pos.ticker}')">
-        <div class="position-left"><div class="position-ticker">${pos.ticker} <span style="font-size:11px;color:var(--dim)">${pos.shares}股</span></div><div class="position-detail">成本 $${pos.buyPrice.toFixed(2)} · ${pos.date||'—'}</div></div>
-        <div class="position-right"><div class="position-value">$${pos.value.toFixed(2)}</div><div class="position-pl ${up?'text-up':'text-dn'}">${up?'+':''}$${pos.pl.toFixed(2)} (${up?'+':''}${pos.plPct.toFixed(1)}%)</div></div>
+      const alloc=totalValue>0?(pos.value/totalValue*100).toFixed(1):'0.0';
+      return `<div class="position-row" onclick="showDetail('${pos.ticker}')" style="display:flex;align-items:center">
+        <div class="position-left" style="flex:1;min-width:0">
+          <div class="position-ticker">${pos.ticker} <span style="font-size:11px;color:var(--dim)">${pos.shares}股 · ${alloc}%</span></div>
+          <div class="position-detail">成本 $${pos.buyPrice.toFixed(2)} → 现价 $${pos.currentPrice.toFixed(2)}</div>
+        </div>
+        <div class="position-right">
+          <div class="position-value">$${pos.value.toFixed(2)}</div>
+          <div class="position-pl ${up?'text-up':'text-dn'}">${up?'+':''}$${pos.pl.toFixed(2)} (${up?'+':''}${pos.plPct.toFixed(1)}%)</div>
+        </div>
+        <button class="position-delete" onclick="event.stopPropagation();deletePosition(${i})" title="删除">✕</button>
       </div>`;
     }).join('')}
+    <div class="glass-card" style="margin-bottom:12px">
+      <div style="font-size:13px;font-weight:700;margin-bottom:10px">📊 持仓分布</div>
+      ${positions.map(pos=>{
+        const alloc=totalValue>0?(pos.value/totalValue*100):0;
+        const up=pos.pl>=0;
+        return `<div class="alloc-bar-wrap">
+          <span class="alloc-bar-label">${pos.ticker}</span>
+          <div class="alloc-bar-track"><div class="alloc-bar-fill" style="width:${alloc}%;background:${up?'var(--up)':'var(--dn)'}"></div></div>
+          <span class="alloc-bar-pct">${alloc.toFixed(1)}%</span>
+        </div>`;
+      }).join('')}
+    </div>
     <button class="add-btn" onclick="openAddModal()">＋ 添加持仓</button>
     <button class="btn-danger" onclick="clearPortfolio()" style="margin-bottom:20px">🗑 清空所有持仓</button>`;
 }
 
 function openAddModal(){
-  document.getElementById('formTicker').value='';
+  const sel=document.getElementById('formTicker');
+  // Populate select with all tradeable stocks
+  if(sel.options.length<=1){
+    const allStocks=ALL.filter(s=>!INDEX_TICKERS.has(s.t));
+    allStocks.forEach(s=>{const o=document.createElement('option');o.value=s.t;o.textContent=s.t+' — '+s.n;sel.appendChild(o);});
+  }
+  sel.value='';
   document.getElementById('formPrice').value='';
   document.getElementById('formShares').value='';
   document.getElementById('formDate').value=new Date().toISOString().slice(0,10);
@@ -1838,11 +2002,9 @@ function closeAddModal(){document.getElementById('addModal').classList.remove('o
 function quickAddPosition(ticker){
   closeDetail();
   setTimeout(()=>{
+    openAddModal();
     document.getElementById('formTicker').value=ticker;
     document.getElementById('formPrice').value=prices[ticker]?.price?.toFixed(2)||'';
-    document.getElementById('formShares').value='';
-    document.getElementById('formDate').value=new Date().toISOString().slice(0,10);
-    document.getElementById('addModal').classList.add('open');
   },350);
 }
 document.getElementById('formSubmit').addEventListener('click',()=>{
@@ -1858,6 +2020,22 @@ document.getElementById('formSubmit').addEventListener('click',()=>{
 document.getElementById('formCancel').addEventListener('click',closeAddModal);
 document.getElementById('addModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeAddModal()});
 function clearPortfolio(){if(confirm('确定清空所有持仓数据？此操作不可恢复。')){localStorage.removeItem('stockai-portfolio');renderPortfolio()}}
+
+function deletePosition(index){
+  if(!confirm('确定删除此持仓？')) return;
+  const portfolio=getPortfolio();
+  portfolio.splice(index,1);
+  savePortfolio(portfolio);
+  renderPortfolio();
+}
+
+// Auto-fill price when ticker selected
+document.getElementById('formTicker').addEventListener('change', function(){
+  const ticker=this.value;
+  if(ticker&&prices[ticker]){
+    document.getElementById('formPrice').value=prices[ticker].price.toFixed(2);
+  }
+});
 
 // ===== RISK PROFILE =====
 let riskSelections = { experience: null, tolerance: null, horizon: null };
@@ -2259,7 +2437,7 @@ function renderMe(){
       <div class="me-menu-left"><span class="me-menu-icon">📖</span><span class="me-menu-text">关于 StockAI</span></div>
       <div class="me-menu-right"><span class="me-menu-arrow">›</span></div>
     </div>
-    <div style="text-align:center;padding:24px 0;font-size:11px;color:var(--dim2)">StockAI v5.0 · Made with 🤖 by OpenClaw</div>
+    <div style="text-align:center;padding:24px 0;font-size:11px;color:var(--dim2)">StockAI v6.0 · Made with 🤖 by OpenClaw</div>
   `;
 }
 
@@ -2480,6 +2658,7 @@ function switchPage(page){
     case 'portfolio': renderPortfolio(); break;
     case 'chain': renderChain(); break;
     case 'me': renderMe(); break;
+    case 'edu': renderEdu(); break;
   }
 }
 
@@ -2633,6 +2812,516 @@ async function init(){
 
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+
+// ================================================================
+// EDUCATION MODULE — 15 Lessons with Quizzes & Progress
+// ================================================================
+
+const EDU_LESSONS = [
+  {
+    id:1, title:'P/E 市盈率', icon:'📊', badge:'🎓',
+    paragraphs:[
+      'P/E（Price-to-Earnings Ratio，市盈率）是最常用的股票估值指标之一。它的计算方式是股价除以每股收益（EPS）。例如，一只股价$100、EPS为$5的股票，P/E为20。',
+      '高P/E通常意味着市场对公司未来增长有较高预期——科技成长股P/E常在30-60之间。低P/E可能代表被低估，也可能是公司增长放缓。不同行业的P/E标准不同，不能简单地跨行业比较。',
+      '使用P/E时需注意：Forward P/E（预期市盈率）基于分析师对未来盈利的预测，Trailing P/E基于过去12个月实际盈利。两者可能差异很大。另外，亏损公司没有P/E，需要用其他指标如P/S（市销率）来评估。'
+    ],
+    exampleFn: function(){
+      const portfolio=getPortfolio();
+      if(portfolio.length>0){
+        const pos=portfolio[0];
+        const p=prices[pos.ticker];
+        if(p&&p.price){
+          const mockPE=(p.price/(p.price*0.03+Math.random()*2)).toFixed(1);
+          return `以你持仓中的 ${pos.ticker} 为例：当前价格 $${p.price.toFixed(2)}，假设每股收益约$${(p.price/parseFloat(mockPE)).toFixed(2)}，则P/E约为 ${mockPE}。这意味着你为每$1的盈利支付了$${mockPE}。与同行业对比，可以判断是否被高估或低估。`;
+        }
+      }
+      const nvda=prices['NVDA'];
+      return nvda?`以NVDA为例：当前价格$${nvda.price.toFixed(2)}，假设年度EPS约$${(nvda.price/35).toFixed(2)}，则P/E约为35。这在芯片行业中属于偏高水平，反映了市场对AI需求增长的高预期。`:'P/E是对比同行业公司估值的基础工具。建议将同一行业的公司P/E放在一起对比分析。';
+    },
+    quiz:[
+      {q:'一只股票价格$200，EPS为$10，其P/E是多少？',opts:['10','20','30','200'],ans:1},
+      {q:'高P/E通常代表什么？',opts:['公司亏损','市场预期高增长','股价便宜','低风险'],ans:1},
+      {q:'哪种公司无法计算P/E？',opts:['科技公司','大型公司','亏损公司','外国公司'],ans:2}
+    ]
+  },
+  {
+    id:2, title:'市值 Market Cap', icon:'🏢', badge:'🏅',
+    paragraphs:[
+      '市值（Market Capitalization）= 股价 × 总股数。它反映了市场对一家公司的总体估价。苹果市值约$3万亿，是全球最大的公司之一。市值是衡量公司规模的最直接指标。',
+      '按市值分类：大盘股（Large Cap）>$100亿，通常更稳定；中盘股（Mid Cap）$20-100亿，有增长潜力；小盘股（Small Cap）<$20亿，波动大但可能有超额回报。ETF如SPY追踪大盘股，而Russell 2000追踪小盘股。',
+      '市值会随股价波动而变化，不代表公司的"真实价值"。两家营收相同的公司可能市值差异巨大——市场更看好增长前景的公司市值更高。拆股、回购等行为也会影响总股数进而影响市值。'
+    ],
+    exampleFn: function(){
+      const portfolio=getPortfolio();
+      if(portfolio.length>=2){
+        return `你的持仓组合中有${portfolio.length}只股票。大盘股提供稳定性，成长股提供上升空间。建议观察每只持仓的市值级别，确保投资组合在不同规模之间有合理分配。`;
+      }
+      return '以科技巨头为例：NVDA、MSFT、GOOG都属于万亿级市值公司（Mega Cap），而AI概念股如C3.ai（AI）市值仅约$40亿，属于小盘股。两者的波动性和风险完全不同。';
+    },
+    quiz:[
+      {q:'市值如何计算？',opts:['营收×利润率','股价×总股数','资产-负债','股价×P/E'],ans:1},
+      {q:'大盘股的市值标准通常是？',opts:['>$10亿','>$50亿','>$100亿','>$1万亿'],ans:2},
+      {q:'哪类股票通常波动最大？',opts:['大盘股','中盘股','小盘股','ETF'],ans:2}
+    ]
+  },
+  {
+    id:3, title:'每股收益 EPS', icon:'💰', badge:'💎',
+    paragraphs:[
+      'EPS（Earnings Per Share，每股收益）= 净利润 / 总股数。它告诉你公司为每一股赚了多少钱。EPS是计算P/E的基础，也是财报中最受关注的指标之一。',
+      'EPS分为基本EPS和稀释EPS（Diluted EPS）。稀释EPS考虑了期权、可转债等可能增加股数的因素，通常低于基本EPS。分析师更关注稀释EPS。每个季度的财报都会报告EPS，并与市场预期（Consensus Estimate）对比。',
+      '当实际EPS超过预期（Beat），股价通常上涨；低于预期（Miss），通常下跌。但也有例外——如果公司EPS下降但降幅小于预期，股价可能反而上涨。关注EPS的趋势比单一季度的数字更重要。'
+    ],
+    exampleFn: function(){
+      const msft=prices['MSFT'];
+      if(msft) return `以MSFT（微软）为例：当前价格$${msft.price.toFixed(2)}。假设年度EPS约$12，意味着微软每股每年为股东赚$12。财报季时，如果EPS超出分析师预期，股价通常会跳涨。`;
+      return '以一家年利润$10亿、总股数5亿的公司为例：EPS=$2。如果下一季度EPS增长到$2.5，同比增长25%——这种强劲的增长通常会推高股价。';
+    },
+    quiz:[
+      {q:'EPS的计算公式是？',opts:['股价÷利润','净利润÷总股数','营收÷股数','市值÷利润'],ans:1},
+      {q:'当实际EPS超过市场预期时，通常？',opts:['股价下跌','股价上涨','没有影响','无法判断'],ans:1},
+      {q:'稀释EPS通常比基本EPS？',opts:['更高','更低','相同','不确定'],ans:1}
+    ]
+  },
+  {
+    id:4, title:'股息率 Dividend Yield', icon:'🌾', badge:'🌟',
+    paragraphs:[
+      '股息率（Dividend Yield）= 年度每股股息 / 股价 × 100%。例如一只$100的股票每年派息$3，股息率为3%。股息是公司将利润分给股东的方式，是投资回报的重要组成部分。',
+      '高股息率的公司通常是成熟企业（如可口可乐、强生），增长较慢但现金流稳定。科技成长股（如NVDA、META）通常不派息或股息率很低，因为它们将利润再投资于增长。选择取决于你的投资目标。',
+      '"股息贵族"（Dividend Aristocrats）指连续25年以上增加股息的公司——这些公司经历了多次经济周期仍能持续加息，是长期投资的优质选择。注意：高股息率可能是"陷阱"——如果股价因基本面恶化而暴跌，股息率会被动升高。'
+    ],
+    exampleFn: function(){
+      const portfolio=getPortfolio();
+      const techStocks=['NVDA','AMD','META','GOOG','AMZN'];
+      const hasTech=portfolio.some(p=>techStocks.includes(p.ticker));
+      if(hasTech) return `你的持仓中有科技成长股，这类公司通常股息率很低或不派息。如果你希望获得稳定现金流收入，可以考虑配置一些高股息ETF来平衡。`;
+      return '以SPY（S&P 500 ETF）为例：平均股息率约1.5%。虽然看起来不高，但加上价格上涨，长期总回报相当可观。复利效应下，股息再投资10年可以显著增加总回报。';
+    },
+    quiz:[
+      {q:'一只$50的股票年派息$2，股息率是多少？',opts:['2%','4%','25%','50%'],ans:1},
+      {q:'哪类公司通常股息率最高？',opts:['初创科技公司','成熟消费品公司','亏损公司','小盘股'],ans:1},
+      {q:'"股息贵族"需要连续增加股息多少年？',opts:['5年','10年','25年','50年'],ans:2}
+    ]
+  },
+  {
+    id:5, title:'RSI 相对强弱指标', icon:'📈', badge:'⚡',
+    paragraphs:[
+      'RSI（Relative Strength Index，相对强弱指标）是最流行的动量指标之一，数值范围0-100。它衡量最近一段时间（通常14天）内涨跌的相对幅度。RSI帮助判断股票是否被过度买入或卖出。',
+      'RSI>70通常被视为超买（Overbought），意味着股价可能被推高太快，有回调风险。RSI<30为超卖（Oversold），暗示过度下跌，可能迎来反弹。但在强势趋势中，RSI可能长时间停留在极端区域。',
+      'RSI最好与其他指标配合使用。RSI背离（Divergence）是强信号：当股价创新高但RSI没有——说明上涨动能减弱。反之，价格创新低但RSI走高——下跌动能减弱，可能是底部信号。'
+    ],
+    exampleFn: function(){
+      const movers=ALL.filter(s=>!INDEX_TICKERS.has(s.t)&&prices[s.t]).sort((a,b)=>Math.abs(prices[b.t].changePct)-Math.abs(prices[a.t].changePct));
+      if(movers.length>0){
+        const top=movers[0];
+        const p=prices[top.t];
+        const mockRSI=p.changePct>3?72+Math.random()*15:p.changePct<-3?18+Math.random()*12:40+Math.random()*20;
+        return `今日 ${top.t} 变动 ${p.changePct>0?'+':''}${p.changePct.toFixed(1)}%，模拟RSI约${mockRSI.toFixed(0)}。${mockRSI>70?'处于超买区域，短线可能有回调压力。':''}${mockRSI<30?'处于超卖区域，可能存在反弹机会。':''}RSI需结合趋势方向综合判断。`;
+      }
+      return 'RSI是短线交易者的必备工具。当RSI从超卖区(<30)向上穿越30时，常被视为买入信号；从超买区(>70)向下穿越70时，为卖出信号。';
+    },
+    quiz:[
+      {q:'RSI的数值范围是？',opts:['0-50','0-100','-100到100','0-200'],ans:1},
+      {q:'RSI>70通常意味着？',opts:['超卖','超买','中性','无意义'],ans:1},
+      {q:'RSI背离是指？',opts:['RSI等于50','价格和RSI走势矛盾','RSI为负数','两只股票RSI相同'],ans:1}
+    ]
+  },
+  {
+    id:6, title:'移动平均线 Moving Averages', icon:'〰️', badge:'📐',
+    paragraphs:[
+      '移动平均线（MA）是将一定时期内的收盘价取平均值形成的曲线。常用的有MA5（5日）、MA20（20日）、MA50（50日）和MA200（200日）。短期MA反映近期趋势，长期MA反映大趋势。',
+      '简单移动平均（SMA）对每天赋予同等权重，指数移动平均（EMA）给近期数据更高权重，对价格变化更敏感。交易者常用"金叉"（短期MA上穿长期MA）作为买入信号，"死叉"（短期下穿长期）作为卖出信号。',
+      'MA200被视为牛熊分界线——股价在MA200上方时处于长期上升趋势，下方则处于下降趋势。机构投资者特别关注MA50和MA200的位置关系。MA也常作为动态支撑和阻力位使用。'
+    ],
+    exampleFn: function(){
+      const spy=prices['SPY']||prices['^GSPC'];
+      if(spy&&spy.spark&&spy.spark.length>=5){
+        const ma5=(spy.spark.reduce((a,b)=>a+b,0)/spy.spark.length).toFixed(2);
+        return `以SPY最近5日数据为例：5日均线约$${ma5}，当前价$${spy.price.toFixed(2)}。${spy.price>parseFloat(ma5)?'股价在5日均线上方，短线偏多。':'股价在5日均线下方，短线偏空。'}实际交易中还需参考50日和200日均线。`;
+      }
+      return '均线系统是趋势跟踪的基础。当MA5>MA20>MA50>MA200时形成"多头排列"，表明处于强势上涨趋势。反之为"空头排列"。';
+    },
+    quiz:[
+      {q:'MA200通常被视为？',opts:['日线支撑','牛熊分界线','买入信号','成交量指标'],ans:1},
+      {q:'"金叉"是指什么？',opts:['股价创新高','短期MA上穿长期MA','RSI>70','成交量放大'],ans:1},
+      {q:'EMA与SMA相比？',opts:['完全相同','对近期数据更敏感','只看收盘价','更滞后'],ans:1}
+    ]
+  },
+  {
+    id:7, title:'成交量 Volume', icon:'📊', badge:'🔔',
+    paragraphs:[
+      '成交量（Volume）是一段时间内交易的股票总数。它反映了市场参与度和交易活跃程度。单看价格变动不够——配合成交量才能判断趋势的"含金量"。',
+      '放量上涨（价升量增）是健康的上升信号，说明有大量资金入场支持上涨。缩量上涨则需警惕——缺乏资金支持的上涨难以持续。放量下跌通常意味着恐慌性抛售，而缩量下跌说明抛压减轻，可能接近底部。',
+      '异常放量（Volume Spike）往往预示着重要转折。比如：长期下跌后突然成交量暴增3-5倍，可能是底部信号（机构大举建仓）。注意观察成交量与20日均量的对比关系。'
+    ],
+    exampleFn: function(){
+      const bigMover=ALL.filter(s=>!INDEX_TICKERS.has(s.t)&&prices[s.t]).sort((a,b)=>Math.abs(prices[b.t].changePct)-Math.abs(prices[a.t].changePct))[0];
+      if(bigMover){
+        const p=prices[bigMover.t];
+        return `今日 ${bigMover.t} 变动 ${p.changePct>0?'+':''}${p.changePct.toFixed(1)}%，是波动最大的股票。在实际交易中，你应该检查这个变动是否伴随成交量的显著变化——放量变动更有参考价值。`;
+      }
+      return '举例：如果NVDA某天上涨3%，成交量是平时的2倍，这说明大量资金在推动上涨。但如果成交量反而萎缩，可能只是少数买盘推高价格，后续难以为继。';
+    },
+    quiz:[
+      {q:'什么是"放量上涨"最可能意味的？',opts:['准备下跌','健康上升信号','超卖信号','市场休市'],ans:1},
+      {q:'缩量下跌通常代表？',opts:['恐慌抛售','抛压减轻','牛市开始','成交量异常'],ans:1},
+      {q:'Volume Spike是指？',opts:['成交量很低','成交量异常放大','股价创新高','连续5天上涨'],ans:1}
+    ]
+  },
+  {
+    id:8, title:'支撑位与阻力位', icon:'🧱', badge:'🏰',
+    paragraphs:[
+      '支撑位（Support）是股价下跌时可能止跌的价格区域，因为买盘力量在此集中。阻力位（Resistance）是上涨时可能遇阻的区域。它们是技术分析的基石概念。',
+      '支撑/阻力形成的原因是心理和资金效应：当很多人在$100买入，股价跌回$100时，这些人倾向于"保本"持有甚至加仓，形成买盘支撑。反之，在$120套牢的人等股价回到$120就卖出，形成卖压阻力。',
+      '关键规则：当支撑位被有效跌破，它会变成新的阻力位；阻力位被突破后变成新的支撑位。"有效"通常指收盘价突破且伴随放量。使用整数关口（$100、$200）和历史高低点作为参考。'
+    ],
+    exampleFn: function(){
+      const portfolio=getPortfolio();
+      if(portfolio.length>0){
+        const pos=portfolio[0];
+        return `你在 $${pos.buyPrice.toFixed(2)} 买入了 ${pos.ticker}。这个价格对你来说就是一个心理支撑位——如果股价跌到这个水平，你可能倾向于持有或加仓。全市场许多投资者的买入价共同形成了支撑区域。`;
+      }
+      return '假设NVDA在$800-$820区间多次获得支撑（跌到此处就反弹），这就形成了一个强支撑区。如果有一天放量跌破$800，这个支撑就变成了阻力——后续反弹到$800附近会遇到抛压。';
+    },
+    quiz:[
+      {q:'支撑位被跌破后通常会？',opts:['消失','变成新的阻力位','变得更强','无变化'],ans:1},
+      {q:'哪个因素帮助确认突破的有效性？',opts:['时间长短','成交量放大','股票代码','P/E比率'],ans:1},
+      {q:'支撑位形成的主要原因是？',opts:['政府干预','买盘力量集中','公司回购','媒体报道'],ans:1}
+    ]
+  },
+  {
+    id:9, title:'板块轮动 Sector Rotation', icon:'🔄', badge:'🎪',
+    paragraphs:[
+      '板块轮动（Sector Rotation）是资金在不同行业板块之间流动的现象。经济周期的不同阶段，不同行业的表现差异很大。理解轮动规律可以帮助你在正确的时间配置正确的板块。',
+      '经济扩张初期：科技、消费可选领涨。扩张中后期：工业、原材料表现好。衰退期：公用事业、医疗保健等防御板块抗跌。复苏期：金融、房地产率先反弹。AI产业链也有自己的轮动——先炒芯片，再炒基建，然后是模型和应用。',
+      '观察板块轮动的工具：对比板块ETF（如XLK科技、XLF金融）的相对表现。当资金从一个板块流出时，另一个板块往往在吸引资金。不要追已经涨了很多的板块——考虑布局下一个可能轮到的板块。'
+    ],
+    exampleFn: function(){
+      const layerPerf=CHAIN_LAYERS.map(layer=>{
+        let sum=0,cnt=0;const seen=new Set();
+        layer.nodes.forEach(n=>{if(!seen.has(n.ticker)&&prices[n.ticker]){sum+=prices[n.ticker].changePct;cnt++;seen.add(n.ticker)}});
+        return {name:layer.label,avg:cnt>0?sum/cnt:0};
+      });
+      const best=layerPerf.sort((a,b)=>b.avg-a.avg)[0];
+      const worst=layerPerf[layerPerf.length-1];
+      return `今日AI产业链板块表现：最强 ${best.name}(${best.avg>0?'+':''}${best.avg.toFixed(1)}%)，最弱 ${worst.name}(${worst.avg>0?'+':''}${worst.avg.toFixed(1)}%)。这种分化正是板块轮动的体现——资金从弱势板块流向强势板块。`;
+    },
+    quiz:[
+      {q:'经济衰退期通常哪类板块最抗跌？',opts:['科技','消费可选','公用事业/医疗','半导体'],ans:2},
+      {q:'AI产业链的轮动顺序通常是？',opts:['应用→芯片→云','芯片→云→模型→应用','模型→应用→芯片','随机的'],ans:1},
+      {q:'观察板块轮动的好工具是？',opts:['个股K线','板块ETF相对表现','新闻标题','P/E比较'],ans:1}
+    ]
+  },
+  {
+    id:10, title:'定投策略 DCA', icon:'📅', badge:'🏆',
+    paragraphs:[
+      '定投（Dollar Cost Averaging，DCA）是指在固定时间间隔投入固定金额买入某资产。比如每月1号买$500的QQQ。无论股价高低都执行，最终获得平均买入成本。',
+      'DCA的优势：消除择时焦虑——不需要判断"什么时候买"。在股价低时自动买入更多股数，高时买入较少股数，天然地"低买多、高买少"。历史回测显示，长期DCA的回报与"完美择时"差距不大。',
+      '最适合DCA的标的：宽基指数ETF（SPY、QQQ）。这些ETF高度分散，不会因单只股票暴跌而崩盘。定投周期建议：周定投比月定投更平滑，但差异不大。关键是坚持——在恐慌时停止定投是最常见的错误。'
+    ],
+    exampleFn: function(){
+      const qqq=prices['QQQ'];
+      if(qqq){
+        const monthly500=(500/qqq.price).toFixed(2);
+        return `假设你每月定投$500买QQQ，当前价格$${qqq.price.toFixed(2)}，本月可买入约${monthly500}股。如果下月QQQ跌10%至$${(qqq.price*0.9).toFixed(2)}，$500可以买入${(500/(qqq.price*0.9)).toFixed(2)}股——自动买更多。这就是DCA的力量。`;
+      }
+      return '假设你从2020年开始每月定投$500买SPY，即使经历了2022年的大跌，到2024年你的平均成本远低于最新价格，获得了可观回报。定投的敌人不是市场波动，而是你的恐惧和贪婪。';
+    },
+    quiz:[
+      {q:'DCA最大的优势是什么？',opts:['保证赚钱','消除择时焦虑','零风险','杠杆放大'],ans:1},
+      {q:'最适合DCA的标的是？',opts:['高风险小盘股','宽基指数ETF','加密货币','期权'],ans:1},
+      {q:'定投最常见的错误是？',opts:['金额太少','在恐慌时停止定投','买太多','周定投'],ans:1}
+    ]
+  },
+  {
+    id:11, title:'风险管理', icon:'🛡️', badge:'🔐',
+    paragraphs:[
+      '风险管理是投资成功的基石——专业投资者花更多时间管理风险而非追逐回报。核心原则：永远不要把无法承受损失的钱投入市场。止损（Stop Loss）是最基本的风险管理工具。',
+      '仓位管理公式：单笔交易风险不超过总资金的1-2%。假设你有$10万，每笔最多亏$1000-$2000。这意味着如果设置5%的止损，单笔仓位最多$2万-$4万。永远不要All-in（全仓）一只股票。',
+      '风险分为系统性风险（市场整体下跌，如金融危机）和非系统性风险（个股事件，如财报暴雷）。分散投资可以降低非系统性风险但无法消除系统性风险。对冲工具如看跌期权可以管理系统性风险。'
+    ],
+    exampleFn: function(){
+      const portfolio=getPortfolio();
+      if(portfolio.length>0){
+        const totalValue=portfolio.reduce((s,p)=>(prices[p.ticker]?.price||p.buyPrice)*p.shares+s,0);
+        const largest=portfolio.reduce((max,p)=>{const v=(prices[p.ticker]?.price||p.buyPrice)*p.shares;return v>max.v?{t:p.ticker,v}:max},{t:'',v:0});
+        const pct=(largest.v/totalValue*100).toFixed(1);
+        return `你的持仓中 ${largest.t} 占比 ${pct}%。${parseFloat(pct)>50?'⚠️ 集中度偏高！建议单只股票不超过总仓位的30-40%，以降低个股风险。':'集中度在合理范围内。'}总仓位$${totalValue.toFixed(0)}，建议单笔最大止损不超过$${(totalValue*0.02).toFixed(0)}。`;
+      }
+      return '举例：$10万的投资组合，买入$3万NVDA并设置5%止损（$-1500），这占总资金的1.5%——在安全范围内。如果NVDA跌5%触发止损，你只损失1.5%的总资金，不会伤筋动骨。';
+    },
+    quiz:[
+      {q:'单笔交易的风险建议不超过总资金的？',opts:['5-10%','1-2%','10-20%','50%'],ans:1},
+      {q:'分散投资可以降低哪种风险？',opts:['系统性风险','非系统性风险','所有风险','无法降低'],ans:1},
+      {q:'All-in一只股票的主要风险是？',opts:['收益太高','错过其他机会','个股崩盘导致巨亏','税务问题'],ans:2}
+    ]
+  },
+  {
+    id:12, title:'投资组合分散', icon:'🎯', badge:'🌈',
+    paragraphs:[
+      '分散投资（Diversification）被称为"投资中唯一的免费午餐"。通过持有不同资产、行业、地区的投资品，降低整体风险而不必牺牲太多预期回报。核心是找到低相关性的资产。',
+      '分散的层次：①资产类别（股票、债券、商品）②行业板块（科技、医疗、消费）③地区（美股、A股、欧股）④市值（大盘、中盘、小盘）。15-25只不同行业的股票就能获得大部分分散效果。',
+      '常见错误：持有10只科技股以为是"分散"——它们高度相关，会同涨同跌。真正的分散需要包含低相关资产。简单的组合建议：60%美股宽基ETF + 20%国际ETF + 10%债券 + 10%其他。'
+    ],
+    exampleFn: function(){
+      const portfolio=getPortfolio();
+      if(portfolio.length>=2){
+        const sectors=new Set(portfolio.map(p=>{const s=ALL.find(a=>a.t===p.ticker);return s?.cat||'未知'}));
+        return `你当前持有${portfolio.length}只股票，覆盖${sectors.size}个板块（${[...sectors].join('、')}）。${sectors.size<=1?'⚠️ 过度集中在同一板块！建议添加不同行业的标的。':sectors.size>=3?'✅ 板块分散度不错，继续保持。':'可以考虑再增加1-2个不同板块。'}`;
+      }
+      return '假设你只持有NVDA和AMD——它们都是芯片股，相关性极高。如果芯片行业整体下跌，两只都会跌。但如果加入MSFT（软件）、SPY（指数ETF），整体波动会显著降低。';
+    },
+    quiz:[
+      {q:'分散投资被称为？',opts:['投资中唯一的免费午餐','最危险的策略','低回报策略','短线技巧'],ans:0},
+      {q:'持有10只科技股算是分散投资吗？',opts:['是，因为数量多','不是，因为高度相关','是，因为都是大公司','不是，因为太少'],ans:1},
+      {q:'获得大部分分散效果需要多少只不同行业股票？',opts:['3-5只','15-25只','50-100只','越多越好'],ans:1}
+    ]
+  },
+  {
+    id:13, title:'牛市与熊市', icon:'🐂', badge:'🐻',
+    paragraphs:[
+      '牛市（Bull Market）定义为从低点上涨20%以上的市场，通常伴随经济增长和投资者信心。熊市（Bear Market）定义为从高点下跌20%以上。了解市场周期对投资决策至关重要。',
+      '牛市特征：经济扩张、企业盈利增长、低失业率、投资者乐观。平均持续约3.5年。熊市特征：经济收缩或担忧、盈利下滑、VIX升高、投资者恐惧。平均持续约10个月——通常比牛市短得多。',
+      '关键心理：牛市后期要谨慎（"别人贪婪时恐惧"），熊市末期要勇敢（"别人恐惧时贪婪"）。大部分人的错误是牛市高位追涨、熊市底部割肉——完全相反。VIX>25且SPY跌超20%时，往往是长期投资者的好机会。'
+    ],
+    exampleFn: function(){
+      const vix=prices['^VIX'];
+      const sp=prices['^GSPC'];
+      if(vix&&sp){
+        const vixV=vix.price;
+        let mood=vixV<15?'极度乐观（可能接近牛市顶部）':vixV<20?'偏乐观':vixV<25?'中性':vixV<30?'偏恐惧':'极度恐惧（可能接近熊市底部）';
+        return `当前VIX=${vixV.toFixed(1)}，市场情绪：${mood}。S&P 500今日${sp.changePct>0?'+':''}${sp.changePct.toFixed(1)}%。${vixV>25?'高VIX环境下坚持定投，历史表明这种时期反而是好的买入时机。':'当前环境相对平稳，保持正常投资节奏即可。'}`;
+      }
+      return '2022年是典型熊市：S&P 500从高点下跌超25%，VIX多次突破30。但如果你在那时坚持定投，2023-2024年的牛市让你获利丰厚。周期是永恒的。';
+    },
+    quiz:[
+      {q:'熊市的定义是从高点下跌多少？',opts:['10%','15%','20%','30%'],ans:2},
+      {q:'牛市平均持续时间vs熊市？',opts:['牛市更短','差不多','牛市更长','无法比较'],ans:2},
+      {q:'巴菲特名言"别人恐惧时"应该？',opts:['也恐惧','立刻清仓','贪婪（买入）','什么都不做'],ans:2}
+    ]
+  },
+  {
+    id:14, title:'期权基础 Options', icon:'🎰', badge:'🎲',
+    paragraphs:[
+      '期权（Options）赋予你在特定时间以特定价格买入（看涨期权Call）或卖出（看跌期权Put）标的股票的权利，但非义务。买入Call看涨，买入Put看跌或对冲。期权是高级工具，杠杆效应显著。',
+      '关键术语：执行价（Strike Price）、到期日（Expiration）、权利金（Premium）。例如：买入NVDA $150 Call 3个月到期，花费$5/股。如果NVDA涨到$170，你赚$170-$150-$5=$15/股（300%回报）。如果没涨过$150，$5权利金归零。',
+      '⚠️ 期权风险极高：买方可能损失100%权利金，卖方（裸卖）风险无限。新手切勿裸卖期权。如果要使用，从Covered Call（备兑看涨）开始——你持有100股底仓，卖出一个Call赚取权利金收入。'
+    ],
+    exampleFn: function(){
+      const portfolio=getPortfolio();
+      if(portfolio.length>0){
+        const pos=portfolio.find(p=>p.shares>=100);
+        if(pos){
+          const p=prices[pos.ticker];
+          if(p){
+            const strikeAbove=(p.price*1.1).toFixed(0);
+            return `你持有${pos.shares}股${pos.ticker}（≥100股）。可以考虑Covered Call策略：卖出执行价$${strikeAbove}的Call（高于当前价$${p.price.toFixed(2)}约10%），收取权利金作为额外收入。即使被行权，也是在高于当前价10%的位置卖出。`;
+          }
+        }
+        return `你的持仓中暂无100股以上的个股。Covered Call策略需要至少100股底仓。如果将来积累足够股数，可以考虑这种稳健的期权策略来增加收入。`;
+      }
+      return '假设你持有100股NVDA（$150），卖出1张$165 Call收取$3权利金。情况A：NVDA到期低于$165，你保留$300权利金。情况B：涨破$165，你在$165卖出+$300权利金。两种都不亏。';
+    },
+    quiz:[
+      {q:'Call期权赋予持有者什么权利？',opts:['必须买入','可以卖出','可以买入','必须卖出'],ans:2},
+      {q:'买入期权最大亏损是？',opts:['无限','100%权利金','50%','10%'],ans:1},
+      {q:'Covered Call需要什么前提？',opts:['大量现金','持有100股底仓','融资账户','专业资格'],ans:1}
+    ]
+  },
+  {
+    id:15, title:'解读财报 Earnings', icon:'📑', badge:'👑',
+    paragraphs:[
+      '上市公司每季度发布财报（Earnings Report），是最重要的投资事件。核心数据：营收（Revenue）、净利润、EPS、指引（Guidance）。Beat（超预期）或Miss（不及预期）对股价影响巨大。',
+      '重点关注：①营收增长率（YoY）——比利润更难"做账"②毛利率变化——反映定价能力③Guidance——公司对下季度的展望比当季结果更重要④自由现金流——真金白银比利润数字更可靠⑤管理层电话会议（Earnings Call）的措辞。',
+      '财报交易技巧：不建议在财报公布前重仓押注——结果不可预测。常见的"Sell the news"现象：即使EPS超预期，如果Guidance不够强，股价仍然下跌。长期投资者更关注连续几个季度的趋势而非单次结果。'
+    ],
+    exampleFn: function(){
+      const portfolio=getPortfolio();
+      if(portfolio.length>0){
+        const pos=portfolio[0];
+        const p=prices[pos.ticker];
+        if(p){
+          return `你持有的 ${pos.ticker} 每季度都会发布财报。建议关注：①EPS是否超预期 ②营收增长率 ③管理层Guidance。在财报公布前，考虑是否需要减仓以控制风险——${pos.ticker}财报后可能大幅波动5-10%。`;
+        }
+      }
+      return '以NVDA为例：AI需求推动下，如果季度营收增长>50%（YoY）且数据中心业务持续扩张，通常是强烈的看涨信号。但如果Guidance（前瞻指引）增速放缓，市场可能解读为"增长见顶"而抛售。';
+    },
+    quiz:[
+      {q:'为什么Guidance比当季结果更重要？',opts:['因为更容易造假','因为反映未来前景','因为数字更大','因为法律要求'],ans:1},
+      {q:'"Sell the news"现象是指？',opts:['好消息后股价上涨','好消息后股价反而下跌','坏消息后买入','新闻发布时买入'],ans:1},
+      {q:'财报中哪个指标最难"做账"？',opts:['EPS','净利润','营收','P/E'],ans:2}
+    ]
+  }
+];
+
+// Education progress helpers
+function getEduProgress(){ return lsGet('edu-progress',{completed:[],quizScores:{},firstVisit:null}); }
+function saveEduProgress(p){ lsSet('edu-progress',p); }
+
+function getUnlockedCount(){
+  const prog=getEduProgress();
+  if(!prog.firstVisit){
+    prog.firstVisit=new Date().toISOString().slice(0,10);
+    saveEduProgress(prog);
+    return 1;
+  }
+  const first=new Date(prog.firstVisit+'T00:00:00');
+  const now=new Date();
+  const days=Math.floor((now-first)/86400000);
+  return Math.min(days+1,15);
+}
+
+let eduDetailView=null; // null=list, lesson id=detail
+
+function renderEdu(){
+  const prog=getEduProgress();
+  const unlocked=getUnlockedCount();
+  const completed=prog.completed||[];
+  const total=EDU_LESSONS.length;
+
+  // Progress bar
+  const pctDone=(completed.length/total*100).toFixed(0);
+  document.getElementById('eduProgress').innerHTML=`
+    <div class="glass-card" style="padding:14px 16px;margin-bottom:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <span style="font-size:13px;font-weight:700">学习进度</span>
+        <span style="font-size:13px;font-weight:800;color:var(--pri)">${completed.length}/${total}</span>
+      </div>
+      <div class="edu-progress-bar"><div class="edu-progress-fill" style="width:${pctDone}%"></div></div>
+      <div class="edu-progress-text">${completed.length===total?'🎉 恭喜！你已完成所有课程！':`已解锁 ${unlocked}/${total} 课 · 每天解锁新课程`}</div>
+      ${completed.length>0?`<div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center">${completed.map(id=>{const l=EDU_LESSONS.find(x=>x.id===id);return l?`<span title="${l.title}" style="font-size:18px">${l.badge}</span>`:''}).join('')}</div>`:''}
+    </div>`;
+
+  const content=document.getElementById('eduContent');
+  if(eduDetailView){
+    renderLessonDetail(eduDetailView);
+    return;
+  }
+
+  // Lesson list
+  content.innerHTML=EDU_LESSONS.map(lesson=>{
+    const isUnlocked=lesson.id<=unlocked;
+    const isCompleted=completed.includes(lesson.id);
+    const score=prog.quizScores?.[lesson.id];
+    return `<div class="edu-lesson-card ${isCompleted?'completed':''} ${!isUnlocked?'locked':''}" ${isUnlocked?`onclick="eduDetailView=${lesson.id};renderEdu()"`:''}>
+      <div class="edu-lesson-icon">${isUnlocked?lesson.icon:'🔒'}</div>
+      <div class="edu-lesson-info">
+        <div class="edu-lesson-title">${isUnlocked?lesson.title:'第'+lesson.id+'课 · 明天解锁'}</div>
+        <div class="edu-lesson-sub">${isCompleted?'✅ 已完成'+(score!=null?' · 测验 '+score+'/3':''):(isUnlocked?'点击开始学习':'🔒 明天自动解锁')}</div>
+      </div>
+      ${isCompleted?`<div class="edu-lesson-badge">${lesson.badge}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+function renderLessonDetail(lessonId){
+  const lesson=EDU_LESSONS.find(l=>l.id===lessonId);
+  if(!lesson) return;
+  const prog=getEduProgress();
+  const isCompleted=(prog.completed||[]).includes(lessonId);
+  const prevScore=prog.quizScores?.[lessonId];
+  const exampleText=lesson.exampleFn();
+
+  const content=document.getElementById('eduContent');
+  content.innerHTML=`
+    <div class="edu-detail">
+      <button class="edu-back-btn" onclick="eduDetailView=null;renderEdu()">← 返回课程列表</button>
+      <div style="text-align:center;margin-bottom:16px">
+        <div style="font-size:40px;margin-bottom:8px">${lesson.icon}</div>
+        <div style="font-size:18px;font-weight:800">${lesson.title}</div>
+        ${isCompleted?`<div style="margin-top:6px;font-size:24px">${lesson.badge}</div>`:''}
+      </div>
+      <div class="edu-section">
+        <h3>📖 知识要点</h3>
+        ${lesson.paragraphs.map(p=>'<p>'+p+'</p>').join('')}
+      </div>
+      <div class="edu-example">
+        <h3>💡 实战案例</h3>
+        <p>${exampleText}</p>
+      </div>
+      <div class="quiz-section" id="quizSection${lessonId}">
+        <h3>🧪 测验 (${isCompleted&&prevScore!=null?prevScore+'/3 · 可重新作答':'3题'})</h3>
+        ${lesson.quiz.map((q,qi)=>`
+          <div class="quiz-q" data-qi="${qi}">
+            <div class="quiz-q-num">问题 ${qi+1}/3</div>
+            <div class="quiz-q-text">${q.q}</div>
+            ${q.opts.map((opt,oi)=>`
+              <div class="quiz-opt" data-qi="${qi}" data-oi="${oi}" onclick="selectQuizOpt(${lessonId},${qi},${oi})">
+                <div class="quiz-radio"></div>
+                <span>${opt}</span>
+              </div>
+            `).join('')}
+          </div>
+        `).join('')}
+        <button class="btn-primary" onclick="submitQuiz(${lessonId})" id="quizSubmit${lessonId}">提交答案</button>
+        <div id="quizResult${lessonId}"></div>
+      </div>
+    </div>`;
+}
+
+let quizAnswers={};
+
+function selectQuizOpt(lessonId,qi,oi){
+  if(!quizAnswers[lessonId]) quizAnswers[lessonId]={};
+  quizAnswers[lessonId][qi]=oi;
+  // Update UI
+  const section=document.getElementById('quizSection'+lessonId);
+  const qDiv=section.querySelectorAll('.quiz-q')[qi];
+  qDiv.querySelectorAll('.quiz-opt').forEach((el,i)=>{
+    el.classList.toggle('selected',i===oi);
+    el.classList.remove('correct','wrong');
+  });
+}
+
+function submitQuiz(lessonId){
+  const lesson=EDU_LESSONS.find(l=>l.id===lessonId);
+  if(!lesson) return;
+  const answers=quizAnswers[lessonId]||{};
+  if(Object.keys(answers).length<3){
+    showToast('请回答所有3个问题');
+    return;
+  }
+  let score=0;
+  const section=document.getElementById('quizSection'+lessonId);
+  lesson.quiz.forEach((q,qi)=>{
+    const userAns=answers[qi];
+    const correct=q.ans;
+    const qDiv=section.querySelectorAll('.quiz-q')[qi];
+    qDiv.querySelectorAll('.quiz-opt').forEach((el,i)=>{
+      el.classList.remove('selected');
+      el.style.pointerEvents='none';
+      if(i===correct) el.classList.add('correct');
+      else if(i===userAns&&userAns!==correct) el.classList.add('wrong');
+    });
+    if(userAns===correct) score++;
+  });
+
+  // Save progress
+  const prog=getEduProgress();
+  if(!prog.quizScores) prog.quizScores={};
+  prog.quizScores[lessonId]=score;
+  if(!prog.completed) prog.completed=[];
+  if(!prog.completed.includes(lessonId)){
+    prog.completed.push(lessonId);
+  }
+  saveEduProgress(prog);
+
+  // Show result
+  const resultEl=document.getElementById('quizResult'+lessonId);
+  const cls=score===3?'perfect':score>=2?'good':'retry';
+  const emoji=score===3?lesson.badge:score>=2?'👏':'💪';
+  const text=score===3?'满分！太棒了！获得徽章 '+lesson.badge:score>=2?'不错！继续加油！':'再复习一下知识要点吧';
+  resultEl.innerHTML=`<div class="quiz-result ${cls}">
+    <div class="quiz-result-badge">${emoji}</div>
+    <div class="quiz-result-score">${score}/3</div>
+    <div class="quiz-result-text">${text}</div>
+  </div>`;
+
+  // Disable submit, update progress bar
+  document.getElementById('quizSubmit'+lessonId).style.display='none';
+  document.getElementById('eduProgress').querySelector('.edu-progress-fill').style.width=(prog.completed.length/EDU_LESSONS.length*100)+'%';
+
+  showToast(score===3?`🎉 完美！获得 ${lesson.badge} 徽章`:score>=2?'👏 不错，'+score+'/3 通过！':'💪 得分 '+score+'/3，再看看知识要点');
 }
 
 init();
