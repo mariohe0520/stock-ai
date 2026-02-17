@@ -1,10 +1,10 @@
 {
-  "updated": "2026-02-17T16:43:31Z",
+  "updated": "2026-02-17T17:13:32Z",
   "count": 10,
   "news": [
     {
-      "headline": "美股三大指数承压下行 — S&P -1.4% 纳指-4.1% 道指+0.4%",
-      "summary": "标普500报6,842点，收跌1.4%。纳斯达克-4.1%，道指+0.4%。",
+      "headline": "美股三大指数大幅下跌 — S&P -1.6% 纳指-4.3% 道指+0.3%",
+      "summary": "标普500报6,829点，收跌1.6%。纳斯达克-4.3%，道指+0.3%。",
       "category": "market",
       "sentiment": "bearish",
       "tickers": [
@@ -12,46 +12,46 @@
         "^IXIC",
         "^DJI"
       ],
-      "time": "2026-02-17T16:43:31Z",
+      "time": "2026-02-17T17:13:32Z",
       "priority": 10
     },
     {
-      "headline": "Palantir Technologies Inc.(PLTR)暴跌22.8% 受分析师下调评级",
-      "summary": "Palantir Technologies Inc.报$132.05，跌22.8%。成为今日跌幅最深个股之一。",
+      "headline": "Palantir Technologies Inc.(PLTR)暴跌23.2% 受宏观数据影响",
+      "summary": "Palantir Technologies Inc.报$131.33，跌23.2%。成为今日跌幅最深个股之一。",
       "category": "stock",
       "sentiment": "bearish",
       "tickers": [
         "PLTR"
       ],
-      "time": "2026-02-17T16:43:31Z",
+      "time": "2026-02-17T17:13:32Z",
       "priority": 8
     },
     {
       "headline": "📊 板块轮动信号：资金从科技流向能源 价差16.6%",
-      "summary": "能源板块领涨+12.4%，科技板块垫底-4.2%。板块间价差达16.6%，轮动信号明显。",
+      "summary": "能源板块领涨+12.3%，科技板块垫底-4.4%。板块间价差达16.6%，轮动信号明显。",
       "category": "rotation",
       "sentiment": "neutral",
       "tickers": [
         "XLE",
         "XLK"
       ],
-      "time": "2026-02-17T16:43:31Z",
+      "time": "2026-02-17T17:13:32Z",
       "priority": 8
     },
     {
-      "headline": "VIX升至20.9 市场波动加剧",
-      "summary": "恐慌指数报20.9（+31.6%），高于20警戒线。注意仓位管理。",
+      "headline": "VIX升至20.7 市场波动加剧",
+      "summary": "恐慌指数报20.7（+30.6%），高于20警戒线。注意仓位管理。",
       "category": "volatility",
       "sentiment": "bearish",
       "tickers": [
         "^VIX"
       ],
-      "time": "2026-02-17T16:43:31Z",
+      "time": "2026-02-17T17:13:32Z",
       "priority": 7
     },
     {
-      "headline": "板块轮动：能源领涨(+12.4%) 科技垫底(-4.2%)",
-      "summary": "今日板块：能源+12.4%、医疗+1.2%、金融-4.0%、科技-4.2%。分化明显。",
+      "headline": "板块轮动：能源领涨(+12.3%) 科技垫底(-4.4%)",
+      "summary": "今日板块：能源+12.3%、医疗+1.1%、金融-4.2%、科技-4.4%。分化明显。",
       "category": "sector",
       "sentiment": "neutral",
       "tickers": [
@@ -60,12 +60,12 @@
         "XLE",
         "XLV"
       ],
-      "time": "2026-02-17T16:43:31Z",
+      "time": "2026-02-17T17:13:32Z",
       "priority": 7
     },
     {
-      "headline": "半导体板块集体承压 NVDA跌1.1%",
-      "summary": "芯片股集体承压，板块均跌3.3%。英伟达$184.10。AI算力需求持续为焦点。",
+      "headline": "半导体板块集体承压 NVDA跌1.3%",
+      "summary": "芯片股集体承压，板块均跌3.5%。英伟达$183.81。AI算力需求持续为焦点。",
       "category": "theme",
       "sentiment": "bearish",
       "tickers": [
@@ -74,24 +74,24 @@
         "TSM",
         "AVGO"
       ],
-      "time": "2026-02-17T16:43:31Z",
+      "time": "2026-02-17T17:13:32Z",
       "priority": 7
     },
     {
       "headline": "今日领涨：TSM、META",
-      "summary": "涨幅居前：Taiwan Semiconductor Manufacturing Company Limited(TSM) +5.9%；Meta Platforms, Inc.(META) +2.9%。",
+      "summary": "涨幅居前：Taiwan Semiconductor Manufacturing Company Limited(TSM) +5.8%；Meta Platforms, Inc.(META) +2.6%。",
       "category": "movers",
       "sentiment": "bullish",
       "tickers": [
         "TSM",
         "META"
       ],
-      "time": "2026-02-17T16:43:31Z",
+      "time": "2026-02-17T17:13:32Z",
       "priority": 6
     },
     {
       "headline": "跌幅居前：PLTR、AI、CRM",
-      "summary": "跌幅居前：Palantir Technologies Inc.(PLTR) -22.8%；C3.ai, Inc.(AI) -20.4%；Salesforce, Inc.(CRM) -18.7%。",
+      "summary": "跌幅居前：Palantir Technologies Inc.(PLTR) -23.2%；C3.ai, Inc.(AI) -20.6%；Salesforce, Inc.(CRM) -18.7%。",
       "category": "movers",
       "sentiment": "bearish",
       "tickers": [
@@ -99,12 +99,12 @@
         "AI",
         "CRM"
       ],
-      "time": "2026-02-17T16:43:31Z",
+      "time": "2026-02-17T17:13:32Z",
       "priority": 6
     },
     {
-      "headline": "科技巨头齐跌 平均-7.2%",
-      "summary": "Microsoft Corporation(MSFT) -13.3%、Alphabet Inc.(GOOG) -8.5%、Amazon.com, Inc.(AMZN) -15.9%、Meta Platforms, Inc.(META) +2.9%、NVIDIA Corporation(NVDA) -1.1%。",
+      "headline": "科技巨头齐跌 平均-7.5%",
+      "summary": "Microsoft Corporation(MSFT) -13.6%、Alphabet Inc.(GOOG) -8.8%、Amazon.com, Inc.(AMZN) -16.3%、Meta Platforms, Inc.(META) +2.6%、NVIDIA Corporation(NVDA) -1.3%。",
       "category": "theme",
       "sentiment": "bearish",
       "tickers": [
@@ -114,18 +114,18 @@
         "META",
         "NVDA"
       ],
-      "time": "2026-02-17T16:43:31Z",
+      "time": "2026-02-17T17:13:32Z",
       "priority": 6
     },
     {
       "headline": "30日趋势：标普500高位整理 近5日低于前5日0.3%",
-      "summary": "多空博弈加剧。近5日均价6,879，前5日均价6,899。",
+      "summary": "多空博弈加剧。近5日均价6,876，前5日均价6,899。",
       "category": "analysis",
       "sentiment": "neutral",
       "tickers": [
         "^GSPC"
       ],
-      "time": "2026-02-17T16:43:31Z",
+      "time": "2026-02-17T17:13:32Z",
       "priority": 5
     }
   ]
