@@ -1451,11 +1451,17 @@ const LESSON_BADGE_MAP = {
     </div>
     <div class="sub-tabs" id="quoteTabs">
       <button class="sub-tab on" data-stab="fav"><script>document.currentScript.outerHTML=icon("star",14)</script> 自选</button>
+      <button class="sub-tab" data-stab="all"><script>document.currentScript.outerHTML=icon("grid",14)</script> 全部</button>
       <button class="sub-tab" data-stab="indices"><script>document.currentScript.outerHTML=icon("globe",14)</script> 指数</button>
-      <button class="sub-tab" data-stab="chips"><script>document.currentScript.outerHTML=icon("cpu",14)</script> 芯片</button>
+      <button class="sub-tab" data-stab="techGiants"><script>document.currentScript.outerHTML=icon("building",14)</script> 巨头</button>
+      <button class="sub-tab" data-stab="aiPure"><script>document.currentScript.outerHTML=icon("brain",14)</script> AI</button>
+      <button class="sub-tab" data-stab="semis"><script>document.currentScript.outerHTML=icon("cpu",14)</script> 芯片</button>
+      <button class="sub-tab" data-stab="china"><script>document.currentScript.outerHTML=icon("globe",14)</script> 中概</button>
+      <button class="sub-tab" data-stab="gaming"><script>document.currentScript.outerHTML=icon("dice",14)</script> 游娱</button>
+      <button class="sub-tab" data-stab="fintech"><script>document.currentScript.outerHTML=icon("dollar",14)</script> 金融</button>
       <button class="sub-tab" data-stab="cloud"><script>document.currentScript.outerHTML=icon("cloud",14)</script> 云</button>
-      <button class="sub-tab" data-stab="models"><script>document.currentScript.outerHTML=icon("brain",14)</script> 模型</button>
-      <button class="sub-tab" data-stab="apps"><script>document.currentScript.outerHTML=icon("smartphone",14)</script> 应用</button>
+      <button class="sub-tab" data-stab="evClean"><script>document.currentScript.outerHTML=icon("zap",14)</script> 新能</button>
+      <button class="sub-tab" data-stab="health"><script>document.currentScript.outerHTML=icon("activity",14)</script> 医疗</button>
       <button class="sub-tab" data-stab="etfs"><script>document.currentScript.outerHTML=icon("package",14)</script> ETF</button>
     </div>
     <div id="quoteContent"></div>
@@ -1724,45 +1730,133 @@ const LESSON_BADGE_MAP = {
 // ===== DATA DEFINITIONS =====
 const STOCKS = {
   indices: [
-    { t:'^GSPC', n:'S&P 500', cat:'index' },
-    { t:'^IXIC', n:'NASDAQ', cat:'index' },
-    { t:'^DJI',  n:'Dow Jones', cat:'index' },
-    { t:'^VIX',  n:'VIX 恐慌指数', cat:'index' }
+    { t:'^GSPC', n:'S&P 500', cat:'指数' },
+    { t:'^IXIC', n:'NASDAQ', cat:'指数' },
+    { t:'^DJI',  n:'Dow Jones', cat:'指数' },
+    { t:'^VIX',  n:'VIX 恐慌指数', cat:'指数' }
   ],
-  chips: [
-    { t:'NVDA', n:'NVIDIA', cat:icon('cpu',14)+' 芯片', layer:'chip' },
-    { t:'AMD',  n:'AMD', cat:icon('cpu',14)+' 芯片', layer:'chip' },
+  techGiants: [
+    { t:'AAPL', n:'Apple', cat:icon('building',14)+' 科技巨头', layer:'app' },
+    { t:'MSFT', n:'Microsoft', cat:icon('building',14)+' 科技巨头', layer:'infra' },
+    { t:'GOOGL', n:'Google', cat:icon('building',14)+' 科技巨头', layer:'infra' },
+    { t:'AMZN', n:'Amazon', cat:icon('building',14)+' 科技巨头', layer:'infra' },
+    { t:'META', n:'Meta', cat:icon('building',14)+' 科技巨头', layer:'model' },
+    { t:'NVDA', n:'NVIDIA', cat:icon('building',14)+' 科技巨头', layer:'chip' },
+    { t:'TSLA', n:'Tesla', cat:icon('building',14)+' 科技巨头' },
+    { t:'AMD',  n:'AMD', cat:icon('building',14)+' 科技巨头', layer:'chip' },
+    { t:'INTC', n:'Intel', cat:icon('building',14)+' 科技巨头', layer:'chip' },
+    { t:'AVGO', n:'Broadcom', cat:icon('building',14)+' 科技巨头', layer:'chip' },
+    { t:'ORCL', n:'Oracle', cat:icon('building',14)+' 科技巨头', layer:'infra' },
+    { t:'CRM',  n:'Salesforce', cat:icon('building',14)+' 科技巨头', layer:'app' },
+    { t:'ADBE', n:'Adobe', cat:icon('building',14)+' 科技巨头', layer:'app' },
+    { t:'IBM',  n:'IBM', cat:icon('building',14)+' 科技巨头', layer:'infra' },
+  ],
+  aiPure: [
+    { t:'PLTR', n:'Palantir', cat:icon('brain',14)+' AI', layer:'model' },
+    { t:'AI',   n:'C3.ai', cat:icon('brain',14)+' AI', layer:'model' },
+    { t:'SNOW', n:'Snowflake', cat:icon('brain',14)+' AI', layer:'app' },
+    { t:'DDOG', n:'Datadog', cat:icon('brain',14)+' AI', layer:'app' },
+    { t:'NET',  n:'Cloudflare', cat:icon('brain',14)+' AI', layer:'infra' },
+    { t:'PATH', n:'UiPath', cat:icon('brain',14)+' AI', layer:'app' },
+    { t:'CFLT', n:'Confluent', cat:icon('brain',14)+' AI', layer:'app' },
+    { t:'MDB',  n:'MongoDB', cat:icon('brain',14)+' AI', layer:'app' },
+    { t:'SMCI', n:'Super Micro', cat:icon('brain',14)+' AI', layer:'chip' },
+  ],
+  semis: [
     { t:'TSM',  n:'TSMC', cat:icon('cpu',14)+' 芯片', layer:'chip' },
-    { t:'AVGO', n:'Broadcom', cat:icon('cpu',14)+' 芯片', layer:'chip' },
-    { t:'ASML', n:'ASML Holding', cat:icon('cpu',14)+' 芯片', layer:'chip' },
+    { t:'ASML', n:'ASML', cat:icon('cpu',14)+' 芯片', layer:'chip' },
+    { t:'QCOM', n:'Qualcomm', cat:icon('cpu',14)+' 芯片', layer:'chip' },
+    { t:'TXN',  n:'Texas Instruments', cat:icon('cpu',14)+' 芯片', layer:'chip' },
+    { t:'MU',   n:'Micron', cat:icon('cpu',14)+' 芯片', layer:'chip' },
+    { t:'LRCX', n:'Lam Research', cat:icon('cpu',14)+' 芯片', layer:'chip' },
+    { t:'KLAC', n:'KLA Corp', cat:icon('cpu',14)+' 芯片', layer:'chip' },
+    { t:'MRVL', n:'Marvell', cat:icon('cpu',14)+' 芯片', layer:'chip' },
+    { t:'ON',   n:'ON Semi', cat:icon('cpu',14)+' 芯片', layer:'chip' },
+    { t:'AMAT', n:'Applied Materials', cat:icon('cpu',14)+' 芯片', layer:'chip' },
+    { t:'ARM',  n:'ARM Holdings', cat:icon('cpu',14)+' 芯片', layer:'chip' },
+  ],
+  china: [
+    { t:'BABA', n:'阿里巴巴', cat:icon('globe',14)+' 中概股' },
+    { t:'JD',   n:'京东', cat:icon('globe',14)+' 中概股' },
+    { t:'PDD',  n:'拼多多', cat:icon('globe',14)+' 中概股' },
+    { t:'BIDU', n:'百度', cat:icon('globe',14)+' 中概股', layer:'model' },
+    { t:'NIO',  n:'蔚来', cat:icon('globe',14)+' 中概股' },
+    { t:'XPEV', n:'小鹏', cat:icon('globe',14)+' 中概股' },
+    { t:'LI',   n:'理想', cat:icon('globe',14)+' 中概股' },
+    { t:'TME',  n:'腾讯音乐', cat:icon('globe',14)+' 中概股' },
+    { t:'BILI', n:'哔哩哔哩', cat:icon('globe',14)+' 中概股' },
+    { t:'TCOM', n:'携程', cat:icon('globe',14)+' 中概股' },
+  ],
+  gaming: [
+    { t:'RBLX', n:'Roblox', cat:icon('dice',14)+' 游娱' },
+    { t:'EA',   n:'Electronic Arts', cat:icon('dice',14)+' 游娱' },
+    { t:'TTWO', n:'Take-Two', cat:icon('dice',14)+' 游娱' },
+    { t:'NFLX', n:'Netflix', cat:icon('dice',14)+' 游娱' },
+    { t:'DIS',  n:'Disney', cat:icon('dice',14)+' 游娱' },
+    { t:'SPOT', n:'Spotify', cat:icon('dice',14)+' 游娱' },
+    { t:'SE',   n:'Sea Limited', cat:icon('dice',14)+' 游娱' },
+    { t:'DKNG', n:'DraftKings', cat:icon('dice',14)+' 游娱' },
+    { t:'ROKU', n:'Roku', cat:icon('dice',14)+' 游娱' },
+    { t:'UBER', n:'Uber', cat:icon('dice',14)+' 游娱' },
+    { t:'ABNB', n:'Airbnb', cat:icon('dice',14)+' 游娱' },
+    { t:'DASH', n:'DoorDash', cat:icon('dice',14)+' 游娱' },
+  ],
+  fintech: [
+    { t:'SQ',   n:'Block', cat:icon('dollar',14)+' 金融科技' },
+    { t:'V',    n:'Visa', cat:icon('dollar',14)+' 金融科技' },
+    { t:'MA',   n:'Mastercard', cat:icon('dollar',14)+' 金融科技' },
+    { t:'PYPL', n:'PayPal', cat:icon('dollar',14)+' 金融科技' },
+    { t:'COIN', n:'Coinbase', cat:icon('dollar',14)+' 金融科技' },
+    { t:'AFRM', n:'Affirm', cat:icon('dollar',14)+' 金融科技' },
+    { t:'SOFI', n:'SoFi', cat:icon('dollar',14)+' 金融科技' },
+    { t:'MELI', n:'MercadoLibre', cat:icon('dollar',14)+' 金融科技' },
+    { t:'NU',   n:'Nu Holdings', cat:icon('dollar',14)+' 金融科技' },
+    { t:'UPST', n:'Upstart', cat:icon('dollar',14)+' 金融科技' },
   ],
   cloud: [
-    { t:'MSFT', n:'Microsoft', cat:icon('cloud',14)+' 云', layer:'infra' },
-    { t:'AMZN', n:'Amazon', cat:icon('cloud',14)+' 云', layer:'infra' },
-    { t:'GOOG', n:'Google', cat:icon('cloud',14)+' 云', layer:'infra' },
-    { t:'ORCL', n:'Oracle', cat:icon('cloud',14)+' 云', layer:'infra' },
+    { t:'NOW',  n:'ServiceNow', cat:icon('cloud',14)+' 云/SaaS', layer:'app' },
+    { t:'TEAM', n:'Atlassian', cat:icon('cloud',14)+' 云/SaaS', layer:'app' },
+    { t:'ZS',   n:'Zscaler', cat:icon('cloud',14)+' 云/SaaS', layer:'app' },
+    { t:'CRWD', n:'CrowdStrike', cat:icon('cloud',14)+' 云/SaaS', layer:'app' },
+    { t:'PANW', n:'Palo Alto', cat:icon('cloud',14)+' 云/SaaS', layer:'app' },
+    { t:'OKTA', n:'Okta', cat:icon('cloud',14)+' 云/SaaS', layer:'app' },
+    { t:'FTNT', n:'Fortinet', cat:icon('cloud',14)+' 云/SaaS', layer:'app' },
+    { t:'INTU', n:'Intuit', cat:icon('cloud',14)+' 云/SaaS', layer:'app' },
+    { t:'WDAY', n:'Workday', cat:icon('cloud',14)+' 云/SaaS', layer:'app' },
+    { t:'HUBS', n:'HubSpot', cat:icon('cloud',14)+' 云/SaaS', layer:'app' },
+    { t:'SHOP', n:'Shopify', cat:icon('cloud',14)+' 云/SaaS', layer:'app' },
+    { t:'S',    n:'SentinelOne', cat:icon('cloud',14)+' 云/SaaS', layer:'app' },
   ],
-  models: [
-    { t:'META', n:'Meta (Llama)', cat:icon('brain',14)+' 模型', layer:'model' },
-    { t:'PLTR', n:'Palantir', cat:icon('brain',14)+' 模型', layer:'model' },
-    { t:'AI',   n:'C3.ai', cat:icon('brain',14)+' 模型', layer:'model' },
+  evClean: [
+    { t:'RIVN', n:'Rivian', cat:icon('zap',14)+' 新能源' },
+    { t:'LCID', n:'Lucid', cat:icon('zap',14)+' 新能源' },
+    { t:'ENPH', n:'Enphase', cat:icon('zap',14)+' 新能源' },
+    { t:'FSLR', n:'First Solar', cat:icon('zap',14)+' 新能源' },
   ],
-  apps: [
-    { t:'CRM',  n:'Salesforce', cat:icon('smartphone',14)+' 应用', layer:'app' },
-    { t:'NOW',  n:'ServiceNow', cat:icon('smartphone',14)+' 应用', layer:'app' },
-    { t:'SNOW', n:'Snowflake', cat:icon('smartphone',14)+' 应用', layer:'app' },
+  health: [
+    { t:'ISRG', n:'Intuitive Surgical', cat:icon('activity',14)+' 医疗AI' },
+    { t:'DXCM', n:'DexCom', cat:icon('activity',14)+' 医疗AI' },
+    { t:'VEEV', n:'Veeva Systems', cat:icon('activity',14)+' 医疗AI' },
   ],
   etfs: [
-    { t:'QQQ',  n:'NASDAQ ETF', cat:icon('package',14)+' ETF', layer:'etf' },
     { t:'SPY',  n:'S&P 500 ETF', cat:icon('package',14)+' ETF', layer:'etf' },
+    { t:'QQQ',  n:'NASDAQ ETF', cat:icon('package',14)+' ETF', layer:'etf' },
+    { t:'ARKK', n:'ARK Innovation', cat:icon('package',14)+' ETF', layer:'etf' },
+    { t:'SOXX', n:'iShares Semi ETF', cat:icon('package',14)+' ETF', layer:'etf' },
+    { t:'SMH',  n:'VanEck Semi ETF', cat:icon('package',14)+' ETF', layer:'etf' },
     { t:'BOTZ', n:'AI & Robotics ETF', cat:icon('package',14)+' ETF', layer:'etf' },
-    { t:'SMH',  n:'Semiconductor ETF', cat:icon('package',14)+' ETF', layer:'etf' },
+    { t:'XLK',  n:'Tech Select', cat:icon('package',14)+' ETF', layer:'etf' },
+    { t:'XLF',  n:'Financial Select', cat:icon('package',14)+' ETF', layer:'etf' },
+    { t:'XLE',  n:'Energy Select', cat:icon('package',14)+' ETF', layer:'etf' },
+    { t:'XLV',  n:'Health Select', cat:icon('package',14)+' ETF', layer:'etf' },
+    { t:'KWEB', n:'China Internet ETF', cat:icon('package',14)+' ETF', layer:'etf' },
+    { t:'VGT',  n:'Vanguard IT ETF', cat:icon('package',14)+' ETF', layer:'etf' },
   ]
 };
 
-const DEFAULT_FAVORITES = ['QQQ','SPY','NVDA','GOOG','META','TSM'];
-const ALL = [...STOCKS.indices,...STOCKS.chips,...STOCKS.cloud,...STOCKS.models,...STOCKS.apps,...STOCKS.etfs];
-const ETF_TICKERS = new Set(['QQQ','SPY','BOTZ','SMH']);
+const DEFAULT_FAVORITES = ['QQQ','SPY','NVDA','GOOGL','META','TSM','AAPL','AMZN'];
+const ALL = [...STOCKS.indices,...STOCKS.techGiants,...STOCKS.aiPure,...STOCKS.semis,...STOCKS.china,...STOCKS.gaming,...STOCKS.fintech,...STOCKS.cloud,...STOCKS.evClean,...STOCKS.health,...STOCKS.etfs];
+const ETF_TICKERS = new Set(['QQQ','SPY','ARKK','SOXX','SMH','BOTZ','XLK','XLF','XLE','XLV','KWEB','VGT']);
 const INDEX_TICKERS = new Set(['^GSPC','^IXIC','^DJI','^VIX']);
 
 let prices = {};
@@ -1961,11 +2055,17 @@ function renderQuotes(){
       items = wl.map(t => ALL.find(s => s.t === t)).filter(Boolean);
       break;
     }
+    case 'all': items=ALL.filter(s=>!INDEX_TICKERS.has(s.t)); break;
     case 'indices': items=STOCKS.indices; break;
-    case 'chips': items=STOCKS.chips; break;
+    case 'techGiants': items=STOCKS.techGiants; break;
+    case 'aiPure': items=STOCKS.aiPure; break;
+    case 'semis': items=STOCKS.semis; break;
+    case 'china': items=STOCKS.china; break;
+    case 'gaming': items=STOCKS.gaming; break;
+    case 'fintech': items=STOCKS.fintech; break;
     case 'cloud': items=STOCKS.cloud; break;
-    case 'models': items=STOCKS.models; break;
-    case 'apps': items=STOCKS.apps; break;
+    case 'evClean': items=STOCKS.evClean; break;
+    case 'health': items=STOCKS.health; break;
     case 'etfs': items=STOCKS.etfs; break;
   }
 
@@ -2249,7 +2349,7 @@ function generateNews(){
   return news;
 }
 function getLayerTrend(layer){
-  const m={chip:['NVDA','AMD','TSM','AVGO'],infra:['MSFT','AMZN','GOOG'],model:['META','PLTR','AI'],app:['CRM','NOW','SNOW']};
+  const m={chip:['NVDA','AMD','TSM','AVGO','INTC','ASML','QCOM','SMCI'],infra:['MSFT','AMZN','GOOGL','ORCL','NET','IBM'],model:['META','PLTR','AI','BIDU'],app:['CRM','NOW','SNOW','ADBE','DDOG','PATH']};
   const tickers=m[layer]||[];let up=0;
   tickers.forEach(t=>{if(prices[t]&&prices[t].changePct>0)up++});
   const r=up/tickers.length;
@@ -2904,14 +3004,14 @@ const CHAIN_LAYERS = [
   ]},
   { id:'cloud', label:icon('cloud',14)+' 云基建', y:215, nodes:[
     {ticker:'MSFT',sub:'Azure'},{ticker:'AMZN',sub:'AWS'},
-    {ticker:'GOOG',sub:'GCP'},{ticker:'ORCL',sub:'OCI'}
+    {ticker:'GOOGL',sub:'GCP'},{ticker:'ORCL',sub:'OCI'}
   ]},
   { id:'models', label:icon('brain',14)+' 模型层', y:355, nodes:[
-    {ticker:'MSFT',sub:'OpenAI'},{ticker:'GOOG',sub:'Gemini'},
+    {ticker:'MSFT',sub:'OpenAI'},{ticker:'GOOGL',sub:'Gemini'},
     {ticker:'META',sub:'LLaMA'},{ticker:'AMZN',sub:'Bedrock'}
   ]},
   { id:'apps', label:icon('smartphone',14)+' 应用层', y:495, nodes:[
-    {ticker:'MSFT',sub:'Copilot'},{ticker:'GOOG',sub:'Search AI'},
+    {ticker:'MSFT',sub:'Copilot'},{ticker:'GOOGL',sub:'Search AI'},
     {ticker:'META',sub:'AI Feeds'},{ticker:'CRM',sub:'Einstein'}
   ]}
 ];
@@ -3355,7 +3455,7 @@ const EDU_LESSONS = [
     ],
     exampleFn: function(){
       const portfolio=getPortfolio();
-      const techStocks=['NVDA','AMD','META','GOOG','AMZN'];
+      const techStocks=['NVDA','AMD','META','GOOGL','AMZN','AAPL','MSFT','TSLA'];
       const hasTech=portfolio.some(p=>techStocks.includes(p.ticker));
       if(hasTech) return `你的持仓中有科技成长股，这类公司通常股息率很低或不派息。如果你希望获得稳定现金流收入，可以考虑配置一些高股息ETF来平衡。`;
       return '以SPY（S&P 500 ETF）为例：平均股息率约1.5%。虽然看起来不高，但加上价格上涨，长期总回报相当可观。复利效应下，股息再投资10年可以显著增加总回报。';
@@ -3677,7 +3777,7 @@ const EDU_LESSONS = [
     exampleFn: function(){
       const portfolio=getPortfolio();
       if(portfolio.length>0){
-        const betaMap={'NVDA':1.7,'AMD':1.8,'TSM':1.3,'AVGO':1.4,'MSFT':1.0,'AMZN':1.2,'GOOG':1.1,'META':1.3,'PLTR':2.1,'AI':2.5,'CRM':1.3,'NOW':1.2,'SNOW':1.8,'QQQ':1.1,'SPY':1.0,'BOTZ':1.4,'SMH':1.5};
+        const betaMap={'NVDA':1.7,'AMD':1.8,'TSM':1.3,'AVGO':1.4,'MSFT':1.0,'AMZN':1.2,'GOOGL':1.1,'META':1.3,'PLTR':2.1,'AI':2.5,'CRM':1.3,'NOW':1.2,'SNOW':1.8,'QQQ':1.1,'SPY':1.0,'BOTZ':1.4,'SMH':1.5,'AAPL':1.1,'TSLA':2.0,'INTC':1.2,'ADBE':1.2,'ORCL':1.0,'IBM':0.9,'DDOG':1.6,'NET':1.5,'SMCI':2.2,'COIN':2.5,'SOFI':1.8,'BABA':1.3,'PDD':1.4,'CRWD':1.4,'PANW':1.3,'ARKK':1.8,'SOXX':1.4};
         let weightedBeta=0,totalVal=0;
         portfolio.forEach(p=>{const price=prices[p.ticker]?.price||p.buyPrice;const val=price*p.shares;const beta=betaMap[p.ticker]||1.2;weightedBeta+=beta*val;totalVal+=val});
         const portBeta=totalVal>0?(weightedBeta/totalVal).toFixed(2):'N/A';

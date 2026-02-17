@@ -1,10 +1,10 @@
 {
-  "updated": "2026-02-17T19:13:33Z",
-  "count": 10,
+  "updated": "2026-02-17T19:31:59Z",
+  "count": 13,
   "news": [
     {
-      "headline": "美股三大指数承压下行 — S&P -1.2% 纳指-3.7% 道指+0.5%",
-      "summary": "标普500报6,858点，收跌1.2%。纳斯达克-3.7%，道指+0.5%。",
+      "headline": "美股三大指数承压下行 — S&P -1.1% 纳指-3.6% 道指+0.5%",
+      "summary": "标普500报6,861点，收跌1.1%。纳斯达克-3.6%，道指+0.5%。",
       "category": "market",
       "sentiment": "bearish",
       "tickers": [
@@ -12,120 +12,164 @@
         "^IXIC",
         "^DJI"
       ],
-      "time": "2026-02-17T19:13:33Z",
+      "time": "2026-02-17T19:31:59Z",
       "priority": 10
     },
     {
-      "headline": "Palantir Technologies Inc.(PLTR)暴跌21.9% 受分析师下调评级",
-      "summary": "Palantir Technologies Inc.报$133.59，跌21.9%。成为今日跌幅最深个股之一。",
+      "headline": "PayPal Holdings, Inc.(PYPL)暴跌27.8% 受分析师下调评级",
+      "summary": "PayPal Holdings, Inc.报$41.05，跌27.8%。成为今日跌幅最深个股之一。",
       "category": "stock",
       "sentiment": "bearish",
       "tickers": [
-        "PLTR"
+        "PYPL"
       ],
-      "time": "2026-02-17T19:13:33Z",
+      "time": "2026-02-17T19:31:59Z",
       "priority": 8
     },
     {
-      "headline": "📊 板块轮动信号：资金从金融流向能源 价差16.4%",
-      "summary": "能源板块领涨+12.4%，金融板块垫底-4.0%。板块间价差达16.4%，轮动信号明显。",
+      "headline": "📊 板块轮动信号：资金从创新流向能源 价差25.6%",
+      "summary": "能源板块领涨+12.3%，创新板块垫底-13.3%。板块间价差达25.6%，轮动信号明显。",
       "category": "rotation",
       "sentiment": "neutral",
       "tickers": [
         "XLE",
-        "XLF"
+        "ARKK"
       ],
-      "time": "2026-02-17T19:13:33Z",
+      "time": "2026-02-17T19:31:59Z",
       "priority": 8
     },
     {
-      "headline": "板块轮动：能源领涨(+12.4%) 金融垫底(-4.0%)",
-      "summary": "今日板块：能源+12.4%、医疗+1.4%、科技-3.9%、金融-4.0%。分化明显。",
+      "headline": "板块轮动：能源领涨(+12.3%) 创新垫底(-13.3%)",
+      "summary": "今日板块：能源+12.3%、半导体+4.1%、医疗+1.4%、科技-3.7%、金融-4.0%、创新-13.3%。分化明显。",
       "category": "sector",
       "sentiment": "neutral",
       "tickers": [
         "XLK",
         "XLF",
         "XLE",
-        "XLV"
+        "XLV",
+        "SOXX",
+        "ARKK"
       ],
-      "time": "2026-02-17T19:13:33Z",
+      "time": "2026-02-17T19:31:59Z",
       "priority": 7
     },
     {
-      "headline": "半导体板块集体承压 NVDA跌0.3%",
-      "summary": "芯片股集体承压，板块均跌2.8%。英伟达$185.72。AI算力需求持续为焦点。",
+      "headline": "半导体板块集体走强 NVDA涨0.2%",
+      "summary": "芯片股集体走强，板块均涨2.6%。英伟达$186.59。AI算力需求持续为焦点。",
       "category": "theme",
-      "sentiment": "bearish",
+      "sentiment": "bullish",
       "tickers": [
         "NVDA",
         "AMD",
         "TSM",
-        "AVGO"
+        "AVGO",
+        "ASML"
       ],
-      "time": "2026-02-17T19:13:33Z",
+      "time": "2026-02-17T19:31:59Z",
       "priority": 7
     },
     {
-      "headline": "今日领涨：TSM、META",
-      "summary": "涨幅居前：Taiwan Semiconductor Manufacturing Company Limited(TSM) +6.7%；Meta Platforms, Inc.(META) +3.2%。",
-      "category": "movers",
-      "sentiment": "bullish",
-      "tickers": [
-        "TSM",
-        "META"
-      ],
-      "time": "2026-02-17T19:13:33Z",
-      "priority": 6
-    },
-    {
-      "headline": "跌幅居前：PLTR、AI、CRM",
-      "summary": "跌幅居前：Palantir Technologies Inc.(PLTR) -21.9%；C3.ai, Inc.(AI) -19.3%；Salesforce, Inc.(CRM) -18.8%。",
-      "category": "movers",
-      "sentiment": "bearish",
-      "tickers": [
-        "PLTR",
-        "AI",
-        "CRM"
-      ],
-      "time": "2026-02-17T19:13:33Z",
-      "priority": 6
-    },
-    {
-      "headline": "科技巨头齐跌 平均-7.0%",
-      "summary": "Microsoft Corporation(MSFT) -13.7%、Alphabet Inc.(GOOG) -8.3%、Amazon.com, Inc.(AMZN) -15.9%、Meta Platforms, Inc.(META) +3.2%、NVIDIA Corporation(NVDA) -0.3%。",
+      "headline": "中概股下挫 板块均-3.2% — 2/9只上涨",
+      "summary": "阿里-5.6%，拼多多-4.3%。海外监管不确定性持续。",
       "category": "theme",
       "sentiment": "bearish",
       "tickers": [
+        "BABA",
+        "PDD",
+        "JD",
+        "BIDU",
+        "NIO"
+      ],
+      "time": "2026-02-17T19:31:59Z",
+      "priority": 7
+    },
+    {
+      "headline": "今日领涨：ARM、ON、LI",
+      "summary": "涨幅居前：Arm Holdings plc(ARM) +19.9%；ON Semiconductor Corporation(ON) +19.1%；Li Auto Inc.(LI) +13.2%。",
+      "category": "movers",
+      "sentiment": "bullish",
+      "tickers": [
+        "ARM",
+        "ON",
+        "LI"
+      ],
+      "time": "2026-02-17T19:31:59Z",
+      "priority": 6
+    },
+    {
+      "headline": "跌幅居前：PYPL、SHOP、PATH",
+      "summary": "跌幅居前：PayPal Holdings, Inc.(PYPL) -27.8%；Shopify Inc.(SHOP) -26.9%；UiPath, Inc.(PATH) -24.3%。",
+      "category": "movers",
+      "sentiment": "bearish",
+      "tickers": [
+        "PYPL",
+        "SHOP",
+        "PATH"
+      ],
+      "time": "2026-02-17T19:31:59Z",
+      "priority": 6
+    },
+    {
+      "headline": "金融板块走弱 均-11.3% 摩根大通+0.0%",
+      "summary": "金融股受利率下行和信贷担忧拖累。",
+      "category": "theme",
+      "sentiment": "bearish",
+      "tickers": [
+        "V",
+        "MA",
+        "PYPL"
+      ],
+      "time": "2026-02-17T19:31:59Z",
+      "priority": 6
+    },
+    {
+      "headline": "医疗板块承压 礼来+0.0% 联合健康+0.0%",
+      "summary": "医疗健康板块均-7.8%。药品定价压力和监管不确定性。",
+      "category": "theme",
+      "sentiment": "bearish",
+      "tickers": [
+        "ISRG"
+      ],
+      "time": "2026-02-17T19:31:59Z",
+      "priority": 6
+    },
+    {
+      "headline": "科技巨头齐跌 平均-5.8%",
+      "summary": "Apple Inc.(AAPL) +3.9%、Microsoft Corporation(MSFT) -13.7%、Amazon.com, Inc.(AMZN) -15.9%、Meta Platforms, Inc.(META) +3.3%、NVIDIA Corporation(NVDA) +0.2%、Tesla, Inc.(TSLA) -5.8%、Netflix, Inc.(NFLX) -12.4%。",
+      "category": "theme",
+      "sentiment": "bearish",
+      "tickers": [
+        "AAPL",
         "MSFT",
-        "GOOG",
         "AMZN",
         "META",
-        "NVDA"
+        "NVDA",
+        "TSLA"
       ],
-      "time": "2026-02-17T19:13:33Z",
+      "time": "2026-02-17T19:31:59Z",
       "priority": 6
     },
     {
       "headline": "30日趋势：标普500高位整理 近5日低于前5日0.2%",
-      "summary": "多空博弈加剧。近5日均价6,882，前5日均价6,899。",
+      "summary": "多空博弈加剧。近5日均价6,883，前5日均价6,899。",
       "category": "analysis",
       "sentiment": "neutral",
       "tickers": [
         "^GSPC"
       ],
-      "time": "2026-02-17T19:13:33Z",
+      "time": "2026-02-17T19:31:59Z",
       "priority": 5
     },
     {
-      "headline": "VIX报19.9（+25.8%）波动正常",
+      "headline": "VIX报20.0（+26.1%）波动正常",
       "summary": "恐慌指数处于15-20正常区间。",
       "category": "volatility",
       "sentiment": "neutral",
       "tickers": [
         "^VIX"
       ],
-      "time": "2026-02-17T19:13:33Z",
+      "time": "2026-02-17T19:31:59Z",
       "priority": 3
     }
   ]
