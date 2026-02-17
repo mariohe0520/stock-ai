@@ -1,10 +1,10 @@
 {
-  "updated": "2026-02-17T20:43:35Z",
+  "updated": "2026-02-17T21:13:36Z",
   "count": 13,
   "news": [
     {
-      "headline": "美股三大指数承压下行 — S&P -1.3% 纳指-3.9% 道指+0.4%",
-      "summary": "标普500报6,847点，收跌1.3%。纳斯达克-3.9%，道指+0.4%。",
+      "headline": "美股三大指数承压下行 — S&P -1.4% 纳指-4.0% 道指+0.3%",
+      "summary": "标普500报6,843点，收跌1.4%。纳斯达克-4.0%，道指+0.3%。",
       "category": "market",
       "sentiment": "bearish",
       "tickers": [
@@ -12,18 +12,18 @@
         "^IXIC",
         "^DJI"
       ],
-      "time": "2026-02-17T20:43:35Z",
+      "time": "2026-02-17T21:13:36Z",
       "priority": 10
     },
     {
-      "headline": "PayPal Holdings, Inc.(PYPL)暴跌28.2% 受宏观数据影响",
-      "summary": "PayPal Holdings, Inc.报$40.82，跌28.2%。成为今日跌幅最深个股之一。",
+      "headline": "PayPal Holdings, Inc.(PYPL)暴跌28.3% 受财报不及预期拖累",
+      "summary": "PayPal Holdings, Inc.报$40.81，跌28.3%。成为今日跌幅最深个股之一。",
       "category": "stock",
       "sentiment": "bearish",
       "tickers": [
         "PYPL"
       ],
-      "time": "2026-02-17T20:43:35Z",
+      "time": "2026-02-17T21:13:36Z",
       "priority": 8
     },
     {
@@ -35,23 +35,23 @@
         "XLE",
         "ARKK"
       ],
-      "time": "2026-02-17T20:43:35Z",
+      "time": "2026-02-17T21:13:36Z",
       "priority": 8
     },
     {
-      "headline": "VIX升至20.2 市场波动加剧",
-      "summary": "恐慌指数报20.2（+27.3%），高于20警戒线。注意仓位管理。",
+      "headline": "VIX升至20.4 市场波动加剧",
+      "summary": "恐慌指数报20.4（+28.6%），高于20警戒线。注意仓位管理。",
       "category": "volatility",
       "sentiment": "bearish",
       "tickers": [
         "^VIX"
       ],
-      "time": "2026-02-17T20:43:35Z",
+      "time": "2026-02-17T21:13:36Z",
       "priority": 7
     },
     {
       "headline": "板块轮动：能源领涨(+12.7%) 创新垫底(-13.9%)",
-      "summary": "今日板块：能源+12.7%、半导体+3.5%、医疗+1.1%、金融-4.1%、科技-4.1%、创新-13.9%。分化明显。",
+      "summary": "今日板块：能源+12.7%、半导体+3.4%、医疗+1.1%、金融-4.1%、科技-4.2%、创新-13.9%。分化明显。",
       "category": "sector",
       "sentiment": "neutral",
       "tickers": [
@@ -62,12 +62,12 @@
         "SOXX",
         "ARKK"
       ],
-      "time": "2026-02-17T20:43:35Z",
+      "time": "2026-02-17T21:13:36Z",
       "priority": 7
     },
     {
-      "headline": "半导体板块集体走强 NVDA跌0.6%",
-      "summary": "芯片股集体走强，板块均涨2.0%。英伟达$185.14。AI算力需求持续为焦点。",
+      "headline": "半导体板块集体走强 NVDA跌0.7%",
+      "summary": "芯片股集体走强，板块均涨2.1%。英伟达$184.97。AI算力需求持续为焦点。",
       "category": "theme",
       "sentiment": "bullish",
       "tickers": [
@@ -77,12 +77,12 @@
         "AVGO",
         "ASML"
       ],
-      "time": "2026-02-17T20:43:35Z",
+      "time": "2026-02-17T21:13:36Z",
       "priority": 7
     },
     {
-      "headline": "中概股下挫 板块均-3.3% — 2/9只上涨",
-      "summary": "阿里-5.7%，拼多多-4.3%。海外监管不确定性持续。",
+      "headline": "中概股下挫 板块均-3.5% — 2/9只上涨",
+      "summary": "阿里-6.0%，拼多多-4.6%。海外监管不确定性持续。",
       "category": "theme",
       "sentiment": "bearish",
       "tickers": [
@@ -92,25 +92,25 @@
         "BIDU",
         "NIO"
       ],
-      "time": "2026-02-17T20:43:35Z",
+      "time": "2026-02-17T21:13:36Z",
       "priority": 7
     },
     {
-      "headline": "今日领涨：ON、ARM、LI",
-      "summary": "涨幅居前：ON Semiconductor Corporation(ON) +19.2%；Arm Holdings plc(ARM) +18.9%；Li Auto Inc.(LI) +13.6%。",
+      "headline": "今日领涨：ARM、ON、LI",
+      "summary": "涨幅居前：Arm Holdings plc(ARM) +20.0%；ON Semiconductor Corporation(ON) +19.3%；Li Auto Inc.(LI) +13.7%。",
       "category": "movers",
       "sentiment": "bullish",
       "tickers": [
-        "ON",
         "ARM",
+        "ON",
         "LI"
       ],
-      "time": "2026-02-17T20:43:35Z",
+      "time": "2026-02-17T21:13:36Z",
       "priority": 6
     },
     {
       "headline": "跌幅居前：PYPL、SHOP、PATH",
-      "summary": "跌幅居前：PayPal Holdings, Inc.(PYPL) -28.2%；Shopify Inc.(SHOP) -27.5%；UiPath, Inc.(PATH) -23.4%。",
+      "summary": "跌幅居前：PayPal Holdings, Inc.(PYPL) -28.3%；Shopify Inc.(SHOP) -27.1%；UiPath, Inc.(PATH) -23.6%。",
       "category": "movers",
       "sentiment": "bearish",
       "tickers": [
@@ -118,7 +118,7 @@
         "SHOP",
         "PATH"
       ],
-      "time": "2026-02-17T20:43:35Z",
+      "time": "2026-02-17T21:13:36Z",
       "priority": 6
     },
     {
@@ -131,7 +131,7 @@
         "MA",
         "PYPL"
       ],
-      "time": "2026-02-17T20:43:35Z",
+      "time": "2026-02-17T21:13:36Z",
       "priority": 6
     },
     {
@@ -142,12 +142,12 @@
       "tickers": [
         "ISRG"
       ],
-      "time": "2026-02-17T20:43:35Z",
+      "time": "2026-02-17T21:13:36Z",
       "priority": 6
     },
     {
       "headline": "科技巨头齐跌 平均-6.1%",
-      "summary": "Apple Inc.(AAPL) +3.4%、Microsoft Corporation(MSFT) -13.7%、Amazon.com, Inc.(AMZN) -16.1%、Meta Platforms, Inc.(META) +3.1%、NVIDIA Corporation(NVDA) -0.6%、Tesla, Inc.(TSLA) -5.9%、Netflix, Inc.(NFLX) -12.6%。",
+      "summary": "Apple Inc.(AAPL) +3.3%、Microsoft Corporation(MSFT) -13.7%、Amazon.com, Inc.(AMZN) -15.9%、Meta Platforms, Inc.(META) +3.1%、NVIDIA Corporation(NVDA) -0.7%、Tesla, Inc.(TSLA) -6.1%、Netflix, Inc.(NFLX) -12.5%。",
       "category": "theme",
       "sentiment": "bearish",
       "tickers": [
@@ -158,18 +158,18 @@
         "NVDA",
         "TSLA"
       ],
-      "time": "2026-02-17T20:43:35Z",
+      "time": "2026-02-17T21:13:36Z",
       "priority": 6
     },
     {
       "headline": "30日趋势：标普500高位整理 近5日低于前5日0.3%",
-      "summary": "多空博弈加剧。近5日均价6,880，前5日均价6,899。",
+      "summary": "多空博弈加剧。近5日均价6,879，前5日均价6,899。",
       "category": "analysis",
       "sentiment": "neutral",
       "tickers": [
         "^GSPC"
       ],
-      "time": "2026-02-17T20:43:35Z",
+      "time": "2026-02-17T21:13:36Z",
       "priority": 5
     }
   ]
