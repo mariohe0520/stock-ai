@@ -73,7 +73,7 @@ html,body{
 .hdr{
   position:sticky;top:0;z-index:50;
   background:linear-gradient(180deg,var(--bg) 60%,transparent);
-  padding:12px 16px 8px;
+  padding:calc(env(safe-area-inset-top,12px) + 4px) 16px 8px;
   display:flex;align-items:center;justify-content:space-between;
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
 }
@@ -1529,9 +1529,10 @@ const LESSON_BADGE_MAP = {
   <button class="tab-item on" data-page="quotes"><span class="tab-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>行情</button>
   <button class="tab-item" data-page="advisor"><span class="tab-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg></span>AI投顾</button>
   <button class="tab-item" data-page="portfolio"><span class="tab-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>持仓</button>
-  <button class="tab-item" data-page="chain"><span class="tab-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>产业链</button>
-  <button class="tab-item" data-page="edu"><span class="tab-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>学堂</button>
-  <button class="tab-item" data-page="me"><span class="tab-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>我的</button>
+  <!-- Hidden tabs: chain, edu, me — simplified per user feedback -->
+  <button class="tab-item" data-page="chain" style="display:none"><span class="tab-icon"></span>产业链</button>
+  <button class="tab-item" data-page="edu" style="display:none"><span class="tab-icon"></span>学堂</button>
+  <button class="tab-item" data-page="me" style="display:none"><span class="tab-icon"></span>我的</button>
 </div>
 
 
@@ -2080,10 +2081,10 @@ function renderQuotes(){
   let html=items.map(stockRow).join('');
   if(currentSubTab==='indices' && !quoteSearchQuery) html+=renderFearGreed();
   if(currentSubTab==='fav' && items.length===0 && !quoteSearchQuery) {
-    html = `<div class="empty-state"><div class="empty-icon">'+icon('star',48)+'</div><div class="empty-title">自选列表为空</div><div class="empty-sub">去"我的"页面管理自选股</div></div>`;
+    html = `<div class="empty-state"><div class="empty-icon">${icon('star',48)}</div><div class="empty-title">自选列表为空</div><div class="empty-sub">点击股票详情页添加自选</div></div>`;
   }
   if(quoteSearchQuery && items.length===0) {
-    html = `<div class="empty-state"><div class="empty-icon">'+icon('search',48)+'</div><div class="empty-title">未找到 "${quoteSearchQuery}"</div><div class="empty-sub">试试其他关键词</div></div>`;
+    html = `<div class="empty-state"><div class="empty-icon">${icon('search',48)}</div><div class="empty-title">未找到 "${quoteSearchQuery}"</div><div class="empty-sub">试试其他关键词</div></div>`;
   }
   c.innerHTML=html;
   updateSignalBanner();
@@ -2121,32 +2122,32 @@ function updateSignalBanner(){
   const vixVal=vix?.price||20;
   const total=upCount+dnCount;
   const bullPct=total>0?upCount/total:0.5;
-  let mood,icon,title,text,action;
+  let mood,sigIcon,title,text,action;
   if(vixVal>25){
-    mood='bear';icon=icon('shield',24);title=`VIX ${vixVal.toFixed(1)} — 市场恐慌升温`;
+    mood='bear';sigIcon=icon('shield',24);title=`VIX ${vixVal.toFixed(1)} — 市场恐慌升温`;
     text=`恐慌指数高于25，市场波动加剧。${bigMoves.length?bigMoves.map(m=>`${m.t} ${m.pct>0?'+':''}${m.pct.toFixed(1)}%`).join('，')+'异动。':''}建议降低仓位，等待明确信号。`;
     action='防御为主，控制仓位';
   } else if(bigMoves.length>0){
     const top=bigMoves.sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct))[0];
-    mood=top.pct>0?'bull':'bear';icon=top.pct>0?icon('rocket',24):icon('alert-triangle',24);
+    mood=top.pct>0?'bull':'bear';sigIcon=top.pct>0?icon('rocket',24):icon('alert-triangle',24);
     title=`${top.t} ${top.pct>0?'+':''}${top.pct.toFixed(1)}% 异常波动`;
     text=`${top.n} 今日大幅${top.pct>0?'上涨':'下跌'}，关注是否有重大消息驱动。`;
     action=top.pct>0?'短线关注，勿追高':'观望为主，等待企稳';
   } else if(bullPct>0.65){
-    mood='bull';icon=icon('trending-up',24);title='AI板块整体偏多';
+    mood='bull';sigIcon=icon('trending-up',24);title='AI板块整体偏多';
     text=`${upCount}/${total} AI股上涨，市场情绪积极。VIX ${vixVal.toFixed(1)} 处于合理区间。`;
     action='定投继续，择机加仓';
   } else if(bullPct<0.35){
-    mood='bear';icon=icon('trending-down',24);title='AI板块整体偏空';
+    mood='bear';sigIcon=icon('trending-down',24);title='AI板块整体偏空';
     text=`${dnCount}/${total} AI股下跌，注意风控。${vixVal>20?'VIX偏高，谨慎操作。':''}`;
     action='持有观望，等反转信号';
   } else{
-    mood='neutral';icon=icon('scale',24);title='AI板块震荡运行';
+    mood='neutral';sigIcon=icon('scale',24);title='AI板块震荡运行';
     text=`涨跌参半，无明显方向。VIX ${vixVal.toFixed(1)}，波动适中。`;
     action='按计划定投即可';
   }
   banner.className=`signal-banner ${mood}`;
-  banner.innerHTML=`<div class="signal-icon">${icon}</div><div class="signal-title">${title}</div><div class="signal-text">${text}</div><div class="signal-action">${action}</div>`;
+  banner.innerHTML=`<div class="signal-icon">${sigIcon}</div><div class="signal-title">${title}</div><div class="signal-text">${text}</div><div class="signal-action">${action}</div>`;
 }
 
 // ===== AI ADVISOR (risk-profile-aware) =====
@@ -2296,7 +2297,7 @@ function renderAdvisor(){
   if(currentAdvisorTab!=='all') filtered=advices.filter(a=>a.action===currentAdvisorTab);
 
   if(filtered.length===0){
-    c.innerHTML=`<div class="empty-state"><div class="empty-icon">'+icon('search',48)+'</div><div class="empty-title">暂无${currentAdvisorTab==='buy'?'买入':currentAdvisorTab==='sell'?'卖出':currentAdvisorTab==='hold'?'持有':'定投'}建议</div></div>`;
+    c.innerHTML=`<div class="empty-state"><div class="empty-icon">${icon('search',48)}</div><div class="empty-title">暂无${currentAdvisorTab==='buy'?'买入':currentAdvisorTab==='sell'?'卖出':currentAdvisorTab==='hold'?'持有':'定投'}建议</div></div>`;
     return;
   }
 
@@ -2374,7 +2375,7 @@ function renderVolumeSection(data,up){
   });
   const maxBar=Math.max(...bars);
   const color=up?'#00d395':'#ff4757';
-  return `<div class="volume-bars-wrap"><div class="volume-bars-title">'+icon('bar-chart',14)+' 成交量趋势</div><div class="volume-bars">${bars.map((b,i)=>{
+  return `<div class="volume-bars-wrap"><div class="volume-bars-title">${icon('bar-chart',14)} 成交量趋势</div><div class="volume-bars">${bars.map((b,i)=>{
     const h=Math.max(4,(b/maxBar)*40);
     const opacity=0.3+0.7*(b/maxBar);
     const isLast=i===bars.length-1;
@@ -2425,7 +2426,7 @@ function showDetail(ticker){
       <div class="detail-metric"><div class="detail-metric-label">5日变动</div><div class="detail-metric-value ${(advice.fiveDayChange||0)>=0?'text-up':'text-dn'}">${advice.fiveDayChange!=null?((advice.fiveDayChange>0?'+':'')+advice.fiveDayChange.toFixed(2)+'%'):'—'}</div></div>
     </div>
     <div class="detail-ai-section">
-      <div class="detail-ai-title">'+icon('bot',16)+' AI投顾建议 <span class="advisor-badge ${advice.action}" style="font-size:11px">${advice.label}</span></div>
+      <div class="detail-ai-title">${icon('bot',16)} AI投顾建议 <span class="advisor-badge ${advice.action}" style="font-size:11px">${advice.label}</span></div>
       <div class="detail-ai-text">${advice.reason}</div>
       ${advice.riskNote?`<div class="advisor-risk-note" style="margin-top:8px">${advice.riskNote}</div>`:''}
       ${advice.confidence?`<div style="margin-top:8px;font-size:11px;color:var(--dim)">置信度: ${advice.confidence}%</div>`:''}
@@ -2438,7 +2439,7 @@ function closeDetail(){
   const o=document.getElementById('detailOverlay');
   o.classList.add('closing');setTimeout(()=>{o.classList.remove('open','closing')},300);
 }
-function formatMktCap(price){const b=price*1e7;if(b>1e12)return(b/1e12).toFixed(1)+'T';if(b>1e9)return(b/1e9).toFixed(0)+'B';return(b/1e6).toFixed(0)+'M'}
+function formatMktCap(price){return '—'} /* Market cap requires real shares-outstanding data; removed fake estimate */
 function formatVolume(v){v=Number(v);if(v>=1e9)return(v/1e9).toFixed(1)+'B';if(v>=1e6)return(v/1e6).toFixed(1)+'M';if(v>=1e3)return(v/1e3).toFixed(0)+'K';return v}
 document.getElementById('detailClose').addEventListener('click',closeDetail);
 document.getElementById('detailOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeDetail()});
@@ -2475,7 +2476,7 @@ function renderPortfolio(){
   const c=document.getElementById('portfolioContent');
   const portfolio=getPortfolio();
   if(portfolio.length===0){
-    c.innerHTML=`<div class="empty-state" style="padding-top:30px"><div class="empty-icon">'+icon('briefcase',48)+'</div><div class="empty-title">暂无持仓</div><div class="empty-sub">点击下方按钮添加你的第一个持仓<br>支持追踪买入价、股数和盈亏</div></div><button class="add-btn" onclick="openAddModal()">＋ 添加持仓</button>`;
+    c.innerHTML=`<div class="empty-state" style="padding-top:30px"><div class="empty-icon">${icon('briefcase',48)}</div><div class="empty-title">暂无持仓</div><div class="empty-sub">点击下方按钮添加你的第一个持仓<br>支持追踪买入价、股数和盈亏</div></div><button class="add-btn" onclick="openAddModal()">＋ 添加持仓</button>`;
     return;
   }
   let totalCost=0, totalValue=0;
@@ -2524,7 +2525,7 @@ function renderPortfolio(){
       </div>`;
     }).join('')}
     <div class="glass-card" style="margin-bottom:12px">
-      <div style="font-size:13px;font-weight:700;margin-bottom:10px">'+icon('pie-chart',14)+' 持仓分布</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:10px">${icon('pie-chart',14)} 持仓分布</div>
       ${renderPieChart(positions,totalValue)}
       ${positions.map(pos=>{
         const alloc=totalValue>0?(pos.value/totalValue*100):0;
@@ -2537,7 +2538,7 @@ function renderPortfolio(){
       }).join('')}
     </div>
     <button class="add-btn" onclick="openAddModal()">＋ 添加持仓</button>
-    <button class="btn-danger" onclick="clearPortfolio()" style="margin-bottom:20px">'+icon('trash',14)+' 清空所有持仓</button>`;
+    <button class="btn-danger" onclick="clearPortfolio()" style="margin-bottom:20px">${icon('trash',14)} 清空所有持仓</button>`;
 }
 
 function openAddModal(){
@@ -2926,9 +2927,9 @@ function renderMe(){
       </div>
     </div>
 
-    <div class="section-title">'+icon('target',14)+' 投资画像</div>
+    <div class="section-title">${icon('target',14)} 投资画像</div>
     <div class="me-menu-item" onclick="openRiskProfile()">
-      <div class="me-menu-left"><span class="me-menu-icon">'+icon('target',20)+'</span><span class="me-menu-text">风险画像设置</span></div>
+      <div class="me-menu-left"><span class="me-menu-icon">${icon('target',20)}</span><span class="me-menu-text">风险画像设置</span></div>
       <div class="me-menu-right">
         <span style="font-size:12px">${profile ? ({conservative:icon('shield',14)+' 保守',moderate:icon('scale',14)+' 平衡',aggressive:icon('flame',14)+' 进取'}[profile.tolerance]) : '未设置'}</span>
         <span class="me-menu-arrow">›</span>
@@ -2937,29 +2938,29 @@ function renderMe(){
     ${profile ? `<div class="glass-card" style="padding:12px 16px">${profileSummary}</div>` : `
       <div class="glass-card" style="padding:14px 16px;border:1px dashed var(--acc);cursor:pointer" onclick="openRiskProfile()">
         <div style="text-align:center">
-          <div style="font-size:24px;margin-bottom:6px">'+icon('target',24)+'</div>
+          <div style="font-size:24px;margin-bottom:6px">${icon('target',24)}</div>
           <div style="font-size:13px;font-weight:700;color:var(--acc)">完成风险画像</div>
           <div style="font-size:11px;color:var(--dim);margin-top:2px">3个问题，让AI更懂你的投资风格</div>
         </div>
       </div>`}
 
-    <div class="section-title">'+icon('star',14)+' 自选 & 提醒</div>
+    <div class="section-title">${icon('star',14)} 自选 & 提醒</div>
     <div class="me-menu-item" onclick="openWatchlistModal()">
-      <div class="me-menu-left"><span class="me-menu-icon">'+icon('star',20)+'</span><span class="me-menu-text">自选股管理</span></div>
+      <div class="me-menu-left"><span class="me-menu-icon">${icon('star',20)}</span><span class="me-menu-text">自选股管理</span></div>
       <div class="me-menu-right">
         <span style="font-size:12px;color:var(--dim)">${wl.length}只</span>
         <span class="me-menu-arrow">›</span>
       </div>
     </div>
     <div class="me-menu-item" onclick="openAlertModal()">
-      <div class="me-menu-left"><span class="me-menu-icon">'+icon('bell',20)+'</span><span class="me-menu-text">价格提醒</span></div>
+      <div class="me-menu-left"><span class="me-menu-icon">${icon('bell',20)}</span><span class="me-menu-text">价格提醒</span></div>
       <div class="me-menu-right">
         ${triggeredAlerts > 0 ? `<span style="font-size:11px;font-weight:700;color:var(--red)">${triggeredAlerts}个已触发</span>` : `<span style="font-size:12px;color:var(--dim)">${alerts.length}个</span>`}
         <span class="me-menu-arrow">›</span>
       </div>
     </div>
 
-    <div class="section-title">'+icon('settings',14)+' 设置</div>
+    <div class="section-title">${icon('settings',14)} 设置</div>
     <div class="me-menu-item" onclick="toggleTheme()">
       <div class="me-menu-left"><span class="me-menu-icon">${theme==='dark'?icon('moon',20):icon('sun',20)}</span><span class="me-menu-text">主题模式</span></div>
       <div class="me-menu-right">
@@ -2968,15 +2969,15 @@ function renderMe(){
       </div>
     </div>
     <div class="me-menu-item" onclick="switchPage('portfolio')">
-      <div class="me-menu-left"><span class="me-menu-icon">'+icon('briefcase',20)+'</span><span class="me-menu-text">我的持仓</span></div>
+      <div class="me-menu-left"><span class="me-menu-icon">${icon('briefcase',20)}</span><span class="me-menu-text">我的持仓</span></div>
       <div class="me-menu-right"><span class="me-menu-arrow">›</span></div>
     </div>
     <div class="me-menu-item" onclick="switchPage('advisor')">
-      <div class="me-menu-left"><span class="me-menu-icon">'+icon('bot',20)+'</span><span class="me-menu-text">AI投顾</span></div>
+      <div class="me-menu-left"><span class="me-menu-icon">${icon('bot',20)}</span><span class="me-menu-text">AI投顾</span></div>
       <div class="me-menu-right"><span class="me-menu-arrow">›</span></div>
     </div>
 
-    <div class="section-title">'+icon('newspaper',14)+' 新闻信号</div>
+    <div class="section-title">${icon('newspaper',14)} 新闻信号</div>
     ${news.map(n=>`<div class="news-card">
       <div class="news-meta"><span class="news-source">${n.source}</span><span class="news-time">${n.time}</span></div>
       <div class="news-title">${n.title}</div>
@@ -2989,10 +2990,10 @@ function renderMe(){
 
     <div class="section-title">关于</div>
     <div class="me-menu-item">
-      <div class="me-menu-left"><span class="me-menu-icon">'+icon('book',20)+'</span><span class="me-menu-text">关于 StockAI</span></div>
+      <div class="me-menu-left"><span class="me-menu-icon">${icon('book',20)}</span><span class="me-menu-text">关于 StockAI</span></div>
       <div class="me-menu-right"><span class="me-menu-arrow">›</span></div>
     </div>
-    <div style="text-align:center;padding:24px 0;font-size:11px;color:var(--dim2)">StockAI v8.0 · Made with '+icon('bot',12)+' by OpenClaw</div>
+    <div style="text-align:center;padding:24px 0;font-size:11px;color:var(--dim2)">StockAI v8.0 · Made with ${icon('bot',12)} by OpenClaw</div>
   `;
 }
 
@@ -3182,7 +3183,7 @@ function renderChain(){
     const inLayers=CHAIN_LAYERS.filter(l=>l.nodes.some(n=>n.ticker===topMover))
       .map(l=>l.label).join(' → ');
     html+=`<div class="chain-insight">
-      <div class="chain-insight-title">'+icon('zap',16)+' 产业链异动</div>
+      <div class="chain-insight-title">${icon('zap',16)} 产业链异动</div>
       <div class="chain-insight-text">${topMover} 今日${tup?'上涨':'下跌'} ${Math.abs(tp.changePct).toFixed(1)}%，影响链路：${inLayers}。${topPct>5?'大幅波动可能向上下游传导，关注相关标的联动。':'关注后续是否向上下游传导。'}</div>
     </div>`;
   }
@@ -3196,7 +3197,7 @@ function renderChain(){
   if(rippleMovers.length>0){
     rippleMovers.sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct));
     html+=`<div class="chain-insight">
-      <div class="chain-insight-title">'+icon('bell',16)+' 今日涟漪效应 (${rippleMovers.length}只&gt;3%)</div>
+      <div class="chain-insight-title">${icon('bell',16)} 今日涟漪效应 (${rippleMovers.length}只&gt;3%)</div>
       <div class="chain-insight-text">${rippleMovers.map(m=>{
         const up=m.pct>=0;
         return `<span style="font-weight:700;color:${up?'var(--up)':'var(--dn)'};cursor:pointer" onclick="showDetail('${m.ticker}')">${m.ticker} ${up?'+':''}${m.pct.toFixed(1)}%</span>`;
@@ -3924,7 +3925,7 @@ function renderEdu(){
 
   // Quiz mode card
   let html=`<div class="edu-quiz-mode-card" onclick="startQuizMode()">
-    <div style="font-size:28px;margin-bottom:6px">'+icon('pencil',28)+'</div>
+    <div style="font-size:28px;margin-bottom:6px">${icon('pencil',28)}</div>
     <div style="font-size:15px;font-weight:800">随机测验模式</div>
     <div style="font-size:12px;color:var(--dim);margin-top:4px">从已学课程中抽取5题，测试你的知识掌握</div>
     ${completed.length<3?'<div style="font-size:11px;color:var(--amber);margin-top:6px">'+icon('alert-triangle',12)+' 至少完成3课后解锁</div>':'<div style="font-size:11px;color:var(--pri);margin-top:6px">'+icon('check-circle',12)+' 点击开始挑战</div>'}
@@ -3973,15 +3974,15 @@ function renderLessonDetail(lessonId){
         ${isCompleted?`<div style="margin-top:6px;font-size:24px">${badgeIcon(lesson.badge,24)}</div>`:''}
       </div>
       <div class="edu-section">
-        <h3>'+icon('book',16)+' 知识要点</h3>
+        <h3>${icon('book',16)} 知识要点</h3>
         ${lesson.paragraphs.map(p=>'<p>'+p+'</p>').join('')}
       </div>
       <div class="edu-example">
-        <h3>'+icon('lightbulb',16)+' 实战案例</h3>
+        <h3>${icon('lightbulb',16)} 实战案例</h3>
         <p>${exampleText}</p>
       </div>
       <div class="quiz-section" id="quizSection${lessonId}">
-        <h3>'+icon('dice',16)+' 测验 (${isCompleted&&prevScore!=null?prevScore+'/3 · 可重新作答':'3题'})</h3>
+        <h3>${icon('dice',16)} 测验 (${isCompleted&&prevScore!=null?prevScore+'/3 · 可重新作答':'3题'})</h3>
         ${lesson.quiz.map((q,qi)=>`
           <div class="quiz-q" data-qi="${qi}">
             <div class="quiz-q-num">问题 ${qi+1}/3</div>
