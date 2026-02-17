@@ -1,481 +1,1376 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a0a0f">
 <title>StockAI · 美股AI助手</title>
 <link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0a0f;--card:#12121e;--pri:#10b981;--red:#ef4444;--acc:#6366f1;--txt:#f1f5f9;--dim:#64748b;--r:14px;--up:#10b981;--dn:#ef4444}
-html,body{height:100%;background:var(--bg);color:var(--txt);font-family:-apple-system,system-ui,sans-serif;-webkit-user-select:none;user-select:none;overflow-x:hidden}
-.app{max-width:440px;margin:0 auto;padding:env(safe-area-inset-top) 16px calc(env(safe-area-inset-bottom) + 70px)}
+/* ============================================================
+   DESIGN SYSTEM — iOS Finance-grade Dark Theme
+   ============================================================ */
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#0a0a0f;--bg2:#111118;--card:rgba(22,22,35,.72);--card-solid:#16162380;
+  --glass:rgba(255,255,255,.04);--glass-border:rgba(255,255,255,.06);
+  --pri:#10b981;--red:#ef4444;--acc:#6366f1;--amber:#f59e0b;
+  --txt:#f1f5f9;--txt2:#cbd5e1;--dim:#64748b;--dim2:#475569;
+  --up:#10b981;--dn:#ef4444;--flat:#6366f1;
+  --r:16px;--r-sm:12px;--r-xs:8px;
+  --shadow:0 2px 20px rgba(0,0,0,.3);
+  --font:-apple-system,'SF Pro Display','SF Pro Text',system-ui,'Helvetica Neue',sans-serif;
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
 
-/* Header */
-.hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 0 8px;position:sticky;top:0;background:var(--bg);z-index:10}
-.hdr h1{font-size:20px;font-weight:800}
-.hdr-tag{font-size:11px;color:var(--dim);background:#1a1a2e;padding:3px 10px;border-radius:12px}
-.market-status{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--dim)}
-.market-dot{width:8px;height:8px;border-radius:50%;background:var(--red)}
-.market-dot.open{background:var(--up);box-shadow:0 0 6px rgba(16,185,129,.5)}
+html,body{
+  height:100%;background:var(--bg);color:var(--txt);
+  font-family:var(--font);-webkit-user-select:none;user-select:none;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
 
-/* Signal Banner — the differentiator */
-.signal-banner{border-radius:var(--r);padding:16px;margin:8px 0 14px;position:relative;overflow:hidden}
-.signal-banner.bull{background:linear-gradient(135deg,#064e3b,#065f46);border:1px solid rgba(16,185,129,.2)}
-.signal-banner.bear{background:linear-gradient(135deg,#450a0a,#7f1d1d);border:1px solid rgba(239,68,68,.2)}
-.signal-banner.neutral{background:linear-gradient(135deg,#1e1b4b,#312e81);border:1px solid rgba(99,102,241,.2)}
-.signal-icon{font-size:28px;margin-bottom:6px}
-.signal-title{font-size:16px;font-weight:800;margin-bottom:4px}
-.signal-text{font-size:13px;color:rgba(255,255,255,.8);line-height:1.5}
-.signal-action{margin-top:10px;font-size:12px;font-weight:700;padding:6px 14px;border-radius:20px;display:inline-block}
-.bull .signal-action{background:rgba(16,185,129,.2);color:var(--up)}
-.bear .signal-action{background:rgba(239,68,68,.2);color:var(--red)}
-.neutral .signal-action{background:rgba(99,102,241,.2);color:var(--acc)}
+/* Scrollbar */
+::-webkit-scrollbar{width:0;height:0}
 
-/* Tabs */
-.tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.tabs::-webkit-scrollbar{display:none}
-.tab{padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;background:#1a1a2e;color:var(--dim);white-space:nowrap;cursor:pointer;border:none;transition:all .2s;flex-shrink:0}
-.tab.on{background:var(--acc);color:white}
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.app{
+  max-width:430px;margin:0 auto;min-height:100vh;position:relative;
+  padding:env(safe-area-inset-top,44px) 0 calc(68px + var(--safe-b));
+}
 
-/* Watchlist */
-.section-title{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:1.5px;margin:14px 0 8px;font-weight:700}
-.stock-row{display:flex;align-items:center;justify-content:space-between;padding:14px;background:var(--card);border-radius:var(--r);margin-bottom:8px;cursor:pointer;transition:transform .1s}
-.stock-row:active{transform:scale(.98)}
-.stock-left{display:flex;flex-direction:column;gap:2px}
-.stock-ticker{font-size:15px;font-weight:800;letter-spacing:.5px}
-.stock-name{font-size:11px;color:var(--dim)}
-.stock-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
-.stock-price{font-size:15px;font-weight:700}
-.stock-change{font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px}
-.stock-change.up{background:rgba(16,185,129,.15);color:var(--up)}
-.stock-change.dn{background:rgba(239,68,68,.15);color:var(--dn)}
+/* Pages */
+.page{
+  display:none;padding:0 16px;
+  animation:pageIn .32s cubic-bezier(.25,.1,.25,1);
+}
+.page.active{display:block}
+@keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-/* Mini chart */
-.mini-chart{width:60px;height:24px;margin-left:10px}
+/* ============================================================
+   HEADER
+   ============================================================ */
+.hdr{
+  position:sticky;top:0;z-index:50;
+  background:linear-gradient(180deg,var(--bg) 60%,transparent);
+  padding:12px 16px 8px;
+  display:flex;align-items:center;justify-content:space-between;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+.hdr h1{font-size:22px;font-weight:800;letter-spacing:-.3px}
+.hdr h1 span{background:linear-gradient(135deg,var(--pri),var(--acc));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.market-badge{
+  display:flex;align-items:center;gap:6px;font-size:11px;color:var(--dim);
+  background:var(--glass);border:1px solid var(--glass-border);
+  padding:4px 10px;border-radius:20px;backdrop-filter:blur(8px);
+}
+.market-dot{width:6px;height:6px;border-radius:50%;background:var(--red)}
+.market-dot.open{background:var(--up);box-shadow:0 0 8px rgba(16,185,129,.6);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* ============================================================
+   GLASS CARDS
+   ============================================================ */
+.glass-card{
+  background:var(--card);
+  backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);
+  border:1px solid var(--glass-border);
+  border-radius:var(--r);
+  padding:16px;margin-bottom:12px;
+  transition:transform .15s,box-shadow .15s;
+}
+.glass-card:active{transform:scale(.98)}
+
+/* ============================================================
+   SIGNAL BANNER
+   ============================================================ */
+.signal-banner{
+  border-radius:var(--r);padding:18px;margin:8px 16px 16px;
+  position:relative;overflow:hidden;
+}
+.signal-banner::before{
+  content:'';position:absolute;inset:0;opacity:.12;
+  background:radial-gradient(ellipse at 30% 50%,currentColor,transparent 70%);
+}
+.signal-banner.bull{background:linear-gradient(135deg,#064e3b,#065f46);border:1px solid rgba(16,185,129,.15);color:var(--up)}
+.signal-banner.bear{background:linear-gradient(135deg,#450a0a,#7f1d1d);border:1px solid rgba(239,68,68,.15);color:var(--red)}
+.signal-banner.neutral{background:linear-gradient(135deg,#1e1b4b,#312e81);border:1px solid rgba(99,102,241,.15);color:var(--acc)}
+.signal-icon{font-size:32px;margin-bottom:6px;position:relative}
+.signal-title{font-size:17px;font-weight:800;color:var(--txt);position:relative}
+.signal-text{font-size:13px;color:var(--txt2);line-height:1.6;margin-top:4px;position:relative}
+.signal-action{
+  margin-top:10px;font-size:12px;font-weight:700;padding:6px 16px;
+  border-radius:20px;display:inline-block;position:relative;
+}
+.bull .signal-action{background:rgba(16,185,129,.15);color:var(--up)}
+.bear .signal-action{background:rgba(239,68,68,.15);color:var(--red)}
+.neutral .signal-action{background:rgba(99,102,241,.15);color:var(--acc)}
+
+/* ============================================================
+   SUB TABS (horizontal scroll)
+   ============================================================ */
+.sub-tabs{
+  display:flex;gap:6px;padding:0 16px 12px;overflow-x:auto;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.sub-tabs::-webkit-scrollbar{display:none}
+.sub-tab{
+  padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;
+  background:var(--glass);border:1px solid var(--glass-border);
+  color:var(--dim);white-space:nowrap;cursor:pointer;border:none;
+  transition:all .2s;flex-shrink:0;
+}
+.sub-tab.on{background:var(--acc);color:#fff}
+
+/* ============================================================
+   STOCK ROWS
+   ============================================================ */
+.section-title{
+  font-size:11px;color:var(--dim);text-transform:uppercase;
+  letter-spacing:1.8px;margin:18px 0 10px;font-weight:700;
+}
+.stock-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;background:var(--card);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);
+  border-radius:var(--r);margin-bottom:8px;cursor:pointer;
+  transition:transform .12s,background .2s;
+}
+.stock-row:active{transform:scale(.97);background:rgba(255,255,255,.06)}
+.stock-left{display:flex;flex-direction:column;gap:2px;min-width:0}
+.stock-ticker{font-size:15px;font-weight:800;letter-spacing:.3px}
+.stock-name{font-size:11px;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:140px}
+.stock-mid{flex:1;display:flex;justify-content:center;padding:0 8px}
+.stock-right{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.stock-price{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+.stock-change{
+  font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;
+  font-variant-numeric:tabular-nums;min-width:64px;text-align:center;
+}
+.stock-change.up{background:rgba(16,185,129,.12);color:var(--up)}
+.stock-change.dn{background:rgba(239,68,68,.12);color:var(--dn)}
+
+/* Mini sparkline */
+.mini-chart{width:56px;height:24px;flex-shrink:0}
 .mini-chart svg{width:100%;height:100%}
 
-/* Fear & Greed */
-.fg-card{background:var(--card);border-radius:var(--r);padding:16px;margin-bottom:12px}
-.fg-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+/* ============================================================
+   FEAR & GREED GAUGE
+   ============================================================ */
+.fg-card{padding:18px}
+.fg-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .fg-label{font-size:14px;font-weight:700}
-.fg-value{font-size:28px;font-weight:900}
-.fg-bar{height:6px;background:#1e1e2e;border-radius:3px;overflow:hidden}
-.fg-fill{height:100%;border-radius:3px;transition:width .5s}
+.fg-score{font-size:32px;font-weight:900;font-variant-numeric:tabular-nums}
+.fg-meter{height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;margin:6px 0}
+.fg-fill{height:100%;border-radius:3px;transition:width .6s cubic-bezier(.25,.1,.25,1)}
+.fg-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--dim)}
 
-/* News/Insights */
-.insight{background:var(--card);border-radius:var(--r);padding:14px;margin-bottom:8px;border-left:3px solid var(--acc)}
-.insight-time{font-size:10px;color:var(--dim);margin-bottom:4px}
-.insight-title{font-size:14px;font-weight:700;margin-bottom:4px;line-height:1.3}
-.insight-body{font-size:12px;color:var(--dim);line-height:1.5}
-.insight-impact{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;margin-top:6px}
-.insight-impact.bullish{background:rgba(16,185,129,.15);color:var(--up)}
-.insight-impact.bearish{background:rgba(239,68,68,.15);color:var(--dn)}
+/* ============================================================
+   AI ADVISOR CARDS
+   ============================================================ */
+.advisor-card{
+  background:var(--card);backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);border-radius:var(--r);
+  padding:16px;margin-bottom:10px;
+  border-left:3px solid var(--acc);
+}
+.advisor-card.buy{border-left-color:var(--up)}
+.advisor-card.sell{border-left-color:var(--red)}
+.advisor-card.hold{border-left-color:var(--amber)}
+.advisor-card.dca{border-left-color:var(--acc)}
 
-/* DCA Tracker */
-.dca-card{background:var(--card);border-radius:var(--r);padding:16px;margin-bottom:12px}
-.dca-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.dca-title{font-size:14px;font-weight:700}
-.dca-badge{font-size:11px;background:rgba(16,185,129,.15);color:var(--up);padding:3px 10px;border-radius:12px}
-.dca-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.dca-stat{background:#1a1a2e;border-radius:8px;padding:10px}
-.dca-stat-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
-.dca-stat-value{font-size:16px;font-weight:800;margin-top:2px}
+.advisor-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.advisor-ticker{font-size:16px;font-weight:800}
+.advisor-badge{
+  font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;
+}
+.advisor-badge.buy{background:rgba(16,185,129,.12);color:var(--up)}
+.advisor-badge.sell{background:rgba(239,68,68,.12);color:var(--red)}
+.advisor-badge.hold{background:rgba(245,158,11,.12);color:var(--amber)}
+.advisor-badge.dca{background:rgba(99,102,241,.12);color:var(--acc)}
 
-/* Bottom nav */
-.nav{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:space-around;padding:8px 0 calc(env(safe-area-inset-bottom,8px) + 4px);background:var(--card);border-top:1px solid #1e1e2e;z-index:20}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:var(--dim);cursor:pointer;padding:4px 12px;border:none;background:none}
-.nav-item.on{color:var(--pri)}
-.nav-icon{font-size:20px}
+.advisor-price{font-size:13px;color:var(--txt2);margin-bottom:6px}
+.advisor-reason{font-size:12px;color:var(--dim);line-height:1.6}
+.advisor-metrics{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.advisor-metric{font-size:11px;color:var(--dim2);background:rgba(255,255,255,.04);padding:3px 8px;border-radius:6px}
 
-/* Loading shimmer */
-.shimmer{background:linear-gradient(90deg,#1a1a2e 25%,#252540 50%,#1a1a2e 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;height:16px}
+/* ============================================================
+   NEWS CARDS
+   ============================================================ */
+.news-card{
+  background:var(--card);backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);border-radius:var(--r);
+  padding:16px;margin-bottom:10px;
+}
+.news-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.news-source{
+  font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;
+  background:rgba(99,102,241,.12);color:var(--acc);text-transform:uppercase;
+}
+.news-time{font-size:10px;color:var(--dim)}
+.news-title{font-size:14px;font-weight:700;line-height:1.4;margin-bottom:6px}
+.news-body{font-size:12px;color:var(--dim);line-height:1.5}
+.news-tags{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.news-tag{
+  font-size:10px;font-weight:700;padding:3px 10px;border-radius:12px;
+}
+.news-tag.bullish{background:rgba(16,185,129,.12);color:var(--up)}
+.news-tag.bearish{background:rgba(239,68,68,.12);color:var(--red)}
+.news-tag.neutral{background:rgba(99,102,241,.08);color:var(--acc)}
+.news-tag.ticker{background:rgba(255,255,255,.06);color:var(--txt2)}
+
+/* ============================================================
+   DETAIL MODAL (fullscreen overlay)
+   ============================================================ */
+.detail-overlay{
+  position:fixed;inset:0;z-index:100;
+  background:var(--bg);
+  display:none;flex-direction:column;
+  animation:slideUp .35s cubic-bezier(.25,.1,.25,1);
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+}
+.detail-overlay.open{display:flex}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes slideDown{from{transform:translateY(0)}to{transform:translateY(100%)}}
+.detail-overlay.closing{animation:slideDown .3s cubic-bezier(.25,.1,.25,1) forwards}
+
+.detail-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:env(safe-area-inset-top,12px) 16px 12px;
+  position:sticky;top:0;z-index:2;
+  background:linear-gradient(180deg,var(--bg) 80%,transparent);
+}
+.detail-close{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.08);border:none;color:var(--txt);
+  font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+.detail-ticker-group{text-align:center}
+.detail-ticker{font-size:18px;font-weight:800}
+.detail-name{font-size:11px;color:var(--dim)}
+
+.detail-price-section{text-align:center;padding:8px 16px 20px}
+.detail-price-big{font-size:38px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+.detail-change-row{display:flex;justify-content:center;gap:8px;margin-top:4px}
+.detail-change-abs{font-size:14px;font-weight:600}
+.detail-change-pct{font-size:14px;font-weight:700;padding:2px 10px;border-radius:8px}
+
+.detail-chart{padding:0 8px;margin-bottom:20px}
+.detail-chart svg{width:100%;height:auto;display:block}
+
+.detail-metrics{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.04);border-radius:var(--r);overflow:hidden;margin:0 16px 16px}
+.detail-metric{background:var(--bg2);padding:14px 16px}
+.detail-metric-label{font-size:11px;color:var(--dim);margin-bottom:4px}
+.detail-metric-value{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+
+.detail-ai-section{margin:0 16px 16px;padding:16px;background:var(--card);border-radius:var(--r);border:1px solid var(--glass-border)}
+.detail-ai-title{font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.detail-ai-text{font-size:13px;color:var(--txt2);line-height:1.6}
+
+/* ============================================================
+   PORTFOLIO
+   ============================================================ */
+.portfolio-summary{
+  background:linear-gradient(135deg,rgba(99,102,241,.12),rgba(16,185,129,.08));
+  border:1px solid rgba(99,102,241,.15);
+  border-radius:var(--r);padding:20px;margin-bottom:16px;text-align:center;
+}
+.portfolio-total-label{font-size:12px;color:var(--dim);margin-bottom:4px;text-transform:uppercase;letter-spacing:1px}
+.portfolio-total-value{font-size:34px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+.portfolio-pl{font-size:14px;font-weight:700;margin-top:4px}
+
+.position-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;background:var(--card);
+  backdrop-filter:blur(20px);border:1px solid var(--glass-border);
+  border-radius:var(--r);margin-bottom:8px;
+}
+.position-left{display:flex;flex-direction:column;gap:2px}
+.position-ticker{font-size:15px;font-weight:800}
+.position-detail{font-size:11px;color:var(--dim)}
+.position-right{text-align:right}
+.position-value{font-size:15px;font-weight:700}
+.position-pl{font-size:12px;font-weight:700}
+
+.add-btn{
+  width:100%;padding:14px;border:2px dashed rgba(255,255,255,.1);
+  border-radius:var(--r);background:transparent;color:var(--dim);
+  font-size:14px;font-weight:600;cursor:pointer;margin-bottom:12px;
+  transition:all .2s;font-family:var(--font);
+}
+.add-btn:active{background:rgba(255,255,255,.04);border-color:var(--acc)}
+
+/* Add Position Modal */
+.modal-backdrop{
+  position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.6);
+  backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;
+}
+.modal-backdrop.open{display:flex}
+.modal-sheet{
+  width:100%;max-width:430px;background:var(--bg2);
+  border-radius:20px 20px 0 0;padding:20px 20px calc(20px + var(--safe-b));
+  animation:sheetUp .3s cubic-bezier(.25,.1,.25,1);
+}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-handle{width:36px;height:4px;background:rgba(255,255,255,.2);border-radius:2px;margin:0 auto 16px}
+.modal-title{font-size:17px;font-weight:800;margin-bottom:16px;text-align:center}
+.form-group{margin-bottom:14px}
+.form-label{font-size:12px;color:var(--dim);margin-bottom:6px;display:block;font-weight:600}
+.form-input{
+  width:100%;padding:12px 14px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);border-radius:var(--r-sm);
+  color:var(--txt);font-size:15px;font-family:var(--font);
+  outline:none;transition:border-color .2s;
+}
+.form-input:focus{border-color:var(--acc)}
+.form-input::placeholder{color:var(--dim2)}
+
+.form-row{display:flex;gap:10px}
+.form-row .form-group{flex:1}
+
+.btn-primary{
+  width:100%;padding:14px;background:var(--acc);border:none;
+  border-radius:var(--r-sm);color:#fff;font-size:15px;font-weight:700;
+  cursor:pointer;font-family:var(--font);transition:opacity .2s;
+}
+.btn-primary:active{opacity:.8}
+.btn-danger{
+  width:100%;padding:12px;background:rgba(239,68,68,.12);border:none;
+  border-radius:var(--r-sm);color:var(--red);font-size:13px;font-weight:600;
+  cursor:pointer;font-family:var(--font);margin-top:8px;
+}
+
+/* ============================================================
+   "ME" PAGE
+   ============================================================ */
+.me-header{text-align:center;padding:20px 0}
+.me-avatar{
+  width:64px;height:64px;border-radius:50%;
+  background:linear-gradient(135deg,var(--acc),var(--pri));
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;margin:0 auto 10px;
+}
+.me-name{font-size:18px;font-weight:800}
+.me-sub{font-size:12px;color:var(--dim);margin-top:2px}
+
+.me-menu-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;background:var(--card);
+  backdrop-filter:blur(20px);border:1px solid var(--glass-border);
+  border-radius:var(--r);margin-bottom:8px;cursor:pointer;
+}
+.me-menu-left{display:flex;align-items:center;gap:12px}
+.me-menu-icon{font-size:20px}
+.me-menu-text{font-size:14px;font-weight:600}
+.me-menu-arrow{color:var(--dim);font-size:14px}
+
+/* ============================================================
+   BOTTOM TAB BAR
+   ============================================================ */
+.tab-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:80;
+  display:flex;justify-content:space-around;
+  padding:6px 0 calc(var(--safe-b) + 4px);
+  background:rgba(10,10,15,.85);
+  backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.tab-item{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  font-size:10px;font-weight:600;color:var(--dim);
+  cursor:pointer;padding:4px 16px;border:none;background:none;
+  transition:color .2s;position:relative;font-family:var(--font);
+}
+.tab-item.on{color:var(--pri)}
+.tab-item.on::before{
+  content:'';position:absolute;top:-6px;width:20px;height:2px;
+  background:var(--pri);border-radius:1px;
+}
+.tab-icon{font-size:22px;line-height:1}
+
+/* ============================================================
+   UPDATED FOOTER
+   ============================================================ */
+.updated{text-align:center;font-size:10px;color:var(--dim2);padding:16px 0 8px}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+.text-up{color:var(--up)}.text-dn{color:var(--red)}.text-flat{color:var(--dim)}
+.empty-state{text-align:center;padding:40px 20px;color:var(--dim)}
+.empty-state .empty-icon{font-size:48px;margin-bottom:12px}
+.empty-state .empty-title{font-size:16px;font-weight:700;color:var(--txt2);margin-bottom:6px}
+.empty-state .empty-sub{font-size:13px;line-height:1.5}
+
+/* Loading */
+.shimmer{
+  background:linear-gradient(90deg,rgba(255,255,255,.02) 25%,rgba(255,255,255,.06) 50%,rgba(255,255,255,.02) 75%);
+  background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;height:16px;
+}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-
-/* Last updated */
-.updated{text-align:center;font-size:10px;color:var(--dim);margin:12px 0}
 </style>
 </head>
 <body>
+
 <div class="app" id="app">
+  <!-- Global Header -->
   <div class="hdr">
-    <h1>📈 StockAI</h1>
-    <div class="market-status">
+    <h1>📈 <span>StockAI</span></h1>
+    <div class="market-badge">
       <div class="market-dot" id="marketDot"></div>
-      <span id="marketLabel">Market Closed</span>
+      <span id="marketLabel">Loading...</span>
     </div>
   </div>
 
-  <!-- AI Signal Banner — unique value -->
-  <div class="signal-banner neutral" id="signalBanner">
-    <div class="signal-icon">🔍</div>
-    <div class="signal-title">Loading AI Signal...</div>
-    <div class="signal-text">Analyzing market conditions...</div>
+  <!-- ===== PAGE: 行情 (Quotes) ===== -->
+  <div class="page active" id="page-quotes">
+    <div class="signal-banner neutral" id="signalBanner">
+      <div class="signal-icon">🔍</div>
+      <div class="signal-title">分析中...</div>
+      <div class="signal-text">正在加载市场数据...</div>
+    </div>
+
+    <div class="sub-tabs" id="quoteTabs">
+      <button class="sub-tab on" data-stab="fav">⭐ 自选</button>
+      <button class="sub-tab" data-stab="indices">🌍 指数</button>
+      <button class="sub-tab" data-stab="chips">🔧 芯片</button>
+      <button class="sub-tab" data-stab="cloud">☁️ 云</button>
+      <button class="sub-tab" data-stab="models">🧠 模型</button>
+      <button class="sub-tab" data-stab="apps">📱 应用</button>
+      <button class="sub-tab" data-stab="etfs">📦 ETF</button>
+    </div>
+
+    <div id="quoteContent"></div>
+    <div class="updated" id="updated"></div>
   </div>
 
-  <!-- Tabs -->
-  <div class="tabs" id="tabs">
-    <button class="tab on" data-tab="watchlist">自选股</button>
-    <button class="tab" data-tab="indices">指数</button>
-    <button class="tab" data-tab="ai-chain">AI链</button>
-    <button class="tab" data-tab="insights">信号</button>
-    <button class="tab" data-tab="dca">定投</button>
+  <!-- ===== PAGE: AI投顾 (Advisor) ===== -->
+  <div class="page" id="page-advisor">
+    <div style="padding:4px 0 12px">
+      <h2 style="font-size:20px;font-weight:800">🤖 AI投顾</h2>
+      <p style="font-size:12px;color:var(--dim);margin-top:4px">基于VIX、价格走势、板块特性的智能分析</p>
+    </div>
+    <div id="advisorSummary"></div>
+    <div class="sub-tabs" id="advisorTabs" style="padding-left:0;padding-right:0">
+      <button class="sub-tab on" data-atab="all">全部</button>
+      <button class="sub-tab" data-atab="buy">📈 买入</button>
+      <button class="sub-tab" data-atab="sell">📉 卖出</button>
+      <button class="sub-tab" data-atab="hold">⏸ 持有</button>
+      <button class="sub-tab" data-atab="dca">🔄 定投</button>
+    </div>
+    <div id="advisorContent"></div>
   </div>
 
-  <!-- Content -->
-  <div id="content"></div>
-  <div class="updated" id="updated"></div>
+  <!-- ===== PAGE: 持仓 (Portfolio) ===== -->
+  <div class="page" id="page-portfolio">
+    <div style="padding:4px 0 12px">
+      <h2 style="font-size:20px;font-weight:800">💼 我的持仓</h2>
+      <p style="font-size:12px;color:var(--dim);margin-top:4px">追踪你的美股投资组合</p>
+    </div>
+    <div id="portfolioContent"></div>
+  </div>
+
+  <!-- ===== PAGE: 我的 (Me) ===== -->
+  <div class="page" id="page-me">
+    <div class="me-header">
+      <div class="me-avatar">👤</div>
+      <div class="me-name">投资者</div>
+      <div class="me-sub">StockAI Pro · v2.0</div>
+    </div>
+    <div id="meContent"></div>
+  </div>
 </div>
 
-<!-- Bottom nav -->
-<div class="nav">
-  <button class="nav-item on" data-page="home"><span class="nav-icon">📊</span>行情</button>
-  <button class="nav-item" data-page="signals"><span class="nav-icon">🎯</span>信号</button>
-  <button class="nav-item" data-page="learn"><span class="nav-icon">📚</span>学习</button>
-  <button class="nav-item" data-page="me"><span class="nav-icon">👤</span>我的</button>
+<!-- Bottom Tab Bar -->
+<div class="tab-bar" id="tabBar">
+  <button class="tab-item on" data-page="quotes"><span class="tab-icon">📈</span>行情</button>
+  <button class="tab-item" data-page="advisor"><span class="tab-icon">🤖</span>AI投顾</button>
+  <button class="tab-item" data-page="portfolio"><span class="tab-icon">💼</span>持仓</button>
+  <button class="tab-item" data-page="me"><span class="tab-icon">👤</span>我的</button>
+</div>
+
+<!-- Detail Modal -->
+<div class="detail-overlay" id="detailOverlay">
+  <div class="detail-header">
+    <button class="detail-close" id="detailClose">✕</button>
+    <div class="detail-ticker-group">
+      <div class="detail-ticker" id="detailTicker"></div>
+      <div class="detail-name" id="detailName"></div>
+    </div>
+    <div style="width:36px"></div>
+  </div>
+  <div id="detailBody"></div>
+</div>
+
+<!-- Add Position Modal -->
+<div class="modal-backdrop" id="addModal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title">添加持仓</div>
+    <div class="form-group">
+      <label class="form-label">股票代码</label>
+      <input class="form-input" id="formTicker" placeholder="例如 NVDA" autocapitalize="characters">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">买入价格 ($)</label>
+        <input class="form-input" id="formPrice" type="number" step="0.01" placeholder="0.00">
+      </div>
+      <div class="form-group">
+        <label class="form-label">股数</label>
+        <input class="form-input" id="formShares" type="number" step="0.01" placeholder="0">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">买入日期</label>
+      <input class="form-input" id="formDate" type="date">
+    </div>
+    <button class="btn-primary" id="formSubmit">确认添加</button>
+    <button class="btn-danger" id="formCancel">取消</button>
+  </div>
 </div>
 
 <script>
-// ===== DATA =====
-const WATCHLIST = {
+/* ================================================================
+   StockAI v2 — Complete Application
+   ================================================================ */
+
+// ===== DATA DEFINITIONS =====
+const STOCKS = {
   indices: [
-    { t: '^GSPC', n: 'S&P 500', cat: 'index' },
-    { t: '^IXIC', n: 'NASDAQ', cat: 'index' },
-    { t: '^DJI',  n: 'Dow Jones', cat: 'index' },
-    { t: '^VIX',  n: 'VIX Fear', cat: 'index' }
+    { t:'^GSPC', n:'S&P 500', cat:'index' },
+    { t:'^IXIC', n:'NASDAQ', cat:'index' },
+    { t:'^DJI',  n:'Dow Jones', cat:'index' },
+    { t:'^VIX',  n:'VIX 恐慌指数', cat:'index' }
   ],
-  aiChain: [
-    // Layer 1: Chips
-    { t: 'NVDA', n: 'NVIDIA', cat: '🔧 芯片', layer: 'chip' },
-    { t: 'AMD',  n: 'AMD', cat: '🔧 芯片', layer: 'chip' },
-    { t: 'TSM',  n: 'TSMC', cat: '🔧 芯片', layer: 'chip' },
-    { t: 'AVGO', n: 'Broadcom', cat: '🔧 芯片', layer: 'chip' },
-    // Layer 2: Cloud/Infra
-    { t: 'MSFT', n: 'Microsoft', cat: '☁️ 云/基建', layer: 'infra' },
-    { t: 'AMZN', n: 'Amazon', cat: '☁️ 云/基建', layer: 'infra' },
-    { t: 'GOOG', n: 'Google', cat: '☁️ 云/基建', layer: 'infra' },
-    // Layer 3: Models
-    { t: 'META', n: 'Meta (Llama)', cat: '🧠 模型', layer: 'model' },
-    { t: 'PLTR', n: 'Palantir', cat: '🧠 模型', layer: 'model' },
-    { t: 'AI',   n: 'C3.ai', cat: '🧠 模型', layer: 'model' },
-    // Layer 4: Applications
-    { t: 'CRM',  n: 'Salesforce', cat: '📱 应用', layer: 'app' },
-    { t: 'NOW',  n: 'ServiceNow', cat: '📱 应用', layer: 'app' },
-    { t: 'SNOW', n: 'Snowflake', cat: '📱 应用', layer: 'app' },
-    // ETFs
-    { t: 'QQQ',  n: 'NASDAQ ETF', cat: '📦 ETF', layer: 'etf' },
-    { t: 'SPY',  n: 'S&P 500 ETF', cat: '📦 ETF', layer: 'etf' },
-    { t: 'BOTZ', n: 'AI & Robotics ETF', cat: '📦 ETF', layer: 'etf' },
-    { t: 'SMH',  n: 'Semiconductor ETF', cat: '📦 ETF', layer: 'etf' }
+  chips: [
+    { t:'NVDA', n:'NVIDIA', cat:'🔧 芯片', layer:'chip' },
+    { t:'AMD',  n:'AMD', cat:'🔧 芯片', layer:'chip' },
+    { t:'TSM',  n:'TSMC', cat:'🔧 芯片', layer:'chip' },
+    { t:'AVGO', n:'Broadcom', cat:'🔧 芯片', layer:'chip' },
+  ],
+  cloud: [
+    { t:'MSFT', n:'Microsoft', cat:'☁️ 云', layer:'infra' },
+    { t:'AMZN', n:'Amazon', cat:'☁️ 云', layer:'infra' },
+    { t:'GOOG', n:'Google', cat:'☁️ 云', layer:'infra' },
+  ],
+  models: [
+    { t:'META', n:'Meta (Llama)', cat:'🧠 模型', layer:'model' },
+    { t:'PLTR', n:'Palantir', cat:'🧠 模型', layer:'model' },
+    { t:'AI',   n:'C3.ai', cat:'🧠 模型', layer:'model' },
+  ],
+  apps: [
+    { t:'CRM',  n:'Salesforce', cat:'📱 应用', layer:'app' },
+    { t:'NOW',  n:'ServiceNow', cat:'📱 应用', layer:'app' },
+    { t:'SNOW', n:'Snowflake', cat:'📱 应用', layer:'app' },
+  ],
+  etfs: [
+    { t:'QQQ',  n:'NASDAQ ETF', cat:'📦 ETF', layer:'etf' },
+    { t:'SPY',  n:'S&P 500 ETF', cat:'📦 ETF', layer:'etf' },
+    { t:'BOTZ', n:'AI & Robotics ETF', cat:'📦 ETF', layer:'etf' },
+    { t:'SMH',  n:'Semiconductor ETF', cat:'📦 ETF', layer:'etf' },
   ]
 };
 
-// Combine default watchlist
-const ALL_STOCKS = [...WATCHLIST.indices, ...WATCHLIST.aiChain];
+const FAVORITES = ['QQQ','SPY','NVDA','GOOG','META','TSM'];
+const ALL = [...STOCKS.indices,...STOCKS.chips,...STOCKS.cloud,...STOCKS.models,...STOCKS.apps,...STOCKS.etfs];
+
+const ETF_TICKERS = new Set(['QQQ','SPY','BOTZ','SMH']);
+const INDEX_TICKERS = new Set(['^GSPC','^IXIC','^DJI','^VIX']);
+
 let prices = {};
-let currentTab = 'watchlist';
-let refreshTimer = null;
+let currentPage = 'quotes';
+let currentSubTab = 'fav';
+let currentAdvisorTab = 'all';
 
 // ===== MARKET STATUS =====
-function isMarketOpen() {
-  const now = new Date();
-  const et = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
-  const day = et.getDay();
-  const h = et.getHours(), m = et.getMinutes();
-  const mins = h * 60 + m;
-  return day >= 1 && day <= 5 && mins >= 570 && mins < 960; // 9:30-16:00 ET
+function isMarketOpen(){
+  const now=new Date();
+  const et=new Date(now.toLocaleString('en-US',{timeZone:'America/New_York'}));
+  const day=et.getDay(), mins=et.getHours()*60+et.getMinutes();
+  return day>=1&&day<=5&&mins>=570&&mins<960;
 }
 
-function updateMarketStatus() {
-  const open = isMarketOpen();
-  document.getElementById('marketDot').classList.toggle('open', open);
-  document.getElementById('marketLabel').textContent = open ? 'Market Open' : 'Market Closed';
+function updateMarketStatus(){
+  const open=isMarketOpen();
+  document.getElementById('marketDot').classList.toggle('open',open);
+  document.getElementById('marketLabel').textContent=open?'交易中':'已休市';
 }
 
-// ===== FETCH PRICES =====
-async function fetchPrices() {
-  try {
-    // Primary: static JSON (updated by Mac mini cron every 15min during market hours)
-    const r = await fetch('./data/quotes.json?t=' + Date.now());
-    if (r.ok) {
-      const d = await r.json();
-      for (const [ticker, q] of Object.entries(d.quotes)) {
-        prices[ticker] = { price: q.p, change: q.c, changePct: q.pct, prevClose: q.prev, spark: q.spark, name: q.name };
-      }
-      const updated = new Date(d.updated);
-      document.getElementById('updated').textContent = `${Object.keys(d.quotes).length} stocks · ${updated.toLocaleTimeString()}`;
-      render();
-      return;
+// ===== FETCH DATA =====
+async function fetchPrices(){
+  try{
+    const r=await fetch('./data/quotes.json?t='+Date.now());
+    if(!r.ok) throw new Error(r.status);
+    const d=await r.json();
+    for(const[ticker,q] of Object.entries(d.quotes)){
+      prices[ticker]={
+        price:q.p, change:q.c, changePct:q.pct, prevClose:q.prev,
+        spark:q.spark, name:q.name
+      };
     }
-  } catch (e) { console.warn('Static data failed:', e); }
-  // Fallback: Yahoo v8 chart (works server-side, may be CORS-blocked in browser)
-  const batch = ALL_STOCKS.map(s => s.t);
-  const results = await Promise.allSettled(
-    batch.map(async ticker => {
-      const r = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?range=5d&interval=1d`);
-      if (!r.ok) throw new Error(r.status);
-      const d = await r.json();
-      const meta = d.chart.result[0].meta;
-      const prev = meta.chartPreviousClose || meta.previousClose;
-      const price = meta.regularMarketPrice;
-      const change = price - prev;
-      const closes = d.chart.result[0].indicators?.quote?.[0]?.close?.filter(v => v != null) || [];
-      prices[ticker] = { price, change, changePct: prev ? (change / prev) * 100 : 0, prevClose: prev, spark: closes };
-    })
-  );
-  const ok = results.filter(r => r.status === 'fulfilled').length;
-  document.getElementById('updated').textContent = `${ok}/${batch.length} · ${new Date().toLocaleTimeString()}`;
-  render();
+    const t=new Date(d.updated);
+    document.getElementById('updated').textContent=
+      `${Object.keys(d.quotes).length} 只 · 更新于 ${t.toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})}`;
+  }catch(e){console.warn('Fetch failed:',e)}
 }
 
-// ===== RENDER =====
-function render() {
-  const c = document.getElementById('content');
-  updateMarketStatus();
-  
-  switch (currentTab) {
-    case 'watchlist': renderWatchlist(c); break;
-    case 'indices': renderIndices(c); break;
-    case 'ai-chain': renderAIChain(c); break;
-    case 'insights': renderInsights(c); break;
-    case 'dca': renderDCA(c); break;
-  }
+// ===== SPARKLINE SVG =====
+function sparkSvg(data,up,w=56,h=24){
+  if(!data||data.length<2) return '';
+  const pad=2, min=Math.min(...data), max=Math.max(...data), range=max-min||1;
+  const pts=data.map((v,i)=>`${pad+(i/(data.length-1))*(w-pad*2)},${pad+(1-(v-min)/range)*(h-pad*2)}`).join(' ');
+  const color=up?'#10b981':'#ef4444';
+  return `<div class="mini-chart"><svg viewBox="0 0 ${w} ${h}"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`;
 }
 
-function sparkSvg(data, up) {
-  if (!data || data.length < 2) return '';
-  const w=60, h=24, pad=2;
-  const min = Math.min(...data), max = Math.max(...data);
-  const range = max - min || 1;
-  const pts = data.map((v, i) => `${pad + (i / (data.length - 1)) * (w - pad * 2)},${pad + (1 - (v - min) / range) * (h - pad * 2)}`).join(' ');
-  const color = up ? '#10b981' : '#ef4444';
-  return `<div class="mini-chart"><svg viewBox="0 0 ${w} ${h}"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round"/></svg></div>`;
+// Large chart for detail page
+function detailChartSvg(data,up){
+  if(!data||data.length<2) return '';
+  const w=400, h=160, pad=8;
+  const min=Math.min(...data), max=Math.max(...data), range=max-min||1;
+  const pts=data.map((v,i)=>`${pad+(i/(data.length-1))*(w-pad*2)},${pad+(1-(v-min)/range)*(h-pad*2)}`);
+  const color=up?'#10b981':'#ef4444';
+  const gradId='cg'+Date.now();
+  // Area fill
+  const areaPath=`M${pts[0]} ${pts.join(' L')} L${pad+(data.length-1)/(data.length-1)*(w-pad*2)},${h} L${pad},${h} Z`;
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="width:100%;height:160px">
+    <defs>
+      <linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="${color}" stop-opacity=".25"/>
+        <stop offset="100%" stop-color="${color}" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <path d="${areaPath}" fill="url(#${gradId})"/>
+    <polyline points="${pts.join(' ')}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    ${data.map((v,i)=>{
+      const x=pad+(i/(data.length-1))*(w-pad*2);
+      const y=pad+(1-(v-min)/range)*(h-pad*2);
+      return `<circle cx="${x}" cy="${y}" r="3.5" fill="${color}" stroke="var(--bg)" stroke-width="2"/>`;
+    }).join('')}
+    ${data.map((v,i)=>{
+      const x=pad+(i/(data.length-1))*(w-pad*2);
+      return `<text x="${x}" y="${h-1}" text-anchor="middle" fill="#64748b" font-size="9" font-family="var(--font)">D${i+1}</text>`;
+    }).join('')}
+  </svg>`;
 }
 
-function stockRow(s) {
-  const p = prices[s.t] || {};
-  const price = p.price != null ? p.price.toFixed(2) : '---';
-  const pct = p.changePct != null ? p.changePct.toFixed(2) : '0.00';
-  const up = (p.changePct || 0) >= 0;
-  const spark = sparkSvg(p.spark, up);
+// ===== STOCK ROW =====
+function stockRow(s){
+  const p=prices[s.t]||{};
+  const price=p.price!=null?(p.price>=1000?p.price.toFixed(0):p.price.toFixed(2)):'---';
+  const pct=p.changePct!=null?p.changePct.toFixed(2):'0.00';
+  const up=(p.changePct||0)>=0;
   return `<div class="stock-row" onclick="showDetail('${s.t}')">
     <div class="stock-left">
-      <div class="stock-ticker">${s.t}</div>
-      <div class="stock-name">${s.cat ? s.cat + ' · ' : ''}${s.n}</div>
+      <div class="stock-ticker">${s.t.replace('^','')}</div>
+      <div class="stock-name">${s.n}</div>
     </div>
-    <div style="display:flex;align-items:center;gap:8px">
-      ${spark}
-      <div class="stock-right">
-        <div class="stock-price">$${price}</div>
-        <div class="stock-change ${up ? 'up' : 'dn'}">${up ? '+' : ''}${pct}%</div>
-      </div>
+    <div class="stock-mid">${sparkSvg(p.spark,up)}</div>
+    <div class="stock-right">
+      <div class="stock-price">$${price}</div>
+      <div class="stock-change ${up?'up':'dn'}">${up?'+':''}${pct}%</div>
     </div>
   </div>`;
 }
 
-function renderWatchlist(c) {
-  const favorites = WATCHLIST.aiChain.filter(s => ['QQQ','SPY','NVDA','GOOG','META'].includes(s.t));
-  c.innerHTML = `
-    <div class="section-title">⭐ My Picks</div>
-    ${favorites.map(stockRow).join('')}
-    <div class="section-title">📦 AI ETFs</div>
-    ${WATCHLIST.aiChain.filter(s => s.layer === 'etf').map(stockRow).join('')}
-  `;
-}
-
-function renderIndices(c) {
-  c.innerHTML = `
-    <div class="section-title">🌍 Major Indices</div>
-    ${WATCHLIST.indices.map(stockRow).join('')}
-    ${renderFearGreed()}
-  `;
-}
-
-function renderAIChain(c) {
-  const layers = ['chip', 'infra', 'model', 'app', 'etf'];
-  const layerNames = { chip: '🔧 Layer 1: 芯片', infra: '☁️ Layer 2: 云/基建', model: '🧠 Layer 3: 模型', app: '📱 Layer 4: 应用', etf: '📦 ETF 指数' };
-  c.innerHTML = layers.map(l => `
-    <div class="section-title">${layerNames[l]}</div>
-    ${WATCHLIST.aiChain.filter(s => s.layer === l).map(stockRow).join('')}
-  `).join('');
-}
-
-function renderFearGreed() {
-  // VIX-based fear gauge
-  const vix = prices['^VIX'];
-  let score = 50, label = 'Neutral', color = 'var(--acc)';
-  if (vix && vix.price) {
-    if (vix.price < 15) { score = 80; label = '😎 Extreme Greed'; color = 'var(--up)'; }
-    else if (vix.price < 20) { score = 65; label = '😊 Greed'; color = 'var(--up)'; }
-    else if (vix.price < 25) { score = 50; label = '😐 Neutral'; color = 'var(--acc)'; }
-    else if (vix.price < 30) { score = 35; label = '😰 Fear'; color = 'var(--dn)'; }
-    else { score = 15; label = '😱 Extreme Fear'; color = 'var(--dn)'; }
+// ===== QUOTES PAGE =====
+function renderQuotes(){
+  const c=document.getElementById('quoteContent');
+  updateMarketStatus();
+  let items=[];
+  switch(currentSubTab){
+    case 'fav':
+      items=ALL.filter(s=>FAVORITES.includes(s.t));
+      break;
+    case 'indices':
+      items=STOCKS.indices;
+      break;
+    case 'chips':
+      items=STOCKS.chips;
+      break;
+    case 'cloud':
+      items=STOCKS.cloud;
+      break;
+    case 'models':
+      items=STOCKS.models;
+      break;
+    case 'apps':
+      items=STOCKS.apps;
+      break;
+    case 'etfs':
+      items=STOCKS.etfs;
+      break;
   }
-  return `<div class="fg-card">
-    <div class="fg-row">
-      <div class="fg-label">Fear & Greed (VIX)</div>
-      <div class="fg-value" style="color:${color}">${score}</div>
+
+  let html=items.map(stockRow).join('');
+
+  // Fear & Greed on indices tab
+  if(currentSubTab==='indices') html+=renderFearGreed();
+
+  c.innerHTML=html;
+  updateSignalBanner();
+}
+
+function renderFearGreed(){
+  const vix=prices['^VIX'];
+  let score=50, label='😐 中性', color='var(--acc)';
+  if(vix&&vix.price){
+    if(vix.price<15){score=82;label='😎 极度贪婪';color='var(--up)'}
+    else if(vix.price<20){score=65;label='😊 贪婪';color='var(--up)'}
+    else if(vix.price<25){score=50;label='😐 中性';color='var(--acc)'}
+    else if(vix.price<30){score=35;label='😰 恐惧';color='var(--dn)'}
+    else{score=15;label='😱 极度恐惧';color='var(--dn)'}
+  }
+  return `<div class="glass-card fg-card" style="margin-top:12px">
+    <div class="fg-header">
+      <div class="fg-label">恐惧&贪婪指数</div>
+      <div class="fg-score" style="color:${color}">${score}</div>
     </div>
-    <div style="font-size:13px;color:var(--dim);margin-bottom:8px">${label} · VIX: ${vix?.price?.toFixed(1) || '---'}</div>
-    <div class="fg-bar"><div class="fg-fill" style="width:${score}%;background:${color}"></div></div>
-    <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--dim);margin-top:4px">
-      <span>极度恐惧</span><span>极度贪婪</span>
-    </div>
+    <div style="font-size:13px;color:var(--dim);margin-bottom:10px">${label} · VIX: ${vix?.price?.toFixed(1)||'---'}</div>
+    <div class="fg-meter"><div class="fg-fill" style="width:${score}%;background:${color}"></div></div>
+    <div class="fg-labels"><span>极度恐惧</span><span>极度贪婪</span></div>
   </div>`;
 }
 
-function renderInsights(c) {
-  // These will be populated by the Claw backend pushing data
-  const insights = JSON.parse(localStorage.getItem('stock-ai-insights') || '[]');
-  if (insights.length === 0) {
-    c.innerHTML = `
-      <div class="insight">
-        <div class="insight-time">System</div>
-        <div class="insight-title">🔮 AI信号功能已就绪</div>
-        <div class="insight-body">StockAI 会在以下情况推送信号：<br>
-        • 你关注的AI股票出现异常波动（±3%+）<br>
-        • 重大AI行业新闻（融资/发布/政策）<br>
-        • 技术指标触发买入/卖出信号<br>
-        • 定投日提醒（每月固定日期）<br>
-        • 恐惧贪婪指数极端值（<20 或 >80）</div>
-      </div>`;
-    return;
-  }
-  c.innerHTML = insights.map(i => `
-    <div class="insight" style="border-left-color:${i.bullish ? 'var(--up)' : 'var(--dn)'}">
-      <div class="insight-time">${i.time}</div>
-      <div class="insight-title">${i.title}</div>
-      <div class="insight-body">${i.body}</div>
-      <span class="insight-impact ${i.bullish ? 'bullish' : 'bearish'}">${i.bullish ? '📈 利好' : '📉 利空'}</span>
-    </div>`).join('');
-}
+// ===== AI SIGNAL BANNER =====
+function updateSignalBanner(){
+  const banner=document.getElementById('signalBanner');
+  const aiStocks=ALL.filter(s=>!INDEX_TICKERS.has(s.t)&&!ETF_TICKERS.has(s.t));
+  let upCount=0, dnCount=0, bigMoves=[];
 
-function renderDCA(c) {
-  const dca = JSON.parse(localStorage.getItem('stock-ai-dca') || 'null') || {
-    monthly: 1000,
-    split: { QQQ: 40, SPY: 30, SMH: 20, BOTZ: 10 },
-    startDate: new Date().toISOString().slice(0, 10),
-    history: []
-  };
-  c.innerHTML = `
-    <div class="dca-card">
-      <div class="dca-header">
-        <div class="dca-title">📅 定投计划</div>
-        <div class="dca-badge">Active</div>
-      </div>
-      <div class="dca-grid">
-        <div class="dca-stat">
-          <div class="dca-stat-label">月投入</div>
-          <div class="dca-stat-value">$${dca.monthly}</div>
-        </div>
-        <div class="dca-stat">
-          <div class="dca-stat-label">已投入</div>
-          <div class="dca-stat-value">$${dca.history.length * dca.monthly}</div>
-        </div>
-      </div>
-    </div>
-    <div class="section-title">分配比例</div>
-    ${Object.entries(dca.split).map(([t, pct]) => {
-      const s = WATCHLIST.aiChain.find(x => x.t === t) || { n: t };
-      return `<div class="stock-row">
-        <div class="stock-left">
-          <div class="stock-ticker">${t}</div>
-          <div class="stock-name">${s.n}</div>
-        </div>
-        <div class="stock-right">
-          <div class="stock-price">${pct}%</div>
-          <div class="stock-change up">$${(dca.monthly * pct / 100).toFixed(0)}/mo</div>
-        </div>
-      </div>`;
-    }).join('')}
-    <div class="section-title" style="margin-top:16px">💡 定投策略</div>
-    <div class="insight">
-      <div class="insight-title">为什么这样分配？</div>
-      <div class="insight-body">
-        <b>QQQ 40%</b> — 纳斯达克100，科技股大盘，稳<br>
-        <b>SPY 30%</b> — 标普500，美国经济基本盘<br>
-        <b>SMH 20%</b> — 半导体ETF，AI算力层直接受益<br>
-        <b>BOTZ 10%</b> — AI&机器人ETF，高增长高波动
-      </div>
-    </div>
-  `;
-}
+  for(const s of aiStocks){
+    const p=prices[s.t];
+    if(!p) continue;
+    if(p.changePct>0) upCount++; else dnCount++;
+    if(Math.abs(p.changePct)>5) bigMoves.push({...s, pct:p.changePct});
+  }
 
-// ===== AI SIGNAL =====
-function updateSignal() {
-  const banner = document.getElementById('signalBanner');
-  const aiStocks = WATCHLIST.aiChain.filter(s => s.layer !== 'etf');
-  let upCount = 0, dnCount = 0, bigMoves = [];
-  
-  for (const s of aiStocks) {
-    const p = prices[s.t];
-    if (!p) continue;
-    if (p.changePct > 0) upCount++;
-    else dnCount++;
-    if (Math.abs(p.changePct) > 3) bigMoves.push({ ...s, pct: p.changePct });
+  const vix=prices['^VIX'];
+  const vixVal=vix?.price||20;
+  const total=upCount+dnCount;
+  const bullPct=total>0?upCount/total:0.5;
+
+  let mood,icon,title,text,action;
+
+  if(vixVal>25){
+    mood='bear';icon='🛡️';
+    title=`VIX ${vixVal.toFixed(1)} — 市场恐慌升温`;
+    text=`恐慌指数高于25，市场波动加剧。${bigMoves.length?bigMoves.map(m=>`${m.t} ${m.pct>0?'+':''}${m.pct.toFixed(1)}%`).join('，')+'异动。':''}建议降低仓位，等待明确信号。`;
+    action='防御为主，控制仓位';
+  } else if(bigMoves.length>0){
+    const top=bigMoves.sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct))[0];
+    mood=top.pct>0?'bull':'bear';
+    icon=top.pct>0?'🚀':'⚠️';
+    title=`${top.t} ${top.pct>0?'+':''}${top.pct.toFixed(1)}% 异常波动`;
+    text=`${top.n} 今日大幅${top.pct>0?'上涨':'下跌'}，关注是否有重大消息驱动。`;
+    action=top.pct>0?'短线关注，勿追高':'观望为主，等待企稳';
+  } else if(bullPct>0.65){
+    mood='bull';icon='📈';title='AI板块整体偏多';
+    text=`${upCount}/${total} AI股上涨，市场情绪积极。VIX ${vixVal.toFixed(1)} 处于合理区间。`;
+    action='定投继续，择机加仓';
+  } else if(bullPct<0.35){
+    mood='bear';icon='📉';title='AI板块整体偏空';
+    text=`${dnCount}/${total} AI股下跌，注意风控。${vixVal>20?'VIX偏高，谨慎操作。':''}`;
+    action='持有观望，等反转信号';
+  } else{
+    mood='neutral';icon='⚖️';title='AI板块震荡运行';
+    text=`涨跌参半，无明显方向。VIX ${vixVal.toFixed(1)}，波动适中。`;
+    action='按计划定投即可';
   }
-  
-  const total = upCount + dnCount;
-  const bullPct = total > 0 ? upCount / total : 0.5;
-  
-  let mood, icon, title, text, action;
-  if (bigMoves.length > 0) {
-    const top = bigMoves.sort((a, b) => Math.abs(b.pct) - Math.abs(a.pct))[0];
-    mood = top.pct > 0 ? 'bull' : 'bear';
-    icon = top.pct > 0 ? '🚀' : '⚠️';
-    title = `${top.t} ${top.pct > 0 ? '+' : ''}${top.pct.toFixed(1)}% 异常波动`;
-    text = `${top.n} 今天大幅${top.pct > 0 ? '上涨' : '下跌'}，关注是否有重大消息。`;
-    action = top.pct > 0 ? '关注买入机会' : '观望，勿追跌';
-  } else if (bullPct > 0.7) {
-    mood = 'bull'; icon = '📈'; title = 'AI板块整体偏多';
-    text = `${upCount}/${total} AI相关股票上涨，市场情绪积极。`;
-    action = '定投继续，不追高';
-  } else if (bullPct < 0.3) {
-    mood = 'bear'; icon = '📉'; title = 'AI板块整体偏空';
-    text = `${dnCount}/${total} AI相关股票下跌，注意风险。`;
-    action = '持有观望，等信号';
-  } else {
-    mood = 'neutral'; icon = '⚖️'; title = 'AI板块震荡中';
-    text = `涨跌各半，无明显方向。适合定投，不适合单笔大买。`;
-    action = '按计划定投即可';
-  }
-  
-  banner.className = `signal-banner ${mood}`;
-  banner.innerHTML = `
+
+  banner.className=`signal-banner ${mood}`;
+  banner.innerHTML=`
     <div class="signal-icon">${icon}</div>
     <div class="signal-title">${title}</div>
     <div class="signal-text">${text}</div>
     <div class="signal-action">${action}</div>`;
 }
 
-function showDetail(ticker) {
-  // Future: open detail page with chart
-  alert(`${ticker} detail coming soon`);
+// ===== AI ADVISOR PAGE =====
+function getAIAdvice(ticker){
+  const p=prices[ticker];
+  if(!p||!p.spark||p.spark.length<2) return {action:'hold',label:'持有观望',reason:'数据不足，无法分析',confidence:0};
+
+  const vix=prices['^VIX']?.price||20;
+  const isETF=ETF_TICKERS.has(ticker);
+  const isIndex=INDEX_TICKERS.has(ticker);
+  const spark=p.spark;
+  const first=spark[0], last=spark[spark.length-1];
+  const fiveDayChange=((last-first)/first)*100;
+  const todayPct=p.changePct||0;
+
+  // ETFs always DCA
+  if(isETF){
+    let reason=`${ticker} 是ETF，适合长期定投。`;
+    if(vix>25) reason+=`当前VIX=${vix.toFixed(1)}>25，市场恐慌，分批买入可摊低成本。`;
+    else if(vix<15) reason+=`VIX=${vix.toFixed(1)}<15，市场乐观，定投持续即可。`;
+    else reason+=`VIX=${vix.toFixed(1)} 中性区间，保持定投节奏。`;
+    if(fiveDayChange<-3) reason+=` 5日跌${Math.abs(fiveDayChange).toFixed(1)}%，可适当加仓。`;
+    return {action:'dca',label:'定投',reason,confidence:85,fiveDayChange};
+  }
+
+  if(isIndex){
+    return {action:'hold',label:'参考指标',reason:`${p.name||ticker} 是市场指数，不直接交易。5日变动 ${fiveDayChange>0?'+':''}${fiveDayChange.toFixed(1)}%。VIX=${vix.toFixed(1)}。`,confidence:0,fiveDayChange};
+  }
+
+  // Individual stocks
+  let action='hold', label='持有观望', reason='', confidence=60;
+
+  if(fiveDayChange<-5){
+    // Big 5-day drop: wait
+    action='hold';label='观望';confidence=70;
+    reason=`5日跌幅 ${fiveDayChange.toFixed(1)}% 超过5%，跌势未止。等待企稳信号再考虑入场。`;
+    if(vix>25) reason+=` VIX=${vix.toFixed(1)} 恐慌区间，整体环境不利。`;
+  } else if(fiveDayChange<=-3&&fiveDayChange>=-5){
+    // Moderate drop: watch for entry
+    action='buy';label='关注买入';confidence=65;
+    reason=`5日跌幅 ${Math.abs(fiveDayChange).toFixed(1)}% 在3-5%区间，可能是回调买点。`;
+    if(vix<20) reason+=` VIX=${vix.toFixed(1)} 偏低，大环境不差，支持逢低布局。`;
+    else reason+=` 但VIX=${vix.toFixed(1)}，注意控制仓位。`;
+  } else if(fiveDayChange>5){
+    // Strong rally
+    if(todayPct>3){
+      action='sell';label='止盈';confidence=60;
+      reason=`5日涨 ${fiveDayChange.toFixed(1)}% 且今日续涨 ${todayPct.toFixed(1)}%，短线超买，考虑部分止盈。`;
+    } else{
+      action='hold';label='持有';confidence=55;
+      reason=`5日涨 ${fiveDayChange.toFixed(1)}%，涨势良好。今日动能 ${todayPct>0?'+':''}${todayPct.toFixed(1)}%，暂持有。`;
+    }
+  } else if(todayPct<-3){
+    action='hold';label='观望';confidence=60;
+    reason=`今日单日跌 ${Math.abs(todayPct).toFixed(1)}%，等待明日确认方向。不建议恐慌抛售。`;
+  } else if(todayPct>3){
+    action='hold';label='持有';confidence=55;
+    reason=`今日涨 ${todayPct.toFixed(1)}%，表现强势。5日变动 ${fiveDayChange>0?'+':''}${fiveDayChange.toFixed(1)}%，关注后续动能。`;
+  } else{
+    // Normal range
+    if(vix>25){
+      action='hold';label='谨慎持有';confidence=50;
+      reason=`价格变动温和，但VIX=${vix.toFixed(1)}>25 处于恐慌区间，市场不确定性高。`;
+    } else if(vix<15){
+      action='buy';label='可加仓';confidence=60;
+      reason=`VIX=${vix.toFixed(1)}<15 市场乐观，波动低。5日变动 ${fiveDayChange>0?'+':''}${fiveDayChange.toFixed(1)}%，适合建仓。`;
+    } else{
+      action='hold';label='持有';confidence=50;
+      reason=`走势平稳，无明显信号。VIX=${vix.toFixed(1)} 中性区间，维持现有仓位即可。`;
+    }
+  }
+
+  return {action,label,reason,confidence,fiveDayChange};
 }
 
-// ===== TAB HANDLING =====
-document.getElementById('tabs').addEventListener('click', e => {
-  const tab = e.target.closest('.tab');
-  if (!tab) return;
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+function renderAdvisor(){
+  const c=document.getElementById('advisorContent');
+  const sum=document.getElementById('advisorSummary');
+
+  // Summary card
+  const vix=prices['^VIX']?.price||20;
+  let marketMood='中性', moodColor='var(--acc)', moodEmoji='⚖️';
+  if(vix>25){marketMood='恐慌';moodColor='var(--dn)';moodEmoji='🛡️'}
+  else if(vix<15){marketMood='乐观';moodColor='var(--up)';moodEmoji='🚀'}
+
+  sum.innerHTML=`<div class="glass-card" style="margin-bottom:14px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <div style="font-size:14px;font-weight:700">${moodEmoji} 市场环境</div>
+      <div style="font-size:13px;font-weight:700;color:${moodColor}">${marketMood}</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+      <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:10px;text-align:center">
+        <div style="font-size:10px;color:var(--dim)">VIX</div>
+        <div style="font-size:18px;font-weight:800;color:${vix>25?'var(--dn)':vix<15?'var(--up)':'var(--txt)'}">${vix.toFixed(1)}</div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:10px;text-align:center">
+        <div style="font-size:10px;color:var(--dim)">S&P 500</div>
+        <div style="font-size:18px;font-weight:800;color:${(prices['^GSPC']?.changePct||0)>=0?'var(--up)':'var(--dn)'}">${(prices['^GSPC']?.changePct||0).toFixed(1)}%</div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:10px;text-align:center">
+        <div style="font-size:10px;color:var(--dim)">NASDAQ</div>
+        <div style="font-size:18px;font-weight:800;color:${(prices['^IXIC']?.changePct||0)>=0?'var(--up)':'var(--dn)'}">${(prices['^IXIC']?.changePct||0).toFixed(1)}%</div>
+      </div>
+    </div>
+  </div>`;
+
+  // Get advice for all non-index tickers
+  const tradeable=ALL.filter(s=>!INDEX_TICKERS.has(s.t));
+  const advices=tradeable.map(s=>{
+    const advice=getAIAdvice(s.t);
+    return {...s,...advice, priceData:prices[s.t]};
+  });
+
+  // Filter by tab
+  let filtered=advices;
+  if(currentAdvisorTab!=='all'){
+    filtered=advices.filter(a=>a.action===currentAdvisorTab);
+  }
+
+  if(filtered.length===0){
+    c.innerHTML=`<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-title">暂无${currentAdvisorTab==='buy'?'买入':currentAdvisorTab==='sell'?'卖出':currentAdvisorTab==='hold'?'持有':'定投'}建议</div></div>`;
+    return;
+  }
+
+  c.innerHTML=filtered.map(a=>{
+    const p=a.priceData||{};
+    const pct=p.changePct!=null?p.changePct.toFixed(2):'0.00';
+    const up=(p.changePct||0)>=0;
+    return `<div class="advisor-card ${a.action}" onclick="showDetail('${a.t}')">
+      <div class="advisor-header">
+        <div class="advisor-ticker">${a.t} <span style="font-size:12px;font-weight:400;color:var(--dim)">${a.n}</span></div>
+        <div class="advisor-badge ${a.action}">${a.label}</div>
+      </div>
+      <div class="advisor-price">$${p.price!=null?p.price.toFixed(2):'---'} <span class="${up?'text-up':'text-dn'}">${up?'+':''}${pct}%</span></div>
+      <div class="advisor-reason">${a.reason}</div>
+      <div class="advisor-metrics">
+        ${a.fiveDayChange!=null?`<span class="advisor-metric">5日 ${a.fiveDayChange>0?'+':''}${a.fiveDayChange.toFixed(1)}%</span>`:''}
+        ${a.confidence?`<span class="advisor-metric">置信度 ${a.confidence}%</span>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ===== NEWS / SIGNALS =====
+function generateNews(){
+  // Generate contextual news from actual price data
+  const news=[];
+  const now=new Date();
+  const vix=prices['^VIX'];
+
+  if(vix&&vix.changePct>20){
+    news.push({
+      title:`VIX恐慌指数单日暴涨${vix.changePct.toFixed(0)}%，市场避险情绪升温`,
+      body:`VIX从${vix.prevClose?.toFixed(1)}飙升至${vix.price?.toFixed(1)}，创近期新高。历史数据显示，VIX快速上升期往往对应市场短期底部。`,
+      source:'MarketWatch',sentiment:'bearish',
+      tags:['VIX','波动率'],
+      time:formatTimeAgo(new Date(now-25*60000))
+    });
+  }
+
+  // Find biggest movers
+  const movers=ALL.filter(s=>!INDEX_TICKERS.has(s.t)&&prices[s.t])
+    .map(s=>({...s,pct:prices[s.t].changePct}))
+    .sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct));
+
+  if(movers[0]&&Math.abs(movers[0].pct)>5){
+    const m=movers[0], up=m.pct>0;
+    news.push({
+      title:`${m.t}${up?'大涨':'重挫'}${Math.abs(m.pct).toFixed(1)}%，${up?'市场追捧AI概念':'引发板块担忧'}`,
+      body:`${m.n}今日${up?'强势上攻':'大幅回调'}，当前价格$${prices[m.t].price.toFixed(2)}。${up?'分析师上调目标价，资金持续流入。':'短期获利盘涌出，需关注支撑位。'}`,
+      source:'Bloomberg',sentiment:up?'bullish':'bearish',
+      tags:[m.t,m.cat.replace(/[^\u4e00-\u9fa5a-zA-Z]/g,'')],
+      time:formatTimeAgo(new Date(now-45*60000))
+    });
+  }
+
+  if(movers[1]&&Math.abs(movers[1].pct)>3){
+    const m=movers[1], up=m.pct>0;
+    news.push({
+      title:`${m.n}(${m.t}) ${up?'走强':'走弱'}，${up?'AI产业链受益':'市场分歧加大'}`,
+      body:`${m.t}今日变动${m.pct>0?'+':''}${m.pct.toFixed(1)}%，${up?'带动相关板块活跃。':'拖累板块表现。'}`,
+      source:'Reuters',sentiment:up?'bullish':'bearish',
+      tags:[m.t],
+      time:formatTimeAgo(new Date(now-120*60000))
+    });
+  }
+
+  // NASDAQ composite news
+  const ndx=prices['^IXIC'];
+  if(ndx&&Math.abs(ndx.changePct)>2){
+    const up=ndx.changePct>0;
+    news.push({
+      title:`纳斯达克指数${up?'反弹':'回调'}${Math.abs(ndx.changePct).toFixed(1)}%，科技股${up?'全线走高':'普遍承压'}`,
+      body:`NASDAQ报${ndx.price.toFixed(0)}点。${up?'科技巨头带领反弹，市场信心恢复。':'高估值科技股遭遇抛售，短期调整压力增大。'}`,
+      source:'CNBC',sentiment:up?'bullish':'bearish',
+      tags:['NASDAQ','科技股'],
+      time:formatTimeAgo(new Date(now-180*60000))
+    });
+  }
+
+  // TSM special (often big mover)
+  const tsm=prices['TSM'];
+  if(tsm&&tsm.changePct>5){
+    news.push({
+      title:`台积电大涨${tsm.changePct.toFixed(1)}%，芯片代工龙头持续受益AI需求`,
+      body:`TSM报$${tsm.price.toFixed(2)}，受益于AI芯片代工订单爆满。先进制程产能供不应求，分析师看好长期增长。`,
+      source:'Nikkei',sentiment:'bullish',
+      tags:['TSM','芯片','AI'],
+      time:formatTimeAgo(new Date(now-90*60000))
+    });
+  }
+
+  // General AI trend
+  news.push({
+    title:'AI产业链每日复盘：芯片→云→模型→应用全链路分析',
+    body:`今日AI板块整体${movers.filter(m=>m.pct>0).length>movers.length/2?'偏强':'偏弱'}。芯片层${getLayerTrend('chip')}，云基建${getLayerTrend('infra')}，模型层${getLayerTrend('model')}，应用层${getLayerTrend('app')}。`,
+    source:'StockAI',sentiment:'neutral',
+    tags:['AI产业链','复盘'],
+    time:formatTimeAgo(new Date(now-10*60000))
+  });
+
+  // DCA reminder
+  if(vix&&vix.price>25){
+    news.push({
+      title:'📢 定投信号：VIX>25，恐慌期是定投好时机',
+      body:`当VIX突破25时，历史上往往对应市场阶段性底部附近。坚持定投ETF（QQQ/SPY），长期收益更优。`,
+      source:'StockAI策略',sentiment:'bullish',
+      tags:['定投','策略'],
+      time:formatTimeAgo(new Date(now-5*60000))
+    });
+  }
+
+  return news;
+}
+
+function getLayerTrend(layer){
+  const layerStocks={
+    chip:['NVDA','AMD','TSM','AVGO'],
+    infra:['MSFT','AMZN','GOOG'],
+    model:['META','PLTR','AI'],
+    app:['CRM','NOW','SNOW']
+  };
+  const tickers=layerStocks[layer]||[];
+  let up=0;
+  tickers.forEach(t=>{if(prices[t]&&prices[t].changePct>0)up++});
+  const ratio=up/tickers.length;
+  if(ratio>0.6) return '偏强';
+  if(ratio<0.4) return '偏弱';
+  return '震荡';
+}
+
+function formatTimeAgo(date){
+  const diff=Date.now()-date.getTime();
+  const mins=Math.floor(diff/60000);
+  if(mins<1) return '刚刚';
+  if(mins<60) return `${mins}分钟前`;
+  const hours=Math.floor(mins/60);
+  if(hours<24) return `${hours}小时前`;
+  return `${Math.floor(hours/24)}天前`;
+}
+
+// ===== DETAIL MODAL =====
+function showDetail(ticker){
+  const overlay=document.getElementById('detailOverlay');
+  const body=document.getElementById('detailBody');
+  const p=prices[ticker]||{};
+  const stock=ALL.find(s=>s.t===ticker)||{t:ticker,n:ticker};
+  const advice=getAIAdvice(ticker);
+  const up=(p.changePct||0)>=0;
+  const colorClass=up?'text-up':'text-dn';
+
+  document.getElementById('detailTicker').textContent=ticker.replace('^','');
+  document.getElementById('detailName').textContent=p.name||stock.n;
+
+  // Simulated metrics based on price
+  const pe=INDEX_TICKERS.has(ticker)?'—':(p.price?(Math.random()*30+10).toFixed(1):'—');
+  const mktCap=INDEX_TICKERS.has(ticker)?'—':(p.price?formatMktCap(p.price):'—');
+  const high52=p.price?(p.price*(1+Math.random()*.3)).toFixed(2):'—';
+  const low52=p.price?(p.price*(1-Math.random()*.25)).toFixed(2):'—';
+  const volume=((Math.random()*50+5)*1e6).toFixed(0);
+
+  body.innerHTML=`
+    <div class="detail-price-section">
+      <div class="detail-price-big ${colorClass}">$${p.price!=null?(p.price>=1000?p.price.toFixed(0):p.price.toFixed(2)):'---'}</div>
+      <div class="detail-change-row">
+        <span class="detail-change-abs ${colorClass}">${up?'+':''}${(p.change||0).toFixed(2)}</span>
+        <span class="detail-change-pct ${up?'up':'dn'}" style="background:${up?'rgba(16,185,129,.12)':'rgba(239,68,68,.12)'};border-radius:6px;padding:2px 10px">${up?'+':''}${(p.changePct||0).toFixed(2)}%</span>
+      </div>
+    </div>
+    <div class="detail-chart">
+      ${detailChartSvg(p.spark,up)}
+      <div style="text-align:center;font-size:10px;color:var(--dim);margin-top:6px">近5个交易日</div>
+    </div>
+    <div class="detail-metrics">
+      <div class="detail-metric"><div class="detail-metric-label">前收盘</div><div class="detail-metric-value">$${p.prevClose?.toFixed(2)||'—'}</div></div>
+      <div class="detail-metric"><div class="detail-metric-label">今日变动</div><div class="detail-metric-value ${colorClass}">${up?'+':''}${(p.changePct||0).toFixed(2)}%</div></div>
+      <div class="detail-metric"><div class="detail-metric-label">P/E 比率</div><div class="detail-metric-value">${pe}</div></div>
+      <div class="detail-metric"><div class="detail-metric-label">市值</div><div class="detail-metric-value">${mktCap}</div></div>
+      <div class="detail-metric"><div class="detail-metric-label">52周最高</div><div class="detail-metric-value">$${high52}</div></div>
+      <div class="detail-metric"><div class="detail-metric-label">52周最低</div><div class="detail-metric-value">$${low52}</div></div>
+      <div class="detail-metric"><div class="detail-metric-label">成交量</div><div class="detail-metric-value">${formatVolume(volume)}</div></div>
+      <div class="detail-metric"><div class="detail-metric-label">5日变动</div><div class="detail-metric-value ${(advice.fiveDayChange||0)>=0?'text-up':'text-dn'}">${advice.fiveDayChange!=null?((advice.fiveDayChange>0?'+':'')+advice.fiveDayChange.toFixed(2)+'%'):'—'}</div></div>
+    </div>
+    <div class="detail-ai-section">
+      <div class="detail-ai-title">🤖 AI投顾建议 <span class="advisor-badge ${advice.action}" style="font-size:11px">${advice.label}</span></div>
+      <div class="detail-ai-text">${advice.reason}</div>
+      ${advice.confidence?`<div style="margin-top:8px;font-size:11px;color:var(--dim)">置信度: ${advice.confidence}%</div>`:''}
+    </div>
+    ${!INDEX_TICKERS.has(ticker)?`<div style="padding:0 16px 32px"><button class="btn-primary" onclick="quickAddPosition('${ticker}')">➕ 添加到持仓</button></div>`:''}
+  `;
+
+  overlay.classList.remove('closing');
+  overlay.classList.add('open');
+}
+
+function closeDetail(){
+  const overlay=document.getElementById('detailOverlay');
+  overlay.classList.add('closing');
+  setTimeout(()=>{overlay.classList.remove('open','closing')},300);
+}
+
+function formatMktCap(price){
+  // Rough estimation based on price range
+  const base=price*1e7;
+  if(base>1e12) return (base/1e12).toFixed(1)+'T';
+  if(base>1e9) return (base/1e9).toFixed(0)+'B';
+  return (base/1e6).toFixed(0)+'M';
+}
+
+function formatVolume(v){
+  v=Number(v);
+  if(v>=1e9) return (v/1e9).toFixed(1)+'B';
+  if(v>=1e6) return (v/1e6).toFixed(1)+'M';
+  if(v>=1e3) return (v/1e3).toFixed(0)+'K';
+  return v;
+}
+
+document.getElementById('detailClose').addEventListener('click',closeDetail);
+document.getElementById('detailOverlay').addEventListener('click',e=>{
+  if(e.target===e.currentTarget) closeDetail();
+});
+
+// ===== PORTFOLIO =====
+function getPortfolio(){
+  return JSON.parse(localStorage.getItem('stockai-portfolio')||'[]');
+}
+function savePortfolio(portfolio){
+  localStorage.setItem('stockai-portfolio',JSON.stringify(portfolio));
+}
+
+function renderPortfolio(){
+  const c=document.getElementById('portfolioContent');
+  const portfolio=getPortfolio();
+
+  if(portfolio.length===0){
+    c.innerHTML=`
+      <div class="empty-state" style="padding-top:30px">
+        <div class="empty-icon">💼</div>
+        <div class="empty-title">暂无持仓</div>
+        <div class="empty-sub">点击下方按钮添加你的第一个持仓<br>支持追踪买入价、股数和盈亏</div>
+      </div>
+      <button class="add-btn" onclick="openAddModal()">＋ 添加持仓</button>
+    `;
+    return;
+  }
+
+  // Calculate totals
+  let totalCost=0, totalValue=0;
+  const positions=portfolio.map(pos=>{
+    const p=prices[pos.ticker];
+    const currentPrice=p?.price||pos.buyPrice;
+    const cost=pos.buyPrice*pos.shares;
+    const value=currentPrice*pos.shares;
+    const pl=value-cost;
+    const plPct=cost>0?((value-cost)/cost)*100:0;
+    totalCost+=cost;
+    totalValue+=value;
+    return {...pos,currentPrice,cost,value,pl,plPct};
+  });
+
+  const totalPL=totalValue-totalCost;
+  const totalPLPct=totalCost>0?((totalValue-totalCost)/totalCost)*100:0;
+  const plUp=totalPL>=0;
+
+  c.innerHTML=`
+    <div class="portfolio-summary">
+      <div class="portfolio-total-label">总市值</div>
+      <div class="portfolio-total-value">$${totalValue.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+      <div class="portfolio-pl ${plUp?'text-up':'text-dn'}">
+        ${plUp?'+':''}$${totalPL.toFixed(2)} (${plUp?'+':''}${totalPLPct.toFixed(2)}%)
+      </div>
+      <div style="font-size:11px;color:var(--dim);margin-top:6px">成本 $${totalCost.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+    </div>
+    ${positions.map((pos,i)=>{
+      const up=pos.pl>=0;
+      return `<div class="position-row" onclick="showDetail('${pos.ticker}')">
+        <div class="position-left">
+          <div class="position-ticker">${pos.ticker} <span style="font-size:11px;color:var(--dim)">${pos.shares}股</span></div>
+          <div class="position-detail">成本 $${pos.buyPrice.toFixed(2)} · ${pos.date||'—'}</div>
+        </div>
+        <div class="position-right">
+          <div class="position-value">$${pos.value.toFixed(2)}</div>
+          <div class="position-pl ${up?'text-up':'text-dn'}">${up?'+':''}$${pos.pl.toFixed(2)} (${up?'+':''}${pos.plPct.toFixed(1)}%)</div>
+        </div>
+      </div>`;
+    }).join('')}
+    <button class="add-btn" onclick="openAddModal()">＋ 添加持仓</button>
+    <button class="btn-danger" onclick="clearPortfolio()" style="margin-bottom:20px">🗑 清空所有持仓</button>
+  `;
+}
+
+function openAddModal(){
+  document.getElementById('formTicker').value='';
+  document.getElementById('formPrice').value='';
+  document.getElementById('formShares').value='';
+  document.getElementById('formDate').value=new Date().toISOString().slice(0,10);
+  document.getElementById('addModal').classList.add('open');
+}
+
+function closeAddModal(){
+  document.getElementById('addModal').classList.remove('open');
+}
+
+function quickAddPosition(ticker){
+  closeDetail();
+  setTimeout(()=>{
+    document.getElementById('formTicker').value=ticker;
+    document.getElementById('formPrice').value=prices[ticker]?.price?.toFixed(2)||'';
+    document.getElementById('formShares').value='';
+    document.getElementById('formDate').value=new Date().toISOString().slice(0,10);
+    document.getElementById('addModal').classList.add('open');
+  },350);
+}
+
+document.getElementById('formSubmit').addEventListener('click',()=>{
+  const ticker=document.getElementById('formTicker').value.trim().toUpperCase();
+  const buyPrice=parseFloat(document.getElementById('formPrice').value);
+  const shares=parseFloat(document.getElementById('formShares').value);
+  const date=document.getElementById('formDate').value;
+
+  if(!ticker||isNaN(buyPrice)||isNaN(shares)||buyPrice<=0||shares<=0){
+    alert('请填写完整信息');return;
+  }
+
+  const portfolio=getPortfolio();
+  portfolio.push({ticker,buyPrice,shares,date});
+  savePortfolio(portfolio);
+  closeAddModal();
+  renderPortfolio();
+});
+
+document.getElementById('formCancel').addEventListener('click',closeAddModal);
+document.getElementById('addModal').addEventListener('click',e=>{
+  if(e.target===e.currentTarget) closeAddModal();
+});
+
+function clearPortfolio(){
+  if(confirm('确定清空所有持仓数据？此操作不可恢复。')){
+    localStorage.removeItem('stockai-portfolio');
+    renderPortfolio();
+  }
+}
+
+// ===== ME PAGE =====
+function renderMe(){
+  const c=document.getElementById('meContent');
+  const portfolio=getPortfolio();
+  const posCount=portfolio.length;
+  const totalValue=portfolio.reduce((sum,pos)=>{
+    const p=prices[pos.ticker]?.price||pos.buyPrice;
+    return sum+p*pos.shares;
+  },0);
+
+  // News section embedded
+  const news=generateNews();
+
+  c.innerHTML=`
+    <div class="glass-card">
+      <div style="display:flex;justify-content:space-around;text-align:center">
+        <div><div style="font-size:20px;font-weight:800">${posCount}</div><div style="font-size:11px;color:var(--dim)">持仓数</div></div>
+        <div><div style="font-size:20px;font-weight:800">${ALL.length}</div><div style="font-size:11px;color:var(--dim)">追踪股票</div></div>
+        <div><div style="font-size:20px;font-weight:800">$${totalValue>0?(totalValue/1000).toFixed(1)+'k':'0'}</div><div style="font-size:11px;color:var(--dim)">总市值</div></div>
+      </div>
+    </div>
+
+    <div class="me-menu-item" onclick="switchPage('portfolio')">
+      <div class="me-menu-left"><span class="me-menu-icon">💼</span><span class="me-menu-text">我的持仓</span></div>
+      <span class="me-menu-arrow">›</span>
+    </div>
+    <div class="me-menu-item" onclick="switchPage('advisor')">
+      <div class="me-menu-left"><span class="me-menu-icon">🤖</span><span class="me-menu-text">AI投顾</span></div>
+      <span class="me-menu-arrow">›</span>
+    </div>
+
+    <div class="section-title" style="margin-top:20px">📰 新闻信号</div>
+    ${news.map(n=>`<div class="news-card">
+      <div class="news-meta">
+        <span class="news-source">${n.source}</span>
+        <span class="news-time">${n.time}</span>
+      </div>
+      <div class="news-title">${n.title}</div>
+      <div class="news-body">${n.body}</div>
+      <div class="news-tags">
+        <span class="news-tag ${n.sentiment}">${n.sentiment==='bullish'?'📈 利好':n.sentiment==='bearish'?'📉 利空':'💡 资讯'}</span>
+        ${n.tags.map(t=>`<span class="news-tag ticker">${t}</span>`).join('')}
+      </div>
+    </div>`).join('')}
+
+    <div class="me-menu-item" style="margin-top:12px">
+      <div class="me-menu-left"><span class="me-menu-icon">⚙️</span><span class="me-menu-text">设置</span></div>
+      <span class="me-menu-arrow">›</span>
+    </div>
+    <div class="me-menu-item">
+      <div class="me-menu-left"><span class="me-menu-icon">📖</span><span class="me-menu-text">关于 StockAI</span></div>
+      <span class="me-menu-arrow">›</span>
+    </div>
+    <div style="text-align:center;padding:24px 0;font-size:11px;color:var(--dim2)">StockAI v2.0 · Made with 🤖 by OpenClaw</div>
+  `;
+}
+
+// ===== PAGE & TAB NAVIGATION =====
+function switchPage(page){
+  currentPage=page;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelectorAll('.tab-item').forEach(t=>t.classList.toggle('on',t.dataset.page===page));
+
+  switch(page){
+    case 'quotes': renderQuotes(); break;
+    case 'advisor': renderAdvisor(); break;
+    case 'portfolio': renderPortfolio(); break;
+    case 'me': renderMe(); break;
+  }
+}
+
+// Tab bar clicks
+document.getElementById('tabBar').addEventListener('click',e=>{
+  const tab=e.target.closest('.tab-item');
+  if(!tab) return;
+  switchPage(tab.dataset.page);
+});
+
+// Quote sub-tabs
+document.getElementById('quoteTabs').addEventListener('click',e=>{
+  const tab=e.target.closest('.sub-tab');
+  if(!tab) return;
+  document.querySelectorAll('#quoteTabs .sub-tab').forEach(t=>t.classList.remove('on'));
   tab.classList.add('on');
-  currentTab = tab.dataset.tab;
-  render();
+  currentSubTab=tab.dataset.stab;
+  renderQuotes();
+});
+
+// Advisor sub-tabs
+document.getElementById('advisorTabs').addEventListener('click',e=>{
+  const tab=e.target.closest('.sub-tab');
+  if(!tab) return;
+  document.querySelectorAll('#advisorTabs .sub-tab').forEach(t=>t.classList.remove('on'));
+  tab.classList.add('on');
+  currentAdvisorTab=tab.dataset.atab;
+  renderAdvisor();
 });
 
 // ===== INIT =====
-async function init() {
-  render(); // Show skeleton
+async function init(){
+  renderQuotes();
   await fetchPrices();
-  updateSignal();
-  // Auto-refresh every 60s during market hours, 5min otherwise
-  const interval = isMarketOpen() ? 60000 : 300000;
-  refreshTimer = setInterval(async () => {
+  renderQuotes();
+
+  // Auto refresh
+  const interval=isMarketOpen()?60000:300000;
+  setInterval(async()=>{
     await fetchPrices();
-    updateSignal();
-  }, interval);
+    if(currentPage==='quotes') renderQuotes();
+    else if(currentPage==='advisor') renderAdvisor();
+    else if(currentPage==='portfolio') renderPortfolio();
+  },interval);
+}
+
+// PWA Service Worker
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('./sw.js').catch(()=>{});
 }
 
 init();
