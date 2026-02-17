@@ -194,8 +194,23 @@ function updateMarketStatus() {
   document.getElementById('marketLabel').textContent = open ? 'Market Open' : 'Market Closed';
 }
 
-// ===== FETCH PRICES (Yahoo Finance v8 chart API — no key needed) =====
+// ===== FETCH PRICES =====
 async function fetchPrices() {
+  try {
+    // Primary: static JSON (updated by Mac mini cron every 15min during market hours)
+    const r = await fetch('./data/quotes.json?t=' + Date.now());
+    if (r.ok) {
+      const d = await r.json();
+      for (const [ticker, q] of Object.entries(d.quotes)) {
+        prices[ticker] = { price: q.p, change: q.c, changePct: q.pct, prevClose: q.prev, spark: q.spark, name: q.name };
+      }
+      const updated = new Date(d.updated);
+      document.getElementById('updated').textContent = `${Object.keys(d.quotes).length} stocks · ${updated.toLocaleTimeString()}`;
+      render();
+      return;
+    }
+  } catch (e) { console.warn('Static data failed:', e); }
+  // Fallback: Yahoo v8 chart (works server-side, may be CORS-blocked in browser)
   const batch = ALL_STOCKS.map(s => s.t);
   const results = await Promise.allSettled(
     batch.map(async ticker => {
@@ -206,13 +221,12 @@ async function fetchPrices() {
       const prev = meta.chartPreviousClose || meta.previousClose;
       const price = meta.regularMarketPrice;
       const change = price - prev;
-      // Get 5-day close prices for sparkline
       const closes = d.chart.result[0].indicators?.quote?.[0]?.close?.filter(v => v != null) || [];
       prices[ticker] = { price, change, changePct: prev ? (change / prev) * 100 : 0, prevClose: prev, spark: closes };
     })
   );
   const ok = results.filter(r => r.status === 'fulfilled').length;
-  document.getElementById('updated').textContent = `${ok}/${batch.length} loaded · ${new Date().toLocaleTimeString()}`;
+  document.getElementById('updated').textContent = `${ok}/${batch.length} · ${new Date().toLocaleTimeString()}`;
   render();
 }
 
