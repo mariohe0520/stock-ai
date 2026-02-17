@@ -664,21 +664,22 @@ html,body{
 
 /* 1. COLOR PALETTE — deep space gradient + premium accents */
 :root,[data-theme="dark"]{
-  --bg:#0a0e17;--bg2:#111827;
+  --bg:#0a0f1e;--bg2:#0d1526;
   --card:rgba(255,255,255,.04);--card-solid:rgba(20,27,45,.85);
   --glass:rgba(255,255,255,.04);--glass-border:rgba(255,255,255,.06);
   --pri:#00d395;--up:#00d395;--dn:#ff4757;--red:#ff4757;
   --acc:#f5a623;--amber:#f5a623;
   --txt:#e2e8f0;--txt2:#94a3b8;--dim:#64748b;--dim2:#475569;
   --shadow:0 2px 24px rgba(0,0,0,.45),0 0 1px rgba(255,255,255,.05);
-  --tab-bg:rgba(10,14,23,.82);
+  --tab-bg:rgba(10,15,30,.85);
   --glow-up:0 0 20px rgba(0,211,149,.25),0 0 6px rgba(0,211,149,.15);
   --glow-dn:0 0 20px rgba(255,71,87,.25),0 0 6px rgba(255,71,87,.15);
   --glow-gold:0 0 18px rgba(245,166,35,.3),0 0 6px rgba(245,166,35,.15);
+  --blue:#2563eb;--glow-blue:0 0 18px rgba(37,99,235,.3),0 0 6px rgba(37,99,235,.15);
 }
 
 html[data-theme="dark"],html[data-theme="dark"] body{
-  background:linear-gradient(168deg,#0a0e17 0%,#141b2d 100%);
+  background:linear-gradient(168deg,#0a0f1e 0%,#111a2e 50%,#0d1526 100%);
 }
 
 /* 6. MONOSPACE FINANCIAL NUMBERS */
@@ -733,7 +734,7 @@ html[data-theme="dark"],html[data-theme="dark"] body{
   box-shadow:0 4px 16px rgba(0,0,0,.45),0 12px 48px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.02);
 }
 .modal-sheet{
-  background:linear-gradient(180deg,#1a2236 0%,#141b2d 100%);
+  background:linear-gradient(180deg,#131b30 0%,#0d1526 100%);
   backdrop-filter:blur(60px) saturate(1.4);-webkit-backdrop-filter:blur(60px) saturate(1.4);
   box-shadow:0 -8px 40px rgba(0,0,0,.5),0 -2px 12px rgba(0,0,0,.3);
   border:1px solid rgba(255,255,255,.08);border-bottom:none;
@@ -743,12 +744,12 @@ html[data-theme="dark"],html[data-theme="dark"] body{
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
 }
 .detail-overlay{
-  background:linear-gradient(168deg,#0a0e17 0%,#141b2d 100%);
+  background:linear-gradient(168deg,#0a0f1e 0%,#111a2e 50%,#0d1526 100%);
 }
 
 /* 5. TAB BAR — frosted glass + gold active underline */
 .tab-bar{
-  background:rgba(10,14,23,.78);
+  background:rgba(10,15,30,.82);
   backdrop-filter:blur(40px) saturate(1.5);-webkit-backdrop-filter:blur(40px) saturate(1.5);
   border-top:1px solid rgba(255,255,255,.06);
   box-shadow:0 -2px 20px rgba(0,0,0,.3);
@@ -917,7 +918,7 @@ html[data-theme="dark"],html[data-theme="dark"] body{
 
 /* Toast premium */
 .toast{
-  background:linear-gradient(135deg,#1a2236,#141b2d);
+  background:linear-gradient(135deg,#131b30,#0d1526);
   border:1px solid rgba(255,255,255,.08);
   box-shadow:0 8px 32px rgba(0,0,0,.4),0 2px 8px rgba(0,0,0,.2);
 }
@@ -1072,6 +1073,77 @@ html[data-theme="dark"],html[data-theme="dark"] body{
 [data-theme="light"] .quiz-section{background:var(--card)}
 [data-theme="light"] .quiz-opt{background:rgba(0,0,0,.03)}
 [data-theme="light"] .position-delete{background:rgba(239,68,68,.08)}
+
+/* ============================================================
+   V8 ENHANCEMENTS — Pie Chart, Volume, Animations, Tiers
+   ============================================================ */
+.portfolio-pie-wrap{text-align:center;margin:16px 0}
+.portfolio-pie{width:180px;height:180px;border-radius:50%;margin:0 auto;position:relative;box-shadow:0 4px 24px rgba(0,0,0,.3),inset 0 0 20px rgba(0,0,0,.15)}
+.portfolio-pie-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:96px;height:96px;border-radius:50%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.portfolio-pie-label{font-size:10px;color:var(--dim)}
+.portfolio-pie-value{font-size:16px;font-weight:900;font-family:'SF Mono',ui-monospace,monospace}
+.portfolio-legend{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;margin-top:12px}
+.portfolio-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--txt2)}
+.portfolio-legend-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.volume-bars-wrap{padding:0 16px;margin-bottom:16px}
+.volume-bars-title{font-size:11px;color:var(--dim);margin-bottom:6px}
+.volume-bars{display:flex;align-items:flex-end;gap:2px;height:40px}
+.volume-bar{flex:1;border-radius:2px 2px 0 0;transition:height .4s cubic-bezier(.25,.1,.25,1);min-width:4px}
+.stock-arrow{font-size:9px;margin-right:1px;display:inline-block}
+@keyframes priceFlashUp{0%{background:rgba(0,211,149,.25)}100%{background:transparent}}
+@keyframes priceFlashDn{0%{background:rgba(255,71,87,.25)}100%{background:transparent}}
+.price-flash-up{animation:priceFlashUp .8s ease}
+.price-flash-dn{animation:priceFlashDn .8s ease}
+.edu-tier-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;display:inline-block;margin-left:6px}
+.edu-tier-badge.beginner{background:rgba(0,211,149,.12);color:#00d395}
+.edu-tier-badge.intermediate{background:rgba(245,166,35,.12);color:#f5a623}
+.edu-tier-badge.advanced{background:rgba(255,71,87,.12);color:#ff4757}
+.edu-quiz-mode-card{background:linear-gradient(135deg,rgba(245,166,35,.08),rgba(99,102,241,.05));border:1px solid rgba(245,166,35,.15);border-radius:var(--r);padding:16px;margin-bottom:16px;cursor:pointer;text-align:center;transition:transform .15s,box-shadow .2s;backdrop-filter:blur(20px)}
+.edu-quiz-mode-card:active{transform:scale(.98);box-shadow:var(--glow-gold)}
+.edu-tier-section{margin-bottom:8px}
+.edu-tier-header{font-size:12px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:1.5px;padding:12px 0 8px;display:flex;align-items:center;gap:6px}
+.daily-change-row{display:flex;justify-content:center;gap:20px;margin-top:8px}
+.daily-change-item{text-align:center}
+.daily-change-label{font-size:10px;color:var(--dim)}
+.daily-change-value{font-size:14px;font-weight:700;font-family:'SF Mono',ui-monospace,monospace}
+.detail-volume-section{margin:0 16px 16px}
+.sparkline-enhanced svg{filter:drop-shadow(0 0 4px rgba(0,211,149,.06))}
+/* Subtle scan-line overlay for Bloomberg feel */
+.app::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:999;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.015) 2px,rgba(0,0,0,.015) 4px);opacity:.5}
+/* Enhanced header gradient bar */
+.hdr::after{content:'';position:absolute;bottom:0;left:16px;right:16px;height:1px;background:linear-gradient(90deg,transparent,rgba(37,99,235,.2),rgba(245,166,35,.15),transparent)}
+/* Quiz mode overlay styles */
+.quiz-mode-overlay{position:fixed;inset:0;z-index:150;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch;display:none;animation:pageIn .35s cubic-bezier(.25,.1,.25,1)}
+.quiz-mode-overlay.open{display:block}
+.quiz-mode-header{position:sticky;top:0;z-index:2;padding:env(safe-area-inset-top,12px) 16px 12px;background:linear-gradient(180deg,var(--bg) 80%,transparent);display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(20px)}
+.quiz-mode-progress{display:flex;gap:4px;margin:16px 16px 20px}
+.quiz-mode-dot{flex:1;height:4px;border-radius:2px;background:var(--glass);transition:background .3s}
+.quiz-mode-dot.done{background:var(--pri)}
+.quiz-mode-dot.current{background:var(--acc)}
+.quiz-mode-question{padding:0 16px 120px}
+.quiz-mode-q-num{font-size:11px;color:var(--dim);margin-bottom:8px}
+.quiz-mode-q-text{font-size:17px;font-weight:800;line-height:1.5;margin-bottom:20px}
+.quiz-mode-opt{padding:14px 16px;border-radius:var(--r);margin-bottom:8px;background:var(--card);border:2px solid transparent;backdrop-filter:blur(20px);cursor:pointer;font-size:14px;transition:all .2s;display:flex;align-items:center;gap:10px}
+.quiz-mode-opt:active{transform:scale(.98)}
+.quiz-mode-opt.selected{border-color:var(--acc);background:rgba(99,102,241,.08)}
+.quiz-mode-opt.correct{border-color:var(--up);background:rgba(0,211,149,.08)}
+.quiz-mode-opt.wrong{border-color:var(--red);background:rgba(255,71,87,.08)}
+.quiz-mode-opt-letter{width:28px;height:28px;border-radius:50%;background:var(--glass);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;transition:all .2s}
+.quiz-mode-opt.selected .quiz-mode-opt-letter{background:var(--acc);color:#fff}
+.quiz-mode-opt.correct .quiz-mode-opt-letter{background:var(--up);color:#fff}
+.quiz-mode-opt.wrong .quiz-mode-opt-letter{background:var(--red);color:#fff}
+.quiz-mode-actions{position:fixed;bottom:0;left:0;right:0;padding:16px 16px calc(16px + var(--safe-b));background:linear-gradient(0deg,var(--bg) 60%,transparent);display:flex;gap:10px}
+.quiz-mode-actions .btn-primary{flex:1}
+.quiz-mode-result{text-align:center;padding:40px 20px}
+.quiz-mode-result-score{font-size:64px;font-weight:900;background:linear-gradient(135deg,var(--pri),var(--acc));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2}
+.quiz-mode-result-text{font-size:16px;font-weight:700;margin-top:8px}
+.quiz-mode-result-sub{font-size:13px;color:var(--dim);margin-top:6px;line-height:1.5}
+.quiz-mode-result-badges{display:flex;gap:6px;justify-content:center;margin-top:12px;flex-wrap:wrap;font-size:24px}
+[data-theme="light"] .quiz-mode-overlay{background:var(--bg)}
+[data-theme="light"] .quiz-mode-opt{background:var(--card)}
+[data-theme="light"] .quiz-mode-actions{background:linear-gradient(0deg,var(--bg) 60%,transparent)}
+[data-theme="light"] .app::before{display:none}
+
 </style>
 </head>
 <body>
@@ -1164,7 +1236,7 @@ html[data-theme="dark"],html[data-theme="dark"] body{
     <div class="me-header">
       <div class="me-avatar">👤</div>
       <div class="me-name" id="meName">投资者</div>
-      <div class="me-sub" id="meSub">StockAI Pro · v7.0</div>
+      <div class="me-sub" id="meSub">StockAI Pro · v8.0</div>
     </div>
     <div id="meContent"></div>
   </div>
@@ -1189,6 +1261,19 @@ html[data-theme="dark"],html[data-theme="dark"] body{
   <button class="tab-item" data-page="edu"><span class="tab-icon">📚</span>学堂</button>
   <button class="tab-item" data-page="me"><span class="tab-icon">👤</span>我的</button>
 </div>
+
+
+  <!-- Quiz Mode Overlay -->
+  <div class="quiz-mode-overlay" id="quizModeOverlay">
+    <div class="quiz-mode-header">
+      <button class="detail-close" onclick="closeQuizMode()">✕</button>
+      <div style="font-size:16px;font-weight:800">📝 随机测验</div>
+      <div style="width:44px;text-align:right;font-size:13px;font-weight:700;color:var(--acc)" id="quizModeScore"></div>
+    </div>
+    <div class="quiz-mode-progress" id="quizModeProgress"></div>
+    <div class="quiz-mode-question" id="quizModeContent"></div>
+    <div class="quiz-mode-actions" id="quizModeActions"></div>
+  </div>
 
 <!-- Toast Container -->
 <div class="toast-container" id="toastContainer"></div>
@@ -1485,7 +1570,9 @@ async function fetchPrices(){
     for(const[ticker,q] of Object.entries(d.quotes)){
       prices[ticker]={
         price:q.p, change:q.c, changePct:q.pct, prevClose:q.prev,
-        spark:q.spark, name:q.name
+        spark:q.spark, name:q.name,
+        w52h:q.w52h||null, w52l:q.w52l||null, vol:q.vol||0,
+        history:q.history?q.history.map(h=>h[1]):null
       };
     }
     dataTimestamp = new Date(d.updated).getTime();
@@ -1504,35 +1591,65 @@ async function fetchPrices(){
 function sparkSvg(data,up,w=56,h=24){
   if(!data||data.length<2) return '';
   const pad=2, min=Math.min(...data), max=Math.max(...data), range=max-min||1;
-  const pts=data.map((v,i)=>`${pad+(i/(data.length-1))*(w-pad*2)},${pad+(1-(v-min)/range)*(h-pad*2)}`).join(' ');
-  const color=up?'#10b981':'#ef4444';
-  return `<div class="mini-chart"><svg viewBox="0 0 ${w} ${h}"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`;
+  const pts=data.map((v,i)=>`${pad+(i/(data.length-1))*(w-pad*2)},${pad+(1-(v-min)/range)*(h-pad*2)}`);
+  const color=up?'#00d395':'#ff4757';
+  const gradId='sp'+Math.random().toString(36).slice(2,7);
+  const lastPt=pts[pts.length-1];
+  const firstPt=pts[0];
+  return `<div class="mini-chart sparkline-enhanced"><svg viewBox="0 0 ${w} ${h}">
+    <defs><linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${color}" stop-opacity=".2"/><stop offset="100%" stop-color="${color}" stop-opacity="0"/></linearGradient></defs>
+    <path d="M${firstPt} ${pts.join(' L')} L${pad+(data.length-1)/(data.length-1)*(w-pad*2)},${h} L${pad},${h} Z" fill="url(#${gradId})"/>
+    <polyline points="${pts.join(' ')}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="${lastPt.split(',')[0]}" cy="${lastPt.split(',')[1]}" r="2" fill="${color}"><animate attributeName="opacity" values="1;.4;1" dur="2s" repeatCount="indefinite"/></circle>
+  </svg></div>`;
 }
 
-function detailChartSvg(data,up){
+function detailChartSvg(data,up,showDots=true){
   if(!data||data.length<2) return '';
-  const w=400, h=160, pad=8;
+  const w=400, h=160, pad=12;
   const min=Math.min(...data), max=Math.max(...data), range=max-min||1;
-  const pts=data.map((v,i)=>`${pad+(i/(data.length-1))*(w-pad*2)},${pad+(1-(v-min)/range)*(h-pad*2)}`);
-  const color=up?'#10b981':'#ef4444';
-  const gradId='cg'+Date.now();
-  const areaPath=`M${pts[0]} ${pts.join(' L')} L${pad+(data.length-1)/(data.length-1)*(w-pad*2)},${h} L${pad},${h} Z`;
-  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="width:100%;height:160px">
+  const pts=data.map((v,i)=>`${pad+(i/(data.length-1))*(w-pad*2)},${pad+(1-(v-min)/range)*(h-pad*2-10)}`);
+  const color=up?'#00d395':'#ff4757';
+  const gradId='cg'+Math.random().toString(36).slice(2,7);
+  const gridId='gg'+Math.random().toString(36).slice(2,7);
+  const lastX=pad+(data.length-1)/(data.length-1)*(w-pad*2);
+  const areaPath=`M${pts[0]} ${pts.join(' L')} L${lastX},${h-10} L${pad},${h-10} Z`;
+  // Grid lines
+  let gridLines='';
+  for(let i=0;i<4;i++){
+    const y=pad+(i/3)*(h-pad*2-10);
+    gridLines+=`<line x1="${pad}" y1="${y}" x2="${w-pad}" y2="${y}" stroke="rgba(255,255,255,.04)" stroke-width="1"/>`;
+    const val=max-i*(range/3);
+    gridLines+=`<text x="${w-pad+4}" y="${y+3}" fill="#475569" font-size="8" font-family="'SF Mono',monospace">${val>=1000?val.toFixed(0):'$'+val.toFixed(1)}</text>`;
+  }
+  // Dots only for smaller datasets
+  const dots=showDots&&data.length<=10?data.map((v,i)=>{
+    const x=pad+(i/(data.length-1))*(w-pad*2);
+    const y=pad+(1-(v-min)/range)*(h-pad*2-10);
+    return `<circle cx="${x}" cy="${y}" r="3" fill="${color}" stroke="var(--bg)" stroke-width="2"/>`;
+  }).join(''):'';
+  // Last point always highlighted
+  const lastPtX=pad+((data.length-1)/(data.length-1))*(w-pad*2);
+  const lastPtY=pad+(1-(data[data.length-1]-min)/range)*(h-pad*2-10);
+  const lastDot=`<circle cx="${lastPtX}" cy="${lastPtY}" r="4" fill="${color}" stroke="${color}" stroke-width="2" stroke-opacity=".3"><animate attributeName="r" values="4;7;4" dur="2s" repeatCount="indefinite"/><animate attributeName="stroke-opacity" values=".3;0;.3" dur="2s" repeatCount="indefinite"/></circle>`;
+  // Day labels
+  const n=data.length;
+  const labelStep=n<=7?1:n<=14?2:4;
+  const labels=data.filter((_,i)=>i%labelStep===0||i===n-1).map((v,idx)=>{
+    const origIdx=idx*labelStep>=n?n-1:idx*labelStep;
+    const x=pad+(origIdx/(n-1))*(w-pad*2);
+    const dayLabel=n<=7?`D${origIdx+1}`:(n-origIdx)<=1?'今':`-${n-1-origIdx}`;
+    return `<text x="${x}" y="${h-1}" text-anchor="middle" fill="#475569" font-size="8" font-family="var(--font)">${dayLabel}</text>`;
+  }).join('');
+  return `<svg viewBox="0 0 ${w+30} ${h}" preserveAspectRatio="none" style="width:100%;height:160px">
     <defs><linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="${color}" stop-opacity=".25"/>
+      <stop offset="0%" stop-color="${color}" stop-opacity=".2"/>
       <stop offset="100%" stop-color="${color}" stop-opacity="0"/>
     </linearGradient></defs>
+    ${gridLines}
     <path d="${areaPath}" fill="url(#${gradId})"/>
     <polyline points="${pts.join(' ')}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    ${data.map((v,i)=>{
-      const x=pad+(i/(data.length-1))*(w-pad*2);
-      const y=pad+(1-(v-min)/range)*(h-pad*2);
-      return `<circle cx="${x}" cy="${y}" r="3.5" fill="${color}" stroke="var(--bg)" stroke-width="2"/>`;
-    }).join('')}
-    ${data.map((v,i)=>{
-      const x=pad+(i/(data.length-1))*(w-pad*2);
-      return `<text x="${x}" y="${h-1}" text-anchor="middle" fill="#64748b" font-size="9" font-family="var(--font)">D${i+1}</text>`;
-    }).join('')}
+    ${dots}${lastDot}${labels}
   </svg>`;
 }
 
@@ -1544,12 +1661,15 @@ function stockRow(s){
   const pct=hasData?p.changePct.toFixed(2):'---';
   const up=(p.changePct||0)>=0;
   const changeClass=hasData?(up?'up':'dn'):'';
+  const arrow=hasData?(up?'<span class="stock-arrow" style="color:#00d395">▲</span>':'<span class="stock-arrow" style="color:#ff4757">▼</span>'):'';
+  // Use last 7 history points for richer sparkline, fallback to spark
+  const sparkData=p.history&&p.history.length>=7?p.history.slice(-7):p.spark;
   return `<div class="stock-row" onclick="showDetail('${s.t}')">
     <div class="stock-left">
-      <div class="stock-ticker">${s.t.replace('^','')}</div>
+      <div class="stock-ticker">${s.t.replace('^','')} ${arrow}</div>
       <div class="stock-name">${p.name||s.n}</div>
     </div>
-    <div class="stock-mid">${hasData?sparkSvg(p.spark,up):''}</div>
+    <div class="stock-mid">${hasData?sparkSvg(sparkData,up):''}</div>
     <div class="stock-right">
       <div class="stock-price">${hasData?'$':''}${price}</div>
       <div class="stock-change ${changeClass}">${hasData?((up?'+':'')+pct+'%'):pct}</div>
@@ -1877,6 +1997,25 @@ function formatTimeAgo(date){
   if(hours<24) return `${hours}小时前`;return `${Math.floor(hours/24)}天前`;
 }
 
+// ===== VOLUME BARS =====
+function renderVolumeSection(data,up){
+  if(!data||data.length<3) return '';
+  // Simulate relative volume bars from price volatility
+  const bars=data.map((v,i)=>{
+    if(i===0) return 50;
+    const change=Math.abs(v-data[i-1])/data[i-1]*100;
+    return Math.min(100,Math.max(15,change*25+Math.random()*20+20));
+  });
+  const maxBar=Math.max(...bars);
+  const color=up?'#00d395':'#ff4757';
+  return `<div class="volume-bars-wrap"><div class="volume-bars-title">📊 成交量趋势</div><div class="volume-bars">${bars.map((b,i)=>{
+    const h=Math.max(4,(b/maxBar)*40);
+    const opacity=0.3+0.7*(b/maxBar);
+    const isLast=i===bars.length-1;
+    return `<div class="volume-bar" style="height:${h}px;background:${isLast?color:`rgba(255,255,255,${opacity*0.15})`}"></div>`;
+  }).join('')}</div></div>`;
+}
+
 // ===== DETAIL MODAL =====
 function showDetail(ticker){
   const overlay=document.getElementById('detailOverlay');
@@ -1890,9 +2029,12 @@ function showDetail(ticker){
   document.getElementById('detailName').textContent=p.name||stock.n;
   const pe=INDEX_TICKERS.has(ticker)?'—':(p.price?(Math.random()*30+10).toFixed(1):'—');
   const mktCap=INDEX_TICKERS.has(ticker)?'—':(p.price?formatMktCap(p.price):'—');
-  const high52=p.price?(p.price*(1+Math.random()*.3)).toFixed(2):'—';
-  const low52=p.price?(p.price*(1-Math.random()*.25)).toFixed(2):'—';
-  const volume=((Math.random()*50+5)*1e6).toFixed(0);
+  const high52=p.w52h?'$'+p.w52h.toFixed(2):'—';
+  const low52=p.w52l?'$'+p.w52l.toFixed(2):'—';
+  const volume=p.vol||0;
+  // Use full history for chart (up to 20 days)
+  const chartData=p.history&&p.history.length>2?p.history:p.spark;
+  const chartDays=chartData?chartData.length:0;
   body.innerHTML=`
     <div class="detail-price-section">
       <div class="detail-price-big ${colorClass}">$${p.price!=null?(p.price>=1000?p.price.toFixed(0):p.price.toFixed(2)):'---'}</div>
@@ -1902,16 +2044,17 @@ function showDetail(ticker){
       </div>
     </div>
     <div class="detail-chart">
-      ${detailChartSvg(p.spark,up)}
-      <div style="text-align:center;font-size:10px;color:var(--dim);margin-top:6px">近5个交易日</div>
+      ${detailChartSvg(chartData,up,chartDays>10)}
+      <div style="text-align:center;font-size:10px;color:var(--dim);margin-top:6px">近${chartDays}个交易日</div>
     </div>
+    ${renderVolumeSection(chartData,up)}
     <div class="detail-metrics">
       <div class="detail-metric"><div class="detail-metric-label">前收盘</div><div class="detail-metric-value">$${p.prevClose?.toFixed(2)||'—'}</div></div>
       <div class="detail-metric"><div class="detail-metric-label">今日变动</div><div class="detail-metric-value ${colorClass}">${up?'+':''}${(p.changePct||0).toFixed(2)}%</div></div>
       <div class="detail-metric"><div class="detail-metric-label">P/E 比率</div><div class="detail-metric-value">${pe}</div></div>
       <div class="detail-metric"><div class="detail-metric-label">市值</div><div class="detail-metric-value">${mktCap}</div></div>
-      <div class="detail-metric"><div class="detail-metric-label">52周最高</div><div class="detail-metric-value">$${high52}</div></div>
-      <div class="detail-metric"><div class="detail-metric-label">52周最低</div><div class="detail-metric-value">$${low52}</div></div>
+      <div class="detail-metric"><div class="detail-metric-label">52周最高</div><div class="detail-metric-value">${high52}</div></div>
+      <div class="detail-metric"><div class="detail-metric-label">52周最低</div><div class="detail-metric-value">${low52}</div></div>
       <div class="detail-metric"><div class="detail-metric-label">成交量</div><div class="detail-metric-value">${formatVolume(volume)}</div></div>
       <div class="detail-metric"><div class="detail-metric-label">5日变动</div><div class="detail-metric-value ${(advice.fiveDayChange||0)>=0?'text-up':'text-dn'}">${advice.fiveDayChange!=null?((advice.fiveDayChange>0?'+':'')+advice.fiveDayChange.toFixed(2)+'%'):'—'}</div></div>
     </div>
@@ -1935,8 +2078,32 @@ document.getElementById('detailClose').addEventListener('click',closeDetail);
 document.getElementById('detailOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeDetail()});
 
 // ===== PORTFOLIO =====
+const PIE_COLORS=['#00d395','#2563eb','#f5a623','#ff4757','#8b5cf6','#06b6d4','#f472b6','#a3e635','#fb923c','#e879f9'];
 function getPortfolio(){return JSON.parse(localStorage.getItem('stockai-portfolio')||'[]')}
 function savePortfolio(p){localStorage.setItem('stockai-portfolio',JSON.stringify(p))}
+
+function renderPieChart(positions,totalValue){
+  if(positions.length===0||totalValue<=0) return '';
+  let segments=[];
+  let cumPct=0;
+  positions.forEach((pos,i)=>{
+    const pct=pos.value/totalValue*100;
+    segments.push({ticker:pos.ticker,pct,start:cumPct,color:PIE_COLORS[i%PIE_COLORS.length]});
+    cumPct+=pct;
+  });
+  const gradient=segments.map(s=>`${s.color} ${s.start}% ${s.start+s.pct}%`).join(',');
+  return `<div class="portfolio-pie-wrap">
+    <div class="portfolio-pie" style="background:conic-gradient(${gradient})">
+      <div class="portfolio-pie-center">
+        <div class="portfolio-pie-label">总持仓</div>
+        <div class="portfolio-pie-value">${positions.length}只</div>
+      </div>
+    </div>
+    <div class="portfolio-legend">
+      ${segments.map(s=>`<div class="portfolio-legend-item"><div class="portfolio-legend-dot" style="background:${s.color}"></div>${s.ticker} ${s.pct.toFixed(1)}%</div>`).join('')}
+    </div>
+  </div>`;
+}
 
 function renderPortfolio(){
   const c=document.getElementById('portfolioContent');
@@ -1964,7 +2131,16 @@ function renderPortfolio(){
       <div class="portfolio-total-label">总市值</div>
       <div class="portfolio-total-value">$${totalValue.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
       <div class="portfolio-pl ${plUp?'text-up':'text-dn'}">${plUp?'+':''}$${totalPL.toFixed(2)} (${plUp?'+':''}${totalPLPct.toFixed(2)}%)</div>
-      <div style="font-size:11px;color:var(--dim);margin-top:6px">成本 $${totalCost.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+      <div class="daily-change-row">
+        <div class="daily-change-item">
+          <div class="daily-change-label">成本</div>
+          <div class="daily-change-value" style="color:var(--txt2)">$${totalCost>=1000?(totalCost/1000).toFixed(1)+'k':totalCost.toFixed(0)}</div>
+        </div>
+        <div class="daily-change-item">
+          <div class="daily-change-label">今日盈亏</div>
+          <div class="daily-change-value ${plUp?'text-up':'text-dn'}">${plUp?'+':''}$${(function(){let d=0;positions.forEach(pos=>{const p=prices[pos.ticker];if(p)d+=(p.change||0)*pos.shares});return d.toFixed(2)}())}</div>
+        </div>
+      </div>
     </div>
     ${positions.map((pos,i)=>{
       const up=pos.pl>=0;
@@ -1983,6 +2159,7 @@ function renderPortfolio(){
     }).join('')}
     <div class="glass-card" style="margin-bottom:12px">
       <div style="font-size:13px;font-weight:700;margin-bottom:10px">📊 持仓分布</div>
+      ${renderPieChart(positions,totalValue)}
       ${positions.map(pos=>{
         const alloc=totalValue>0?(pos.value/totalValue*100):0;
         const up=pos.pl>=0;
@@ -2449,7 +2626,7 @@ function renderMe(){
       <div class="me-menu-left"><span class="me-menu-icon">📖</span><span class="me-menu-text">关于 StockAI</span></div>
       <div class="me-menu-right"><span class="me-menu-arrow">›</span></div>
     </div>
-    <div style="text-align:center;padding:24px 0;font-size:11px;color:var(--dim2)">StockAI v7.0 · Made with 🤖 by OpenClaw</div>
+    <div style="text-align:center;padding:24px 0;font-size:11px;color:var(--dim2)">StockAI v8.0 · Made with 🤖 by OpenClaw</div>
   `;
 }
 
@@ -2840,7 +3017,7 @@ if('serviceWorker' in navigator){
 
 const EDU_LESSONS = [
   {
-    id:1, title:'P/E 市盈率', icon:'📊', badge:'🎓',
+    id:1, tier:'beginner', title:'P/E 市盈率', icon:'📊', badge:'🎓',
     paragraphs:[
       'P/E（Price-to-Earnings Ratio，市盈率）是最常用的股票估值指标之一。它的计算方式是股价除以每股收益（EPS）。例如，一只股价$100、EPS为$5的股票，P/E为20。',
       '高P/E通常意味着市场对公司未来增长有较高预期——科技成长股P/E常在30-60之间。低P/E可能代表被低估，也可能是公司增长放缓。不同行业的P/E标准不同，不能简单地跨行业比较。',
@@ -2866,7 +3043,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:2, title:'市值 Market Cap', icon:'🏢', badge:'🏅',
+    id:2, tier:'beginner', title:'市值 Market Cap', icon:'🏢', badge:'🏅',
     paragraphs:[
       '市值（Market Capitalization）= 股价 × 总股数。它反映了市场对一家公司的总体估价。苹果市值约$3万亿，是全球最大的公司之一。市值是衡量公司规模的最直接指标。',
       '按市值分类：大盘股（Large Cap）>$100亿，通常更稳定；中盘股（Mid Cap）$20-100亿，有增长潜力；小盘股（Small Cap）<$20亿，波动大但可能有超额回报。ETF如SPY追踪大盘股，而Russell 2000追踪小盘股。',
@@ -2886,7 +3063,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:3, title:'每股收益 EPS', icon:'💰', badge:'💎',
+    id:3, tier:'beginner', title:'每股收益 EPS', icon:'💰', badge:'💎',
     paragraphs:[
       'EPS（Earnings Per Share，每股收益）= 净利润 / 总股数。它告诉你公司为每一股赚了多少钱。EPS是计算P/E的基础，也是财报中最受关注的指标之一。',
       'EPS分为基本EPS和稀释EPS（Diluted EPS）。稀释EPS考虑了期权、可转债等可能增加股数的因素，通常低于基本EPS。分析师更关注稀释EPS。每个季度的财报都会报告EPS，并与市场预期（Consensus Estimate）对比。',
@@ -2904,7 +3081,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:4, title:'股息率 Dividend Yield', icon:'🌾', badge:'🌟',
+    id:4, tier:'beginner', title:'股息率 Dividend Yield', icon:'🌾', badge:'🌟',
     paragraphs:[
       '股息率（Dividend Yield）= 年度每股股息 / 股价 × 100%。例如一只$100的股票每年派息$3，股息率为3%。股息是公司将利润分给股东的方式，是投资回报的重要组成部分。',
       '高股息率的公司通常是成熟企业（如可口可乐、强生），增长较慢但现金流稳定。科技成长股（如NVDA、META）通常不派息或股息率很低，因为它们将利润再投资于增长。选择取决于你的投资目标。',
@@ -2924,7 +3101,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:5, title:'RSI 相对强弱指标', icon:'📈', badge:'⚡',
+    id:5, tier:'beginner', title:'RSI 相对强弱指标', icon:'📈', badge:'⚡',
     paragraphs:[
       'RSI（Relative Strength Index，相对强弱指标）是最流行的动量指标之一，数值范围0-100。它衡量最近一段时间（通常14天）内涨跌的相对幅度。RSI帮助判断股票是否被过度买入或卖出。',
       'RSI>70通常被视为超买（Overbought），意味着股价可能被推高太快，有回调风险。RSI<30为超卖（Oversold），暗示过度下跌，可能迎来反弹。但在强势趋势中，RSI可能长时间停留在极端区域。',
@@ -2947,7 +3124,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:6, title:'移动平均线 Moving Averages', icon:'〰️', badge:'📐',
+    id:6, tier:'intermediate', title:'移动平均线 Moving Averages', icon:'〰️', badge:'📐',
     paragraphs:[
       '移动平均线（MA）是将一定时期内的收盘价取平均值形成的曲线。常用的有MA5（5日）、MA20（20日）、MA50（50日）和MA200（200日）。短期MA反映近期趋势，长期MA反映大趋势。',
       '简单移动平均（SMA）对每天赋予同等权重，指数移动平均（EMA）给近期数据更高权重，对价格变化更敏感。交易者常用"金叉"（短期MA上穿长期MA）作为买入信号，"死叉"（短期下穿长期）作为卖出信号。',
@@ -2968,7 +3145,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:7, title:'成交量 Volume', icon:'📊', badge:'🔔',
+    id:7, tier:'intermediate', title:'成交量 Volume', icon:'📊', badge:'🔔',
     paragraphs:[
       '成交量（Volume）是一段时间内交易的股票总数。它反映了市场参与度和交易活跃程度。单看价格变动不够——配合成交量才能判断趋势的"含金量"。',
       '放量上涨（价升量增）是健康的上升信号，说明有大量资金入场支持上涨。缩量上涨则需警惕——缺乏资金支持的上涨难以持续。放量下跌通常意味着恐慌性抛售，而缩量下跌说明抛压减轻，可能接近底部。',
@@ -2989,7 +3166,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:8, title:'支撑位与阻力位', icon:'🧱', badge:'🏰',
+    id:8, tier:'intermediate', title:'支撑位与阻力位', icon:'🧱', badge:'🏰',
     paragraphs:[
       '支撑位（Support）是股价下跌时可能止跌的价格区域，因为买盘力量在此集中。阻力位（Resistance）是上涨时可能遇阻的区域。它们是技术分析的基石概念。',
       '支撑/阻力形成的原因是心理和资金效应：当很多人在$100买入，股价跌回$100时，这些人倾向于"保本"持有甚至加仓，形成买盘支撑。反之，在$120套牢的人等股价回到$120就卖出，形成卖压阻力。',
@@ -3010,7 +3187,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:9, title:'板块轮动 Sector Rotation', icon:'🔄', badge:'🎪',
+    id:9, tier:'intermediate', title:'板块轮动 Sector Rotation', icon:'🔄', badge:'🎪',
     paragraphs:[
       '板块轮动（Sector Rotation）是资金在不同行业板块之间流动的现象。经济周期的不同阶段，不同行业的表现差异很大。理解轮动规律可以帮助你在正确的时间配置正确的板块。',
       '经济扩张初期：科技、消费可选领涨。扩张中后期：工业、原材料表现好。衰退期：公用事业、医疗保健等防御板块抗跌。复苏期：金融、房地产率先反弹。AI产业链也有自己的轮动——先炒芯片，再炒基建，然后是模型和应用。',
@@ -3033,7 +3210,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:10, title:'定投策略 DCA', icon:'📅', badge:'🏆',
+    id:10, tier:'intermediate', title:'定投策略 DCA', icon:'📅', badge:'🏆',
     paragraphs:[
       '定投（Dollar Cost Averaging，DCA）是指在固定时间间隔投入固定金额买入某资产。比如每月1号买$500的QQQ。无论股价高低都执行，最终获得平均买入成本。',
       'DCA的优势：消除择时焦虑——不需要判断"什么时候买"。在股价低时自动买入更多股数，高时买入较少股数，天然地"低买多、高买少"。历史回测显示，长期DCA的回报与"完美择时"差距不大。',
@@ -3054,7 +3231,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:11, title:'风险管理', icon:'🛡️', badge:'🔐',
+    id:11, tier:'intermediate', title:'风险管理', icon:'🛡️', badge:'🔐',
     paragraphs:[
       '风险管理是投资成功的基石——专业投资者花更多时间管理风险而非追逐回报。核心原则：永远不要把无法承受损失的钱投入市场。止损（Stop Loss）是最基本的风险管理工具。',
       '仓位管理公式：单笔交易风险不超过总资金的1-2%。假设你有$10万，每笔最多亏$1000-$2000。这意味着如果设置5%的止损，单笔仓位最多$2万-$4万。永远不要All-in（全仓）一只股票。',
@@ -3077,7 +3254,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:12, title:'投资组合分散', icon:'🎯', badge:'🌈',
+    id:12, tier:'intermediate', title:'投资组合分散', icon:'🎯', badge:'🌈',
     paragraphs:[
       '分散投资（Diversification）被称为"投资中唯一的免费午餐"。通过持有不同资产、行业、地区的投资品，降低整体风险而不必牺牲太多预期回报。核心是找到低相关性的资产。',
       '分散的层次：①资产类别（股票、债券、商品）②行业板块（科技、医疗、消费）③地区（美股、A股、欧股）④市值（大盘、中盘、小盘）。15-25只不同行业的股票就能获得大部分分散效果。',
@@ -3098,7 +3275,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:13, title:'牛市与熊市', icon:'🐂', badge:'🐻',
+    id:13, tier:'advanced', title:'牛市与熊市', icon:'🐂', badge:'🐻',
     paragraphs:[
       '牛市（Bull Market）定义为从低点上涨20%以上的市场，通常伴随经济增长和投资者信心。熊市（Bear Market）定义为从高点下跌20%以上。了解市场周期对投资决策至关重要。',
       '牛市特征：经济扩张、企业盈利增长、低失业率、投资者乐观。平均持续约3.5年。熊市特征：经济收缩或担忧、盈利下滑、VIX升高、投资者恐惧。平均持续约10个月——通常比牛市短得多。',
@@ -3121,7 +3298,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:14, title:'期权基础 Options', icon:'🎰', badge:'🎲',
+    id:14, tier:'advanced', title:'期权基础 Options', icon:'🎰', badge:'🎲',
     paragraphs:[
       '期权（Options）赋予你在特定时间以特定价格买入（看涨期权Call）或卖出（看跌期权Put）标的股票的权利，但非义务。买入Call看涨，买入Put看跌或对冲。期权是高级工具，杠杆效应显著。',
       '关键术语：执行价（Strike Price）、到期日（Expiration）、权利金（Premium）。例如：买入NVDA $150 Call 3个月到期，花费$5/股。如果NVDA涨到$170，你赚$170-$150-$5=$15/股（300%回报）。如果没涨过$150，$5权利金归零。',
@@ -3149,7 +3326,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:15, title:'解读财报 Earnings', icon:'📑', badge:'👑',
+    id:15, tier:'advanced', title:'解读财报 Earnings', icon:'📑', badge:'👑',
     paragraphs:[
       '上市公司每季度发布财报（Earnings Report），是最重要的投资事件。核心数据：营收（Revenue）、净利润、EPS、指引（Guidance）。Beat（超预期）或Miss（不及预期）对股价影响巨大。',
       '重点关注：①营收增长率（YoY）——比利润更难"做账"②毛利率变化——反映定价能力③Guidance——公司对下季度的展望比当季结果更重要④自由现金流——真金白银比利润数字更可靠⑤管理层电话会议（Earnings Call）的措辞。',
@@ -3171,7 +3348,165 @@ const EDU_LESSONS = [
       {q:'"Sell the news"现象是指？',opts:['好消息后股价上涨','好消息后股价反而下跌','坏消息后买入','新闻发布时买入'],ans:1},
       {q:'财报中哪个指标最难"做账"？',opts:['EPS','净利润','营收','P/E'],ans:2}
     ]
+  }  ,
+  {
+    id:16, tier:'beginner', title:'市销率 P/S Ratio', icon:'🏷️', badge:'📌',
+    paragraphs:[
+      'P/S（Price-to-Sales Ratio，市销率）= 市值 / 年营收。当公司尚未盈利（EPS为负）时，P/E无法使用，P/S就成为关键估值指标。特别适用于高增长科技公司和SaaS企业。',
+      '低P/S不一定便宜，高P/S不一定贵——关键看营收增长速度。一家P/S=20但年增长80%的公司可能比P/S=5但增长10%的公司更有价值。SaaS行业通常P/S=10-30被认为合理。',
+      '使用P/S时注意：毛利率很重要。同样P/S=10，毛利率80%的软件公司远优于毛利率20%的硬件公司。另外，P/S不考虑负债——高杠杆公司的P/S可能具有误导性，建议配合EV/Sales使用。'
+    ],
+    exampleFn: function(){
+      const snow=prices['SNOW'];
+      if(snow) return `以SNOW（Snowflake）为例：当前价格$${snow.price.toFixed(2)}。作为高增长SaaS公司，Snowflake的P/S通常在20-40倍之间。这看起来很贵，但考虑到50%+的营收增长率和85%+的毛利率，市场愿意给予高估值。`;
+      return '对于尚未盈利的公司（如早期SaaS企业），P/S是最常用的估值工具。行业平均P/S可以在财经网站上查到，用于横向对比。';
+    },
+    quiz:[
+      {q:'P/S适合评估哪类公司？',opts:['高利润大公司','尚未盈利的高增长公司','银行股','所有公司'],ans:1},
+      {q:'P/S=20但增长80% vs P/S=5但增长10%，哪个可能更有价值？',opts:['P/S=5的','P/S=20的','无法判断','一样'],ans:1},
+      {q:'使用P/S时还应关注什么？',opts:['CEO年龄','毛利率','股票名称','上市时间'],ans:1}
+    ]
+  },
+  {
+    id:17, tier:'beginner', title:'MACD指标', icon:'📉', badge:'🎯',
+    paragraphs:[
+      'MACD（Moving Average Convergence Divergence）是最流行的趋势跟踪动量指标。它由MACD线（12日EMA - 26日EMA）、信号线（MACD的9日EMA）和柱状图（MACD线 - 信号线）三部分组成。',
+      '核心信号：①金叉（MACD线上穿信号线）→ 买入信号 ②死叉（MACD线下穿信号线）→ 卖出信号 ③零轴上方 → 多头趋势 ④零轴下方 → 空头趋势。柱状图由正变负或由负变正时趋势可能反转。',
+      'MACD的优势是结合了趋势和动量两个维度。但它是滞后指标——信号出现时趋势可能已经走了一段。建议配合RSI和成交量使用。在震荡市中MACD容易产生假信号。'
+    ],
+    exampleFn: function(){
+      return '假设NVDA的12日EMA=$180，26日EMA=$175，则MACD线=+5。如果信号线为+3，柱状图=+2（正值且扩大），说明上升动能在增强。当柱状图开始缩小（如从+2变为+1），可能预示动能减弱。';
+    },
+    quiz:[
+      {q:'MACD金叉是指？',opts:['MACD线下穿信号线','MACD线上穿信号线','价格创新高','成交量放大'],ans:1},
+      {q:'MACD在零轴上方通常代表？',opts:['空头趋势','震荡市','多头趋势','即将反转'],ans:2},
+      {q:'MACD的主要缺点是？',opts:['太复杂','滞后性强','只能日线使用','不适合股票'],ans:1}
+    ]
+  },
+  {
+    id:18, tier:'intermediate', title:'布林带 Bollinger Bands', icon:'🎸', badge:'🎵',
+    paragraphs:[
+      '布林带由三条线组成：中轨（20日SMA）、上轨（中轨+2倍标准差）、下轨（中轨-2倍标准差）。它动态地反映了价格的波动范围——约95%的价格波动会落在上下轨之间。',
+      '核心用法：①价格触及上轨 → 可能超买（但在强势趋势中，价格会"贴着"上轨走）②价格触及下轨 → 可能超卖 ③布林带收窄（Squeeze）→ 波动率极低，可能即将爆发大行情 ④布林带扩张 → 波动率增大。',
+      '布林带Squeeze是最有价值的信号：当上下轨距离收窄到极端水平时，就像弹簧被压缩，之后往往会出现大幅单边行情。方向需要配合其他指标判断（如MACD方向、成交量）。'
+    ],
+    exampleFn: function(){
+      const vix=prices['^VIX'];
+      if(vix) return `VIX当前=${vix.price.toFixed(1)}。VIX可以类比为整个市场的"布林带宽度"——VIX低（<15）对应布林带收窄，市场平静但可能即将爆发。VIX高（>25）对应布林带扩张，市场剧烈波动中。`;
+      return '假设某只股票的布林带在过去2周持续收窄，上下轨距离从$20缩小到$8。这种Squeeze意味着大行情即将到来。一旦价格突破上轨，可能开启一波快速上涨。';
+    },
+    quiz:[
+      {q:'布林带的上轨计算方式是？',opts:['最高价+10%','中轨+2倍标准差','52周最高价','RSI>70'],ans:1},
+      {q:'布林带Squeeze意味着什么？',opts:['趋势结束','波动率极低，大行情将至','股价见顶','应该卖出'],ans:1},
+      {q:'约多少比例的价格会在布林带内波动？',opts:['50%','75%','95%','100%'],ans:2}
+    ]
+  },
+  {
+    id:19, tier:'intermediate', title:'Beta系数', icon:'β', badge:'📏',
+    paragraphs:[
+      'Beta（贝塔系数）衡量个股相对于市场（通常是S&P 500）的波动性。Beta=1表示与市场同步波动；Beta>1波动大于市场（如NVDA Beta≈1.7）；Beta<1波动小于市场（如JNJ Beta≈0.6）。',
+      '高Beta股（>1.5）：在牛市中涨得更多，熊市中跌得也更多——适合风险偏好型投资者。低Beta股（<0.8）：涨跌幅度都较小，适合稳健型投资者。负Beta（极罕见）：与市场反向运动。',
+      '投资组合的Beta = 各持仓Beta的加权平均。如果你的组合Beta=1.5，意味着市场涨10%时你的组合大约涨15%，市场跌10%时大约跌15%。可以通过加入低Beta股或债券ETF来降低组合Beta。'
+    ],
+    exampleFn: function(){
+      const portfolio=getPortfolio();
+      if(portfolio.length>0){
+        const betaMap={'NVDA':1.7,'AMD':1.8,'TSM':1.3,'AVGO':1.4,'MSFT':1.0,'AMZN':1.2,'GOOG':1.1,'META':1.3,'PLTR':2.1,'AI':2.5,'CRM':1.3,'NOW':1.2,'SNOW':1.8,'QQQ':1.1,'SPY':1.0,'BOTZ':1.4,'SMH':1.5};
+        let weightedBeta=0,totalVal=0;
+        portfolio.forEach(p=>{const price=prices[p.ticker]?.price||p.buyPrice;const val=price*p.shares;const beta=betaMap[p.ticker]||1.2;weightedBeta+=beta*val;totalVal+=val});
+        const portBeta=totalVal>0?(weightedBeta/totalVal).toFixed(2):'N/A';
+        return `你的投资组合加权Beta约为 ${portBeta}。${parseFloat(portBeta)>1.5?'⚠️ 组合波动性较高，在市场下跌时亏损可能放大。考虑加入低Beta标的如SPY来平衡。':parseFloat(portBeta)<0.8?'✅ 组合波动性较低，比较稳健。':'整体风险水平适中。'}`;
+      }
+      return 'AI板块整体Beta较高（通常1.5-2.5），意味着市场大跌时AI股跌幅更大。这就是为什么在VIX>25时，AI股的跌幅往往是市场的1.5-2倍。';
+    },
+    quiz:[
+      {q:'Beta=1.5的股票，当市场涨10%时大约涨多少？',opts:['10%','15%','5%','20%'],ans:1},
+      {q:'想降低投资组合波动性，应该？',opts:['全部买高Beta股','加入低Beta或债券ETF','卖出所有持仓','等待牛市'],ans:1},
+      {q:'以下哪只股票Beta可能最高？',opts:['银行股','公用事业股','AI初创公司','消费品龙头'],ans:2}
+    ]
+  },
+  {
+    id:20, tier:'intermediate', title:'市价单与限价单', icon:'🎫', badge:'🏪',
+    paragraphs:[
+      '市价单（Market Order）以当前市场最优价格立即成交，保证成交但不保证价格。限价单（Limit Order）设定你愿意接受的最高买入价或最低卖出价，保证价格但不保证成交。',
+      '什么时候用市价单：①需要立即建仓/平仓 ②交易量大的流动性好的股票（SPY、AAPL等）③盘前盘后不建议用市价单（价差可能很大）。什么时候用限价单：①有明确的目标价 ②流动性较差的股票 ③不急于成交。',
+      '进阶订单类型：①止损单（Stop Loss）——当价格跌到某水平自动卖出 ②止损限价单（Stop Limit）——止损+限价的组合 ③追踪止损单（Trailing Stop）——随价格上涨自动上调止损价。专业交易者通常用限价单+止损单的组合来管理风险。'
+    ],
+    exampleFn: function(){
+      const nvda=prices['NVDA'];
+      if(nvda) return `假设你想买入NVDA，当前价$${nvda.price.toFixed(2)}。市价单会在$${(nvda.price-0.05).toFixed(2)}-$${(nvda.price+0.05).toFixed(2)}之间成交。如果设置限价单$${(nvda.price*0.98).toFixed(2)}（低于当前价2%），需要等NVDA跌到该价格才会成交——可能几天内成交，也可能永远不成交。`;
+      return '举例：在波动剧烈的盘前交易中，如果你对一只$100的股票下市价单，实际可能以$103成交（滑点3%）。而限价单$100.50则确保不会买贵，但可能买不到。';
+    },
+    quiz:[
+      {q:'市价单的特点是？',opts:['保证价格不保证成交','保证成交不保证价格','两者都保证','两者都不保证'],ans:1},
+      {q:'流动性差的股票应该用什么单？',opts:['市价单','限价单','都可以','不应该交易'],ans:1},
+      {q:'追踪止损单的特点是？',opts:['固定止损价','随价格下跌自动下调','随价格上涨自动上调止损','无止损功能'],ans:2}
+    ]
+  },
+  {
+    id:21, tier:'advanced', title:'做空 Short Selling', icon:'📉', badge:'🔻',
+    paragraphs:[
+      '做空（Short Selling）是借入股票卖出，等价格下跌后买回归还，赚取差价。例如：在$100借入并卖出100股，跌到$80时买回，赚$20/股。做空让你在下跌市场中也能盈利。',
+      '⚠️ 做空风险极高：①亏损理论上无限（股价可以无限上涨）②需要支付借股费用 ③可能被"逼空"（Short Squeeze，空头被迫买回推高股价）④需要维持保证金，否则被强制平仓。GameStop (GME) 2021年的逼空事件是典型案例。',
+      '替代方案：如果看空某只股票，买入看跌期权（Put）比直接做空更安全——最大亏损仅限于权利金。或者卖出持仓（如果你持有的话）。新手投资者不建议做空个股。'
+    ],
+    exampleFn: function(){
+      const movers=ALL.filter(s=>!INDEX_TICKERS.has(s.t)&&prices[s.t]&&prices[s.t].changePct<-5).sort((a,b)=>prices[a.t].changePct-prices[b.t].changePct);
+      if(movers.length>0){
+        const m=movers[0];const p=prices[m.t];
+        return `今日 ${m.t} 下跌 ${p.changePct.toFixed(1)}%。如果你在开盘做空了100股（$${p.prevClose.toFixed(2)}），现在价格$${p.price.toFixed(2)}，你的利润约$${(Math.abs(p.change)*100).toFixed(0)}。但如果判断错误，股价反涨10%，你将亏损$${(p.prevClose*0.1*100).toFixed(0)}——做空的风险就是这么不对称。`;
+      }
+      return '2021年1月，GameStop的做空比例超过140%（借出的股票比实际流通的还多）。当散户大量买入推高股价时，空头被迫以天价买回平仓，股价从$20飙升到$480。这就是Short Squeeze的威力。';
+    },
+    quiz:[
+      {q:'做空的最大亏损是？',opts:['100%','50%','理论上无限','与做多相同'],ans:2},
+      {q:'Short Squeeze是指？',opts:['股价持续下跌','空头被迫买回推高股价','做空获利了结','市场暴跌'],ans:1},
+      {q:'新手看空某只股票，更安全的替代方案是？',opts:['加倍做空','买入看跌期权','什么都不做','借更多钱做空'],ans:1}
+    ]
+  },
+  {
+    id:22, tier:'advanced', title:'ETF vs 共同基金', icon:'🏦', badge:'💳',
+    paragraphs:[
+      'ETF（交易所交易基金）和共同基金（Mutual Fund）都是投资一篮子资产的方式，但运作机制不同。ETF像股票一样在交易所实时交易，共同基金只在每天收盘后按净值交易。',
+      'ETF优势：①费率更低（SPY费率0.09% vs 主动基金1-2%）②实时交易，流动性好 ③税务效率更高 ④透明度高（每日公布持仓）。共同基金优势：①可以自动定投 ②部分主动管理基金可能跑赢市场 ③适合不想盯盘的投资者。',
+      '对于大多数投资者，低费率的指数ETF（如QQQ、SPY、VTI）是最优选择。研究表明，超过90%的主动管理基金在10年期内跑输对应指数。费率差异看似微小，但复利效应下，1%的费率差异在30年后可以减少约25%的总回报。'
+    ],
+    exampleFn: function(){
+      const qqq=prices['QQQ'];const spy=prices['SPY'];
+      if(qqq&&spy) return `你关注的QQQ（$${qqq.price.toFixed(2)}）和SPY（$${spy.price.toFixed(2)}）都是超低费率ETF（0.2%和0.09%）。假设投资$100,000，30年后：0.09%费率的ETF比1.5%费率的共同基金多出约$150,000——仅仅因为费率差异！`;
+      return '假设两个基金追踪同一指数，基金A费率0.1%，基金B费率1.5%。投资$10万，年化回报10%，30年后：A=$1,694,000 vs B=$1,325,000。差额$369,000，全部来自费率差异。';
+    },
+    quiz:[
+      {q:'ETF与共同基金最大的区别是？',opts:['风险不同','ETF可实时交易','收益率不同','名字不同'],ans:1},
+      {q:'10年期内，主动管理基金跑输指数的比例约？',opts:['30%','50%','75%','90%以上'],ans:3},
+      {q:'为什么低费率如此重要？',opts:['因为规定','复利效应放大差异','心理因素','没什么重要的'],ans:1}
+    ]
+  },
+  {
+    id:23, tier:'advanced', title:'复利的力量', icon:'🌊', badge:'🏆',
+    paragraphs:[
+      '复利（Compound Interest）被爱因斯坦称为"世界第八大奇迹"。它的核心是"利滚利"——你的收益也产生收益。$10,000以年化10%增长：10年=$25,937，20年=$67,275，30年=$174,494。时间是复利最好的朋友。',
+      '72法则：用72除以年化回报率，得到资产翻倍所需年数。年化10% → 约7.2年翻倍。年化7% → 约10.3年翻倍。这意味着25岁开始每月投$500，到60岁时（假设年化9%）约有$100万+。但如果35岁才开始，同样到60岁只有约$40万。',
+      '复利的敌人：①通货膨胀（实际回报=名义回报-通胀率）②频繁交易（每次交易的税和手续费侵蚀复利）③中途取出（打断复利链条）④高费率基金。最大化复利的策略：长期持有低费率指数ETF + 股息再投资 + 定期加仓 + 不要试图择时。'
+    ],
+    exampleFn: function(){
+      const portfolio=getPortfolio();
+      if(portfolio.length>0){
+        const totalValue=portfolio.reduce((s,p)=>(prices[p.ticker]?.price||p.buyPrice)*p.shares+s,0);
+        const y10=(totalValue*Math.pow(1.1,10)).toFixed(0);
+        const y20=(totalValue*Math.pow(1.1,20)).toFixed(0);
+        const y30=(totalValue*Math.pow(1.1,30)).toFixed(0);
+        return `你当前的投资组合价值约$${totalValue.toFixed(0)}。假设年化回报10%（S&P 500历史平均）：10年后≈$${Number(y10).toLocaleString()}，20年后≈$${Number(y20).toLocaleString()}，30年后≈$${Number(y30).toLocaleString()}。这就是复利的魔力——后10年的增长远超前10年！`;
+      }
+      return '假设你每月定投$1,000到SPY（年化约10%）：10年后≈$206,000（本金$120,000，复利收益$86,000），30年后≈$2,171,000（本金$360,000，复利收益$1,811,000）！80%以上的财富来自复利。';
+    },
+    quiz:[
+      {q:'72法则：年化10%时资产翻倍需要几年？',opts:['5年','7.2年','10年','15年'],ans:1},
+      {q:'复利最大的朋友是？',opts:['高杠杆','时间','频繁交易','市场波动'],ans:1},
+      {q:'25岁开始vs35岁开始每月投$500（到60岁），差距约？',opts:['差10%','差30%','差60%以上','没差别'],ans:2}
+    ]
   }
+
 ];
 
 // Education progress helpers
@@ -3183,15 +3518,18 @@ function getUnlockedCount(){
   if(!prog.firstVisit){
     prog.firstVisit=new Date().toISOString().slice(0,10);
     saveEduProgress(prog);
-    return 1;
+    return 3; // Start with 3 unlocked
   }
   const first=new Date(prog.firstVisit+'T00:00:00');
   const now=new Date();
   const days=Math.floor((now-first)/86400000);
-  return Math.min(days+1,15);
+  return Math.min(days+3, EDU_LESSONS.length); // Unlock faster
 }
 
 let eduDetailView=null; // null=list, lesson id=detail
+
+const TIER_NAMES={beginner:'🌱 入门基础',intermediate:'📊 进阶技巧',advanced:'🔥 高手必修'};
+const TIER_ORDER=['beginner','intermediate','advanced'];
 
 function renderEdu(){
   const prog=getEduProgress();
@@ -3208,30 +3546,47 @@ function renderEdu(){
         <span style="font-size:13px;font-weight:800;color:var(--pri)">${completed.length}/${total}</span>
       </div>
       <div class="edu-progress-bar"><div class="edu-progress-fill" style="width:${pctDone}%"></div></div>
-      <div class="edu-progress-text">${completed.length===total?'🎉 恭喜！你已完成所有课程！':`已解锁 ${unlocked}/${total} 课 · 每天解锁新课程`}</div>
-      ${completed.length>0?`<div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center">${completed.map(id=>{const l=EDU_LESSONS.find(x=>x.id===id);return l?`<span title="${l.title}" style="font-size:18px">${l.badge}</span>`:''}).join('')}</div>`:''}
+      <div class="edu-progress-text">${completed.length===total?'🎉 恭喜！你已完成全部'+total+'课！':`已解锁 ${unlocked}/${total} 课 · 每天解锁新课程`}</div>
+      ${completed.length>0?`<div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin-top:6px">${completed.map(id=>{const l=EDU_LESSONS.find(x=>x.id===id);return l?`<span title="${l.title}" style="font-size:18px">${l.badge}</span>`:''}).join('')}</div>`:''}
     </div>`;
 
-  const content=document.getElementById('eduContent');
+  const contentEl=document.getElementById('eduContent');
   if(eduDetailView){
     renderLessonDetail(eduDetailView);
     return;
   }
 
-  // Lesson list
-  content.innerHTML=EDU_LESSONS.map(lesson=>{
-    const isUnlocked=lesson.id<=unlocked;
-    const isCompleted=completed.includes(lesson.id);
-    const score=prog.quizScores?.[lesson.id];
-    return `<div class="edu-lesson-card ${isCompleted?'completed':''} ${!isUnlocked?'locked':''}" ${isUnlocked?`onclick="eduDetailView=${lesson.id};renderEdu()"`:''}>
-      <div class="edu-lesson-icon">${isUnlocked?lesson.icon:'🔒'}</div>
-      <div class="edu-lesson-info">
-        <div class="edu-lesson-title">${isUnlocked?lesson.title:'第'+lesson.id+'课 · 明天解锁'}</div>
-        <div class="edu-lesson-sub">${isCompleted?'✅ 已完成'+(score!=null?' · 测验 '+score+'/3':''):(isUnlocked?'点击开始学习':'🔒 明天自动解锁')}</div>
-      </div>
-      ${isCompleted?`<div class="edu-lesson-badge">${lesson.badge}</div>`:''}
-    </div>`;
-  }).join('');
+  // Quiz mode card
+  let html=`<div class="edu-quiz-mode-card" onclick="startQuizMode()">
+    <div style="font-size:28px;margin-bottom:6px">📝</div>
+    <div style="font-size:15px;font-weight:800">随机测验模式</div>
+    <div style="font-size:12px;color:var(--dim);margin-top:4px">从已学课程中抽取5题，测试你的知识掌握</div>
+    ${completed.length<3?'<div style="font-size:11px;color:var(--amber);margin-top:6px">⚠️ 至少完成3课后解锁</div>':'<div style="font-size:11px;color:var(--pri);margin-top:6px">✅ 点击开始挑战</div>'}
+  </div>`;
+
+  // Lesson list grouped by tier
+  TIER_ORDER.forEach(tier=>{
+    const tierLessons=EDU_LESSONS.filter(l=>l.tier===tier);
+    if(tierLessons.length===0) return;
+    const tierCompleted=tierLessons.filter(l=>completed.includes(l.id)).length;
+    html+=`<div class="edu-tier-section">
+      <div class="edu-tier-header">${TIER_NAMES[tier]} <span class="edu-tier-badge ${tier}">${tierCompleted}/${tierLessons.length}</span></div>`;
+    html+=tierLessons.map(lesson=>{
+      const isUnlocked=lesson.id<=unlocked;
+      const isCompleted=completed.includes(lesson.id);
+      const score=prog.quizScores?.[lesson.id];
+      return `<div class="edu-lesson-card ${isCompleted?'completed':''} ${!isUnlocked?'locked':''}" ${isUnlocked?`onclick="eduDetailView=${lesson.id};renderEdu()"`:''}>
+        <div class="edu-lesson-icon">${isUnlocked?lesson.icon:'🔒'}</div>
+        <div class="edu-lesson-info">
+          <div class="edu-lesson-title">${isUnlocked?lesson.title:'第'+lesson.id+'课 · 明天解锁'}</div>
+          <div class="edu-lesson-sub">${isCompleted?'✅ 已完成'+(score!=null?' · 测验 '+score+'/3':''):(isUnlocked?'点击开始学习':'🔒 明天自动解锁')}</div>
+        </div>
+        ${isCompleted?`<div class="edu-lesson-badge">${lesson.badge}</div>`:''}
+      </div>`;
+    }).join('');
+    html+='</div>';
+  });
+  contentEl.innerHTML=html;
 }
 
 function renderLessonDetail(lessonId){
@@ -3342,6 +3697,171 @@ function submitQuiz(lessonId){
   document.getElementById('eduProgress').querySelector('.edu-progress-fill').style.width=(prog.completed.length/EDU_LESSONS.length*100)+'%';
 
   showToast(score===3?`🎉 完美！获得 ${lesson.badge} 徽章`:score>=2?'👏 不错，'+score+'/3 通过！':'💪 得分 '+score+'/3，再看看知识要点');
+}
+
+
+
+// ================================================================
+// RANDOM QUIZ MODE — 5 questions from completed lessons
+// ================================================================
+let quizModeState = { questions: [], current: 0, score: 0, answers: [], revealed: false };
+
+function startQuizMode() {
+  const prog = getEduProgress();
+  const completed = prog.completed || [];
+  if (completed.length < 3) {
+    showToast('⚠️ 至少完成3课后才能开始测验');
+    return;
+  }
+
+  // Collect all quiz questions from completed lessons
+  const pool = [];
+  completed.forEach(id => {
+    const lesson = EDU_LESSONS.find(l => l.id === id);
+    if (lesson && lesson.quiz) {
+      lesson.quiz.forEach((q, qi) => {
+        pool.push({ ...q, lessonId: id, lessonTitle: lesson.title, lessonIcon: lesson.icon });
+      });
+    }
+  });
+
+  // Shuffle and pick 5
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  const questions = pool.slice(0, 5);
+
+  quizModeState = { questions, current: 0, score: 0, answers: new Array(5).fill(-1), revealed: false };
+
+  document.getElementById('quizModeOverlay').classList.add('open');
+  renderQuizModeQuestion();
+}
+
+function closeQuizMode() {
+  document.getElementById('quizModeOverlay').classList.remove('open');
+}
+
+function renderQuizModeQuestion() {
+  const { questions, current, score, answers, revealed } = quizModeState;
+  const total = questions.length;
+
+  // Score display
+  document.getElementById('quizModeScore').textContent = `${score}/${total}`;
+
+  // Progress dots
+  document.getElementById('quizModeProgress').innerHTML = questions.map((_, i) => {
+    let cls = '';
+    if (i < current || (i === current && revealed)) cls = 'done';
+    else if (i === current) cls = 'current';
+    return `<div class="quiz-mode-dot ${cls}"></div>`;
+  }).join('');
+
+  const contentEl = document.getElementById('quizModeContent');
+  const actionsEl = document.getElementById('quizModeActions');
+
+  // Check if quiz is complete
+  if (current >= total) {
+    renderQuizModeResult();
+    return;
+  }
+
+  const q = questions[current];
+  const selected = answers[current];
+  const letters = ['A', 'B', 'C', 'D'];
+
+  contentEl.innerHTML = `
+    <div class="quiz-mode-q-num">问题 ${current + 1} / ${total} · ${q.lessonIcon} ${q.lessonTitle}</div>
+    <div class="quiz-mode-q-text">${q.q}</div>
+    ${q.opts.map((opt, i) => {
+      let cls = '';
+      if (revealed) {
+        if (i === q.ans) cls = 'correct';
+        else if (i === selected && selected !== q.ans) cls = 'wrong';
+      } else if (i === selected) {
+        cls = 'selected';
+      }
+      return `<div class="quiz-mode-opt ${cls}" ${revealed ? '' : `onclick="selectQuizModeOpt(${i})"`}>
+        <div class="quiz-mode-opt-letter">${revealed && i === q.ans ? '✓' : revealed && i === selected && selected !== q.ans ? '✗' : letters[i]}</div>
+        <span>${opt}</span>
+      </div>`;
+    }).join('')}
+  `;
+
+  if (revealed) {
+    actionsEl.innerHTML = `<button class="btn-primary" onclick="nextQuizModeQuestion()">
+      ${current < total - 1 ? '下一题 →' : '查看结果 →'}
+    </button>`;
+  } else {
+    actionsEl.innerHTML = `<button class="btn-primary" onclick="submitQuizModeAnswer()" ${selected === -1 ? 'style="opacity:.5;pointer-events:none"' : ''}>
+      确认答案
+    </button>`;
+  }
+}
+
+function selectQuizModeOpt(i) {
+  quizModeState.answers[quizModeState.current] = i;
+  renderQuizModeQuestion();
+}
+
+function submitQuizModeAnswer() {
+  const { questions, current, answers } = quizModeState;
+  if (answers[current] === -1) return;
+  quizModeState.revealed = true;
+  if (answers[current] === questions[current].ans) {
+    quizModeState.score++;
+  }
+  renderQuizModeQuestion();
+}
+
+function nextQuizModeQuestion() {
+  quizModeState.current++;
+  quizModeState.revealed = false;
+  renderQuizModeQuestion();
+}
+
+function renderQuizModeResult() {
+  const { questions, score } = quizModeState;
+  const total = questions.length;
+  const pct = Math.round(score / total * 100);
+  let emoji, text, sub;
+  if (score === total) {
+    emoji = '🏆';
+    text = '完美满分！';
+    sub = '所有问题全部答对，投资知识扎实！';
+  } else if (score >= 4) {
+    emoji = '🌟';
+    text = '优秀！';
+    sub = '几乎全对，继续保持学习热情！';
+  } else if (score >= 3) {
+    emoji = '👏';
+    text = '不错！';
+    sub = '基础掌握良好，可以回顾部分课程加强理解。';
+  } else {
+    emoji = '💪';
+    text = '继续加油！';
+    sub = '建议复习相关课程，巩固知识后再来挑战。';
+  }
+
+  // Collect badges from questions' lessons
+  const lessonIds = [...new Set(questions.map(q => q.lessonId))];
+  const badges = lessonIds.map(id => EDU_LESSONS.find(l => l.id === id)?.badge || '').filter(Boolean);
+
+  document.getElementById('quizModeContent').innerHTML = `
+    <div class="quiz-mode-result">
+      <div style="font-size:64px;margin-bottom:16px">${emoji}</div>
+      <div class="quiz-mode-result-score">${score}/${total}</div>
+      <div class="quiz-mode-result-text">${text}</div>
+      <div class="quiz-mode-result-sub">${sub}</div>
+      ${badges.length > 0 ? `<div class="quiz-mode-result-badges">${badges.join('')}</div>` : ''}
+      <div style="margin-top:16px;font-size:13px;color:var(--dim)">正确率 ${pct}%</div>
+    </div>
+  `;
+
+  document.getElementById('quizModeActions').innerHTML = `
+    <button class="btn-primary" onclick="startQuizMode()" style="flex:1">🔄 再来一轮</button>
+    <button class="btn-primary" onclick="closeQuizMode()" style="flex:1;background:var(--glass);color:var(--txt);box-shadow:none">返回</button>
+  `;
 }
 
 init();
