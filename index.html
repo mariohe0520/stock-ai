@@ -194,42 +194,25 @@ function updateMarketStatus() {
   document.getElementById('marketLabel').textContent = open ? 'Market Open' : 'Market Closed';
 }
 
-// ===== FETCH PRICES (Yahoo Finance via public API) =====
+// ===== FETCH PRICES (Yahoo Finance v8 chart API — no key needed) =====
 async function fetchPrices() {
-  const tickers = ALL_STOCKS.map(s => s.t).join(',');
-  try {
-    // Use Yahoo Finance v7 quote endpoint (no API key needed)
-    const url = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${tickers}&fields=regularMarketPrice,regularMarketChange,regularMarketChangePercent,regularMarketPreviousClose,sparkline`;
-    const r = await fetch(url);
-    if (!r.ok) throw new Error('Yahoo API ' + r.status);
-    const d = await r.json();
-    if (d.quoteResponse && d.quoteResponse.result) {
-      for (const q of d.quoteResponse.result) {
-        prices[q.symbol] = {
-          price: q.regularMarketPrice,
-          change: q.regularMarketChange,
-          changePct: q.regularMarketChangePercent,
-          prevClose: q.regularMarketPreviousClose
-        };
-      }
-    }
-  } catch (e) {
-    console.warn('Yahoo API failed, trying fallback...', e);
-    // Fallback: fetch individually via chart API
-    for (const s of ALL_STOCKS) {
-      try {
-        const r = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${s.t}?range=5d&interval=1d`);
-        if (!r.ok) continue;
-        const d = await r.json();
-        const meta = d.chart.result[0].meta;
-        const prev = meta.chartPreviousClose || meta.previousClose;
-        const price = meta.regularMarketPrice;
-        const change = price - prev;
-        prices[s.t] = { price, change, changePct: (change / prev) * 100, prevClose: prev };
-      } catch (e2) { /* skip */ }
-    }
-  }
-  document.getElementById('updated').textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
+  const batch = ALL_STOCKS.map(s => s.t);
+  const results = await Promise.allSettled(
+    batch.map(async ticker => {
+      const r = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?range=5d&interval=1d`);
+      if (!r.ok) throw new Error(r.status);
+      const d = await r.json();
+      const meta = d.chart.result[0].meta;
+      const prev = meta.chartPreviousClose || meta.previousClose;
+      const price = meta.regularMarketPrice;
+      const change = price - prev;
+      // Get 5-day close prices for sparkline
+      const closes = d.chart.result[0].indicators?.quote?.[0]?.close?.filter(v => v != null) || [];
+      prices[ticker] = { price, change, changePct: prev ? (change / prev) * 100 : 0, prevClose: prev, spark: closes };
+    })
+  );
+  const ok = results.filter(r => r.status === 'fulfilled').length;
+  document.getElementById('updated').textContent = `${ok}/${batch.length} loaded · ${new Date().toLocaleTimeString()}`;
   render();
 }
 
@@ -247,19 +230,33 @@ function render() {
   }
 }
 
+function sparkSvg(data, up) {
+  if (!data || data.length < 2) return '';
+  const w=60, h=24, pad=2;
+  const min = Math.min(...data), max = Math.max(...data);
+  const range = max - min || 1;
+  const pts = data.map((v, i) => `${pad + (i / (data.length - 1)) * (w - pad * 2)},${pad + (1 - (v - min) / range) * (h - pad * 2)}`).join(' ');
+  const color = up ? '#10b981' : '#ef4444';
+  return `<div class="mini-chart"><svg viewBox="0 0 ${w} ${h}"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round"/></svg></div>`;
+}
+
 function stockRow(s) {
   const p = prices[s.t] || {};
   const price = p.price != null ? p.price.toFixed(2) : '---';
   const pct = p.changePct != null ? p.changePct.toFixed(2) : '0.00';
   const up = (p.changePct || 0) >= 0;
+  const spark = sparkSvg(p.spark, up);
   return `<div class="stock-row" onclick="showDetail('${s.t}')">
     <div class="stock-left">
       <div class="stock-ticker">${s.t}</div>
       <div class="stock-name">${s.cat ? s.cat + ' · ' : ''}${s.n}</div>
     </div>
-    <div class="stock-right">
-      <div class="stock-price">$${price}</div>
-      <div class="stock-change ${up ? 'up' : 'dn'}">${up ? '+' : ''}${pct}%</div>
+    <div style="display:flex;align-items:center;gap:8px">
+      ${spark}
+      <div class="stock-right">
+        <div class="stock-price">$${price}</div>
+        <div class="stock-change ${up ? 'up' : 'dn'}">${up ? '+' : ''}${pct}%</div>
+      </div>
     </div>
   </div>`;
 }
