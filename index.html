@@ -237,7 +237,7 @@ html,body{
   position:sticky;top:0;z-index:2;
   background:linear-gradient(180deg,var(--bg) 80%,transparent);
 }
-.detail-close{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:var(--txt);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.detail-close{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:var(--txt);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .detail-ticker-group{text-align:center}
 .detail-ticker{font-size:18px;font-weight:800}
 .detail-name{font-size:11px;color:var(--dim)}
@@ -558,6 +558,105 @@ html,body{
 .chain-legend{display:flex;gap:16px;justify-content:center;padding:8px 0 4px}
 .chain-legend-item{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--dim)}
 .chain-legend-dot{width:8px;height:8px;border-radius:50%}
+
+/* ============================================================
+   v5 QA HARDENING
+   ============================================================ */
+
+/* Light theme comprehensive overrides */
+[data-theme="light"] .stock-row:active{background:rgba(0,0,0,.04)}
+[data-theme="light"] .glass-card:active{background:rgba(0,0,0,.02)}
+[data-theme="light"] .advisor-metric{background:rgba(0,0,0,.04)}
+[data-theme="light"] .modal-handle{background:rgba(0,0,0,.12)}
+[data-theme="light"] .fg-meter{background:rgba(0,0,0,.06)}
+[data-theme="light"] .toast{background:var(--bg2);border-color:rgba(0,0,0,.08);box-shadow:0 4px 20px rgba(0,0,0,.1)}
+[data-theme="light"] .sub-tab{background:rgba(0,0,0,.04)}
+[data-theme="light"] .tab-bar{border-top-color:rgba(0,0,0,.08)}
+[data-theme="light"] .signal-banner.bull{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-color:rgba(16,185,129,.2)}
+[data-theme="light"] .signal-banner.bear{background:linear-gradient(135deg,#fef2f2,#fecaca);border-color:rgba(239,68,68,.2)}
+[data-theme="light"] .signal-banner.neutral{background:linear-gradient(135deg,#eef2ff,#e0e7ff);border-color:rgba(99,102,241,.2)}
+[data-theme="light"] .portfolio-summary{background:linear-gradient(135deg,rgba(99,102,241,.06),rgba(16,185,129,.04));border-color:rgba(99,102,241,.1)}
+[data-theme="light"] .add-btn{border-color:rgba(0,0,0,.12)}
+[data-theme="light"] .news-tag.ticker{background:rgba(0,0,0,.04)}
+[data-theme="light"] .wl-btn{background:rgba(0,0,0,.04)}
+[data-theme="light"] .risk-opt{background:rgba(0,0,0,.03)}
+[data-theme="light"] .advisor-card{background:var(--card);border-color:var(--glass-border)}
+[data-theme="light"] .stat-inner{background:rgba(0,0,0,.03)!important}
+[data-theme="light"] .chain-stat-card{background:var(--card)}
+[data-theme="light"] .chain-insight{background:var(--card)}
+[data-theme="light"] .skeleton-row{background:var(--card)}
+[data-theme="light"] .shimmer{background:linear-gradient(90deg,rgba(0,0,0,.03) 25%,rgba(0,0,0,.06) 50%,rgba(0,0,0,.03) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+
+/* Touch targets ≥ 44px — Apple HIG compliance */
+.tab-item{min-height:44px;min-width:48px;padding:6px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.sub-tab{min-height:36px;padding:8px 16px;display:inline-flex;align-items:center}
+.wl-btn{width:44px;height:44px;border-radius:10px;font-size:16px}
+.alert-remove{width:44px;height:44px;border-radius:10px;font-size:14px}
+.detail-close{width:44px;height:44px;font-size:20px}
+.me-menu-item{min-height:52px}
+.stock-row{min-height:56px}
+.autocomplete-item{min-height:44px;padding:12px 14px}
+.risk-opt{min-height:44px}
+
+/* Text overflow protection */
+.detail-name{max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin:0 auto}
+.advisor-ticker{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.advisor-card .advisor-header{gap:8px}
+.advisor-card .advisor-reason{word-break:break-word}
+.position-ticker{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180px}
+
+/* Search bar */
+.search-bar{position:relative;margin:0 16px 10px}
+.search-bar input{
+  width:100%;padding:10px 14px 10px 36px;
+  background:var(--input-bg);border:1px solid var(--input-border);
+  border-radius:var(--r-sm);color:var(--txt);font-size:14px;
+  font-family:var(--font);outline:none;transition:border-color .2s;
+}
+.search-bar input:focus{border-color:var(--acc)}
+.search-bar input::placeholder{color:var(--dim2)}
+.search-bar .s-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--dim);pointer-events:none}
+.search-bar .s-clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:28px;height:28px;border:none;background:var(--glass);border-radius:50%;color:var(--dim);font-size:13px;cursor:pointer;display:none;align-items:center;justify-content:center}
+.search-bar .s-clear.show{display:flex}
+
+/* Pull-to-refresh */
+.ptr-indicator{
+  text-align:center;padding:0;font-size:13px;color:var(--dim);
+  height:0;overflow:hidden;transition:height .25s,padding .25s;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.ptr-indicator.pulling{height:48px;padding:12px 0}
+.ptr-indicator.refreshing{height:48px;padding:12px 0;color:var(--acc)}
+.ptr-spinner{display:inline-block;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Loading skeleton */
+.skeleton-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;background:var(--card);border:1px solid var(--glass-border);
+  border-radius:var(--r);margin-bottom:8px;min-height:56px;
+}
+.skel-left{display:flex;flex-direction:column;gap:6px}
+.skel-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.skel-bar{border-radius:4px;height:14px}
+
+/* Offline indicator */
+.offline-banner{
+  background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.15);
+  border-radius:var(--r-sm);padding:10px 14px;margin:0 16px 12px;
+  text-align:center;font-size:13px;color:var(--red);font-weight:600;
+  display:none;align-items:center;justify-content:center;gap:6px;
+}
+.offline-banner.show{display:flex}
+
+/* Supply chain responsive for small phones */
+@media(max-width:390px){
+  .chain-wrap{margin:0 -8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+  .chain-svg{min-width:400px}
+}
+
+/* Fix chain node clickable area */
+.chain-svg g[style*="cursor:pointer"]:active{opacity:.8}
 </style>
 </head>
 <body>
@@ -578,12 +677,24 @@ html,body{
     </div>
   </div>
 
+  <!-- Offline Banner -->
+  <div class="offline-banner" id="offlineBanner">📡 网络离线 · 显示缓存数据</div>
+
+  <!-- Pull-to-refresh indicator -->
+  <div class="ptr-indicator" id="ptrIndicator"><span id="ptrText">↓ 下拉刷新</span></div>
+
   <!-- ===== PAGE: 行情 (Quotes) ===== -->
   <div class="page active" id="page-quotes">
     <div class="signal-banner neutral" id="signalBanner">
       <div class="signal-icon">🔍</div>
       <div class="signal-title">分析中...</div>
       <div class="signal-text">正在加载市场数据...</div>
+    </div>
+    <!-- Search/Filter -->
+    <div class="search-bar" id="quoteSearchBar">
+      <span class="s-icon">🔍</span>
+      <input type="text" id="quoteSearchInput" placeholder="搜索股票代码或名称..." autocomplete="off">
+      <button class="s-clear" id="quoteSearchClear" onclick="clearQuoteSearch()">✕</button>
     </div>
     <div class="sub-tabs" id="quoteTabs">
       <button class="sub-tab on" data-stab="fav">⭐ 自选</button>
@@ -638,7 +749,7 @@ html,body{
     <div class="me-header">
       <div class="me-avatar">👤</div>
       <div class="me-name" id="meName">投资者</div>
-      <div class="me-sub" id="meSub">StockAI Pro · v4.0</div>
+      <div class="me-sub" id="meSub">StockAI Pro · v5.0</div>
     </div>
     <div id="meContent"></div>
   </div>
@@ -664,7 +775,7 @@ html,body{
       <div class="detail-ticker" id="detailTicker"></div>
       <div class="detail-name" id="detailName"></div>
     </div>
-    <div style="width:36px"></div>
+    <div style="width:44px"></div>
   </div>
   <div id="detailBody"></div>
 </div>
@@ -846,11 +957,13 @@ const STOCKS = {
     { t:'AMD',  n:'AMD', cat:'🔧 芯片', layer:'chip' },
     { t:'TSM',  n:'TSMC', cat:'🔧 芯片', layer:'chip' },
     { t:'AVGO', n:'Broadcom', cat:'🔧 芯片', layer:'chip' },
+    { t:'ASML', n:'ASML Holding', cat:'🔧 芯片', layer:'chip' },
   ],
   cloud: [
     { t:'MSFT', n:'Microsoft', cat:'☁️ 云', layer:'infra' },
     { t:'AMZN', n:'Amazon', cat:'☁️ 云', layer:'infra' },
     { t:'GOOG', n:'Google', cat:'☁️ 云', layer:'infra' },
+    { t:'ORCL', n:'Oracle', cat:'☁️ 云', layer:'infra' },
   ],
   models: [
     { t:'META', n:'Meta (Llama)', cat:'🧠 模型', layer:'model' },
@@ -1000,18 +1113,20 @@ function detailChartSvg(data,up){
 // ===== STOCK ROW =====
 function stockRow(s){
   const p=prices[s.t]||{};
-  const price=p.price!=null?(p.price>=1000?p.price.toFixed(0):p.price.toFixed(2)):'---';
-  const pct=p.changePct!=null?p.changePct.toFixed(2):'0.00';
+  const hasData = p.price != null;
+  const price=hasData?(p.price>=1000?p.price.toFixed(0):p.price.toFixed(2)):'---';
+  const pct=hasData?p.changePct.toFixed(2):'---';
   const up=(p.changePct||0)>=0;
+  const changeClass=hasData?(up?'up':'dn'):'';
   return `<div class="stock-row" onclick="showDetail('${s.t}')">
     <div class="stock-left">
       <div class="stock-ticker">${s.t.replace('^','')}</div>
-      <div class="stock-name">${s.n}</div>
+      <div class="stock-name">${p.name||s.n}</div>
     </div>
-    <div class="stock-mid">${sparkSvg(p.spark,up)}</div>
+    <div class="stock-mid">${hasData?sparkSvg(p.spark,up):''}</div>
     <div class="stock-right">
-      <div class="stock-price">$${price}</div>
-      <div class="stock-change ${up?'up':'dn'}">${up?'+':''}${pct}%</div>
+      <div class="stock-price">${hasData?'$':''}${price}</div>
+      <div class="stock-change ${changeClass}">${hasData?((up?'+':'')+pct+'%'):pct}</div>
     </div>
   </div>`;
 }
@@ -1020,6 +1135,13 @@ function stockRow(s){
 function renderQuotes(){
   const c=document.getElementById('quoteContent');
   updateMarketStatus();
+
+  // Show loading skeletons if no price data yet
+  if (Object.keys(prices).length === 0) {
+    c.innerHTML = renderSkeletons(6);
+    return;
+  }
+
   let items=[];
   switch(currentSubTab){
     case 'fav': {
@@ -1034,10 +1156,22 @@ function renderQuotes(){
     case 'apps': items=STOCKS.apps; break;
     case 'etfs': items=STOCKS.etfs; break;
   }
+
+  // Apply search filter
+  if (quoteSearchQuery) {
+    items = items.filter(s =>
+      s.t.toUpperCase().includes(quoteSearchQuery) ||
+      s.n.toUpperCase().includes(quoteSearchQuery)
+    );
+  }
+
   let html=items.map(stockRow).join('');
-  if(currentSubTab==='indices') html+=renderFearGreed();
-  if(currentSubTab==='fav' && items.length===0) {
+  if(currentSubTab==='indices' && !quoteSearchQuery) html+=renderFearGreed();
+  if(currentSubTab==='fav' && items.length===0 && !quoteSearchQuery) {
     html = `<div class="empty-state"><div class="empty-icon">⭐</div><div class="empty-title">自选列表为空</div><div class="empty-sub">去"我的"页面管理自选股</div></div>`;
+  }
+  if(quoteSearchQuery && items.length===0) {
+    html = `<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-title">未找到 "${quoteSearchQuery}"</div><div class="empty-sub">试试其他关键词</div></div>`;
   }
   c.innerHTML=html;
   updateSignalBanner();
@@ -1225,15 +1359,15 @@ function renderAdvisor(){
       </div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-      <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:10px;text-align:center">
+      <div class="stat-inner" style="border-radius:10px;padding:10px;text-align:center;background:var(--glass)">
         <div style="font-size:10px;color:var(--dim)">VIX</div>
         <div style="font-size:18px;font-weight:800;color:${vix>25?'var(--dn)':vix<15?'var(--up)':'var(--txt)'}">${vix.toFixed(1)}</div>
       </div>
-      <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:10px;text-align:center">
+      <div class="stat-inner" style="border-radius:10px;padding:10px;text-align:center;background:var(--glass)">
         <div style="font-size:10px;color:var(--dim)">S&P 500</div>
         <div style="font-size:18px;font-weight:800;color:${(prices['^GSPC']?.changePct||0)>=0?'var(--up)':'var(--dn)'}">${(prices['^GSPC']?.changePct||0).toFixed(1)}%</div>
       </div>
-      <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:10px;text-align:center">
+      <div class="stat-inner" style="border-radius:10px;padding:10px;text-align:center;background:var(--glass)">
         <div style="font-size:10px;color:var(--dim)">NASDAQ</div>
         <div style="font-size:18px;font-weight:800;color:${(prices['^IXIC']?.changePct||0)>=0?'var(--up)':'var(--dn)'}">${(prices['^IXIC']?.changePct||0).toFixed(1)}%</div>
       </div>
@@ -1849,7 +1983,7 @@ function renderMe(){
       <div class="me-menu-left"><span class="me-menu-icon">📖</span><span class="me-menu-text">关于 StockAI</span></div>
       <div class="me-menu-right"><span class="me-menu-arrow">›</span></div>
     </div>
-    <div style="text-align:center;padding:24px 0;font-size:11px;color:var(--dim2)">StockAI v4.0 · Made with 🤖 by OpenClaw</div>
+    <div style="text-align:center;padding:24px 0;font-size:11px;color:var(--dim2)">StockAI v5.0 · Made with 🤖 by OpenClaw</div>
   `;
 }
 
@@ -1908,7 +2042,7 @@ function renderChain(){
     });
   });
 
-  let svg=`<svg viewBox="0 0 ${W} ${H}" class="chain-svg" xmlns="http://www.w3.org/2000/svg">`;
+  let svg=`<div class="chain-wrap"><svg viewBox="0 0 ${W} ${H}" class="chain-svg" xmlns="http://www.w3.org/2000/svg">`;
 
   // Defs — shadow filter
   svg+=`<defs>
@@ -1985,7 +2119,7 @@ function renderChain(){
     });
   });
 
-  svg+='</svg>';
+  svg+='</svg></div>';
 
   // Legend
   let html='<div class="chain-legend">';
@@ -2090,15 +2224,111 @@ document.getElementById('advisorTabs').addEventListener('click',e=>{
   tab.classList.add('on');currentAdvisorTab=tab.dataset.atab;renderAdvisor();
 });
 
+// ===== QUOTE SEARCH/FILTER =====
+let quoteSearchQuery = '';
+const quoteSearchInput = document.getElementById('quoteSearchInput');
+const quoteSearchClear = document.getElementById('quoteSearchClear');
+
+quoteSearchInput.addEventListener('input', () => {
+  quoteSearchQuery = quoteSearchInput.value.trim().toUpperCase();
+  quoteSearchClear.classList.toggle('show', quoteSearchQuery.length > 0);
+  renderQuotes();
+});
+function clearQuoteSearch() {
+  quoteSearchInput.value = '';
+  quoteSearchQuery = '';
+  quoteSearchClear.classList.remove('show');
+  renderQuotes();
+}
+
+// ===== LOADING SKELETONS =====
+function renderSkeletons(count = 5) {
+  return Array.from({length: count}, () =>
+    `<div class="skeleton-row"><div class="skel-left"><div class="shimmer skel-bar" style="width:60px"></div><div class="shimmer skel-bar" style="width:90px;height:10px"></div></div><div class="skel-right"><div class="shimmer skel-bar" style="width:70px"></div><div class="shimmer skel-bar" style="width:54px;height:10px"></div></div></div>`
+  ).join('');
+}
+
+// ===== PULL-TO-REFRESH =====
+let ptrStartY = 0, ptrActive = false, ptrTriggered = false;
+const ptrIndicator = document.getElementById('ptrIndicator');
+const ptrText = document.getElementById('ptrText');
+
+document.addEventListener('touchstart', e => {
+  if (window.scrollY === 0 && !ptrActive) {
+    ptrStartY = e.touches[0].clientY;
+    ptrActive = true;
+    ptrTriggered = false;
+  }
+}, { passive: true });
+
+document.addEventListener('touchmove', e => {
+  if (!ptrActive) return;
+  const dy = e.touches[0].clientY - ptrStartY;
+  if (dy > 10 && dy < 120 && window.scrollY === 0) {
+    ptrIndicator.classList.add('pulling');
+    ptrIndicator.classList.remove('refreshing');
+    if (dy > 60) {
+      ptrTriggered = true;
+      ptrText.textContent = '↑ 释放刷新';
+    } else {
+      ptrTriggered = false;
+      ptrText.textContent = '↓ 下拉刷新';
+    }
+  } else if (dy <= 0) {
+    ptrIndicator.classList.remove('pulling');
+    ptrActive = false;
+  }
+}, { passive: true });
+
+document.addEventListener('touchend', async () => {
+  if (!ptrActive) return;
+  ptrActive = false;
+  if (ptrTriggered) {
+    ptrIndicator.classList.remove('pulling');
+    ptrIndicator.classList.add('refreshing');
+    ptrText.innerHTML = '<span class="ptr-spinner">⟳</span> 刷新中...';
+    await fetchPrices();
+    switchPage(currentPage);
+    setTimeout(() => {
+      ptrIndicator.classList.remove('refreshing');
+      ptrText.textContent = '↓ 下拉刷新';
+      showToast('✅ 数据已刷新');
+    }, 400);
+  } else {
+    ptrIndicator.classList.remove('pulling');
+  }
+}, { passive: true });
+
+// ===== OFFLINE DETECTION =====
+const offlineBanner = document.getElementById('offlineBanner');
+function updateOnlineStatus() {
+  offlineBanner.classList.toggle('show', !navigator.onLine);
+}
+window.addEventListener('online', () => {
+  updateOnlineStatus();
+  showToast('✅ 网络已恢复');
+  fetchPrices().then(() => switchPage(currentPage));
+});
+window.addEventListener('offline', () => {
+  updateOnlineStatus();
+  showToast('📡 网络已断开，使用缓存数据');
+});
+
 // ===== INIT =====
 async function init(){
   // Apply saved theme
   setTheme(getTheme());
 
+  // Check online status
+  updateOnlineStatus();
+
   // Check for first-time profile setup
   const profile = getRiskProfile();
 
+  // Render loading state first
   renderQuotes();
+
+  // Fetch data
   await fetchPrices();
   renderQuotes();
 

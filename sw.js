@@ -1,8 +1,9 @@
-const CACHE_NAME = 'stockai-v3';
+const CACHE_NAME = 'stockai-v5';
 const ASSETS = [
   './',
   './index.html',
-  './manifest.json'
+  './manifest.json',
+  './data/quotes.json'
 ];
 
 self.addEventListener('install', e => {
@@ -28,18 +29,25 @@ self.addEventListener('fetch', e => {
       fetch(e.request).then(response => {
         if (response.ok) {
           const clone = response.clone();
-          caches.open(CACHE_NAME).then(c => c.put(e.request.url.split('?')[0], clone));
+          caches.open(CACHE_NAME).then(c => {
+            // Cache both with and without query param
+            c.put(new Request(url.origin + url.pathname), clone);
+          });
         }
         return response;
       }).catch(() => {
-        // Serve cached quotes when offline (strip cache-bust param)
-        return caches.match(url.pathname) || caches.match(e.request);
+        // Serve cached quotes when offline
+        return caches.match(url.origin + url.pathname)
+          .then(r => r || caches.match(e.request))
+          .then(r => r || new Response('{"updated":"","quotes":{}}', {
+            headers: {'Content-Type': 'application/json'}
+          }));
       })
     );
     return;
   }
 
-  // Cache-first for app shell, stale-while-revalidate
+  // Stale-while-revalidate for app shell
   e.respondWith(
     caches.match(e.request).then(cached => {
       const fetchPromise = fetch(e.request).then(response => {
