@@ -1439,24 +1439,24 @@ const LESSON_BADGE_MAP = {
   <!-- ===== PAGE: 行情 (Quotes) ===== -->
   <div class="page active" id="page-quotes">
     <div class="signal-banner neutral" id="signalBanner">
-      <div class="signal-icon">🔍</div>
+      <div class="signal-icon"><script>document.currentScript.outerHTML=icon("search",32)</script></div>
       <div class="signal-title">分析中...</div>
       <div class="signal-text">正在加载市场数据...</div>
     </div>
     <!-- Search/Filter -->
     <div class="search-bar" id="quoteSearchBar">
-      <span class="s-icon">🔍</span>
+      <span class="s-icon"><script>document.currentScript.outerHTML=icon("search",16)</script></span>
       <input type="text" id="quoteSearchInput" placeholder="搜索股票代码或名称..." autocomplete="off">
       <button class="s-clear" id="quoteSearchClear" onclick="clearQuoteSearch()">✕</button>
     </div>
     <div class="sub-tabs" id="quoteTabs">
-      <button class="sub-tab on" data-stab="fav">⭐ 自选</button>
-      <button class="sub-tab" data-stab="indices">🌍 指数</button>
-      <button class="sub-tab" data-stab="chips">🔧 芯片</button>
-      <button class="sub-tab" data-stab="cloud">☁️ 云</button>
-      <button class="sub-tab" data-stab="models">🧠 模型</button>
-      <button class="sub-tab" data-stab="apps">📱 应用</button>
-      <button class="sub-tab" data-stab="etfs">📦 ETF</button>
+      <button class="sub-tab on" data-stab="fav"><script>document.currentScript.outerHTML=icon("star",14)</script> 自选</button>
+      <button class="sub-tab" data-stab="indices"><script>document.currentScript.outerHTML=icon("globe",14)</script> 指数</button>
+      <button class="sub-tab" data-stab="chips"><script>document.currentScript.outerHTML=icon("cpu",14)</script> 芯片</button>
+      <button class="sub-tab" data-stab="cloud"><script>document.currentScript.outerHTML=icon("cloud",14)</script> 云</button>
+      <button class="sub-tab" data-stab="models"><script>document.currentScript.outerHTML=icon("brain",14)</script> 模型</button>
+      <button class="sub-tab" data-stab="apps"><script>document.currentScript.outerHTML=icon("smartphone",14)</script> 应用</button>
+      <button class="sub-tab" data-stab="etfs"><script>document.currentScript.outerHTML=icon("package",14)</script> ETF</button>
     </div>
     <div id="quoteContent"></div>
     <div class="updated" id="updated"></div>
@@ -1471,10 +1471,10 @@ const LESSON_BADGE_MAP = {
     <div id="advisorSummary"></div>
     <div class="sub-tabs" id="advisorTabs" style="padding-left:0;padding-right:0">
       <button class="sub-tab on" data-atab="all">全部</button>
-      <button class="sub-tab" data-atab="buy">📈 买入</button>
-      <button class="sub-tab" data-atab="sell">📉 卖出</button>
-      <button class="sub-tab" data-atab="hold">⏸ 持有</button>
-      <button class="sub-tab" data-atab="dca">🔄 定投</button>
+      <button class="sub-tab" data-atab="buy"><script>document.currentScript.outerHTML=icon("trending-up",14)</script> 买入</button>
+      <button class="sub-tab" data-atab="sell"><script>document.currentScript.outerHTML=icon("trending-down",14)</script> 卖出</button>
+      <button class="sub-tab" data-atab="hold"><script>document.currentScript.outerHTML=icon("pause",14)</script> 持有</button>
+      <button class="sub-tab" data-atab="dca"><script>document.currentScript.outerHTML=icon("refresh-cw",14)</script> 定投</button>
     </div>
     <div id="advisorContent"></div>
   </div>
@@ -1482,7 +1482,7 @@ const LESSON_BADGE_MAP = {
   <!-- ===== PAGE: 持仓 (Portfolio) ===== -->
   <div class="page" id="page-portfolio">
     <div style="padding:4px 0 12px">
-      <h2 style="font-size:20px;font-weight:800">💼 我的持仓</h2>
+      <h2 style="font-size:20px;font-weight:800"><script>document.currentScript.outerHTML=icon("briefcase",20)</script> 我的持仓</h2>
       <p style="font-size:12px;color:var(--dim);margin-top:4px">追踪你的美股投资组合</p>
     </div>
     <div id="portfolioContent"></div>
@@ -1491,7 +1491,7 @@ const LESSON_BADGE_MAP = {
   <!-- ===== PAGE: 产业链 (Chain) ===== -->
   <div class="page" id="page-chain">
     <div style="padding:4px 0 12px">
-      <h2 style="font-size:20px;font-weight:800">🔗 AI产业链</h2>
+      <h2 style="font-size:20px;font-weight:800"><script>document.currentScript.outerHTML=icon("link",20)</script> AI产业链</h2>
       <p style="font-size:12px;color:var(--dim);margin-top:4px">芯片 → 云基建 → 大模型 → 应用 · 全链路追踪</p>
     </div>
     <div id="chainContent"></div>
@@ -1500,7 +1500,7 @@ const LESSON_BADGE_MAP = {
   <!-- ===== PAGE: 我的 (Me) ===== -->
   <div class="page" id="page-me">
     <div class="me-header">
-      <div class="me-avatar">👤</div>
+      <div class="me-avatar"><script>document.currentScript.outerHTML=icon("user",32)</script></div>
       <div class="me-name" id="meName">投资者</div>
       <div class="me-sub" id="meSub">StockAI Pro · v8.0</div>
     </div>
@@ -1510,7 +1510,7 @@ const LESSON_BADGE_MAP = {
   <!-- ===== PAGE: 学堂 (Education) ===== -->
   <div class="page" id="page-edu">
     <div style="padding:4px 0 12px">
-      <h2 style="font-size:20px;font-weight:800">📚 投资学堂</h2>
+      <h2 style="font-size:20px;font-weight:800"><script>document.currentScript.outerHTML=icon("book-open",20)</script> 投资学堂</h2>
       <p style="font-size:12px;color:var(--dim);margin-top:4px">每天解锁一课，系统学习投资知识</p>
     </div>
     <div id="eduProgress"></div>
@@ -1533,7 +1533,7 @@ const LESSON_BADGE_MAP = {
   <div class="quiz-mode-overlay" id="quizModeOverlay">
     <div class="quiz-mode-header">
       <button class="detail-close" onclick="closeQuizMode()">✕</button>
-      <div style="font-size:16px;font-weight:800">📝 随机测验</div>
+      <div style="font-size:16px;font-weight:800"><script>document.currentScript.outerHTML=icon("pencil",18)</script> 随机测验</div>
       <div style="width:44px;text-align:right;font-size:13px;font-weight:700;color:var(--acc)" id="quizModeScore"></div>
     </div>
     <div class="quiz-mode-progress" id="quizModeProgress"></div>
@@ -1589,7 +1589,7 @@ const LESSON_BADGE_MAP = {
 <div class="modal-backdrop" id="riskProfileModal">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
-    <div class="modal-title">🎯 投资风险画像</div>
+    <div class="modal-title"><script>document.currentScript.outerHTML=icon("target",18)</script> 投资风险画像</div>
     <p style="font-size:13px;color:var(--dim);text-align:center;margin-bottom:18px">完成3个问题，AI将根据你的风险偏好提供个性化建议</p>
 
     <div class="risk-option-group">
@@ -1597,13 +1597,13 @@ const LESSON_BADGE_MAP = {
       <div class="risk-option-sub">你在股票/基金投资方面有多少经验？</div>
       <div class="risk-options" data-risk="experience">
         <div class="risk-opt" data-val="beginner" onclick="selectRiskOpt(this)">
-          <div class="risk-opt-icon">🌱</div>新手
+          <div class="risk-opt-icon"><script>document.currentScript.outerHTML=icon("sprout",22)</script></div>新手
         </div>
         <div class="risk-opt" data-val="intermediate" onclick="selectRiskOpt(this)">
-          <div class="risk-opt-icon">📊</div>有经验
+          <div class="risk-opt-icon"><script>document.currentScript.outerHTML=icon("bar-chart",22)</script></div>有经验
         </div>
         <div class="risk-opt" data-val="pro" onclick="selectRiskOpt(this)">
-          <div class="risk-opt-icon">🏆</div>专业
+          <div class="risk-opt-icon"><script>document.currentScript.outerHTML=icon("trophy",22)</script></div>专业
         </div>
       </div>
     </div>
@@ -1613,13 +1613,13 @@ const LESSON_BADGE_MAP = {
       <div class="risk-option-sub">当持仓亏损20%时，你会？</div>
       <div class="risk-options" data-risk="tolerance">
         <div class="risk-opt" data-val="conservative" onclick="selectRiskOpt(this)">
-          <div class="risk-opt-icon">🛡️</div>止损卖出
+          <div class="risk-opt-icon"><script>document.currentScript.outerHTML=icon("shield",22)</script></div>止损卖出
         </div>
         <div class="risk-opt" data-val="moderate" onclick="selectRiskOpt(this)">
-          <div class="risk-opt-icon">⚖️</div>持有等待
+          <div class="risk-opt-icon"><script>document.currentScript.outerHTML=icon("scale",22)</script></div>持有等待
         </div>
         <div class="risk-opt" data-val="aggressive" onclick="selectRiskOpt(this)">
-          <div class="risk-opt-icon">🔥</div>加仓抄底
+          <div class="risk-opt-icon"><script>document.currentScript.outerHTML=icon("flame",22)</script></div>加仓抄底
         </div>
       </div>
     </div>
@@ -1629,13 +1629,13 @@ const LESSON_BADGE_MAP = {
       <div class="risk-option-sub">你计划的投资持有时间？</div>
       <div class="risk-options" data-risk="horizon">
         <div class="risk-opt" data-val="short" onclick="selectRiskOpt(this)">
-          <div class="risk-opt-icon">⚡</div>短期<br><span style="font-size:10px;color:var(--dim)">&lt;6个月</span>
+          <div class="risk-opt-icon"><script>document.currentScript.outerHTML=icon("zap",22)</script></div>短期<br><span style="font-size:10px;color:var(--dim)">&lt;6个月</span>
         </div>
         <div class="risk-opt" data-val="medium" onclick="selectRiskOpt(this)">
-          <div class="risk-opt-icon">📅</div>中期<br><span style="font-size:10px;color:var(--dim)">6月-3年</span>
+          <div class="risk-opt-icon"><script>document.currentScript.outerHTML=icon("calendar",22)</script></div>中期<br><span style="font-size:10px;color:var(--dim)">6月-3年</span>
         </div>
         <div class="risk-opt" data-val="long" onclick="selectRiskOpt(this)">
-          <div class="risk-opt-icon">🏔️</div>长期<br><span style="font-size:10px;color:var(--dim)">&gt;3年</span>
+          <div class="risk-opt-icon"><script>document.currentScript.outerHTML=icon("mountain",22)</script></div>长期<br><span style="font-size:10px;color:var(--dim)">&gt;3年</span>
         </div>
       </div>
     </div>
@@ -1649,9 +1649,9 @@ const LESSON_BADGE_MAP = {
 <div class="modal-backdrop" id="watchlistModal">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
-    <div class="modal-title">⭐ 自选股管理</div>
+    <div class="modal-title"><script>document.currentScript.outerHTML=icon("star",18)</script> 自选股管理</div>
     <div class="watchlist-search">
-      <span class="search-icon">🔍</span>
+      <span class="search-icon"><script>document.currentScript.outerHTML=icon("search",14)</script></span>
       <input type="text" id="watchlistSearchInput" placeholder="搜索股票代码或名称..." autocomplete="off">
       <div class="autocomplete-list" id="autocompleteList"></div>
     </div>
@@ -1665,11 +1665,11 @@ const LESSON_BADGE_MAP = {
 <div class="modal-backdrop" id="alertModal">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
-    <div class="modal-title">🔔 设置提醒</div>
+    <div class="modal-title"><script>document.currentScript.outerHTML=icon("bell",18)</script> 设置提醒</div>
 
     <div class="sub-tabs" style="padding:0 0 12px;justify-content:center">
-      <button class="sub-tab on" data-alerttab="price" onclick="switchAlertTab('price')">💰 价格提醒</button>
-      <button class="sub-tab" data-alerttab="pct" onclick="switchAlertTab('pct')">📊 涨跌幅提醒</button>
+      <button class="sub-tab on" data-alerttab="price" onclick="switchAlertTab('price')"><script>document.currentScript.outerHTML=icon("dollar",14)</script> 价格提醒</button>
+      <button class="sub-tab" data-alerttab="pct" onclick="switchAlertTab('pct')"><script>document.currentScript.outerHTML=icon("bar-chart",14)</script> 涨跌幅提醒</button>
     </div>
 
     <div id="alertPriceForm">
@@ -1730,33 +1730,33 @@ const STOCKS = {
     { t:'^VIX',  n:'VIX 恐慌指数', cat:'index' }
   ],
   chips: [
-    { t:'NVDA', n:'NVIDIA', cat:'🔧 芯片', layer:'chip' },
-    { t:'AMD',  n:'AMD', cat:'🔧 芯片', layer:'chip' },
-    { t:'TSM',  n:'TSMC', cat:'🔧 芯片', layer:'chip' },
-    { t:'AVGO', n:'Broadcom', cat:'🔧 芯片', layer:'chip' },
-    { t:'ASML', n:'ASML Holding', cat:'🔧 芯片', layer:'chip' },
+    { t:'NVDA', n:'NVIDIA', cat:icon('cpu',14)+' 芯片', layer:'chip' },
+    { t:'AMD',  n:'AMD', cat:icon('cpu',14)+' 芯片', layer:'chip' },
+    { t:'TSM',  n:'TSMC', cat:icon('cpu',14)+' 芯片', layer:'chip' },
+    { t:'AVGO', n:'Broadcom', cat:icon('cpu',14)+' 芯片', layer:'chip' },
+    { t:'ASML', n:'ASML Holding', cat:icon('cpu',14)+' 芯片', layer:'chip' },
   ],
   cloud: [
-    { t:'MSFT', n:'Microsoft', cat:'☁️ 云', layer:'infra' },
-    { t:'AMZN', n:'Amazon', cat:'☁️ 云', layer:'infra' },
-    { t:'GOOG', n:'Google', cat:'☁️ 云', layer:'infra' },
-    { t:'ORCL', n:'Oracle', cat:'☁️ 云', layer:'infra' },
+    { t:'MSFT', n:'Microsoft', cat:icon('cloud',14)+' 云', layer:'infra' },
+    { t:'AMZN', n:'Amazon', cat:icon('cloud',14)+' 云', layer:'infra' },
+    { t:'GOOG', n:'Google', cat:icon('cloud',14)+' 云', layer:'infra' },
+    { t:'ORCL', n:'Oracle', cat:icon('cloud',14)+' 云', layer:'infra' },
   ],
   models: [
-    { t:'META', n:'Meta (Llama)', cat:'🧠 模型', layer:'model' },
-    { t:'PLTR', n:'Palantir', cat:'🧠 模型', layer:'model' },
-    { t:'AI',   n:'C3.ai', cat:'🧠 模型', layer:'model' },
+    { t:'META', n:'Meta (Llama)', cat:icon('brain',14)+' 模型', layer:'model' },
+    { t:'PLTR', n:'Palantir', cat:icon('brain',14)+' 模型', layer:'model' },
+    { t:'AI',   n:'C3.ai', cat:icon('brain',14)+' 模型', layer:'model' },
   ],
   apps: [
-    { t:'CRM',  n:'Salesforce', cat:'📱 应用', layer:'app' },
-    { t:'NOW',  n:'ServiceNow', cat:'📱 应用', layer:'app' },
-    { t:'SNOW', n:'Snowflake', cat:'📱 应用', layer:'app' },
+    { t:'CRM',  n:'Salesforce', cat:icon('smartphone',14)+' 应用', layer:'app' },
+    { t:'NOW',  n:'ServiceNow', cat:icon('smartphone',14)+' 应用', layer:'app' },
+    { t:'SNOW', n:'Snowflake', cat:icon('smartphone',14)+' 应用', layer:'app' },
   ],
   etfs: [
-    { t:'QQQ',  n:'NASDAQ ETF', cat:'📦 ETF', layer:'etf' },
-    { t:'SPY',  n:'S&P 500 ETF', cat:'📦 ETF', layer:'etf' },
-    { t:'BOTZ', n:'AI & Robotics ETF', cat:'📦 ETF', layer:'etf' },
-    { t:'SMH',  n:'Semiconductor ETF', cat:'📦 ETF', layer:'etf' },
+    { t:'QQQ',  n:'NASDAQ ETF', cat:icon('package',14)+' ETF', layer:'etf' },
+    { t:'SPY',  n:'S&P 500 ETF', cat:icon('package',14)+' ETF', layer:'etf' },
+    { t:'BOTZ', n:'AI & Robotics ETF', cat:icon('package',14)+' ETF', layer:'etf' },
+    { t:'SMH',  n:'Semiconductor ETF', cat:icon('package',14)+' ETF', layer:'etf' },
   ]
 };
 
@@ -1823,8 +1823,8 @@ function updateFreshness(){
   if (mins < 1) { text.textContent = '刚刚更新'; dot.className = 'freshness-dot fresh'; }
   else if (mins < 5) { text.textContent = `${mins}分钟前`; dot.className = 'freshness-dot fresh'; }
   else if (mins < 60) { text.textContent = `${mins}分钟前`; dot.className = 'freshness-dot stale'; }
-  else if (hours < 24) { text.textContent = `⚠️ ${hours}小时前`; dot.className = 'freshness-dot old'; }
-  else { text.textContent = `⚠️ ${Math.floor(hours/24)}天前`; dot.className = 'freshness-dot old'; }
+  else if (hours < 24) { text.textContent = `${hours}小时前`; dot.className = 'freshness-dot old'; }
+  else { text.textContent = `${Math.floor(hours/24)}天前`; dot.className = 'freshness-dot old'; }
 }
 
 // ===== FETCH DATA =====
@@ -1923,7 +1923,7 @@ function detailChartSvg(data,up,showDots=true){
 function stockRow(s){
   const p=prices[s.t]||{};
   const hasData = p.price != null;
-  const price=hasData?(p.price>=1000?p.price.toFixed(0):p.price.toFixed(2)):'---';
+  const price=hasData?(p.price>=1000?p.price.toLocaleString('en-US',{maximumFractionDigits:0}):p.price.toFixed(2)):'---';
   const pct=hasData?p.changePct.toFixed(2):'---';
   const up=(p.changePct||0)>=0;
   const changeClass=hasData?(up?'up':'dn'):'';
@@ -1980,10 +1980,10 @@ function renderQuotes(){
   let html=items.map(stockRow).join('');
   if(currentSubTab==='indices' && !quoteSearchQuery) html+=renderFearGreed();
   if(currentSubTab==='fav' && items.length===0 && !quoteSearchQuery) {
-    html = `<div class="empty-state"><div class="empty-icon">⭐</div><div class="empty-title">自选列表为空</div><div class="empty-sub">去"我的"页面管理自选股</div></div>`;
+    html = `<div class="empty-state"><div class="empty-icon">'+icon('star',48)+'</div><div class="empty-title">自选列表为空</div><div class="empty-sub">去"我的"页面管理自选股</div></div>`;
   }
   if(quoteSearchQuery && items.length===0) {
-    html = `<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-title">未找到 "${quoteSearchQuery}"</div><div class="empty-sub">试试其他关键词</div></div>`;
+    html = `<div class="empty-state"><div class="empty-icon">'+icon('search',48)+'</div><div class="empty-title">未找到 "${quoteSearchQuery}"</div><div class="empty-sub">试试其他关键词</div></div>`;
   }
   c.innerHTML=html;
   updateSignalBanner();
@@ -1991,13 +1991,13 @@ function renderQuotes(){
 
 function renderFearGreed(){
   const vix=prices['^VIX'];
-  let score=50, label='😐 中性', color='var(--acc)';
+  let score=50, label='<span style="color:var(--acc)">● 中性</span>', color='var(--acc)';
   if(vix&&vix.price){
-    if(vix.price<15){score=82;label='😎 极度贪婪';color='var(--up)'}
-    else if(vix.price<20){score=65;label='😊 贪婪';color='var(--up)'}
-    else if(vix.price<25){score=50;label='😐 中性';color='var(--acc)'}
-    else if(vix.price<30){score=35;label='😰 恐惧';color='var(--dn)'}
-    else{score=15;label='😱 极度恐惧';color='var(--dn)'}
+    if(vix.price<15){score=82;label='<span style="color:var(--up)">▲ 极度贪婪</span>';color='var(--up)'}
+    else if(vix.price<20){score=65;label='<span style="color:var(--up)">▲ 贪婪</span>';color='var(--up)'}
+    else if(vix.price<25){score=50;label='<span style="color:var(--acc)">● 中性</span>';color='var(--acc)'}
+    else if(vix.price<30){score=35;label='<span style="color:var(--dn)">▼ 恐惧</span>';color='var(--dn)'}
+    else{score=15;label='<span style="color:var(--dn)">▼ 极度恐惧</span>';color='var(--dn)'}
   }
   return `<div class="glass-card fg-card" style="margin-top:12px">
     <div class="fg-header"><div class="fg-label">恐惧&贪婪指数</div><div class="fg-score" style="color:${color}">${score}</div></div>
@@ -2023,25 +2023,25 @@ function updateSignalBanner(){
   const bullPct=total>0?upCount/total:0.5;
   let mood,icon,title,text,action;
   if(vixVal>25){
-    mood='bear';icon='🛡️';title=`VIX ${vixVal.toFixed(1)} — 市场恐慌升温`;
+    mood='bear';icon=icon('shield',24);title=`VIX ${vixVal.toFixed(1)} — 市场恐慌升温`;
     text=`恐慌指数高于25，市场波动加剧。${bigMoves.length?bigMoves.map(m=>`${m.t} ${m.pct>0?'+':''}${m.pct.toFixed(1)}%`).join('，')+'异动。':''}建议降低仓位，等待明确信号。`;
     action='防御为主，控制仓位';
   } else if(bigMoves.length>0){
     const top=bigMoves.sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct))[0];
-    mood=top.pct>0?'bull':'bear';icon=top.pct>0?'🚀':'⚠️';
+    mood=top.pct>0?'bull':'bear';icon=top.pct>0?icon('rocket',24):icon('alert-triangle',24);
     title=`${top.t} ${top.pct>0?'+':''}${top.pct.toFixed(1)}% 异常波动`;
     text=`${top.n} 今日大幅${top.pct>0?'上涨':'下跌'}，关注是否有重大消息驱动。`;
     action=top.pct>0?'短线关注，勿追高':'观望为主，等待企稳';
   } else if(bullPct>0.65){
-    mood='bull';icon='📈';title='AI板块整体偏多';
+    mood='bull';icon=icon('trending-up',24);title='AI板块整体偏多';
     text=`${upCount}/${total} AI股上涨，市场情绪积极。VIX ${vixVal.toFixed(1)} 处于合理区间。`;
     action='定投继续，择机加仓';
   } else if(bullPct<0.35){
-    mood='bear';icon='📉';title='AI板块整体偏空';
+    mood='bear';icon=icon('trending-down',24);title='AI板块整体偏空';
     text=`${dnCount}/${total} AI股下跌，注意风控。${vixVal>20?'VIX偏高，谨慎操作。':''}`;
     action='持有观望，等反转信号';
   } else{
-    mood='neutral';icon='⚖️';title='AI板块震荡运行';
+    mood='neutral';icon=icon('scale',24);title='AI板块震荡运行';
     text=`涨跌参半，无明显方向。VIX ${vixVal.toFixed(1)}，波动适中。`;
     action='按计划定投即可';
   }
@@ -2081,8 +2081,8 @@ function getAIAdvice(ticker){
     else if(vix<15) reason+=`VIX=${vix.toFixed(1)}<15，市场乐观，定投持续即可。`;
     else reason+=`VIX=${vix.toFixed(1)} 中性区间，保持定投节奏。`;
     if(fiveDayChange<-3) reason+=` 5日跌${Math.abs(fiveDayChange).toFixed(1)}%，可适当加仓。`;
-    if(horizon === 'short') riskNote = '⚡ 短线投资者：ETF适合中长线，短线可考虑波段操作';
-    else if(horizon === 'long') riskNote = '🏔️ 长线投资者：ETF是核心持仓的理想选择';
+    if(horizon === 'short') riskNote = icon('zap',14)+' 短线投资者：ETF适合中长线，短线可考虑波段操作';
+    else if(horizon === 'long') riskNote = icon('mountain',14)+' 长线投资者：ETF是核心持仓的理想选择';
     return {action:'dca',label:'定投',reason,confidence:85,fiveDayChange,riskNote};
   }
 
@@ -2096,11 +2096,11 @@ function getAIAdvice(ticker){
     if(tolerance === 'aggressive') {
       action='buy';label='抄底机会';confidence=55;
       reason=`5日跌幅 ${fiveDayChange.toFixed(1)}%，进取型投资者可考虑分批建仓。`;
-      riskNote = '🔥 进取型策略：逆势建仓，注意仓位控制';
+      riskNote = icon('flame',14)+' 进取型策略：逆势建仓，注意仓位控制';
     } else {
       action='hold';label='观望';confidence=70;
       reason=`5日跌幅 ${fiveDayChange.toFixed(1)}% 超过${Math.abs(bigDropThreshold)}%，跌势未止。等待企稳信号再考虑入场。`;
-      if(tolerance === 'conservative') riskNote = '🛡️ 保守型：建议观望，等待明确反转信号';
+      if(tolerance === 'conservative') riskNote = icon('shield',14)+' 保守型：建议观望，等待明确反转信号';
     }
     if(vix>25) reason+=` VIX=${vix.toFixed(1)} 恐慌区间，整体环境不利。`;
   } else if(fiveDayChange<=buyDipThreshold && fiveDayChange>=bigDropThreshold){
@@ -2108,14 +2108,14 @@ function getAIAdvice(ticker){
     reason=`5日跌幅 ${Math.abs(fiveDayChange).toFixed(1)}%，可能是回调买点。`;
     if(vix<20) reason+=` VIX=${vix.toFixed(1)} 偏低，大环境不差，支持逢低布局。`;
     else reason+=` 但VIX=${vix.toFixed(1)}，注意控制仓位。`;
-    if(tolerance === 'conservative') { confidence = 55; riskNote = '🛡️ 保守型：建议小仓位试探，设好止损'; }
-    if(horizon === 'short') riskNote = '⚡ 短线：关注支撑位，快进快出';
+    if(tolerance === 'conservative') { confidence = 55; riskNote = icon('shield',14)+' 保守型：建议小仓位试探，设好止损'; }
+    if(horizon === 'short') riskNote = icon('zap',14)+' 短线：关注支撑位，快进快出';
   } else if(fiveDayChange > sellRallyThreshold){
     if(todayPct>3){
       action='sell';label='止盈';confidence=60;
       reason=`5日涨 ${fiveDayChange.toFixed(1)}% 且今日续涨 ${todayPct.toFixed(1)}%，短线超买，考虑部分止盈。`;
-      if(tolerance === 'aggressive') { confidence = 50; riskNote = '🔥 进取型：可继续持有部分仓位追趋势'; }
-      else riskNote = '💡 建议分批止盈，锁定利润';
+      if(tolerance === 'aggressive') { confidence = 50; riskNote = icon('flame',14)+' 进取型：可继续持有部分仓位追趋势'; }
+      else riskNote = icon('lightbulb',14)+' 建议分批止盈，锁定利润';
     } else{
       action='hold';label='持有';confidence=55;
       reason=`5日涨 ${fiveDayChange.toFixed(1)}%，涨势良好。今日动能 ${todayPct>0?'+':''}${todayPct.toFixed(1)}%，暂持有。`;
@@ -2123,7 +2123,7 @@ function getAIAdvice(ticker){
   } else if(todayPct<-3){
     action='hold';label='观望';confidence=60;
     reason=`今日单日跌 ${Math.abs(todayPct).toFixed(1)}%，等待明日确认方向。不建议恐慌抛售。`;
-    if(experience === 'beginner') riskNote = '🌱 新手提醒：单日大跌时切忌恐慌操作';
+    if(experience === 'beginner') riskNote = icon('sprout',14)+' 新手提醒：单日大跌时切忌恐慌操作';
   } else if(todayPct>3){
     action='hold';label='持有';confidence=55;
     reason=`今日涨 ${todayPct.toFixed(1)}%，表现强势。5日变动 ${fiveDayChange>0?'+':''}${fiveDayChange.toFixed(1)}%，关注后续动能。`;
@@ -2131,11 +2131,11 @@ function getAIAdvice(ticker){
     if(vix>25){
       action='hold';label='谨慎持有';confidence=50;
       reason=`价格变动温和，但VIX=${vix.toFixed(1)}>25 处于恐慌区间，市场不确定性高。`;
-      if(tolerance === 'conservative') riskNote = '🛡️ 保守型：高波动期减仓避险';
+      if(tolerance === 'conservative') riskNote = icon('shield',14)+' 保守型：高波动期减仓避险';
     } else if(vix<15){
       action='buy';label='可加仓';confidence=60;
       reason=`VIX=${vix.toFixed(1)}<15 市场乐观，波动低。5日变动 ${fiveDayChange>0?'+':''}${fiveDayChange.toFixed(1)}%，适合建仓。`;
-      if(horizon === 'long') riskNote = '🏔️ 长线投资者：低波动期适合建立核心仓位';
+      if(horizon === 'long') riskNote = icon('mountain',14)+' 长线投资者：低波动期适合建立核心仓位';
     } else{
       action='hold';label='持有';confidence=50;
       reason=`走势平稳，无明显信号。VIX=${vix.toFixed(1)} 中性区间，维持现有仓位即可。`;
@@ -2158,15 +2158,15 @@ function renderAdvisor(){
   }
 
   const vix=prices['^VIX']?.price||20;
-  let marketMood='中性', moodColor='var(--acc)', moodEmoji='⚖️';
-  if(vix>25){marketMood='恐慌';moodColor='var(--dn)';moodEmoji='🛡️'}
-  else if(vix<15){marketMood='乐观';moodColor='var(--up)';moodEmoji='🚀'}
+  let marketMood='中性', moodColor='var(--acc)', moodEmoji=icon('scale',16);
+  if(vix>25){marketMood='恐慌';moodColor='var(--dn)';moodEmoji=icon('shield',16)}
+  else if(vix<15){marketMood='乐观';moodColor='var(--up)';moodEmoji=icon('rocket',16)}
 
   sum.innerHTML=`<div class="glass-card" style="margin-bottom:14px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
       <div style="font-size:14px;font-weight:700">${moodEmoji} 市场环境</div>
       <div style="display:flex;align-items:center;gap:8px">
-        ${profile?`<span class="profile-badge ${profile.tolerance}">${{conservative:'🛡️ 保守',moderate:'⚖️ 平衡',aggressive:'🔥 进取'}[profile.tolerance]}</span>`:''}
+        ${profile?`<span class="profile-badge ${profile.tolerance}">${{conservative:icon('shield',14)+' 保守',moderate:icon('scale',14)+' 平衡',aggressive:icon('flame',14)+' 进取'}[profile.tolerance]}</span>`:''}
         <span style="font-size:13px;font-weight:700;color:${moodColor}">${marketMood}</span>
       </div>
     </div>
@@ -2196,7 +2196,7 @@ function renderAdvisor(){
   if(currentAdvisorTab!=='all') filtered=advices.filter(a=>a.action===currentAdvisorTab);
 
   if(filtered.length===0){
-    c.innerHTML=`<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-title">暂无${currentAdvisorTab==='buy'?'买入':currentAdvisorTab==='sell'?'卖出':currentAdvisorTab==='hold'?'持有':'定投'}建议</div></div>`;
+    c.innerHTML=`<div class="empty-state"><div class="empty-icon">'+icon('search',48)+'</div><div class="empty-title">暂无${currentAdvisorTab==='buy'?'买入':currentAdvisorTab==='sell'?'卖出':currentAdvisorTab==='hold'?'持有':'定投'}建议</div></div>`;
     return;
   }
 
@@ -2244,7 +2244,7 @@ function generateNews(){
   }
   news.push({title:'AI产业链每日复盘：芯片→云→模型→应用全链路分析',body:`今日AI板块整体${movers.filter(m=>m.pct>0).length>movers.length/2?'偏强':'偏弱'}。芯片层${getLayerTrend('chip')}，云基建${getLayerTrend('infra')}，模型层${getLayerTrend('model')}，应用层${getLayerTrend('app')}。`,source:'StockAI',sentiment:'neutral',tags:['AI产业链','复盘'],time:formatTimeAgo(new Date(now-10*60000))});
   if(vix&&vix.price>25){
-    news.push({title:'📢 定投信号：VIX>25，恐慌期是定投好时机',body:'当VIX突破25时，历史上往往对应市场阶段性底部附近。坚持定投ETF（QQQ/SPY），长期收益更优。',source:'StockAI策略',sentiment:'bullish',tags:['定投','策略'],time:formatTimeAgo(new Date(now-5*60000))});
+    news.push({title:icon('bell',14)+' 定投信号：VIX>25，恐慌期是定投好时机',body:'当VIX突破25时，历史上往往对应市场阶段性底部附近。坚持定投ETF（QQQ/SPY），长期收益更优。',source:'StockAI策略',sentiment:'bullish',tags:['定投','策略'],time:formatTimeAgo(new Date(now-5*60000))});
   }
   return news;
 }
@@ -2274,7 +2274,7 @@ function renderVolumeSection(data,up){
   });
   const maxBar=Math.max(...bars);
   const color=up?'#00d395':'#ff4757';
-  return `<div class="volume-bars-wrap"><div class="volume-bars-title">📊 成交量趋势</div><div class="volume-bars">${bars.map((b,i)=>{
+  return `<div class="volume-bars-wrap"><div class="volume-bars-title">'+icon('bar-chart',14)+' 成交量趋势</div><div class="volume-bars">${bars.map((b,i)=>{
     const h=Math.max(4,(b/maxBar)*40);
     const opacity=0.3+0.7*(b/maxBar);
     const isLast=i===bars.length-1;
@@ -2325,12 +2325,12 @@ function showDetail(ticker){
       <div class="detail-metric"><div class="detail-metric-label">5日变动</div><div class="detail-metric-value ${(advice.fiveDayChange||0)>=0?'text-up':'text-dn'}">${advice.fiveDayChange!=null?((advice.fiveDayChange>0?'+':'')+advice.fiveDayChange.toFixed(2)+'%'):'—'}</div></div>
     </div>
     <div class="detail-ai-section">
-      <div class="detail-ai-title">🤖 AI投顾建议 <span class="advisor-badge ${advice.action}" style="font-size:11px">${advice.label}</span></div>
+      <div class="detail-ai-title">'+icon('bot',16)+' AI投顾建议 <span class="advisor-badge ${advice.action}" style="font-size:11px">${advice.label}</span></div>
       <div class="detail-ai-text">${advice.reason}</div>
       ${advice.riskNote?`<div class="advisor-risk-note" style="margin-top:8px">${advice.riskNote}</div>`:''}
       ${advice.confidence?`<div style="margin-top:8px;font-size:11px;color:var(--dim)">置信度: ${advice.confidence}%</div>`:''}
     </div>
-    ${!INDEX_TICKERS.has(ticker)?`<div style="padding:0 16px 32px"><button class="btn-primary" onclick="quickAddPosition('${ticker}')">➕ 添加到持仓</button></div>`:''}
+    ${!INDEX_TICKERS.has(ticker)?`<div style="padding:0 16px 32px"><button class="btn-primary" onclick="quickAddPosition('${ticker}')">${icon('plus',14)} 添加到持仓</button></div>`:''}
   `;
   overlay.classList.remove('closing');overlay.classList.add('open');
 }
@@ -2375,7 +2375,7 @@ function renderPortfolio(){
   const c=document.getElementById('portfolioContent');
   const portfolio=getPortfolio();
   if(portfolio.length===0){
-    c.innerHTML=`<div class="empty-state" style="padding-top:30px"><div class="empty-icon">💼</div><div class="empty-title">暂无持仓</div><div class="empty-sub">点击下方按钮添加你的第一个持仓<br>支持追踪买入价、股数和盈亏</div></div><button class="add-btn" onclick="openAddModal()">＋ 添加持仓</button>`;
+    c.innerHTML=`<div class="empty-state" style="padding-top:30px"><div class="empty-icon">'+icon('briefcase',48)+'</div><div class="empty-title">暂无持仓</div><div class="empty-sub">点击下方按钮添加你的第一个持仓<br>支持追踪买入价、股数和盈亏</div></div><button class="add-btn" onclick="openAddModal()">＋ 添加持仓</button>`;
     return;
   }
   let totalCost=0, totalValue=0;
@@ -2424,7 +2424,7 @@ function renderPortfolio(){
       </div>`;
     }).join('')}
     <div class="glass-card" style="margin-bottom:12px">
-      <div style="font-size:13px;font-weight:700;margin-bottom:10px">📊 持仓分布</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:10px">'+icon('pie-chart',14)+' 持仓分布</div>
       ${renderPieChart(positions,totalValue)}
       ${positions.map(pos=>{
         const alloc=totalValue>0?(pos.value/totalValue*100):0;
@@ -2437,7 +2437,7 @@ function renderPortfolio(){
       }).join('')}
     </div>
     <button class="add-btn" onclick="openAddModal()">＋ 添加持仓</button>
-    <button class="btn-danger" onclick="clearPortfolio()" style="margin-bottom:20px">🗑 清空所有持仓</button>`;
+    <button class="btn-danger" onclick="clearPortfolio()" style="margin-bottom:20px">'+icon('trash',14)+' 清空所有持仓</button>`;
 }
 
 function openAddModal(){
@@ -2533,7 +2533,7 @@ function saveRiskProfile() {
   }
   setRiskProfile(riskSelections);
   closeRiskProfile();
-  showToast('✅ 风险画像已保存，AI建议将根据你的偏好调整');
+  showToast(icon('check-circle',16)+' 风险画像已保存，AI建议将根据你的偏好调整');
   renderMe();
 }
 
@@ -2556,7 +2556,7 @@ function renderWatchlistItems() {
   const wl = getWatchlist();
   const container = document.getElementById('watchlistItems');
   if (wl.length === 0) {
-    container.innerHTML = '<div class="empty-state" style="padding:20px 0"><div class="empty-icon">⭐</div><div class="empty-title">自选列表为空</div><div class="empty-sub">在上方搜索框输入股票代码添加</div></div>';
+    container.innerHTML = '<div class="empty-state" style="padding:20px 0"><div class="empty-icon">'+icon('star',48)+'</div><div class="empty-title">自选列表为空</div><div class="empty-sub">在上方搜索框输入股票代码添加</div></div>';
   } else {
     container.innerHTML = wl.map((t, i) => {
       const stock = ALL.find(s => s.t === t);
@@ -2580,11 +2580,11 @@ function renderWatchlistItems() {
 function addToWatchlist(ticker) {
   const wl = getWatchlist();
   if (wl.includes(ticker)) { showToast(`${ticker} 已在自选列表中`); return; }
-  if (wl.length >= 30) { showToast('⚠️ 自选列表已满（最多30只）'); return; }
+  if (wl.length >= 30) { showToast(icon('alert-triangle',16)+' 自选列表已满（最多30只）'); return; }
   wl.push(ticker);
   setWatchlist(wl);
   renderWatchlistItems();
-  showToast(`✅ 已添加 ${ticker} 到自选`);
+  showToast(icon('check-circle',16)+` 已添加 ${ticker} 到自选`);
 }
 
 function removeFromWatchlist(ticker) {
@@ -2618,7 +2618,7 @@ searchInput.addEventListener('input', () => {
     const inList = wl.includes(s.t);
     return `<div class="autocomplete-item" onclick="${inList?'':`addToWatchlist('${s.t}');searchInput.value='';acList.classList.remove('show')`}">
       <div><span class="ac-ticker">${s.t.replace('^','')}</span> <span class="ac-name">${s.n}</span></div>
-      <div style="font-size:11px;color:${inList?'var(--pri)':'var(--acc)'}">${inList?'✓ 已添加':'+ 添加'}</div>
+      <div style="font-size:11px;color:${inList?'var(--pri)':'var(--acc)'}">${inList?icon('check',12)+' 已添加':icon('plus',12)+' 添加'}</div>
     </div>`;
   }).join('');
   acList.classList.add('show');
@@ -2655,7 +2655,7 @@ function addPriceAlert() {
   document.getElementById('alertTicker').value = '';
   document.getElementById('alertPrice').value = '';
   renderAlertList();
-  showToast(`✅ 已设置 ${ticker} ${direction === 'below' ? '跌破' : '突破'} $${price} 提醒`);
+  showToast(icon('check-circle',16)+` 已设置 ${ticker} ${direction === 'below' ? '跌破' : '突破'} $${price} 提醒`);
 }
 
 function addPctAlert() {
@@ -2665,7 +2665,7 @@ function addPctAlert() {
   alerts.push({ id: Date.now(), type: 'pct', threshold: pct, triggered: false, triggeredTickers: [], createdAt: new Date().toISOString() });
   setAlerts(alerts);
   renderAlertList();
-  showToast(`✅ 已设置涨跌幅 >${pct}% 提醒`);
+  showToast(icon('check-circle',16)+` 已设置涨跌幅 >${pct}% 提醒`);
 }
 
 function removeAlert(id) {
@@ -2693,9 +2693,9 @@ function renderAlertList() {
     }
     return `<div class="alert-item">
       <div class="alert-item-left">
-        <div class="alert-item-desc">${a.triggered ? '🔔 ' : ''}${desc}</div>
+        <div class="alert-item-desc">${a.triggered ? icon('bell',12)+' ' : ''}${desc}</div>
         <div class="alert-item-detail">${detail}</div>
-        ${a.triggered ? `<div class="alert-item-triggered">⚡ 已触发${a.type === 'pct' && a.triggeredTickers?.length ? ': ' + a.triggeredTickers.join(', ') : ''}</div>` : ''}
+        ${a.triggered ? `<div class="alert-item-triggered">${icon('zap',12)} 已触发${a.type === 'pct' && a.triggeredTickers?.length ? ': ' + a.triggeredTickers.join(', ') : ''}</div>` : ''}
       </div>
       <button class="alert-remove" onclick="removeAlert(${a.id})">✕</button>
     </div>`;
@@ -2715,7 +2715,7 @@ function checkAlerts() {
       if (a.direction === 'below' && p.price <= a.price) { a.triggered = true; }
       else if (a.direction === 'above' && p.price >= a.price) { a.triggered = true; }
       if (a.triggered && !wasTriggered) {
-        newTriggers.push(`🔔 ${a.ticker} 已${a.direction === 'below' ? '跌破' : '突破'} $${a.price}（当前 $${p.price.toFixed(2)}）`);
+        newTriggers.push(icon('bell',14)+` ${a.ticker} 已${a.direction === 'below' ? '跌破' : '突破'} $${a.price}（当前 $${p.price.toFixed(2)}）`);
       }
       if (a.triggered) triggered++;
     } else if (a.type === 'pct') {
@@ -2725,7 +2725,7 @@ function checkAlerts() {
         a.triggered = true;
         a.triggeredTickers = movers.map(m => `${m.t}(${prices[m.t].changePct > 0 ? '+' : ''}${prices[m.t].changePct.toFixed(1)}%)`);
         if (!wasTriggered) {
-          newTriggers.push(`🔔 ${movers.length}只股票涨跌幅超${a.threshold}%: ${a.triggeredTickers.slice(0,3).join(', ')}`);
+          newTriggers.push(icon('bell',14)+` ${movers.length}只股票涨跌幅超${a.threshold}%: ${a.triggeredTickers.slice(0,3).join(', ')}`);
         }
         triggered++;
       }
@@ -2798,9 +2798,9 @@ function renderMe(){
   // Profile summary
   let profileSummary = '';
   if (profile) {
-    const expMap = { beginner: '🌱 新手', intermediate: '📊 有经验', pro: '🏆 专业' };
-    const tolMap = { conservative: '🛡️ 保守型', moderate: '⚖️ 平衡型', aggressive: '🔥 进取型' };
-    const horMap = { short: '⚡ 短期', medium: '📅 中期', long: '🏔️ 长期' };
+    const expMap = { beginner: icon('sprout',14)+' 新手', intermediate: icon('bar-chart',14)+' 有经验', pro: icon('trophy',14)+' 专业' };
+    const tolMap = { conservative: icon('shield',14)+' 保守型', moderate: icon('scale',14)+' 平衡型', aggressive: icon('flame',14)+' 进取型' };
+    const horMap = { short: icon('zap',14)+' 短期', medium: icon('calendar',14)+' 中期', long: icon('mountain',14)+' 长期' };
     profileSummary = `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
       <span style="font-size:11px;padding:3px 8px;border-radius:8px;background:var(--glass)">${expMap[profile.experience]||''}</span>
       <span style="font-size:11px;padding:3px 8px;border-radius:8px;background:var(--glass)">${tolMap[profile.tolerance]||''}</span>
@@ -2826,91 +2826,91 @@ function renderMe(){
       </div>
     </div>
 
-    <div class="section-title">🎯 投资画像</div>
+    <div class="section-title">'+icon('target',14)+' 投资画像</div>
     <div class="me-menu-item" onclick="openRiskProfile()">
-      <div class="me-menu-left"><span class="me-menu-icon">🎯</span><span class="me-menu-text">风险画像设置</span></div>
+      <div class="me-menu-left"><span class="me-menu-icon">'+icon('target',20)+'</span><span class="me-menu-text">风险画像设置</span></div>
       <div class="me-menu-right">
-        <span style="font-size:12px">${profile ? ({conservative:'🛡️ 保守',moderate:'⚖️ 平衡',aggressive:'🔥 进取'}[profile.tolerance]) : '未设置'}</span>
+        <span style="font-size:12px">${profile ? ({conservative:icon('shield',14)+' 保守',moderate:icon('scale',14)+' 平衡',aggressive:icon('flame',14)+' 进取'}[profile.tolerance]) : '未设置'}</span>
         <span class="me-menu-arrow">›</span>
       </div>
     </div>
     ${profile ? `<div class="glass-card" style="padding:12px 16px">${profileSummary}</div>` : `
       <div class="glass-card" style="padding:14px 16px;border:1px dashed var(--acc);cursor:pointer" onclick="openRiskProfile()">
         <div style="text-align:center">
-          <div style="font-size:24px;margin-bottom:6px">🎯</div>
+          <div style="font-size:24px;margin-bottom:6px">'+icon('target',24)+'</div>
           <div style="font-size:13px;font-weight:700;color:var(--acc)">完成风险画像</div>
           <div style="font-size:11px;color:var(--dim);margin-top:2px">3个问题，让AI更懂你的投资风格</div>
         </div>
       </div>`}
 
-    <div class="section-title">⭐ 自选 & 提醒</div>
+    <div class="section-title">'+icon('star',14)+' 自选 & 提醒</div>
     <div class="me-menu-item" onclick="openWatchlistModal()">
-      <div class="me-menu-left"><span class="me-menu-icon">⭐</span><span class="me-menu-text">自选股管理</span></div>
+      <div class="me-menu-left"><span class="me-menu-icon">'+icon('star',20)+'</span><span class="me-menu-text">自选股管理</span></div>
       <div class="me-menu-right">
         <span style="font-size:12px;color:var(--dim)">${wl.length}只</span>
         <span class="me-menu-arrow">›</span>
       </div>
     </div>
     <div class="me-menu-item" onclick="openAlertModal()">
-      <div class="me-menu-left"><span class="me-menu-icon">🔔</span><span class="me-menu-text">价格提醒</span></div>
+      <div class="me-menu-left"><span class="me-menu-icon">'+icon('bell',20)+'</span><span class="me-menu-text">价格提醒</span></div>
       <div class="me-menu-right">
         ${triggeredAlerts > 0 ? `<span style="font-size:11px;font-weight:700;color:var(--red)">${triggeredAlerts}个已触发</span>` : `<span style="font-size:12px;color:var(--dim)">${alerts.length}个</span>`}
         <span class="me-menu-arrow">›</span>
       </div>
     </div>
 
-    <div class="section-title">⚙️ 设置</div>
+    <div class="section-title">'+icon('settings',14)+' 设置</div>
     <div class="me-menu-item" onclick="toggleTheme()">
-      <div class="me-menu-left"><span class="me-menu-icon">${theme==='dark'?'🌙':'☀️'}</span><span class="me-menu-text">主题模式</span></div>
+      <div class="me-menu-left"><span class="me-menu-icon">${theme==='dark'?icon('moon',20):icon('sun',20)}</span><span class="me-menu-text">主题模式</span></div>
       <div class="me-menu-right">
         <span style="font-size:12px;color:var(--dim)">${theme==='dark'?'深色':'浅色'}</span>
         <div class="theme-switch ${theme==='light'?'on':''}"></div>
       </div>
     </div>
     <div class="me-menu-item" onclick="switchPage('portfolio')">
-      <div class="me-menu-left"><span class="me-menu-icon">💼</span><span class="me-menu-text">我的持仓</span></div>
+      <div class="me-menu-left"><span class="me-menu-icon">'+icon('briefcase',20)+'</span><span class="me-menu-text">我的持仓</span></div>
       <div class="me-menu-right"><span class="me-menu-arrow">›</span></div>
     </div>
     <div class="me-menu-item" onclick="switchPage('advisor')">
-      <div class="me-menu-left"><span class="me-menu-icon">🤖</span><span class="me-menu-text">AI投顾</span></div>
+      <div class="me-menu-left"><span class="me-menu-icon">'+icon('bot',20)+'</span><span class="me-menu-text">AI投顾</span></div>
       <div class="me-menu-right"><span class="me-menu-arrow">›</span></div>
     </div>
 
-    <div class="section-title">📰 新闻信号</div>
+    <div class="section-title">'+icon('newspaper',14)+' 新闻信号</div>
     ${news.map(n=>`<div class="news-card">
       <div class="news-meta"><span class="news-source">${n.source}</span><span class="news-time">${n.time}</span></div>
       <div class="news-title">${n.title}</div>
       <div class="news-body">${n.body}</div>
       <div class="news-tags">
-        <span class="news-tag ${n.sentiment}">${n.sentiment==='bullish'?'📈 利好':n.sentiment==='bearish'?'📉 利空':'💡 资讯'}</span>
+        <span class="news-tag ${n.sentiment}">${n.sentiment==='bullish'?icon('trending-up',12)+' 利好':n.sentiment==='bearish'?icon('trending-down',12)+' 利空':icon('lightbulb',12)+' 资讯'}</span>
         ${n.tags.map(t=>`<span class="news-tag ticker">${t}</span>`).join('')}
       </div>
     </div>`).join('')}
 
     <div class="section-title">关于</div>
     <div class="me-menu-item">
-      <div class="me-menu-left"><span class="me-menu-icon">📖</span><span class="me-menu-text">关于 StockAI</span></div>
+      <div class="me-menu-left"><span class="me-menu-icon">'+icon('book',20)+'</span><span class="me-menu-text">关于 StockAI</span></div>
       <div class="me-menu-right"><span class="me-menu-arrow">›</span></div>
     </div>
-    <div style="text-align:center;padding:24px 0;font-size:11px;color:var(--dim2)">StockAI v8.0 · Made with 🤖 by OpenClaw</div>
+    <div style="text-align:center;padding:24px 0;font-size:11px;color:var(--dim2)">StockAI v8.0 · Made with '+icon('bot',12)+' by OpenClaw</div>
   `;
 }
 
 // ===== SUPPLY CHAIN VISUALIZATION =====
 const CHAIN_LAYERS = [
-  { id:'chips', label:'🔧 芯片层', y:75, nodes:[
+  { id:'chips', label:icon('cpu',14)+' 芯片层', y:75, nodes:[
     {ticker:'NVDA',sub:'GPU'},{ticker:'AMD',sub:'GPU/CPU'},{ticker:'AVGO',sub:'网络芯片'},
     {ticker:'TSM',sub:'代工'},{ticker:'ASML',sub:'光刻机'}
   ]},
-  { id:'cloud', label:'☁️ 云基建', y:215, nodes:[
+  { id:'cloud', label:icon('cloud',14)+' 云基建', y:215, nodes:[
     {ticker:'MSFT',sub:'Azure'},{ticker:'AMZN',sub:'AWS'},
     {ticker:'GOOG',sub:'GCP'},{ticker:'ORCL',sub:'OCI'}
   ]},
-  { id:'models', label:'🧠 模型层', y:355, nodes:[
+  { id:'models', label:icon('brain',14)+' 模型层', y:355, nodes:[
     {ticker:'MSFT',sub:'OpenAI'},{ticker:'GOOG',sub:'Gemini'},
     {ticker:'META',sub:'LLaMA'},{ticker:'AMZN',sub:'Bedrock'}
   ]},
-  { id:'apps', label:'📱 应用层', y:495, nodes:[
+  { id:'apps', label:icon('smartphone',14)+' 应用层', y:495, nodes:[
     {ticker:'MSFT',sub:'Copilot'},{ticker:'GOOG',sub:'Search AI'},
     {ticker:'META',sub:'AI Feeds'},{ticker:'CRM',sub:'Einstein'}
   ]}
@@ -3082,7 +3082,7 @@ function renderChain(){
     const inLayers=CHAIN_LAYERS.filter(l=>l.nodes.some(n=>n.ticker===topMover))
       .map(l=>l.label).join(' → ');
     html+=`<div class="chain-insight">
-      <div class="chain-insight-title">⚡ 产业链异动</div>
+      <div class="chain-insight-title">'+icon('zap',16)+' 产业链异动</div>
       <div class="chain-insight-text">${topMover} 今日${tup?'上涨':'下跌'} ${Math.abs(tp.changePct).toFixed(1)}%，影响链路：${inLayers}。${topPct>5?'大幅波动可能向上下游传导，关注相关标的联动。':'关注后续是否向上下游传导。'}</div>
     </div>`;
   }
@@ -3096,7 +3096,7 @@ function renderChain(){
   if(rippleMovers.length>0){
     rippleMovers.sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct));
     html+=`<div class="chain-insight">
-      <div class="chain-insight-title">🔔 今日涟漪效应 (${rippleMovers.length}只&gt;3%)</div>
+      <div class="chain-insight-title">'+icon('bell',16)+' 今日涟漪效应 (${rippleMovers.length}只&gt;3%)</div>
       <div class="chain-insight-text">${rippleMovers.map(m=>{
         const up=m.pct>=0;
         return `<span style="font-weight:700;color:${up?'var(--up)':'var(--dn)'};cursor:pointer" onclick="showDetail('${m.ticker}')">${m.ticker} ${up?'+':''}${m.pct.toFixed(1)}%</span>`;
@@ -3210,7 +3210,7 @@ document.addEventListener('touchend', async () => {
     setTimeout(() => {
       ptrIndicator.classList.remove('refreshing');
       ptrText.textContent = '↓ 下拉刷新';
-      showToast('✅ 数据已刷新');
+      showToast(icon('check-circle',16)+' 数据已刷新');
     }, 400);
   } else {
     ptrIndicator.classList.remove('pulling');
@@ -3224,12 +3224,12 @@ function updateOnlineStatus() {
 }
 window.addEventListener('online', () => {
   updateOnlineStatus();
-  showToast('✅ 网络已恢复');
+  showToast(icon('check-circle',16)+' 网络已恢复');
   fetchPrices().then(() => switchPage(currentPage));
 });
 window.addEventListener('offline', () => {
   updateOnlineStatus();
-  showToast('📡 网络已断开，使用缓存数据');
+  showToast(icon('wifi-off',16)+' 网络已断开，使用缓存数据');
 });
 
 // ===== INIT =====
@@ -3254,7 +3254,7 @@ async function init(){
   if (!profile) {
     setTimeout(() => {
       if (currentPage === 'quotes') {
-        showToast('🎯 完成风险画像，获取个性化AI建议 →', '');
+        showToast(icon('target',16)+' 完成风险画像，获取个性化AI建议 →', '');
       }
     }, 2000);
   }
@@ -3283,7 +3283,7 @@ if('serviceWorker' in navigator){
 
 const EDU_LESSONS = [
   {
-    id:1, tier:'beginner', title:'P/E 市盈率', icon:'📊', badge:'🎓',
+    id:1, tier:'beginner', title:'P/E 市盈率', icon:'bar-chart', badge:'gold',
     paragraphs:[
       'P/E（Price-to-Earnings Ratio，市盈率）是最常用的股票估值指标之一。它的计算方式是股价除以每股收益（EPS）。例如，一只股价$100、EPS为$5的股票，P/E为20。',
       '高P/E通常意味着市场对公司未来增长有较高预期——科技成长股P/E常在30-60之间。低P/E可能代表被低估，也可能是公司增长放缓。不同行业的P/E标准不同，不能简单地跨行业比较。',
@@ -3309,7 +3309,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:2, tier:'beginner', title:'市值 Market Cap', icon:'🏢', badge:'🏅',
+    id:2, tier:'beginner', title:'市值 Market Cap', icon:'building', badge:'silver',
     paragraphs:[
       '市值（Market Capitalization）= 股价 × 总股数。它反映了市场对一家公司的总体估价。苹果市值约$3万亿，是全球最大的公司之一。市值是衡量公司规模的最直接指标。',
       '按市值分类：大盘股（Large Cap）>$100亿，通常更稳定；中盘股（Mid Cap）$20-100亿，有增长潜力；小盘股（Small Cap）<$20亿，波动大但可能有超额回报。ETF如SPY追踪大盘股，而Russell 2000追踪小盘股。',
@@ -3329,7 +3329,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:3, tier:'beginner', title:'每股收益 EPS', icon:'💰', badge:'💎',
+    id:3, tier:'beginner', title:'每股收益 EPS', icon:'dollar', badge:'blue',
     paragraphs:[
       'EPS（Earnings Per Share，每股收益）= 净利润 / 总股数。它告诉你公司为每一股赚了多少钱。EPS是计算P/E的基础，也是财报中最受关注的指标之一。',
       'EPS分为基本EPS和稀释EPS（Diluted EPS）。稀释EPS考虑了期权、可转债等可能增加股数的因素，通常低于基本EPS。分析师更关注稀释EPS。每个季度的财报都会报告EPS，并与市场预期（Consensus Estimate）对比。',
@@ -3347,7 +3347,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:4, tier:'beginner', title:'股息率 Dividend Yield', icon:'🌾', badge:'🌟',
+    id:4, tier:'beginner', title:'股息率 Dividend Yield', icon:'wheat', badge:'green',
     paragraphs:[
       '股息率（Dividend Yield）= 年度每股股息 / 股价 × 100%。例如一只$100的股票每年派息$3，股息率为3%。股息是公司将利润分给股东的方式，是投资回报的重要组成部分。',
       '高股息率的公司通常是成熟企业（如可口可乐、强生），增长较慢但现金流稳定。科技成长股（如NVDA、META）通常不派息或股息率很低，因为它们将利润再投资于增长。选择取决于你的投资目标。',
@@ -3367,7 +3367,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:5, tier:'beginner', title:'RSI 相对强弱指标', icon:'📈', badge:'⚡',
+    id:5, tier:'beginner', title:'RSI 相对强弱指标', icon:'trending-up', badge:'gold',
     paragraphs:[
       'RSI（Relative Strength Index，相对强弱指标）是最流行的动量指标之一，数值范围0-100。它衡量最近一段时间（通常14天）内涨跌的相对幅度。RSI帮助判断股票是否被过度买入或卖出。',
       'RSI>70通常被视为超买（Overbought），意味着股价可能被推高太快，有回调风险。RSI<30为超卖（Oversold），暗示过度下跌，可能迎来反弹。但在强势趋势中，RSI可能长时间停留在极端区域。',
@@ -3390,7 +3390,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:6, tier:'intermediate', title:'移动平均线 Moving Averages', icon:'〰️', badge:'📐',
+    id:6, tier:'intermediate', title:'移动平均线 Moving Averages', icon:'activity', badge:'silver',
     paragraphs:[
       '移动平均线（MA）是将一定时期内的收盘价取平均值形成的曲线。常用的有MA5（5日）、MA20（20日）、MA50（50日）和MA200（200日）。短期MA反映近期趋势，长期MA反映大趋势。',
       '简单移动平均（SMA）对每天赋予同等权重，指数移动平均（EMA）给近期数据更高权重，对价格变化更敏感。交易者常用"金叉"（短期MA上穿长期MA）作为买入信号，"死叉"（短期下穿长期）作为卖出信号。',
@@ -3411,7 +3411,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:7, tier:'intermediate', title:'成交量 Volume', icon:'📊', badge:'🔔',
+    id:7, tier:'intermediate', title:'成交量 Volume', icon:'bar-chart', badge:'bronze',
     paragraphs:[
       '成交量（Volume）是一段时间内交易的股票总数。它反映了市场参与度和交易活跃程度。单看价格变动不够——配合成交量才能判断趋势的"含金量"。',
       '放量上涨（价升量增）是健康的上升信号，说明有大量资金入场支持上涨。缩量上涨则需警惕——缺乏资金支持的上涨难以持续。放量下跌通常意味着恐慌性抛售，而缩量下跌说明抛压减轻，可能接近底部。',
@@ -3432,7 +3432,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:8, tier:'intermediate', title:'支撑位与阻力位', icon:'🧱', badge:'🏰',
+    id:8, tier:'intermediate', title:'支撑位与阻力位', icon:'layers', badge:'bronze',
     paragraphs:[
       '支撑位（Support）是股价下跌时可能止跌的价格区域，因为买盘力量在此集中。阻力位（Resistance）是上涨时可能遇阻的区域。它们是技术分析的基石概念。',
       '支撑/阻力形成的原因是心理和资金效应：当很多人在$100买入，股价跌回$100时，这些人倾向于"保本"持有甚至加仓，形成买盘支撑。反之，在$120套牢的人等股价回到$120就卖出，形成卖压阻力。',
@@ -3453,7 +3453,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:9, tier:'intermediate', title:'板块轮动 Sector Rotation', icon:'🔄', badge:'🎪',
+    id:9, tier:'intermediate', title:'板块轮动 Sector Rotation', icon:'refresh-cw', badge:'purple',
     paragraphs:[
       '板块轮动（Sector Rotation）是资金在不同行业板块之间流动的现象。经济周期的不同阶段，不同行业的表现差异很大。理解轮动规律可以帮助你在正确的时间配置正确的板块。',
       '经济扩张初期：科技、消费可选领涨。扩张中后期：工业、原材料表现好。衰退期：公用事业、医疗保健等防御板块抗跌。复苏期：金融、房地产率先反弹。AI产业链也有自己的轮动——先炒芯片，再炒基建，然后是模型和应用。',
@@ -3476,7 +3476,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:10, tier:'intermediate', title:'定投策略 DCA', icon:'📅', badge:'🏆',
+    id:10, tier:'intermediate', title:'定投策略 DCA', icon:'calendar', badge:'gold',
     paragraphs:[
       '定投（Dollar Cost Averaging，DCA）是指在固定时间间隔投入固定金额买入某资产。比如每月1号买$500的QQQ。无论股价高低都执行，最终获得平均买入成本。',
       'DCA的优势：消除择时焦虑——不需要判断"什么时候买"。在股价低时自动买入更多股数，高时买入较少股数，天然地"低买多、高买少"。历史回测显示，长期DCA的回报与"完美择时"差距不大。',
@@ -3497,7 +3497,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:11, tier:'intermediate', title:'风险管理', icon:'🛡️', badge:'🔐',
+    id:11, tier:'intermediate', title:'风险管理', icon:'shield', badge:'blue',
     paragraphs:[
       '风险管理是投资成功的基石——专业投资者花更多时间管理风险而非追逐回报。核心原则：永远不要把无法承受损失的钱投入市场。止损（Stop Loss）是最基本的风险管理工具。',
       '仓位管理公式：单笔交易风险不超过总资金的1-2%。假设你有$10万，每笔最多亏$1000-$2000。这意味着如果设置5%的止损，单笔仓位最多$2万-$4万。永远不要All-in（全仓）一只股票。',
@@ -3509,7 +3509,7 @@ const EDU_LESSONS = [
         const totalValue=portfolio.reduce((s,p)=>(prices[p.ticker]?.price||p.buyPrice)*p.shares+s,0);
         const largest=portfolio.reduce((max,p)=>{const v=(prices[p.ticker]?.price||p.buyPrice)*p.shares;return v>max.v?{t:p.ticker,v}:max},{t:'',v:0});
         const pct=(largest.v/totalValue*100).toFixed(1);
-        return `你的持仓中 ${largest.t} 占比 ${pct}%。${parseFloat(pct)>50?'⚠️ 集中度偏高！建议单只股票不超过总仓位的30-40%，以降低个股风险。':'集中度在合理范围内。'}总仓位$${totalValue.toFixed(0)}，建议单笔最大止损不超过$${(totalValue*0.02).toFixed(0)}。`;
+        return `你的持仓中 ${largest.t} 占比 ${pct}%。${parseFloat(pct)>50?icon('alert-triangle',14)+' 集中度偏高！建议单只股票不超过总仓位的30-40%，以降低个股风险。':'集中度在合理范围内。'}总仓位$${totalValue.toFixed(0)}，建议单笔最大止损不超过$${(totalValue*0.02).toFixed(0)}。`;
       }
       return '举例：$10万的投资组合，买入$3万NVDA并设置5%止损（$-1500），这占总资金的1.5%——在安全范围内。如果NVDA跌5%触发止损，你只损失1.5%的总资金，不会伤筋动骨。';
     },
@@ -3520,7 +3520,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:12, tier:'intermediate', title:'投资组合分散', icon:'🎯', badge:'🌈',
+    id:12, tier:'intermediate', title:'投资组合分散', icon:'target', badge:'green',
     paragraphs:[
       '分散投资（Diversification）被称为"投资中唯一的免费午餐"。通过持有不同资产、行业、地区的投资品，降低整体风险而不必牺牲太多预期回报。核心是找到低相关性的资产。',
       '分散的层次：①资产类别（股票、债券、商品）②行业板块（科技、医疗、消费）③地区（美股、A股、欧股）④市值（大盘、中盘、小盘）。15-25只不同行业的股票就能获得大部分分散效果。',
@@ -3530,7 +3530,7 @@ const EDU_LESSONS = [
       const portfolio=getPortfolio();
       if(portfolio.length>=2){
         const sectors=new Set(portfolio.map(p=>{const s=ALL.find(a=>a.t===p.ticker);return s?.cat||'未知'}));
-        return `你当前持有${portfolio.length}只股票，覆盖${sectors.size}个板块（${[...sectors].join('、')}）。${sectors.size<=1?'⚠️ 过度集中在同一板块！建议添加不同行业的标的。':sectors.size>=3?'✅ 板块分散度不错，继续保持。':'可以考虑再增加1-2个不同板块。'}`;
+        return `你当前持有${portfolio.length}只股票，覆盖${sectors.size}个板块（${[...sectors].join('、')}）。${sectors.size<=1?icon('alert-triangle',14)+' 过度集中在同一板块！建议添加不同行业的标的。':sectors.size>=3?icon('check-circle',14)+' 板块分散度不错，继续保持。':'可以考虑再增加1-2个不同板块。'}`;
       }
       return '假设你只持有NVDA和AMD——它们都是芯片股，相关性极高。如果芯片行业整体下跌，两只都会跌。但如果加入MSFT（软件）、SPY（指数ETF），整体波动会显著降低。';
     },
@@ -3541,7 +3541,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:13, tier:'advanced', title:'牛市与熊市', icon:'🐂', badge:'🐻',
+    id:13, tier:'advanced', title:'牛市与熊市', icon:'trending-up', badge:'red',
     paragraphs:[
       '牛市（Bull Market）定义为从低点上涨20%以上的市场，通常伴随经济增长和投资者信心。熊市（Bear Market）定义为从高点下跌20%以上。了解市场周期对投资决策至关重要。',
       '牛市特征：经济扩张、企业盈利增长、低失业率、投资者乐观。平均持续约3.5年。熊市特征：经济收缩或担忧、盈利下滑、VIX升高、投资者恐惧。平均持续约10个月——通常比牛市短得多。',
@@ -3564,11 +3564,11 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:14, tier:'advanced', title:'期权基础 Options', icon:'🎰', badge:'🎲',
+    id:14, tier:'advanced', title:'期权基础 Options', icon:'dice', badge:'purple',
     paragraphs:[
       '期权（Options）赋予你在特定时间以特定价格买入（看涨期权Call）或卖出（看跌期权Put）标的股票的权利，但非义务。买入Call看涨，买入Put看跌或对冲。期权是高级工具，杠杆效应显著。',
       '关键术语：执行价（Strike Price）、到期日（Expiration）、权利金（Premium）。例如：买入NVDA $150 Call 3个月到期，花费$5/股。如果NVDA涨到$170，你赚$170-$150-$5=$15/股（300%回报）。如果没涨过$150，$5权利金归零。',
-      '⚠️ 期权风险极高：买方可能损失100%权利金，卖方（裸卖）风险无限。新手切勿裸卖期权。如果要使用，从Covered Call（备兑看涨）开始——你持有100股底仓，卖出一个Call赚取权利金收入。'
+      icon('alert-triangle',14)+' 期权风险极高：买方可能损失100%权利金，卖方（裸卖）风险无限。新手切勿裸卖期权。如果要使用，从Covered Call（备兑看涨）开始——你持有100股底仓，卖出一个Call赚取权利金收入。'
     ],
     exampleFn: function(){
       const portfolio=getPortfolio();
@@ -3592,7 +3592,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:15, tier:'advanced', title:'解读财报 Earnings', icon:'📑', badge:'👑',
+    id:15, tier:'advanced', title:'解读财报 Earnings', icon:'file-text', badge:'gold',
     paragraphs:[
       '上市公司每季度发布财报（Earnings Report），是最重要的投资事件。核心数据：营收（Revenue）、净利润、EPS、指引（Guidance）。Beat（超预期）或Miss（不及预期）对股价影响巨大。',
       '重点关注：①营收增长率（YoY）——比利润更难"做账"②毛利率变化——反映定价能力③Guidance——公司对下季度的展望比当季结果更重要④自由现金流——真金白银比利润数字更可靠⑤管理层电话会议（Earnings Call）的措辞。',
@@ -3616,7 +3616,7 @@ const EDU_LESSONS = [
     ]
   }  ,
   {
-    id:16, tier:'beginner', title:'市销率 P/S Ratio', icon:'🏷️', badge:'📌',
+    id:16, tier:'beginner', title:'市销率 P/S Ratio', icon:'tag', badge:'silver',
     paragraphs:[
       'P/S（Price-to-Sales Ratio，市销率）= 市值 / 年营收。当公司尚未盈利（EPS为负）时，P/E无法使用，P/S就成为关键估值指标。特别适用于高增长科技公司和SaaS企业。',
       '低P/S不一定便宜，高P/S不一定贵——关键看营收增长速度。一家P/S=20但年增长80%的公司可能比P/S=5但增长10%的公司更有价值。SaaS行业通常P/S=10-30被认为合理。',
@@ -3634,7 +3634,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:17, tier:'beginner', title:'MACD指标', icon:'📉', badge:'🎯',
+    id:17, tier:'beginner', title:'MACD指标', icon:'trending-down', badge:'blue',
     paragraphs:[
       'MACD（Moving Average Convergence Divergence）是最流行的趋势跟踪动量指标。它由MACD线（12日EMA - 26日EMA）、信号线（MACD的9日EMA）和柱状图（MACD线 - 信号线）三部分组成。',
       '核心信号：①金叉（MACD线上穿信号线）→ 买入信号 ②死叉（MACD线下穿信号线）→ 卖出信号 ③零轴上方 → 多头趋势 ④零轴下方 → 空头趋势。柱状图由正变负或由负变正时趋势可能反转。',
@@ -3650,7 +3650,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:18, tier:'intermediate', title:'布林带 Bollinger Bands', icon:'🎸', badge:'🎵',
+    id:18, tier:'intermediate', title:'布林带 Bollinger Bands', icon:'activity', badge:'purple',
     paragraphs:[
       '布林带由三条线组成：中轨（20日SMA）、上轨（中轨+2倍标准差）、下轨（中轨-2倍标准差）。它动态地反映了价格的波动范围——约95%的价格波动会落在上下轨之间。',
       '核心用法：①价格触及上轨 → 可能超买（但在强势趋势中，价格会"贴着"上轨走）②价格触及下轨 → 可能超卖 ③布林带收窄（Squeeze）→ 波动率极低，可能即将爆发大行情 ④布林带扩张 → 波动率增大。',
@@ -3668,7 +3668,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:19, tier:'intermediate', title:'Beta系数', icon:'β', badge:'📏',
+    id:19, tier:'intermediate', title:'Beta系数', icon:'compass', badge:'bronze',
     paragraphs:[
       'Beta（贝塔系数）衡量个股相对于市场（通常是S&P 500）的波动性。Beta=1表示与市场同步波动；Beta>1波动大于市场（如NVDA Beta≈1.7）；Beta<1波动小于市场（如JNJ Beta≈0.6）。',
       '高Beta股（>1.5）：在牛市中涨得更多，熊市中跌得也更多——适合风险偏好型投资者。低Beta股（<0.8）：涨跌幅度都较小，适合稳健型投资者。负Beta（极罕见）：与市场反向运动。',
@@ -3681,7 +3681,7 @@ const EDU_LESSONS = [
         let weightedBeta=0,totalVal=0;
         portfolio.forEach(p=>{const price=prices[p.ticker]?.price||p.buyPrice;const val=price*p.shares;const beta=betaMap[p.ticker]||1.2;weightedBeta+=beta*val;totalVal+=val});
         const portBeta=totalVal>0?(weightedBeta/totalVal).toFixed(2):'N/A';
-        return `你的投资组合加权Beta约为 ${portBeta}。${parseFloat(portBeta)>1.5?'⚠️ 组合波动性较高，在市场下跌时亏损可能放大。考虑加入低Beta标的如SPY来平衡。':parseFloat(portBeta)<0.8?'✅ 组合波动性较低，比较稳健。':'整体风险水平适中。'}`;
+        return `你的投资组合加权Beta约为 ${portBeta}。${parseFloat(portBeta)>1.5?icon('alert-triangle',14)+' 组合波动性较高，在市场下跌时亏损可能放大。考虑加入低Beta标的如SPY来平衡。':parseFloat(portBeta)<0.8?icon('check-circle',14)+' 组合波动性较低，比较稳健。':'整体风险水平适中。'}`;
       }
       return 'AI板块整体Beta较高（通常1.5-2.5），意味着市场大跌时AI股跌幅更大。这就是为什么在VIX>25时，AI股的跌幅往往是市场的1.5-2倍。';
     },
@@ -3692,7 +3692,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:20, tier:'intermediate', title:'市价单与限价单', icon:'🎫', badge:'🏪',
+    id:20, tier:'intermediate', title:'市价单与限价单', icon:'ticket', badge:'green',
     paragraphs:[
       '市价单（Market Order）以当前市场最优价格立即成交，保证成交但不保证价格。限价单（Limit Order）设定你愿意接受的最高买入价或最低卖出价，保证价格但不保证成交。',
       '什么时候用市价单：①需要立即建仓/平仓 ②交易量大的流动性好的股票（SPY、AAPL等）③盘前盘后不建议用市价单（价差可能很大）。什么时候用限价单：①有明确的目标价 ②流动性较差的股票 ③不急于成交。',
@@ -3710,10 +3710,10 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:21, tier:'advanced', title:'做空 Short Selling', icon:'📉', badge:'🔻',
+    id:21, tier:'advanced', title:'做空 Short Selling', icon:'trending-down', badge:'red',
     paragraphs:[
       '做空（Short Selling）是借入股票卖出，等价格下跌后买回归还，赚取差价。例如：在$100借入并卖出100股，跌到$80时买回，赚$20/股。做空让你在下跌市场中也能盈利。',
-      '⚠️ 做空风险极高：①亏损理论上无限（股价可以无限上涨）②需要支付借股费用 ③可能被"逼空"（Short Squeeze，空头被迫买回推高股价）④需要维持保证金，否则被强制平仓。GameStop (GME) 2021年的逼空事件是典型案例。',
+      icon('alert-triangle',14)+' 做空风险极高：①亏损理论上无限（股价可以无限上涨）②需要支付借股费用 ③可能被"逼空"（Short Squeeze，空头被迫买回推高股价）④需要维持保证金，否则被强制平仓。GameStop (GME) 2021年的逼空事件是典型案例。',
       '替代方案：如果看空某只股票，买入看跌期权（Put）比直接做空更安全——最大亏损仅限于权利金。或者卖出持仓（如果你持有的话）。新手投资者不建议做空个股。'
     ],
     exampleFn: function(){
@@ -3731,7 +3731,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:22, tier:'advanced', title:'ETF vs 共同基金', icon:'🏦', badge:'💳',
+    id:22, tier:'advanced', title:'ETF vs 共同基金', icon:'building', badge:'blue',
     paragraphs:[
       'ETF（交易所交易基金）和共同基金（Mutual Fund）都是投资一篮子资产的方式，但运作机制不同。ETF像股票一样在交易所实时交易，共同基金只在每天收盘后按净值交易。',
       'ETF优势：①费率更低（SPY费率0.09% vs 主动基金1-2%）②实时交易，流动性好 ③税务效率更高 ④透明度高（每日公布持仓）。共同基金优势：①可以自动定投 ②部分主动管理基金可能跑赢市场 ③适合不想盯盘的投资者。',
@@ -3749,7 +3749,7 @@ const EDU_LESSONS = [
     ]
   },
   {
-    id:23, tier:'advanced', title:'复利的力量', icon:'🌊', badge:'🏆',
+    id:23, tier:'advanced', title:'复利的力量', icon:'waves', badge:'gold',
     paragraphs:[
       '复利（Compound Interest）被爱因斯坦称为"世界第八大奇迹"。它的核心是"利滚利"——你的收益也产生收益。$10,000以年化10%增长：10年=$25,937，20年=$67,275，30年=$174,494。时间是复利最好的朋友。',
       '72法则：用72除以年化回报率，得到资产翻倍所需年数。年化10% → 约7.2年翻倍。年化7% → 约10.3年翻倍。这意味着25岁开始每月投$500，到60岁时（假设年化9%）约有$100万+。但如果35岁才开始，同样到60岁只有约$40万。',
@@ -3794,7 +3794,7 @@ function getUnlockedCount(){
 
 let eduDetailView=null; // null=list, lesson id=detail
 
-const TIER_NAMES={beginner:'🌱 入门基础',intermediate:'📊 进阶技巧',advanced:'🔥 高手必修'};
+const TIER_NAMES={beginner:icon('sprout',14)+' 入门基础',intermediate:icon('bar-chart',14)+' 进阶技巧',advanced:icon('flame',14)+' 高手必修'};
 const TIER_ORDER=['beginner','intermediate','advanced'];
 
 function renderEdu(){
@@ -3812,8 +3812,8 @@ function renderEdu(){
         <span style="font-size:13px;font-weight:800;color:var(--pri)">${completed.length}/${total}</span>
       </div>
       <div class="edu-progress-bar"><div class="edu-progress-fill" style="width:${pctDone}%"></div></div>
-      <div class="edu-progress-text">${completed.length===total?'🎉 恭喜！你已完成全部'+total+'课！':`已解锁 ${unlocked}/${total} 课 · 每天解锁新课程`}</div>
-      ${completed.length>0?`<div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin-top:6px">${completed.map(id=>{const l=EDU_LESSONS.find(x=>x.id===id);return l?`<span title="${l.title}" style="font-size:18px">${l.badge}</span>`:''}).join('')}</div>`:''}
+      <div class="edu-progress-text">${completed.length===total?icon('trophy',16)+' 恭喜！你已完成全部'+total+'课！':`已解锁 ${unlocked}/${total} 课 · 每天解锁新课程`}</div>
+      ${completed.length>0?`<div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin-top:6px">${completed.map(id=>{const l=EDU_LESSONS.find(x=>x.id===id);return l?`<span title="${l.title}" style="font-size:18px">${badgeIcon(l.badge,18)}</span>`:''}).join('')}</div>`:''}
     </div>`;
 
   const contentEl=document.getElementById('eduContent');
@@ -3824,10 +3824,10 @@ function renderEdu(){
 
   // Quiz mode card
   let html=`<div class="edu-quiz-mode-card" onclick="startQuizMode()">
-    <div style="font-size:28px;margin-bottom:6px">📝</div>
+    <div style="font-size:28px;margin-bottom:6px">'+icon('pencil',28)+'</div>
     <div style="font-size:15px;font-weight:800">随机测验模式</div>
     <div style="font-size:12px;color:var(--dim);margin-top:4px">从已学课程中抽取5题，测试你的知识掌握</div>
-    ${completed.length<3?'<div style="font-size:11px;color:var(--amber);margin-top:6px">⚠️ 至少完成3课后解锁</div>':'<div style="font-size:11px;color:var(--pri);margin-top:6px">✅ 点击开始挑战</div>'}
+    ${completed.length<3?'<div style="font-size:11px;color:var(--amber);margin-top:6px">'+icon('alert-triangle',12)+' 至少完成3课后解锁</div>':'<div style="font-size:11px;color:var(--pri);margin-top:6px">'+icon('check-circle',12)+' 点击开始挑战</div>'}
   </div>`;
 
   // Lesson list grouped by tier
@@ -3842,12 +3842,12 @@ function renderEdu(){
       const isCompleted=completed.includes(lesson.id);
       const score=prog.quizScores?.[lesson.id];
       return `<div class="edu-lesson-card ${isCompleted?'completed':''} ${!isUnlocked?'locked':''}" ${isUnlocked?`onclick="eduDetailView=${lesson.id};renderEdu()"`:''}>
-        <div class="edu-lesson-icon">${isUnlocked?lesson.icon:'🔒'}</div>
+        <div class="edu-lesson-icon">${isUnlocked?icon(lesson.icon,28):icon('lock',28)}</div>
         <div class="edu-lesson-info">
           <div class="edu-lesson-title">${isUnlocked?lesson.title:'第'+lesson.id+'课 · 明天解锁'}</div>
-          <div class="edu-lesson-sub">${isCompleted?'✅ 已完成'+(score!=null?' · 测验 '+score+'/3':''):(isUnlocked?'点击开始学习':'🔒 明天自动解锁')}</div>
+          <div class="edu-lesson-sub">${isCompleted?icon('check-circle',12)+' 已完成'+(score!=null?' · 测验 '+score+'/3':''):(isUnlocked?'点击开始学习':icon('lock',12)+' 明天自动解锁')}</div>
         </div>
-        ${isCompleted?`<div class="edu-lesson-badge">${lesson.badge}</div>`:''}
+        ${isCompleted?`<div class="edu-lesson-badge">${badgeIcon(lesson.badge,24)}</div>`:''}
       </div>`;
     }).join('');
     html+='</div>';
@@ -3868,20 +3868,20 @@ function renderLessonDetail(lessonId){
     <div class="edu-detail">
       <button class="edu-back-btn" onclick="eduDetailView=null;renderEdu()">← 返回课程列表</button>
       <div style="text-align:center;margin-bottom:16px">
-        <div style="font-size:40px;margin-bottom:8px">${lesson.icon}</div>
+        <div style="font-size:40px;margin-bottom:8px">${icon(lesson.icon,40)}</div>
         <div style="font-size:18px;font-weight:800">${lesson.title}</div>
-        ${isCompleted?`<div style="margin-top:6px;font-size:24px">${lesson.badge}</div>`:''}
+        ${isCompleted?`<div style="margin-top:6px;font-size:24px">${badgeIcon(lesson.badge,24)}</div>`:''}
       </div>
       <div class="edu-section">
-        <h3>📖 知识要点</h3>
+        <h3>'+icon('book',16)+' 知识要点</h3>
         ${lesson.paragraphs.map(p=>'<p>'+p+'</p>').join('')}
       </div>
       <div class="edu-example">
-        <h3>💡 实战案例</h3>
+        <h3>'+icon('lightbulb',16)+' 实战案例</h3>
         <p>${exampleText}</p>
       </div>
       <div class="quiz-section" id="quizSection${lessonId}">
-        <h3>🧪 测验 (${isCompleted&&prevScore!=null?prevScore+'/3 · 可重新作答':'3题'})</h3>
+        <h3>'+icon('dice',16)+' 测验 (${isCompleted&&prevScore!=null?prevScore+'/3 · 可重新作答':'3题'})</h3>
         ${lesson.quiz.map((q,qi)=>`
           <div class="quiz-q" data-qi="${qi}">
             <div class="quiz-q-num">问题 ${qi+1}/3</div>
@@ -3950,8 +3950,8 @@ function submitQuiz(lessonId){
   // Show result
   const resultEl=document.getElementById('quizResult'+lessonId);
   const cls=score===3?'perfect':score>=2?'good':'retry';
-  const emoji=score===3?lesson.badge:score>=2?'👏':'💪';
-  const text=score===3?'满分！太棒了！获得徽章 '+lesson.badge:score>=2?'不错！继续加油！':'再复习一下知识要点吧';
+  const emoji=score===3?badgeIcon(lesson.badge,40):score>=2?icon('trophy',40):icon('flame',40);
+  const text=score===3?'满分！太棒了！获得徽章！':score>=2?'不错！继续加油！':'再复习一下知识要点吧';
   resultEl.innerHTML=`<div class="quiz-result ${cls}">
     <div class="quiz-result-badge">${emoji}</div>
     <div class="quiz-result-score">${score}/3</div>
@@ -3962,7 +3962,7 @@ function submitQuiz(lessonId){
   document.getElementById('quizSubmit'+lessonId).style.display='none';
   document.getElementById('eduProgress').querySelector('.edu-progress-fill').style.width=(prog.completed.length/EDU_LESSONS.length*100)+'%';
 
-  showToast(score===3?`🎉 完美！获得 ${lesson.badge} 徽章`:score>=2?'👏 不错，'+score+'/3 通过！':'💪 得分 '+score+'/3，再看看知识要点');
+  showToast(score===3?icon('trophy',16)+` 完美！获得徽章！`:score>=2?icon('check-circle',16)+' 不错，'+score+'/3 通过！':icon('flame',16)+' 得分 '+score+'/3，再看看知识要点');
 }
 
 
@@ -3976,7 +3976,7 @@ function startQuizMode() {
   const prog = getEduProgress();
   const completed = prog.completed || [];
   if (completed.length < 3) {
-    showToast('⚠️ 至少完成3课后才能开始测验');
+    showToast(icon('alert-triangle',16)+' 至少完成3课后才能开始测验');
     return;
   }
 
@@ -4037,7 +4037,7 @@ function renderQuizModeQuestion() {
   const letters = ['A', 'B', 'C', 'D'];
 
   contentEl.innerHTML = `
-    <div class="quiz-mode-q-num">问题 ${current + 1} / ${total} · ${q.lessonIcon} ${q.lessonTitle}</div>
+    <div class="quiz-mode-q-num">问题 ${current + 1} / ${total} · ${icon(q.lessonIcon,14)} ${q.lessonTitle}</div>
     <div class="quiz-mode-q-text">${q.q}</div>
     ${q.opts.map((opt, i) => {
       let cls = '';
@@ -4092,26 +4092,26 @@ function renderQuizModeResult() {
   const pct = Math.round(score / total * 100);
   let emoji, text, sub;
   if (score === total) {
-    emoji = '🏆';
+    emoji = icon('trophy',48);
     text = '完美满分！';
     sub = '所有问题全部答对，投资知识扎实！';
   } else if (score >= 4) {
-    emoji = '🌟';
+    emoji = icon('star',48);
     text = '优秀！';
     sub = '几乎全对，继续保持学习热情！';
   } else if (score >= 3) {
-    emoji = '👏';
+    emoji = icon('check-circle',48);
     text = '不错！';
     sub = '基础掌握良好，可以回顾部分课程加强理解。';
   } else {
-    emoji = '💪';
+    emoji = icon('flame',48);
     text = '继续加油！';
     sub = '建议复习相关课程，巩固知识后再来挑战。';
   }
 
   // Collect badges from questions' lessons
   const lessonIds = [...new Set(questions.map(q => q.lessonId))];
-  const badges = lessonIds.map(id => EDU_LESSONS.find(l => l.id === id)?.badge || '').filter(Boolean);
+  const badges = lessonIds.map(id => { const l = EDU_LESSONS.find(x => x.id === id); return l ? badgeIcon(l.badge, 24) : ''; }).filter(Boolean);
 
   document.getElementById('quizModeContent').innerHTML = `
     <div class="quiz-mode-result">
@@ -4125,7 +4125,7 @@ function renderQuizModeResult() {
   `;
 
   document.getElementById('quizModeActions').innerHTML = `
-    <button class="btn-primary" onclick="startQuizMode()" style="flex:1">🔄 再来一轮</button>
+    <button class="btn-primary" onclick="startQuizMode()" style="flex:1">${icon('refresh-cw',16)} 再来一轮</button>
     <button class="btn-primary" onclick="closeQuizMode()" style="flex:1;background:var(--glass);color:var(--txt);box-shadow:none">返回</button>
   `;
 }
