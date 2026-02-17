@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-17T11:39:19Z",
+  "updated": "2026-02-17T11:54:19Z",
   "count": 8,
   "news": [
     {
@@ -12,29 +12,29 @@
         "^IXIC",
         "^DJI"
       ],
-      "time": "2026-02-17T11:39:19Z",
+      "time": "2026-02-17T11:54:19Z",
       "priority": 10
     },
     {
-      "headline": "Palantir Technologies Inc.(PLTR)暴跌26.6% 受分析师下调评级打压",
-      "summary": "Palantir Technologies Inc.报$131.41，跌26.6%。受分析师下调评级打压，成为今日跌幅最深个股之一。",
+      "headline": "Palantir Technologies Inc.(PLTR)暴跌26.6% 受财报不及预期拖累",
+      "summary": "Palantir Technologies Inc.报$131.41，跌26.6%。受财报不及预期拖累，成为今日跌幅最深个股之一。",
       "category": "stock",
       "sentiment": "bearish",
       "tickers": [
         "PLTR"
       ],
-      "time": "2026-02-17T11:39:19Z",
+      "time": "2026-02-17T11:54:19Z",
       "priority": 8
     },
     {
-      "headline": "VIX指数升至22.2 市场波动加剧需警惕风险",
-      "summary": "恐慌指数VIX报22.2（+38.9%），高于20的警戒线。市场不确定性上升，短线操作需注意仓位管理。",
+      "headline": "VIX指数升至21.9 市场波动加剧需警惕风险",
+      "summary": "恐慌指数VIX报21.9（+37.2%），高于20的警戒线。市场不确定性上升，短线操作需注意仓位管理。",
       "category": "volatility",
       "sentiment": "bearish",
       "tickers": [
         "^VIX"
       ],
-      "time": "2026-02-17T11:39:19Z",
+      "time": "2026-02-17T11:54:19Z",
       "priority": 7
     },
     {
@@ -48,7 +48,7 @@
         "XLE",
         "XLV"
       ],
-      "time": "2026-02-17T11:39:19Z",
+      "time": "2026-02-17T11:54:19Z",
       "priority": 7
     },
     {
@@ -60,7 +60,7 @@
         "TSM",
         "META"
       ],
-      "time": "2026-02-17T11:39:19Z",
+      "time": "2026-02-17T11:54:19Z",
       "priority": 6
     },
     {
@@ -73,7 +73,7 @@
         "NOW",
         "CRM"
       ],
-      "time": "2026-02-17T11:39:19Z",
+      "time": "2026-02-17T11:54:19Z",
       "priority": 6
     },
     {
@@ -87,7 +87,7 @@
         "GOOG",
         "META"
       ],
-      "time": "2026-02-17T11:39:19Z",
+      "time": "2026-02-17T11:54:19Z",
       "priority": 6
     },
     {
@@ -98,7 +98,7 @@
       "tickers": [
         "^GSPC"
       ],
-      "time": "2026-02-17T11:39:19Z",
+      "time": "2026-02-17T11:54:19Z",
       "priority": 5
     }
   ]
