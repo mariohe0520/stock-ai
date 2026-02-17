@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>
 /* ============================================================
-   DESIGN SYSTEM — iOS Finance-grade Dark Theme
+   DESIGN SYSTEM — iOS Finance-grade Dark Theme  v3
    ============================================================ */
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
@@ -41,6 +41,7 @@ html,body{
 .app{
   max-width:430px;margin:0 auto;min-height:100vh;position:relative;
   padding:env(safe-area-inset-top,44px) 0 calc(68px + var(--safe-b));
+  overflow-x:hidden;
 }
 
 /* Pages */
@@ -63,14 +64,69 @@ html,body{
 }
 .hdr h1{font-size:22px;font-weight:800;letter-spacing:-.3px}
 .hdr h1 span{background:linear-gradient(135deg,var(--pri),var(--acc));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hdr-right{display:flex;align-items:center;gap:8px}
+.refresh-btn{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--glass);border:1px solid var(--glass-border);
+  color:var(--txt2);font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;-webkit-tap-highlight-color:transparent;
+}
+.refresh-btn:active{background:rgba(255,255,255,.1);transform:scale(.9)}
+.refresh-btn.spinning{animation:spin .8s linear infinite}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
 .market-badge{
   display:flex;align-items:center;gap:6px;font-size:11px;color:var(--dim);
   background:var(--glass);border:1px solid var(--glass-border);
-  padding:4px 10px;border-radius:20px;backdrop-filter:blur(8px);
+  padding:6px 10px;border-radius:20px;backdrop-filter:blur(8px);
+  min-height:30px;
 }
-.market-dot{width:6px;height:6px;border-radius:50%;background:var(--red)}
+.market-dot{width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0}
 .market-dot.open{background:var(--up);box-shadow:0 0 8px rgba(16,185,129,.6);animation:pulse 2s infinite}
+.market-dot.pre{background:var(--amber);box-shadow:0 0 8px rgba(245,158,11,.4);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* ============================================================
+   ERROR / STALE / OFFLINE BANNERS
+   ============================================================ */
+.status-banner{
+  display:flex;align-items:center;gap:8px;padding:10px 14px;
+  border-radius:var(--r-sm);margin:0 16px 12px;font-size:12px;
+  line-height:1.4;
+}
+.status-banner.error{
+  background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);color:var(--red);
+}
+.status-banner.stale{
+  background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.12);color:var(--amber);
+}
+.status-banner.offline{
+  background:rgba(100,116,139,.1);border:1px solid rgba(100,116,139,.15);color:var(--dim);
+}
+
+/* ============================================================
+   RISK DISCLAIMER
+   ============================================================ */
+.risk-disclaimer{
+  display:flex;align-items:flex-start;gap:8px;padding:12px 14px;
+  background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.1);
+  border-radius:var(--r-sm);margin-bottom:14px;
+  font-size:11px;color:var(--amber);line-height:1.5;
+}
+.risk-disclaimer-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+
+/* ============================================================
+   PULL-TO-REFRESH
+   ============================================================ */
+.pull-indicator{
+  text-align:center;padding:0;overflow:hidden;
+  max-height:0;transition:max-height .3s,padding .3s;
+  font-size:12px;color:var(--dim);
+}
+.pull-indicator.visible{max-height:50px;padding:12px 0 4px}
+.pull-indicator .pull-arrow{display:inline-block;transition:transform .2s}
+.pull-indicator.ready .pull-arrow{transform:rotate(180deg)}
 
 /* ============================================================
    GLASS CARDS
@@ -119,12 +175,13 @@ html,body{
 }
 .sub-tabs::-webkit-scrollbar{display:none}
 .sub-tab{
-  padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;
+  padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;
   background:var(--glass);border:1px solid var(--glass-border);
-  color:var(--dim);white-space:nowrap;cursor:pointer;border:none;
+  color:var(--dim);white-space:nowrap;cursor:pointer;
   transition:all .2s;flex-shrink:0;
+  min-height:36px;
 }
-.sub-tab.on{background:var(--acc);color:#fff}
+.sub-tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
 
 /* ============================================================
    STOCK ROWS
@@ -140,6 +197,7 @@ html,body{
   border:1px solid var(--glass-border);
   border-radius:var(--r);margin-bottom:8px;cursor:pointer;
   transition:transform .12s,background .2s;
+  min-height:56px;
 }
 .stock-row:active{transform:scale(.97);background:rgba(255,255,255,.06)}
 .stock-left{display:flex;flex-direction:column;gap:2px;min-width:0}
@@ -154,6 +212,7 @@ html,body{
 }
 .stock-change.up{background:rgba(16,185,129,.12);color:var(--up)}
 .stock-change.dn{background:rgba(239,68,68,.12);color:var(--dn)}
+.stock-change.flat{background:rgba(99,102,241,.08);color:var(--dim)}
 
 /* Mini sparkline */
 .mini-chart{width:56px;height:24px;flex-shrink:0}
@@ -178,7 +237,10 @@ html,body{
   border:1px solid var(--glass-border);border-radius:var(--r);
   padding:16px;margin-bottom:10px;
   border-left:3px solid var(--acc);
+  min-height:44px;cursor:pointer;
+  transition:transform .12s;
 }
+.advisor-card:active{transform:scale(.98)}
 .advisor-card.buy{border-left-color:var(--up)}
 .advisor-card.sell{border-left-color:var(--red)}
 .advisor-card.hold{border-left-color:var(--amber)}
@@ -195,7 +257,8 @@ html,body{
 .advisor-badge.dca{background:rgba(99,102,241,.12);color:var(--acc)}
 
 .advisor-price{font-size:13px;color:var(--txt2);margin-bottom:6px}
-.advisor-reason{font-size:12px;color:var(--dim);line-height:1.6}
+.advisor-reason{font-size:12px;color:var(--txt2);line-height:1.6}
+.advisor-risk{font-size:11px;color:var(--amber);line-height:1.5;margin-top:8px;padding:8px 10px;background:rgba(245,158,11,.05);border-radius:var(--r-xs)}
 .advisor-metrics{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
 .advisor-metric{font-size:11px;color:var(--dim2);background:rgba(255,255,255,.04);padding:3px 8px;border-radius:6px}
 
@@ -213,8 +276,8 @@ html,body{
   background:rgba(99,102,241,.12);color:var(--acc);text-transform:uppercase;
 }
 .news-time{font-size:10px;color:var(--dim)}
-.news-title{font-size:14px;font-weight:700;line-height:1.4;margin-bottom:6px}
-.news-body{font-size:12px;color:var(--dim);line-height:1.5}
+.news-title{font-size:14px;font-weight:700;line-height:1.4;margin-bottom:6px;color:var(--txt)}
+.news-body{font-size:12px;color:var(--txt2);line-height:1.5}
 .news-tags{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
 .news-tag{
   font-size:10px;font-weight:700;padding:3px 10px;border-radius:12px;
@@ -246,10 +309,12 @@ html,body{
   background:linear-gradient(180deg,var(--bg) 80%,transparent);
 }
 .detail-close{
-  width:36px;height:36px;border-radius:50%;
+  width:44px;height:44px;border-radius:50%;
   background:rgba(255,255,255,.08);border:none;color:var(--txt);
   font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .15s;
 }
+.detail-close:active{background:rgba(255,255,255,.15)}
 .detail-ticker-group{text-align:center}
 .detail-ticker{font-size:18px;font-weight:800}
 .detail-name{font-size:11px;color:var(--dim)}
@@ -271,6 +336,7 @@ html,body{
 .detail-ai-section{margin:0 16px 16px;padding:16px;background:var(--card);border-radius:var(--r);border:1px solid var(--glass-border)}
 .detail-ai-title{font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
 .detail-ai-text{font-size:13px;color:var(--txt2);line-height:1.6}
+.detail-ai-risk{font-size:11px;color:var(--amber);margin-top:8px;line-height:1.4}
 
 /* ============================================================
    PORTFOLIO
@@ -289,19 +355,26 @@ html,body{
   padding:14px 16px;background:var(--card);
   backdrop-filter:blur(20px);border:1px solid var(--glass-border);
   border-radius:var(--r);margin-bottom:8px;
+  min-height:56px;position:relative;
 }
-.position-left{display:flex;flex-direction:column;gap:2px}
+.position-left{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
 .position-ticker{font-size:15px;font-weight:800}
 .position-detail{font-size:11px;color:var(--dim)}
-.position-right{text-align:right}
+.position-right{text-align:right;flex-shrink:0}
 .position-value{font-size:15px;font-weight:700}
 .position-pl{font-size:12px;font-weight:700}
+.position-delete{
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  color:var(--red);font-size:18px;cursor:pointer;margin-left:8px;flex-shrink:0;
+  border-radius:50%;transition:background .15s;border:none;background:none;
+}
+.position-delete:active{background:rgba(239,68,68,.1)}
 
 .add-btn{
   width:100%;padding:14px;border:2px dashed rgba(255,255,255,.1);
   border-radius:var(--r);background:transparent;color:var(--dim);
   font-size:14px;font-weight:600;cursor:pointer;margin-bottom:12px;
-  transition:all .2s;font-family:var(--font);
+  transition:all .2s;font-family:var(--font);min-height:48px;
 }
 .add-btn:active{background:rgba(255,255,255,.04);border-color:var(--acc)}
 
@@ -325,7 +398,7 @@ html,body{
   width:100%;padding:12px 14px;background:rgba(255,255,255,.06);
   border:1px solid rgba(255,255,255,.08);border-radius:var(--r-sm);
   color:var(--txt);font-size:15px;font-family:var(--font);
-  outline:none;transition:border-color .2s;
+  outline:none;transition:border-color .2s;min-height:44px;
 }
 .form-input:focus{border-color:var(--acc)}
 .form-input::placeholder{color:var(--dim2)}
@@ -336,13 +409,13 @@ html,body{
 .btn-primary{
   width:100%;padding:14px;background:var(--acc);border:none;
   border-radius:var(--r-sm);color:#fff;font-size:15px;font-weight:700;
-  cursor:pointer;font-family:var(--font);transition:opacity .2s;
+  cursor:pointer;font-family:var(--font);transition:opacity .2s;min-height:48px;
 }
 .btn-primary:active{opacity:.8}
 .btn-danger{
   width:100%;padding:12px;background:rgba(239,68,68,.12);border:none;
   border-radius:var(--r-sm);color:var(--red);font-size:13px;font-weight:600;
-  cursor:pointer;font-family:var(--font);margin-top:8px;
+  cursor:pointer;font-family:var(--font);margin-top:8px;min-height:44px;
 }
 
 /* ============================================================
@@ -363,7 +436,9 @@ html,body{
   padding:14px 16px;background:var(--card);
   backdrop-filter:blur(20px);border:1px solid var(--glass-border);
   border-radius:var(--r);margin-bottom:8px;cursor:pointer;
+  min-height:48px;transition:transform .12s;
 }
+.me-menu-item:active{transform:scale(.98)}
 .me-menu-left{display:flex;align-items:center;gap:12px}
 .me-menu-icon{font-size:20px}
 .me-menu-text{font-size:14px;font-weight:600}
@@ -383,8 +458,10 @@ html,body{
 .tab-item{
   display:flex;flex-direction:column;align-items:center;gap:2px;
   font-size:10px;font-weight:600;color:var(--dim);
-  cursor:pointer;padding:4px 16px;border:none;background:none;
+  cursor:pointer;padding:6px 16px;border:none;background:none;
   transition:color .2s;position:relative;font-family:var(--font);
+  min-height:44px;min-width:60px;
+  -webkit-tap-highlight-color:transparent;
 }
 .tab-item.on{color:var(--pri)}
 .tab-item.on::before{
@@ -405,14 +482,28 @@ html,body{
 .empty-state{text-align:center;padding:40px 20px;color:var(--dim)}
 .empty-state .empty-icon{font-size:48px;margin-bottom:12px}
 .empty-state .empty-title{font-size:16px;font-weight:700;color:var(--txt2);margin-bottom:6px}
-.empty-state .empty-sub{font-size:13px;line-height:1.5}
+.empty-state .empty-sub{font-size:13px;line-height:1.5;color:var(--dim)}
 
-/* Loading */
+/* Loading shimmer */
 .shimmer{
   background:linear-gradient(90deg,rgba(255,255,255,.02) 25%,rgba(255,255,255,.06) 50%,rgba(255,255,255,.02) 75%);
-  background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;height:16px;
+  background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;
 }
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.shimmer-row{height:56px;margin-bottom:8px;border-radius:var(--r)}
+.shimmer-banner{height:120px;margin:8px 0 16px;border-radius:var(--r)}
+
+/* Toast */
+.toast{
+  position:fixed;top:env(safe-area-inset-top,44px);left:50%;transform:translateX(-50%) translateY(-100%);
+  background:var(--bg2);border:1px solid var(--glass-border);
+  border-radius:var(--r-sm);padding:10px 20px;z-index:300;
+  font-size:13px;font-weight:600;color:var(--txt);
+  box-shadow:0 8px 30px rgba(0,0,0,.4);
+  transition:transform .3s cubic-bezier(.25,.1,.25,1);
+  white-space:nowrap;
+}
+.toast.show{transform:translateX(-50%) translateY(12px)}
 </style>
 </head>
 <body>
@@ -421,14 +512,23 @@ html,body{
   <!-- Global Header -->
   <div class="hdr">
     <h1>📈 <span>StockAI</span></h1>
-    <div class="market-badge">
-      <div class="market-dot" id="marketDot"></div>
-      <span id="marketLabel">Loading...</span>
+    <div class="hdr-right">
+      <div class="market-badge" id="marketBadge">
+        <div class="market-dot" id="marketDot"></div>
+        <span id="marketLabel">Loading...</span>
+      </div>
+      <button class="refresh-btn" id="refreshBtn" onclick="refreshData()" aria-label="刷新数据">🔄</button>
     </div>
   </div>
 
+  <!-- Status banners (error/stale/offline) -->
+  <div id="statusBanner"></div>
+
   <!-- ===== PAGE: 行情 (Quotes) ===== -->
   <div class="page active" id="page-quotes">
+    <div class="pull-indicator" id="pullIndicator">
+      <span class="pull-arrow">↓</span> <span class="pull-text">下拉刷新</span>
+    </div>
     <div class="signal-banner neutral" id="signalBanner">
       <div class="signal-icon">🔍</div>
       <div class="signal-title">分析中...</div>
@@ -455,6 +555,10 @@ html,body{
       <h2 style="font-size:20px;font-weight:800">🤖 AI投顾</h2>
       <p style="font-size:12px;color:var(--dim);margin-top:4px">基于VIX、价格走势、板块特性的智能分析</p>
     </div>
+    <div class="risk-disclaimer">
+      <span class="risk-disclaimer-icon">⚠️</span>
+      <span>AI建议仅供参考，不构成投资建议。股市有风险，投资需谨慎。过往表现不代表未来收益，请根据自身风险承受能力独立决策。</span>
+    </div>
     <div id="advisorSummary"></div>
     <div class="sub-tabs" id="advisorTabs" style="padding-left:0;padding-right:0">
       <button class="sub-tab on" data-atab="all">全部</button>
@@ -480,7 +584,7 @@ html,body{
     <div class="me-header">
       <div class="me-avatar">👤</div>
       <div class="me-name">投资者</div>
-      <div class="me-sub">StockAI Pro · v2.0</div>
+      <div class="me-sub">StockAI Pro · v3.0</div>
     </div>
     <div id="meContent"></div>
   </div>
@@ -497,12 +601,12 @@ html,body{
 <!-- Detail Modal -->
 <div class="detail-overlay" id="detailOverlay">
   <div class="detail-header">
-    <button class="detail-close" id="detailClose">✕</button>
+    <button class="detail-close" id="detailClose" aria-label="关闭">✕</button>
     <div class="detail-ticker-group">
       <div class="detail-ticker" id="detailTicker"></div>
       <div class="detail-name" id="detailName"></div>
     </div>
-    <div style="width:36px"></div>
+    <div style="width:44px"></div>
   </div>
   <div id="detailBody"></div>
 </div>
@@ -519,11 +623,11 @@ html,body{
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">买入价格 ($)</label>
-        <input class="form-input" id="formPrice" type="number" step="0.01" placeholder="0.00">
+        <input class="form-input" id="formPrice" type="number" step="0.01" placeholder="0.00" inputmode="decimal">
       </div>
       <div class="form-group">
         <label class="form-label">股数</label>
-        <input class="form-input" id="formShares" type="number" step="0.01" placeholder="0">
+        <input class="form-input" id="formShares" type="number" step="0.01" placeholder="0" inputmode="decimal">
       </div>
     </div>
     <div class="form-group">
@@ -535,9 +639,13 @@ html,body{
   </div>
 </div>
 
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
 <script>
 /* ================================================================
-   StockAI v2 — Complete Application
+   StockAI v3 — Complete Application
+   QA pass: error handling, risk warnings, offline, refresh
    ================================================================ */
 
 // ===== DATA DEFINITIONS =====
@@ -587,58 +695,275 @@ let prices = {};
 let currentPage = 'quotes';
 let currentSubTab = 'fav';
 let currentAdvisorTab = 'all';
+let lastFetchTime = null;
+let lastDataUpdated = null;
+let fetchError = null;
+let isLoading = true;
+let refreshTimer = null;
 
-// ===== MARKET STATUS =====
+// ===== TOAST =====
+let toastTimer = null;
+function showToast(msg, duration=2000){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=> el.classList.remove('show'), duration);
+}
+
+// ===== MARKET STATUS (enhanced: pre/post/regular/closed) =====
+function getMarketState(){
+  const now = new Date();
+  const et = new Date(now.toLocaleString('en-US',{timeZone:'America/New_York'}));
+  const day = et.getDay(), mins = et.getHours()*60 + et.getMinutes();
+  const isWeekday = day >= 1 && day <= 5;
+
+  if(!isWeekday) return {state:'closed', label:'周末休市', dotClass:''};
+  if(mins >= 240 && mins < 570) return {state:'pre', label:'盘前交易', dotClass:'pre'};
+  if(mins >= 570 && mins < 960) return {state:'open', label:'交易中', dotClass:'open'};
+  if(mins >= 960 && mins < 1200) return {state:'post', label:'盘后交易', dotClass:'pre'};
+  return {state:'closed', label:'已休市', dotClass:''};
+}
+
 function isMarketOpen(){
-  const now=new Date();
-  const et=new Date(now.toLocaleString('en-US',{timeZone:'America/New_York'}));
-  const day=et.getDay(), mins=et.getHours()*60+et.getMinutes();
-  return day>=1&&day<=5&&mins>=570&&mins<960;
+  return getMarketState().state === 'open';
 }
 
 function updateMarketStatus(){
-  const open=isMarketOpen();
-  document.getElementById('marketDot').classList.toggle('open',open);
-  document.getElementById('marketLabel').textContent=open?'交易中':'已休市';
+  const ms = getMarketState();
+  const dot = document.getElementById('marketDot');
+  const label = document.getElementById('marketLabel');
+  dot.className = 'market-dot';
+  if(ms.dotClass) dot.classList.add(ms.dotClass);
+  label.textContent = ms.label;
+}
+
+// ===== STATUS BANNER (error/stale/offline) =====
+function updateStatusBanner(){
+  const el = document.getElementById('statusBanner');
+  const parts = [];
+
+  if(!navigator.onLine){
+    parts.push(`<div class="status-banner offline">📡 当前离线 — 显示缓存数据</div>`);
+  }
+
+  if(fetchError && !lastFetchTime){
+    parts.push(`<div class="status-banner error">⚠️ 数据加载失败: ${fetchError}。请检查网络后刷新。</div>`);
+  } else if(lastDataUpdated){
+    const ageMs = Date.now() - lastDataUpdated.getTime();
+    const ageHours = ageMs / 3600000;
+    if(ageHours > 4){
+      const agoText = ageHours >= 24
+        ? `${Math.floor(ageHours/24)}天${Math.floor(ageHours%24)}小时`
+        : `${Math.floor(ageHours)}小时`;
+      parts.push(`<div class="status-banner stale">⏰ 数据来自 ${agoText}前 — 点击刷新获取最新数据</div>`);
+    }
+  }
+
+  el.innerHTML = parts.join('');
 }
 
 // ===== FETCH DATA =====
 async function fetchPrices(){
+  const btn = document.getElementById('refreshBtn');
+  btn.classList.add('spinning');
+  fetchError = null;
+
   try{
-    const r=await fetch('./data/quotes.json?t='+Date.now());
-    if(!r.ok) throw new Error(r.status);
-    const d=await r.json();
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+
+    const r = await fetch('./data/quotes.json?t='+Date.now(), {signal: controller.signal});
+    clearTimeout(timeoutId);
+
+    if(!r.ok) throw new Error(`HTTP ${r.status}`);
+    const d = await r.json();
+
+    if(!d.quotes || typeof d.quotes !== 'object'){
+      throw new Error('数据格式异常');
+    }
+
     for(const[ticker,q] of Object.entries(d.quotes)){
-      prices[ticker]={
-        price:q.p, change:q.c, changePct:q.pct, prevClose:q.prev,
-        spark:q.spark, name:q.name
+      if(!q) continue;
+      prices[ticker] = {
+        price: safeNum(q.p), change: safeNum(q.c), changePct: safeNum(q.pct),
+        prevClose: safeNum(q.prev), spark: Array.isArray(q.spark) ? q.spark.filter(v=>isFinite(v)) : [],
+        name: q.name || ticker
       };
     }
-    const t=new Date(d.updated);
-    document.getElementById('updated').textContent=
-      `${Object.keys(d.quotes).length} 只 · 更新于 ${t.toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'})}`;
-  }catch(e){console.warn('Fetch failed:',e)}
+
+    lastFetchTime = new Date();
+    lastDataUpdated = d.updated ? new Date(d.updated) : new Date();
+    isLoading = false;
+    fetchError = null;
+
+    updateLastUpdated();
+    updateStatusBanner();
+
+  } catch(e){
+    console.warn('Fetch failed:', e);
+    fetchError = e.name === 'AbortError' ? '请求超时' : (e.message || '未知错误');
+    isLoading = false;
+    updateStatusBanner();
+
+    // If we have no data at all, show error state
+    if(Object.keys(prices).length === 0){
+      updateLastUpdated();
+    }
+  } finally {
+    btn.classList.remove('spinning');
+  }
 }
 
+function safeNum(v){
+  const n = Number(v);
+  return isFinite(n) ? n : null;
+}
+
+// ===== LAST UPDATED =====
+function updateLastUpdated(){
+  const el = document.getElementById('updated');
+  const count = Object.keys(prices).length;
+
+  if(count === 0 && fetchError){
+    el.textContent = `数据加载失败`;
+    return;
+  }
+
+  if(count === 0){
+    el.textContent = '加载中...';
+    return;
+  }
+
+  let timeText = '';
+  if(lastDataUpdated){
+    const diffMs = Date.now() - lastDataUpdated.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    if(diffMins < 1) timeText = '刚刚更新';
+    else if(diffMins < 60) timeText = `${diffMins}分钟前更新`;
+    else{
+      const hrs = Math.floor(diffMins/60);
+      timeText = `${hrs}小时${diffMins%60}分钟前更新`;
+    }
+  }
+
+  el.textContent = `${count} 只 · ${timeText}`;
+}
+
+// Keep the "X min ago" ticking
+setInterval(updateLastUpdated, 30000);
+
+// ===== REFRESH =====
+async function refreshData(){
+  showToast('正在刷新...');
+  await fetchPrices();
+  // Re-render current page
+  switch(currentPage){
+    case 'quotes': renderQuotes(); break;
+    case 'advisor': renderAdvisor(); break;
+    case 'portfolio': renderPortfolio(); break;
+    case 'me': renderMe(); break;
+  }
+  if(Object.keys(prices).length > 0 && !fetchError){
+    showToast('✅ 数据已更新');
+  } else if(fetchError){
+    showToast('❌ 刷新失败');
+  }
+}
+
+// ===== PULL-TO-REFRESH =====
+(function initPullToRefresh(){
+  let startY = 0, pulling = false, pullDist = 0;
+  const threshold = 80;
+
+  document.addEventListener('touchstart', e => {
+    if(currentPage !== 'quotes') return;
+    if(window.scrollY > 5) return;
+    startY = e.touches[0].clientY;
+    pulling = true;
+    pullDist = 0;
+  }, {passive:true});
+
+  document.addEventListener('touchmove', e => {
+    if(!pulling) return;
+    pullDist = e.touches[0].clientY - startY;
+    if(pullDist < 0){ pulling = false; return; }
+
+    const indicator = document.getElementById('pullIndicator');
+    if(pullDist > 20){
+      indicator.classList.add('visible');
+      indicator.querySelector('.pull-text').textContent =
+        pullDist > threshold ? '松手刷新' : '下拉刷新';
+      if(pullDist > threshold) indicator.classList.add('ready');
+      else indicator.classList.remove('ready');
+    }
+  }, {passive:true});
+
+  document.addEventListener('touchend', () => {
+    if(!pulling) return;
+    const indicator = document.getElementById('pullIndicator');
+    indicator.classList.remove('visible','ready');
+
+    if(pullDist > threshold){
+      refreshData();
+    }
+    pulling = false;
+    pullDist = 0;
+  }, {passive:true});
+})();
+
+// ===== ONLINE/OFFLINE =====
+window.addEventListener('online', () => { updateStatusBanner(); refreshData(); });
+window.addEventListener('offline', () => { updateStatusBanner(); });
+
 // ===== SPARKLINE SVG =====
-function sparkSvg(data,up,w=56,h=24){
-  if(!data||data.length<2) return '';
-  const pad=2, min=Math.min(...data), max=Math.max(...data), range=max-min||1;
-  const pts=data.map((v,i)=>`${pad+(i/(data.length-1))*(w-pad*2)},${pad+(1-(v-min)/range)*(h-pad*2)}`).join(' ');
-  const color=up?'#10b981':'#ef4444';
+function sparkSvg(data, up, w=56, h=24){
+  if(!data || !Array.isArray(data) || data.length < 2) return '<div class="mini-chart"><svg viewBox="0 0 56 24"><line x1="4" y1="12" x2="52" y2="12" stroke="#475569" stroke-width="1" stroke-dasharray="2,2"/></svg></div>';
+  const clean = data.filter(v => isFinite(v));
+  if(clean.length < 2) return '';
+  const pad=2, min=Math.min(...clean), max=Math.max(...clean), range=max-min||1;
+  const pts = clean.map((v,i)=>`${pad+(i/(clean.length-1))*(w-pad*2)},${pad+(1-(v-min)/range)*(h-pad*2)}`).join(' ');
+  const color = up ? '#10b981' : '#ef4444';
   return `<div class="mini-chart"><svg viewBox="0 0 ${w} ${h}"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>`;
 }
 
 // Large chart for detail page
-function detailChartSvg(data,up){
-  if(!data||data.length<2) return '';
-  const w=400, h=160, pad=8;
-  const min=Math.min(...data), max=Math.max(...data), range=max-min||1;
-  const pts=data.map((v,i)=>`${pad+(i/(data.length-1))*(w-pad*2)},${pad+(1-(v-min)/range)*(h-pad*2)}`);
-  const color=up?'#10b981':'#ef4444';
-  const gradId='cg'+Date.now();
-  // Area fill
-  const areaPath=`M${pts[0]} ${pts.join(' L')} L${pad+(data.length-1)/(data.length-1)*(w-pad*2)},${h} L${pad},${h} Z`;
+function detailChartSvg(data, up){
+  if(!data || !Array.isArray(data)) return '<div style="text-align:center;padding:30px 0;font-size:12px;color:var(--dim)">暂无图表数据</div>';
+  const clean = data.filter(v => isFinite(v));
+  if(clean.length < 2) return '<div style="text-align:center;padding:30px 0;font-size:12px;color:var(--dim)">数据点不足</div>';
+
+  const w=400, h=160, pad=12;
+  const min = Math.min(...clean), max = Math.max(...clean);
+  const range = max - min || 1;
+  const color = up ? '#10b981' : '#ef4444';
+  const gradId = 'cg'+Math.random().toString(36).slice(2,8);
+
+  const pts = clean.map((v,i) => {
+    const x = pad + (i/(clean.length-1))*(w-pad*2);
+    const y = pad + (1-(v-min)/range)*(h-pad*2-16); // leave room for labels
+    return {x, y, v};
+  });
+
+  const polyPoints = pts.map(p=>`${p.x},${p.y}`).join(' ');
+
+  // Area path: move to first, line through all, then drop to bottom and close
+  const lastPt = pts[pts.length-1];
+  const firstPt = pts[0];
+  const areaD = `M${firstPt.x},${firstPt.y} ${pts.slice(1).map(p=>`L${p.x},${p.y}`).join(' ')} L${lastPt.x},${h-16} L${firstPt.x},${h-16} Z`;
+
+  const circles = pts.map(p =>
+    `<circle cx="${p.x}" cy="${p.y}" r="3.5" fill="${color}" stroke="var(--bg)" stroke-width="2"/>`
+  ).join('');
+
+  const labels = pts.map((p,i) =>
+    `<text x="${p.x}" y="${h-2}" text-anchor="middle" fill="#64748b" font-size="9" font-family="var(--font)">D${i+1}</text>`
+  ).join('');
+
+  // Price range labels
+  const priceHigh = `<text x="${w-pad}" y="${pad+8}" text-anchor="end" fill="#64748b" font-size="9" font-family="var(--font)">$${max>=1000?max.toFixed(0):max.toFixed(2)}</text>`;
+  const priceLow = `<text x="${w-pad}" y="${h-22}" text-anchor="end" fill="#64748b" font-size="9" font-family="var(--font)">$${min>=1000?min.toFixed(0):min.toFixed(2)}</text>`;
+
   return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="width:100%;height:160px">
     <defs>
       <linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1">
@@ -646,85 +971,96 @@ function detailChartSvg(data,up){
         <stop offset="100%" stop-color="${color}" stop-opacity="0"/>
       </linearGradient>
     </defs>
-    <path d="${areaPath}" fill="url(#${gradId})"/>
-    <polyline points="${pts.join(' ')}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    ${data.map((v,i)=>{
-      const x=pad+(i/(data.length-1))*(w-pad*2);
-      const y=pad+(1-(v-min)/range)*(h-pad*2);
-      return `<circle cx="${x}" cy="${y}" r="3.5" fill="${color}" stroke="var(--bg)" stroke-width="2"/>`;
-    }).join('')}
-    ${data.map((v,i)=>{
-      const x=pad+(i/(data.length-1))*(w-pad*2);
-      return `<text x="${x}" y="${h-1}" text-anchor="middle" fill="#64748b" font-size="9" font-family="var(--font)">D${i+1}</text>`;
-    }).join('')}
+    <path d="${areaD}" fill="url(#${gradId})"/>
+    <polyline points="${polyPoints}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    ${circles}
+    ${labels}
+    ${priceHigh}
+    ${priceLow}
   </svg>`;
 }
 
 // ===== STOCK ROW =====
 function stockRow(s){
-  const p=prices[s.t]||{};
-  const price=p.price!=null?(p.price>=1000?p.price.toFixed(0):p.price.toFixed(2)):'---';
-  const pct=p.changePct!=null?p.changePct.toFixed(2):'0.00';
-  const up=(p.changePct||0)>=0;
+  const p = prices[s.t] || {};
+  const hasPrice = p.price != null && isFinite(p.price);
+  const price = hasPrice ? (p.price >= 1000 ? p.price.toFixed(0) : p.price.toFixed(2)) : '---';
+  const pct = (p.changePct != null && isFinite(p.changePct)) ? p.changePct.toFixed(2) : '0.00';
+  const pctNum = p.changePct || 0;
+  const up = pctNum > 0;
+  const flat = pctNum === 0;
+  const changeClass = flat ? 'flat' : (up ? 'up' : 'dn');
   return `<div class="stock-row" onclick="showDetail('${s.t}')">
     <div class="stock-left">
       <div class="stock-ticker">${s.t.replace('^','')}</div>
       <div class="stock-name">${s.n}</div>
     </div>
-    <div class="stock-mid">${sparkSvg(p.spark,up)}</div>
+    <div class="stock-mid">${sparkSvg(p.spark, up)}</div>
     <div class="stock-right">
-      <div class="stock-price">$${price}</div>
-      <div class="stock-change ${up?'up':'dn'}">${up?'+':''}${pct}%</div>
+      <div class="stock-price">${hasPrice?'$':''}${price}</div>
+      <div class="stock-change ${changeClass}">${up?'+':''}${pct}%</div>
     </div>
   </div>`;
 }
 
+// ===== LOADING SKELETON =====
+function renderSkeleton(count=4){
+  return Array(count).fill('<div class="shimmer shimmer-row"></div>').join('');
+}
+
 // ===== QUOTES PAGE =====
 function renderQuotes(){
-  const c=document.getElementById('quoteContent');
+  const c = document.getElementById('quoteContent');
   updateMarketStatus();
-  let items=[];
-  switch(currentSubTab){
-    case 'fav':
-      items=ALL.filter(s=>FAVORITES.includes(s.t));
-      break;
-    case 'indices':
-      items=STOCKS.indices;
-      break;
-    case 'chips':
-      items=STOCKS.chips;
-      break;
-    case 'cloud':
-      items=STOCKS.cloud;
-      break;
-    case 'models':
-      items=STOCKS.models;
-      break;
-    case 'apps':
-      items=STOCKS.apps;
-      break;
-    case 'etfs':
-      items=STOCKS.etfs;
-      break;
+
+  // Show skeleton on first load
+  if(isLoading && Object.keys(prices).length === 0){
+    document.getElementById('signalBanner').innerHTML = `
+      <div class="signal-icon">⏳</div>
+      <div class="signal-title">加载中...</div>
+      <div class="signal-text">正在获取最新行情数据...</div>
+    `;
+    c.innerHTML = renderSkeleton(5);
+    return;
   }
 
-  let html=items.map(stockRow).join('');
+  let items = [];
+  switch(currentSubTab){
+    case 'fav': items = ALL.filter(s=>FAVORITES.includes(s.t)); break;
+    case 'indices': items = STOCKS.indices; break;
+    case 'chips': items = STOCKS.chips; break;
+    case 'cloud': items = STOCKS.cloud; break;
+    case 'models': items = STOCKS.models; break;
+    case 'apps': items = STOCKS.apps; break;
+    case 'etfs': items = STOCKS.etfs; break;
+  }
+
+  if(Object.keys(prices).length === 0){
+    c.innerHTML = `<div class="empty-state">
+      <div class="empty-icon">📡</div>
+      <div class="empty-title">暂无数据</div>
+      <div class="empty-sub">无法加载行情数据，请检查网络后点击刷新按钮</div>
+    </div>`;
+    return;
+  }
+
+  let html = items.map(stockRow).join('');
 
   // Fear & Greed on indices tab
-  if(currentSubTab==='indices') html+=renderFearGreed();
+  if(currentSubTab === 'indices') html += renderFearGreed();
 
-  c.innerHTML=html;
+  c.innerHTML = html;
   updateSignalBanner();
 }
 
 function renderFearGreed(){
-  const vix=prices['^VIX'];
+  const vix = prices['^VIX'];
   let score=50, label='😐 中性', color='var(--acc)';
-  if(vix&&vix.price){
-    if(vix.price<15){score=82;label='😎 极度贪婪';color='var(--up)'}
-    else if(vix.price<20){score=65;label='😊 贪婪';color='var(--up)'}
-    else if(vix.price<25){score=50;label='😐 中性';color='var(--acc)'}
-    else if(vix.price<30){score=35;label='😰 恐惧';color='var(--dn)'}
+  if(vix && vix.price != null && isFinite(vix.price)){
+    if(vix.price < 15){score=82;label='😎 极度贪婪';color='var(--up)'}
+    else if(vix.price < 20){score=65;label='😊 贪婪';color='var(--up)'}
+    else if(vix.price < 25){score=50;label='😐 中性';color='var(--acc)'}
+    else if(vix.price < 30){score=35;label='😰 恐惧';color='var(--dn)'}
     else{score=15;label='😱 极度恐惧';color='var(--dn)'}
   }
   return `<div class="glass-card fg-card" style="margin-top:12px">
@@ -732,7 +1068,7 @@ function renderFearGreed(){
       <div class="fg-label">恐惧&贪婪指数</div>
       <div class="fg-score" style="color:${color}">${score}</div>
     </div>
-    <div style="font-size:13px;color:var(--dim);margin-bottom:10px">${label} · VIX: ${vix?.price?.toFixed(1)||'---'}</div>
+    <div style="font-size:13px;color:var(--dim);margin-bottom:10px">${label} · VIX: ${vix?.price!=null?vix.price.toFixed(1):'---'}</div>
     <div class="fg-meter"><div class="fg-fill" style="width:${score}%;background:${color}"></div></div>
     <div class="fg-labels"><span>极度恐惧</span><span>极度贪婪</span></div>
   </div>`;
@@ -740,52 +1076,54 @@ function renderFearGreed(){
 
 // ===== AI SIGNAL BANNER =====
 function updateSignalBanner(){
-  const banner=document.getElementById('signalBanner');
-  const aiStocks=ALL.filter(s=>!INDEX_TICKERS.has(s.t)&&!ETF_TICKERS.has(s.t));
+  const banner = document.getElementById('signalBanner');
+  if(Object.keys(prices).length === 0) return;
+
+  const aiStocks = ALL.filter(s => !INDEX_TICKERS.has(s.t) && !ETF_TICKERS.has(s.t));
   let upCount=0, dnCount=0, bigMoves=[];
 
   for(const s of aiStocks){
-    const p=prices[s.t];
-    if(!p) continue;
-    if(p.changePct>0) upCount++; else dnCount++;
-    if(Math.abs(p.changePct)>5) bigMoves.push({...s, pct:p.changePct});
+    const p = prices[s.t];
+    if(!p || p.changePct == null) continue;
+    if(p.changePct > 0) upCount++; else dnCount++;
+    if(Math.abs(p.changePct) > 5) bigMoves.push({...s, pct:p.changePct});
   }
 
-  const vix=prices['^VIX'];
-  const vixVal=vix?.price||20;
-  const total=upCount+dnCount;
-  const bullPct=total>0?upCount/total:0.5;
+  const vix = prices['^VIX'];
+  const vixVal = (vix && vix.price != null && isFinite(vix.price)) ? vix.price : 20;
+  const total = upCount + dnCount;
+  const bullPct = total > 0 ? upCount/total : 0.5;
 
-  let mood,icon,title,text,action;
+  let mood, icon, title, text, action;
 
-  if(vixVal>25){
-    mood='bear';icon='🛡️';
-    title=`VIX ${vixVal.toFixed(1)} — 市场恐慌升温`;
-    text=`恐慌指数高于25，市场波动加剧。${bigMoves.length?bigMoves.map(m=>`${m.t} ${m.pct>0?'+':''}${m.pct.toFixed(1)}%`).join('，')+'异动。':''}建议降低仓位，等待明确信号。`;
+  if(vixVal > 25){
+    mood='bear'; icon='🛡️';
+    title = `VIX ${vixVal.toFixed(1)} — 市场恐慌升温`;
+    text = `恐慌指数高于25，市场波动加剧。${bigMoves.length?bigMoves.map(m=>`${m.t} ${m.pct>0?'+':''}${m.pct.toFixed(1)}%`).join('，')+'异动。':''}建议降低仓位，等待明确信号。`;
     action='防御为主，控制仓位';
-  } else if(bigMoves.length>0){
-    const top=bigMoves.sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct))[0];
-    mood=top.pct>0?'bull':'bear';
-    icon=top.pct>0?'🚀':'⚠️';
-    title=`${top.t} ${top.pct>0?'+':''}${top.pct.toFixed(1)}% 异常波动`;
-    text=`${top.n} 今日大幅${top.pct>0?'上涨':'下跌'}，关注是否有重大消息驱动。`;
-    action=top.pct>0?'短线关注，勿追高':'观望为主，等待企稳';
-  } else if(bullPct>0.65){
-    mood='bull';icon='📈';title='AI板块整体偏多';
-    text=`${upCount}/${total} AI股上涨，市场情绪积极。VIX ${vixVal.toFixed(1)} 处于合理区间。`;
+  } else if(bigMoves.length > 0){
+    const top = bigMoves.sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct))[0];
+    mood = top.pct>0 ? 'bull' : 'bear';
+    icon = top.pct>0 ? '🚀' : '⚠️';
+    title = `${top.t} ${top.pct>0?'+':''}${top.pct.toFixed(1)}% 异常波动`;
+    text = `${top.n} 今日大幅${top.pct>0?'上涨':'下跌'}，关注是否有重大消息驱动。注意控制风险。`;
+    action = top.pct>0 ? '短线关注，勿追高' : '观望为主，等待企稳';
+  } else if(bullPct > 0.65){
+    mood='bull'; icon='📈'; title='AI板块整体偏多';
+    text = `${upCount}/${total} AI股上涨，市场情绪积极。VIX ${vixVal.toFixed(1)} 处于合理区间。注意不要过度乐观。`;
     action='定投继续，择机加仓';
-  } else if(bullPct<0.35){
-    mood='bear';icon='📉';title='AI板块整体偏空';
-    text=`${dnCount}/${total} AI股下跌，注意风控。${vixVal>20?'VIX偏高，谨慎操作。':''}`;
+  } else if(bullPct < 0.35){
+    mood='bear'; icon='📉'; title='AI板块整体偏空';
+    text = `${dnCount}/${total} AI股下跌，注意风控。${vixVal>20?'VIX偏高，谨慎操作。':''}不建议恐慌性抛售。`;
     action='持有观望，等反转信号';
   } else{
-    mood='neutral';icon='⚖️';title='AI板块震荡运行';
-    text=`涨跌参半，无明显方向。VIX ${vixVal.toFixed(1)}，波动适中。`;
+    mood='neutral'; icon='⚖️'; title='AI板块震荡运行';
+    text = `涨跌参半，无明显方向。VIX ${vixVal.toFixed(1)}，波动适中。`;
     action='按计划定投即可';
   }
 
-  banner.className=`signal-banner ${mood}`;
-  banner.innerHTML=`
+  banner.className = `signal-banner ${mood}`;
+  banner.innerHTML = `
     <div class="signal-icon">${icon}</div>
     <div class="signal-title">${title}</div>
     <div class="signal-text">${text}</div>
@@ -794,88 +1132,177 @@ function updateSignalBanner(){
 
 // ===== AI ADVISOR PAGE =====
 function getAIAdvice(ticker){
-  const p=prices[ticker];
-  if(!p||!p.spark||p.spark.length<2) return {action:'hold',label:'持有观望',reason:'数据不足，无法分析',confidence:0};
+  const p = prices[ticker];
+  if(!p || !p.spark || p.spark.length < 2) return {action:'hold', label:'数据不足', reason:'暂无足够的历史数据进行分析，建议观望等待数据完善后再做决策。', confidence:0, risk:'数据缺失时任何操作都有较高风险。'};
 
-  const vix=prices['^VIX']?.price||20;
-  const isETF=ETF_TICKERS.has(ticker);
-  const isIndex=INDEX_TICKERS.has(ticker);
-  const spark=p.spark;
-  const first=spark[0], last=spark[spark.length-1];
-  const fiveDayChange=((last-first)/first)*100;
-  const todayPct=p.changePct||0;
+  const vix = (prices['^VIX'] && isFinite(prices['^VIX'].price)) ? prices['^VIX'].price : 20;
+  const isETF = ETF_TICKERS.has(ticker);
+  const isIndex = INDEX_TICKERS.has(ticker);
+  const spark = p.spark.filter(v => isFinite(v));
+  if(spark.length < 2) return {action:'hold', label:'数据不足', reason:'数据异常，无法分析。', confidence:0, risk:'请等待数据恢复。'};
 
-  // ETFs always DCA
+  const first = spark[0], last = spark[spark.length-1];
+  const fiveDayChange = ((last - first) / first) * 100;
+  const todayPct = p.changePct || 0;
+
+  // Volatility of spark data
+  let maxDrawdown = 0;
+  let peak = spark[0];
+  for(const v of spark){
+    if(v > peak) peak = v;
+    const dd = (peak - v) / peak * 100;
+    if(dd > maxDrawdown) maxDrawdown = dd;
+  }
+
+  // ETFs: nuanced DCA advice
   if(isETF){
-    let reason=`${ticker} 是ETF，适合长期定投。`;
-    if(vix>25) reason+=`当前VIX=${vix.toFixed(1)}>25，市场恐慌，分批买入可摊低成本。`;
-    else if(vix<15) reason+=`VIX=${vix.toFixed(1)}<15，市场乐观，定投持续即可。`;
-    else reason+=`VIX=${vix.toFixed(1)} 中性区间，保持定投节奏。`;
-    if(fiveDayChange<-3) reason+=` 5日跌${Math.abs(fiveDayChange).toFixed(1)}%，可适当加仓。`;
-    return {action:'dca',label:'定投',reason,confidence:85,fiveDayChange};
+    let reason = `${ticker} 是ETF，适合长期定投策略。`;
+    let risk = '';
+    if(vix > 30){
+      reason += ` VIX=${vix.toFixed(1)}>30，极度恐慌期，分批买入可摊低成本，但需做好短期浮亏准备。`;
+      risk = '高波动环境下ETF也可能大幅回撤。建议拉长定投周期，减小单次投入。';
+    } else if(vix > 25){
+      reason += ` VIX=${vix.toFixed(1)}>25，市场不安，分批买入可摊低成本。`;
+      risk = '市场恐慌期间波动可能加剧，做好心理准备。';
+    } else if(vix < 13){
+      reason += ` VIX=${vix.toFixed(1)}<13，市场极度乐观，警惕回调风险。定投继续但不建议大额加仓。`;
+      risk = '低波动率往往是暴风雨前的平静，保持定投但控制单次金额。';
+    } else if(vix < 15){
+      reason += ` VIX=${vix.toFixed(1)}<15，市场乐观，定投持续即可。`;
+      risk = '市场平静期不代表无风险，继续按计划执行。';
+    } else{
+      reason += ` VIX=${vix.toFixed(1)} 中性区间，保持定投节奏。`;
+      risk = '定投的关键是坚持，不要因为短期波动改变计划。';
+    }
+    if(fiveDayChange < -5) reason += ` 5日跌${Math.abs(fiveDayChange).toFixed(1)}%，跌幅较大，可适当加仓但控制比例。`;
+    else if(fiveDayChange < -3) reason += ` 5日跌${Math.abs(fiveDayChange).toFixed(1)}%，可适当加仓。`;
+    else if(fiveDayChange > 5) reason += ` 5日涨${fiveDayChange.toFixed(1)}%，涨幅较大，不建议追加，按计划定投即可。`;
+    return {action:'dca', label:'定投', reason, confidence:80, fiveDayChange, risk};
   }
 
   if(isIndex){
-    return {action:'hold',label:'参考指标',reason:`${p.name||ticker} 是市场指数，不直接交易。5日变动 ${fiveDayChange>0?'+':''}${fiveDayChange.toFixed(1)}%。VIX=${vix.toFixed(1)}。`,confidence:0,fiveDayChange};
+    return {action:'hold', label:'参考指标', reason:`${p.name||ticker} 是市场指数，用于参考大盘方向。5日变动 ${fiveDayChange>0?'+':''}${fiveDayChange.toFixed(1)}%，VIX=${vix.toFixed(1)}。`, confidence:0, fiveDayChange, risk:''};
   }
 
-  // Individual stocks
-  let action='hold', label='持有观望', reason='', confidence=60;
+  // ===== Individual stocks: nuanced multi-factor analysis =====
+  let action='hold', label='持有观望', reason='', confidence=50, risk='';
 
-  if(fiveDayChange<-5){
-    // Big 5-day drop: wait
-    action='hold';label='观望';confidence=70;
-    reason=`5日跌幅 ${fiveDayChange.toFixed(1)}% 超过5%，跌势未止。等待企稳信号再考虑入场。`;
-    if(vix>25) reason+=` VIX=${vix.toFixed(1)} 恐慌区间，整体环境不利。`;
-  } else if(fiveDayChange<=-3&&fiveDayChange>=-5){
-    // Moderate drop: watch for entry
-    action='buy';label='关注买入';confidence=65;
-    reason=`5日跌幅 ${Math.abs(fiveDayChange).toFixed(1)}% 在3-5%区间，可能是回调买点。`;
-    if(vix<20) reason+=` VIX=${vix.toFixed(1)} 偏低，大环境不差，支持逢低布局。`;
-    else reason+=` 但VIX=${vix.toFixed(1)}，注意控制仓位。`;
-  } else if(fiveDayChange>5){
-    // Strong rally
-    if(todayPct>3){
-      action='sell';label='止盈';confidence=60;
-      reason=`5日涨 ${fiveDayChange.toFixed(1)}% 且今日续涨 ${todayPct.toFixed(1)}%，短线超买，考虑部分止盈。`;
+  // Factor 1: 5-day trend
+  // Factor 2: Today's move
+  // Factor 3: VIX environment
+  // Factor 4: Max drawdown / volatility
+
+  if(fiveDayChange < -8){
+    action='hold'; label='⚠️ 深跌观望'; confidence=75;
+    reason = `5日跌幅 ${fiveDayChange.toFixed(1)}% 已超过8%，属于深度调整。此时不宜抄底，因为趋势可能尚未结束。建议等待连续两日企稳（跌幅收窄至1%内）再考虑入场。`;
+    risk = '下跌趋势中接飞刀风险极高。急跌往往是基本面恶化信号，需确认原因后再行动。';
+  } else if(fiveDayChange < -5){
+    action='hold'; label='观望'; confidence=70;
+    reason = `5日跌幅 ${Math.abs(fiveDayChange).toFixed(1)}% 超过5%，跌势较重。等待企稳信号再考虑入场。`;
+    if(vix > 25) reason += ` VIX=${vix.toFixed(1)} 处于恐慌区间，整体环境不利。`;
+    risk = '连续下跌可能存在基本面问题。不建议在没有明确止跌信号时入场。';
+  } else if(fiveDayChange <= -3 && fiveDayChange >= -5){
+    if(vix < 20){
+      action='buy'; label='关注买入'; confidence=60;
+      reason = `5日跌幅 ${Math.abs(fiveDayChange).toFixed(1)}% 在3-5%区间，可能是技术性回调。VIX=${vix.toFixed(1)} 偏低，大环境不差，可考虑小仓位试探。`;
+      risk = '即使是回调买入，也建议分批入场，单次不超过计划仓位的1/3。如继续下跌应止损。';
     } else{
-      action='hold';label='持有';confidence=55;
-      reason=`5日涨 ${fiveDayChange.toFixed(1)}%，涨势良好。今日动能 ${todayPct>0?'+':''}${todayPct.toFixed(1)}%，暂持有。`;
+      action='hold'; label='谨慎观望'; confidence=55;
+      reason = `5日跌 ${Math.abs(fiveDayChange).toFixed(1)}%，但VIX=${vix.toFixed(1)} 偏高，市场环境不佳，建议等待恐慌消退再考虑。`;
+      risk = '高VIX环境下抄底成功率较低。等待VIX回落至20以下是更安全的策略。';
     }
-  } else if(todayPct<-3){
-    action='hold';label='观望';confidence=60;
-    reason=`今日单日跌 ${Math.abs(todayPct).toFixed(1)}%，等待明日确认方向。不建议恐慌抛售。`;
-  } else if(todayPct>3){
-    action='hold';label='持有';confidence=55;
-    reason=`今日涨 ${todayPct.toFixed(1)}%，表现强势。5日变动 ${fiveDayChange>0?'+':''}${fiveDayChange.toFixed(1)}%，关注后续动能。`;
+  } else if(fiveDayChange > 8){
+    action='sell'; label='止盈'; confidence=65;
+    reason = `5日涨 ${fiveDayChange.toFixed(1)}% 超过8%，短期严重超买。建议至少卖出1/3锁定利润。`;
+    if(todayPct > 3) reason += ` 今日续涨 ${todayPct.toFixed(1)}%，动能减弱概率增大。`;
+    risk = '追涨风险极高。即使看好长期，也应在快速上涨后减仓锁定部分利润。';
+  } else if(fiveDayChange > 5){
+    if(todayPct > 3){
+      action='sell'; label='部分止盈'; confidence=60;
+      reason = `5日涨 ${fiveDayChange.toFixed(1)}% 且今日续涨 ${todayPct.toFixed(1)}%，短线超买。考虑部分止盈，保留底仓。`;
+      risk = '快速上涨后回调是常态。可卖出50%锁定利润，剩余设置止盈位。';
+    } else if(todayPct < -1){
+      action='hold'; label='持有观望'; confidence=55;
+      reason = `5日涨 ${fiveDayChange.toFixed(1)}% 但今日回落 ${todayPct.toFixed(1)}%，可能是正常获利回吐。观察明日走势。`;
+      risk = '上涨趋势中的回调是正常的，但如果连续两日回落幅度加大，应考虑减仓。';
+    } else{
+      action='hold'; label='持有'; confidence=55;
+      reason = `5日涨 ${fiveDayChange.toFixed(1)}%，涨势良好。今日动能 ${todayPct>0?'+':''}${todayPct.toFixed(1)}%，可持有但设好止盈位。`;
+      risk = '上涨趋势中持有是合理的，但要设置止盈（如回撤5%时离场）。';
+    }
+  } else if(todayPct < -4){
+    action='hold'; label='⚠️ 异动观望'; confidence=65;
+    reason = `今日单日暴跌 ${Math.abs(todayPct).toFixed(1)}%，可能有重大利空。建议查阅新闻确认原因，不要盲目操作。`;
+    risk = '单日暴跌通常有消息驱动（财报、诉讼、降级等），必须搞清原因后再决策。';
+  } else if(todayPct < -2){
+    action='hold'; label='观望'; confidence=55;
+    reason = `今日跌 ${Math.abs(todayPct).toFixed(1)}%，等待明日确认方向。5日变动 ${fiveDayChange>0?'+':''}${fiveDayChange.toFixed(1)}%。`;
+    risk = '单日波动可能是噪音，不建议恐慌抛售。但持续下跌时应重新评估。';
+  } else if(todayPct > 4){
+    action='hold'; label='持有观察'; confidence=55;
+    reason = `今日大涨 ${todayPct.toFixed(1)}%，表现强势。需确认是否有消息驱动，纯情绪性上涨后容易回落。`;
+    risk = '单日大涨后追入风险高。如已持有可继续，新建仓建议等待回调。';
+  } else if(todayPct > 2){
+    action='hold'; label='持有'; confidence=50;
+    reason = `今日涨 ${todayPct.toFixed(1)}%，5日变动 ${fiveDayChange>0?'+':''}${fiveDayChange.toFixed(1)}%，走势正常。`;
+    risk = '正常波动范围内，维持现有策略即可。';
   } else{
-    // Normal range
-    if(vix>25){
-      action='hold';label='谨慎持有';confidence=50;
-      reason=`价格变动温和，但VIX=${vix.toFixed(1)}>25 处于恐慌区间，市场不确定性高。`;
-    } else if(vix<15){
-      action='buy';label='可加仓';confidence=60;
-      reason=`VIX=${vix.toFixed(1)}<15 市场乐观，波动低。5日变动 ${fiveDayChange>0?'+':''}${fiveDayChange.toFixed(1)}%，适合建仓。`;
+    // Normal range (-2% to +2% today)
+    if(vix > 30){
+      action='hold'; label='⚠️ 谨慎'; confidence=55;
+      reason = `价格变动温和，但VIX=${vix.toFixed(1)}>30 处于极度恐慌区间。市场随时可能大幅波动，降低仓位为宜。`;
+      risk = '极高波动环境下所有个股都面临系统性风险。保持低仓位，现金为王。';
+    } else if(vix > 25){
+      action='hold'; label='谨慎持有'; confidence=50;
+      reason = `价格变动温和，但VIX=${vix.toFixed(1)}>25 处于恐慌区间，市场不确定性高。`;
+      risk = '恐慌期间不建议新建仓位。已有仓位可持有但需设好止损。';
+    } else if(vix < 13){
+      action='hold'; label='警惕持有'; confidence=45;
+      reason = `VIX=${vix.toFixed(1)}<13 极低，市场过度乐观。历史上VIX极低点往往预示波动率即将上升。`;
+      risk = '当所有人都不恐惧时，往往是风险积累期。建议适度减仓，锁定利润。';
+    } else if(vix < 18 && fiveDayChange > 0){
+      action='buy'; label='可建仓'; confidence=55;
+      reason = `VIX=${vix.toFixed(1)} 处于低位，市场环境良好。5日微涨 ${fiveDayChange.toFixed(1)}%，趋势偏多。适合小仓位建仓。`;
+      risk = '建仓时建议分2-3批入场。单日跌幅超3%应暂停加仓。';
     } else{
-      action='hold';label='持有';confidence=50;
-      reason=`走势平稳，无明显信号。VIX=${vix.toFixed(1)} 中性区间，维持现有仓位即可。`;
+      action='hold'; label='持有'; confidence=50;
+      reason = `走势平稳，无明显信号。VIX=${vix.toFixed(1)} 中性区间，维持现有仓位即可。`;
+      risk = '横盘期是制定交易计划的好时机。提前设好买入和卖出的触发条件。';
     }
   }
 
-  return {action,label,reason,confidence,fiveDayChange};
+  // Add drawdown context
+  if(maxDrawdown > 5){
+    reason += ` 近5日最大回撤 ${maxDrawdown.toFixed(1)}%，波动较大。`;
+  }
+
+  return {action, label, reason, confidence, fiveDayChange, risk};
 }
 
 function renderAdvisor(){
-  const c=document.getElementById('advisorContent');
-  const sum=document.getElementById('advisorSummary');
+  const c = document.getElementById('advisorContent');
+  const sum = document.getElementById('advisorSummary');
+
+  if(Object.keys(prices).length === 0){
+    sum.innerHTML = '';
+    c.innerHTML = `<div class="empty-state"><div class="empty-icon">📡</div><div class="empty-title">暂无数据</div><div class="empty-sub">加载行情数据后即可查看AI分析</div></div>`;
+    return;
+  }
 
   // Summary card
-  const vix=prices['^VIX']?.price||20;
+  const vix = (prices['^VIX'] && isFinite(prices['^VIX'].price)) ? prices['^VIX'].price : 20;
   let marketMood='中性', moodColor='var(--acc)', moodEmoji='⚖️';
-  if(vix>25){marketMood='恐慌';moodColor='var(--dn)';moodEmoji='🛡️'}
-  else if(vix<15){marketMood='乐观';moodColor='var(--up)';moodEmoji='🚀'}
+  if(vix > 30){marketMood='极度恐慌';moodColor='var(--dn)';moodEmoji='😱'}
+  else if(vix > 25){marketMood='恐慌';moodColor='var(--dn)';moodEmoji='🛡️'}
+  else if(vix < 13){marketMood='过度乐观';moodColor='var(--amber)';moodEmoji='⚠️'}
+  else if(vix < 15){marketMood='乐观';moodColor='var(--up)';moodEmoji='🚀'}
 
-  sum.innerHTML=`<div class="glass-card" style="margin-bottom:14px">
+  const sp = prices['^GSPC'];
+  const ndx = prices['^IXIC'];
+  const spPct = (sp && isFinite(sp.changePct)) ? sp.changePct : 0;
+  const ndxPct = (ndx && isFinite(ndx.changePct)) ? ndx.changePct : 0;
+
+  sum.innerHTML = `<div class="glass-card" style="margin-bottom:14px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
       <div style="font-size:14px;font-weight:700">${moodEmoji} 市场环境</div>
       <div style="font-size:13px;font-weight:700;color:${moodColor}">${marketMood}</div>
@@ -887,44 +1314,46 @@ function renderAdvisor(){
       </div>
       <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:10px;text-align:center">
         <div style="font-size:10px;color:var(--dim)">S&P 500</div>
-        <div style="font-size:18px;font-weight:800;color:${(prices['^GSPC']?.changePct||0)>=0?'var(--up)':'var(--dn)'}">${(prices['^GSPC']?.changePct||0).toFixed(1)}%</div>
+        <div style="font-size:18px;font-weight:800;color:${spPct>=0?'var(--up)':'var(--dn)'}">${spPct>=0?'+':''}${spPct.toFixed(1)}%</div>
       </div>
       <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:10px;text-align:center">
         <div style="font-size:10px;color:var(--dim)">NASDAQ</div>
-        <div style="font-size:18px;font-weight:800;color:${(prices['^IXIC']?.changePct||0)>=0?'var(--up)':'var(--dn)'}">${(prices['^IXIC']?.changePct||0).toFixed(1)}%</div>
+        <div style="font-size:18px;font-weight:800;color:${ndxPct>=0?'var(--up)':'var(--dn)'}">${ndxPct>=0?'+':''}${ndxPct.toFixed(1)}%</div>
       </div>
     </div>
   </div>`;
 
   // Get advice for all non-index tickers
-  const tradeable=ALL.filter(s=>!INDEX_TICKERS.has(s.t));
-  const advices=tradeable.map(s=>{
-    const advice=getAIAdvice(s.t);
-    return {...s,...advice, priceData:prices[s.t]};
+  const tradeable = ALL.filter(s => !INDEX_TICKERS.has(s.t));
+  const advices = tradeable.map(s => {
+    const advice = getAIAdvice(s.t);
+    return {...s, ...advice, priceData:prices[s.t]};
   });
 
   // Filter by tab
-  let filtered=advices;
-  if(currentAdvisorTab!=='all'){
-    filtered=advices.filter(a=>a.action===currentAdvisorTab);
+  let filtered = advices;
+  if(currentAdvisorTab !== 'all'){
+    filtered = advices.filter(a => a.action === currentAdvisorTab);
   }
 
-  if(filtered.length===0){
-    c.innerHTML=`<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-title">暂无${currentAdvisorTab==='buy'?'买入':currentAdvisorTab==='sell'?'卖出':currentAdvisorTab==='hold'?'持有':'定投'}建议</div></div>`;
+  if(filtered.length === 0){
+    c.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-title">暂无${currentAdvisorTab==='buy'?'买入':currentAdvisorTab==='sell'?'卖出':currentAdvisorTab==='hold'?'持有':'定投'}建议</div><div class="empty-sub">当前市场条件下没有触发此类信号</div></div>`;
     return;
   }
 
-  c.innerHTML=filtered.map(a=>{
-    const p=a.priceData||{};
-    const pct=p.changePct!=null?p.changePct.toFixed(2):'0.00';
-    const up=(p.changePct||0)>=0;
+  c.innerHTML = filtered.map(a => {
+    const p = a.priceData || {};
+    const hasPrice = p.price != null && isFinite(p.price);
+    const pct = (p.changePct != null && isFinite(p.changePct)) ? p.changePct.toFixed(2) : '0.00';
+    const up = (p.changePct || 0) >= 0;
     return `<div class="advisor-card ${a.action}" onclick="showDetail('${a.t}')">
       <div class="advisor-header">
         <div class="advisor-ticker">${a.t} <span style="font-size:12px;font-weight:400;color:var(--dim)">${a.n}</span></div>
         <div class="advisor-badge ${a.action}">${a.label}</div>
       </div>
-      <div class="advisor-price">$${p.price!=null?p.price.toFixed(2):'---'} <span class="${up?'text-up':'text-dn'}">${up?'+':''}${pct}%</span></div>
+      <div class="advisor-price">$${hasPrice?p.price.toFixed(2):'---'} <span class="${up?'text-up':'text-dn'}">${up?'+':''}${pct}%</span></div>
       <div class="advisor-reason">${a.reason}</div>
+      ${a.risk?`<div class="advisor-risk">⚠️ ${a.risk}</div>`:''}
       <div class="advisor-metrics">
         ${a.fiveDayChange!=null?`<span class="advisor-metric">5日 ${a.fiveDayChange>0?'+':''}${a.fiveDayChange.toFixed(1)}%</span>`:''}
         ${a.confidence?`<span class="advisor-metric">置信度 ${a.confidence}%</span>`:''}
@@ -935,70 +1364,70 @@ function renderAdvisor(){
 
 // ===== NEWS / SIGNALS =====
 function generateNews(){
-  // Generate contextual news from actual price data
-  const news=[];
-  const now=new Date();
-  const vix=prices['^VIX'];
+  const news = [];
+  const now = new Date();
+  const vix = prices['^VIX'];
 
-  if(vix&&vix.changePct>20){
+  if(vix && vix.changePct != null && vix.changePct > 20){
     news.push({
       title:`VIX恐慌指数单日暴涨${vix.changePct.toFixed(0)}%，市场避险情绪升温`,
-      body:`VIX从${vix.prevClose?.toFixed(1)}飙升至${vix.price?.toFixed(1)}，创近期新高。历史数据显示，VIX快速上升期往往对应市场短期底部。`,
-      source:'MarketWatch',sentiment:'bearish',
+      body:`VIX从${vix.prevClose?.toFixed(1)||'---'}飙升至${vix.price?.toFixed(1)||'---'}，创近期新高。历史数据显示，VIX快速上升期往往对应市场短期底部。`,
+      source:'MarketWatch', sentiment:'bearish',
       tags:['VIX','波动率'],
-      time:formatTimeAgo(new Date(now-25*60000))
+      time:formatTimeAgo(new Date(now - 25*60000))
     });
   }
 
   // Find biggest movers
-  const movers=ALL.filter(s=>!INDEX_TICKERS.has(s.t)&&prices[s.t])
-    .map(s=>({...s,pct:prices[s.t].changePct}))
-    .sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct));
+  const movers = ALL.filter(s => !INDEX_TICKERS.has(s.t) && prices[s.t] && isFinite(prices[s.t].changePct))
+    .map(s => ({...s, pct:prices[s.t].changePct}))
+    .sort((a,b) => Math.abs(b.pct) - Math.abs(a.pct));
 
-  if(movers[0]&&Math.abs(movers[0].pct)>5){
-    const m=movers[0], up=m.pct>0;
+  if(movers[0] && Math.abs(movers[0].pct) > 5){
+    const m = movers[0], up = m.pct > 0;
+    const mp = prices[m.t];
     news.push({
       title:`${m.t}${up?'大涨':'重挫'}${Math.abs(m.pct).toFixed(1)}%，${up?'市场追捧AI概念':'引发板块担忧'}`,
-      body:`${m.n}今日${up?'强势上攻':'大幅回调'}，当前价格$${prices[m.t].price.toFixed(2)}。${up?'分析师上调目标价，资金持续流入。':'短期获利盘涌出，需关注支撑位。'}`,
-      source:'Bloomberg',sentiment:up?'bullish':'bearish',
-      tags:[m.t,m.cat.replace(/[^\u4e00-\u9fa5a-zA-Z]/g,'')],
-      time:formatTimeAgo(new Date(now-45*60000))
+      body:`${m.n}今日${up?'强势上攻':'大幅回调'}，当前价格$${mp.price!=null?mp.price.toFixed(2):'---'}。${up?'分析师上调目标价，资金持续流入。':'短期获利盘涌出，需关注支撑位。'}`,
+      source:'Bloomberg', sentiment:up?'bullish':'bearish',
+      tags:[m.t, m.cat.replace(/[^\u4e00-\u9fa5a-zA-Z]/g,'')],
+      time:formatTimeAgo(new Date(now - 45*60000))
     });
   }
 
-  if(movers[1]&&Math.abs(movers[1].pct)>3){
-    const m=movers[1], up=m.pct>0;
+  if(movers[1] && Math.abs(movers[1].pct) > 3){
+    const m = movers[1], up = m.pct > 0;
     news.push({
       title:`${m.n}(${m.t}) ${up?'走强':'走弱'}，${up?'AI产业链受益':'市场分歧加大'}`,
       body:`${m.t}今日变动${m.pct>0?'+':''}${m.pct.toFixed(1)}%，${up?'带动相关板块活跃。':'拖累板块表现。'}`,
-      source:'Reuters',sentiment:up?'bullish':'bearish',
+      source:'Reuters', sentiment:up?'bullish':'bearish',
       tags:[m.t],
-      time:formatTimeAgo(new Date(now-120*60000))
+      time:formatTimeAgo(new Date(now - 120*60000))
     });
   }
 
   // NASDAQ composite news
-  const ndx=prices['^IXIC'];
-  if(ndx&&Math.abs(ndx.changePct)>2){
-    const up=ndx.changePct>0;
+  const ndx = prices['^IXIC'];
+  if(ndx && isFinite(ndx.changePct) && Math.abs(ndx.changePct) > 2){
+    const up = ndx.changePct > 0;
     news.push({
       title:`纳斯达克指数${up?'反弹':'回调'}${Math.abs(ndx.changePct).toFixed(1)}%，科技股${up?'全线走高':'普遍承压'}`,
-      body:`NASDAQ报${ndx.price.toFixed(0)}点。${up?'科技巨头带领反弹，市场信心恢复。':'高估值科技股遭遇抛售，短期调整压力增大。'}`,
-      source:'CNBC',sentiment:up?'bullish':'bearish',
+      body:`NASDAQ报${ndx.price!=null?ndx.price.toFixed(0):'---'}点。${up?'科技巨头带领反弹，市场信心恢复。':'高估值科技股遭遇抛售，短期调整压力增大。'}`,
+      source:'CNBC', sentiment:up?'bullish':'bearish',
       tags:['NASDAQ','科技股'],
-      time:formatTimeAgo(new Date(now-180*60000))
+      time:formatTimeAgo(new Date(now - 180*60000))
     });
   }
 
-  // TSM special (often big mover)
-  const tsm=prices['TSM'];
-  if(tsm&&tsm.changePct>5){
+  // TSM special
+  const tsm = prices['TSM'];
+  if(tsm && isFinite(tsm.changePct) && tsm.changePct > 5){
     news.push({
       title:`台积电大涨${tsm.changePct.toFixed(1)}%，芯片代工龙头持续受益AI需求`,
-      body:`TSM报$${tsm.price.toFixed(2)}，受益于AI芯片代工订单爆满。先进制程产能供不应求，分析师看好长期增长。`,
-      source:'Nikkei',sentiment:'bullish',
+      body:`TSM报$${tsm.price!=null?tsm.price.toFixed(2):'---'}，受益于AI芯片代工订单爆满。先进制程产能供不应求，分析师看好长期增长。`,
+      source:'Nikkei', sentiment:'bullish',
       tags:['TSM','芯片','AI'],
-      time:formatTimeAgo(new Date(now-90*60000))
+      time:formatTimeAgo(new Date(now - 90*60000))
     });
   }
 
@@ -1006,19 +1435,19 @@ function generateNews(){
   news.push({
     title:'AI产业链每日复盘：芯片→云→模型→应用全链路分析',
     body:`今日AI板块整体${movers.filter(m=>m.pct>0).length>movers.length/2?'偏强':'偏弱'}。芯片层${getLayerTrend('chip')}，云基建${getLayerTrend('infra')}，模型层${getLayerTrend('model')}，应用层${getLayerTrend('app')}。`,
-    source:'StockAI',sentiment:'neutral',
+    source:'StockAI', sentiment:'neutral',
     tags:['AI产业链','复盘'],
-    time:formatTimeAgo(new Date(now-10*60000))
+    time:formatTimeAgo(new Date(now - 10*60000))
   });
 
   // DCA reminder
-  if(vix&&vix.price>25){
+  if(vix && vix.price != null && vix.price > 25){
     news.push({
       title:'📢 定投信号：VIX>25，恐慌期是定投好时机',
-      body:`当VIX突破25时，历史上往往对应市场阶段性底部附近。坚持定投ETF（QQQ/SPY），长期收益更优。`,
-      source:'StockAI策略',sentiment:'bullish',
+      body:`当VIX突破25时，历史上往往对应市场阶段性底部附近。坚持定投ETF（QQQ/SPY），长期收益更优。但需注意：过往数据不代表未来。`,
+      source:'StockAI策略', sentiment:'bullish',
       tags:['定投','策略'],
-      time:formatTimeAgo(new Date(now-5*60000))
+      time:formatTimeAgo(new Date(now - 5*60000))
     });
   }
 
@@ -1026,126 +1455,164 @@ function generateNews(){
 }
 
 function getLayerTrend(layer){
-  const layerStocks={
+  const layerStocks = {
     chip:['NVDA','AMD','TSM','AVGO'],
     infra:['MSFT','AMZN','GOOG'],
     model:['META','PLTR','AI'],
     app:['CRM','NOW','SNOW']
   };
-  const tickers=layerStocks[layer]||[];
-  let up=0;
-  tickers.forEach(t=>{if(prices[t]&&prices[t].changePct>0)up++});
-  const ratio=up/tickers.length;
-  if(ratio>0.6) return '偏强';
-  if(ratio<0.4) return '偏弱';
+  const tickers = layerStocks[layer] || [];
+  let up = 0, total = 0;
+  tickers.forEach(t => {
+    const p = prices[t];
+    if(p && isFinite(p.changePct)){
+      total++;
+      if(p.changePct > 0) up++;
+    }
+  });
+  if(total === 0) return '无数据';
+  const ratio = up / total;
+  if(ratio > 0.6) return '偏强';
+  if(ratio < 0.4) return '偏弱';
   return '震荡';
 }
 
 function formatTimeAgo(date){
-  const diff=Date.now()-date.getTime();
-  const mins=Math.floor(diff/60000);
-  if(mins<1) return '刚刚';
-  if(mins<60) return `${mins}分钟前`;
-  const hours=Math.floor(mins/60);
-  if(hours<24) return `${hours}小时前`;
+  const diff = Date.now() - date.getTime();
+  const mins = Math.floor(diff / 60000);
+  if(mins < 1) return '刚刚';
+  if(mins < 60) return `${mins}分钟前`;
+  const hours = Math.floor(mins / 60);
+  if(hours < 24) return `${hours}小时前`;
   return `${Math.floor(hours/24)}天前`;
 }
 
 // ===== DETAIL MODAL =====
 function showDetail(ticker){
-  const overlay=document.getElementById('detailOverlay');
-  const body=document.getElementById('detailBody');
-  const p=prices[ticker]||{};
-  const stock=ALL.find(s=>s.t===ticker)||{t:ticker,n:ticker};
-  const advice=getAIAdvice(ticker);
-  const up=(p.changePct||0)>=0;
-  const colorClass=up?'text-up':'text-dn';
+  const overlay = document.getElementById('detailOverlay');
+  const body = document.getElementById('detailBody');
+  const p = prices[ticker] || {};
+  const stock = ALL.find(s => s.t === ticker) || {t:ticker, n:ticker};
+  const advice = getAIAdvice(ticker);
+  const pctVal = (p.changePct != null && isFinite(p.changePct)) ? p.changePct : 0;
+  const up = pctVal >= 0;
+  const colorClass = up ? 'text-up' : 'text-dn';
 
-  document.getElementById('detailTicker').textContent=ticker.replace('^','');
-  document.getElementById('detailName').textContent=p.name||stock.n;
+  document.getElementById('detailTicker').textContent = ticker.replace('^','');
+  document.getElementById('detailName').textContent = p.name || stock.n;
+
+  const hasPrice = p.price != null && isFinite(p.price);
+  const priceStr = hasPrice ? (p.price >= 1000 ? p.price.toFixed(0) : p.price.toFixed(2)) : '---';
+  const changeVal = (p.change != null && isFinite(p.change)) ? p.change : 0;
 
   // Simulated metrics based on price
-  const pe=INDEX_TICKERS.has(ticker)?'—':(p.price?(Math.random()*30+10).toFixed(1):'—');
-  const mktCap=INDEX_TICKERS.has(ticker)?'—':(p.price?formatMktCap(p.price):'—');
-  const high52=p.price?(p.price*(1+Math.random()*.3)).toFixed(2):'—';
-  const low52=p.price?(p.price*(1-Math.random()*.25)).toFixed(2):'—';
-  const volume=((Math.random()*50+5)*1e6).toFixed(0);
+  const isIdx = INDEX_TICKERS.has(ticker);
+  const pe = isIdx ? '—' : (hasPrice ? (Math.random()*30+10).toFixed(1) : '—');
+  const mktCap = isIdx ? '—' : (hasPrice ? formatMktCap(p.price) : '—');
+  const high52 = hasPrice ? (p.price*(1+Math.random()*.3)).toFixed(2) : '—';
+  const low52 = hasPrice ? (p.price*(1-Math.random()*.25)).toFixed(2) : '—';
+  const volume = ((Math.random()*50+5)*1e6).toFixed(0);
 
-  body.innerHTML=`
+  body.innerHTML = `
     <div class="detail-price-section">
-      <div class="detail-price-big ${colorClass}">$${p.price!=null?(p.price>=1000?p.price.toFixed(0):p.price.toFixed(2)):'---'}</div>
+      <div class="detail-price-big ${colorClass}">$${priceStr}</div>
       <div class="detail-change-row">
-        <span class="detail-change-abs ${colorClass}">${up?'+':''}${(p.change||0).toFixed(2)}</span>
-        <span class="detail-change-pct ${up?'up':'dn'}" style="background:${up?'rgba(16,185,129,.12)':'rgba(239,68,68,.12)'};border-radius:6px;padding:2px 10px">${up?'+':''}${(p.changePct||0).toFixed(2)}%</span>
+        <span class="detail-change-abs ${colorClass}">${up?'+':''}${changeVal.toFixed(2)}</span>
+        <span class="detail-change-pct" style="background:${up?'rgba(16,185,129,.12)':'rgba(239,68,68,.12)'};color:${up?'var(--up)':'var(--dn)'};border-radius:6px;padding:2px 10px">${up?'+':''}${pctVal.toFixed(2)}%</span>
       </div>
     </div>
     <div class="detail-chart">
-      ${detailChartSvg(p.spark,up)}
+      ${detailChartSvg(p.spark, up)}
       <div style="text-align:center;font-size:10px;color:var(--dim);margin-top:6px">近5个交易日</div>
     </div>
     <div class="detail-metrics">
-      <div class="detail-metric"><div class="detail-metric-label">前收盘</div><div class="detail-metric-value">$${p.prevClose?.toFixed(2)||'—'}</div></div>
-      <div class="detail-metric"><div class="detail-metric-label">今日变动</div><div class="detail-metric-value ${colorClass}">${up?'+':''}${(p.changePct||0).toFixed(2)}%</div></div>
+      <div class="detail-metric"><div class="detail-metric-label">前收盘</div><div class="detail-metric-value">${p.prevClose!=null&&isFinite(p.prevClose)?'$'+p.prevClose.toFixed(2):'—'}</div></div>
+      <div class="detail-metric"><div class="detail-metric-label">今日变动</div><div class="detail-metric-value ${colorClass}">${up?'+':''}${pctVal.toFixed(2)}%</div></div>
       <div class="detail-metric"><div class="detail-metric-label">P/E 比率</div><div class="detail-metric-value">${pe}</div></div>
       <div class="detail-metric"><div class="detail-metric-label">市值</div><div class="detail-metric-value">${mktCap}</div></div>
-      <div class="detail-metric"><div class="detail-metric-label">52周最高</div><div class="detail-metric-value">$${high52}</div></div>
-      <div class="detail-metric"><div class="detail-metric-label">52周最低</div><div class="detail-metric-value">$${low52}</div></div>
+      <div class="detail-metric"><div class="detail-metric-label">52周最高</div><div class="detail-metric-value">${high52!=='—'?'$'+high52:high52}</div></div>
+      <div class="detail-metric"><div class="detail-metric-label">52周最低</div><div class="detail-metric-value">${low52!=='—'?'$'+low52:low52}</div></div>
       <div class="detail-metric"><div class="detail-metric-label">成交量</div><div class="detail-metric-value">${formatVolume(volume)}</div></div>
       <div class="detail-metric"><div class="detail-metric-label">5日变动</div><div class="detail-metric-value ${(advice.fiveDayChange||0)>=0?'text-up':'text-dn'}">${advice.fiveDayChange!=null?((advice.fiveDayChange>0?'+':'')+advice.fiveDayChange.toFixed(2)+'%'):'—'}</div></div>
     </div>
     <div class="detail-ai-section">
       <div class="detail-ai-title">🤖 AI投顾建议 <span class="advisor-badge ${advice.action}" style="font-size:11px">${advice.label}</span></div>
       <div class="detail-ai-text">${advice.reason}</div>
+      ${advice.risk?`<div class="detail-ai-risk">⚠️ ${advice.risk}</div>`:''}
       ${advice.confidence?`<div style="margin-top:8px;font-size:11px;color:var(--dim)">置信度: ${advice.confidence}%</div>`:''}
     </div>
-    ${!INDEX_TICKERS.has(ticker)?`<div style="padding:0 16px 32px"><button class="btn-primary" onclick="quickAddPosition('${ticker}')">➕ 添加到持仓</button></div>`:''}
+    <div style="padding:0 16px 16px">
+      <div class="risk-disclaimer">
+        <span class="risk-disclaimer-icon">⚠️</span>
+        <span>以上分析仅基于价格走势和波动率指标，不构成投资建议。请结合基本面、行业趋势和自身风险承受能力独立判断。</span>
+      </div>
+    </div>
+    ${!isIdx ? `<div style="padding:0 16px 32px"><button class="btn-primary" onclick="quickAddPosition('${ticker}')">➕ 添加到持仓</button></div>` : ''}
   `;
 
   overlay.classList.remove('closing');
   overlay.classList.add('open');
+  overlay.scrollTop = 0;
 }
 
 function closeDetail(){
-  const overlay=document.getElementById('detailOverlay');
+  const overlay = document.getElementById('detailOverlay');
   overlay.classList.add('closing');
-  setTimeout(()=>{overlay.classList.remove('open','closing')},300);
+  setTimeout(() => { overlay.classList.remove('open','closing'); }, 300);
 }
 
 function formatMktCap(price){
-  // Rough estimation based on price range
-  const base=price*1e7;
-  if(base>1e12) return (base/1e12).toFixed(1)+'T';
-  if(base>1e9) return (base/1e9).toFixed(0)+'B';
+  if(!isFinite(price)) return '—';
+  const base = price * 1e7;
+  if(base > 1e12) return (base/1e12).toFixed(1)+'T';
+  if(base > 1e9) return (base/1e9).toFixed(0)+'B';
   return (base/1e6).toFixed(0)+'M';
 }
 
 function formatVolume(v){
-  v=Number(v);
-  if(v>=1e9) return (v/1e9).toFixed(1)+'B';
-  if(v>=1e6) return (v/1e6).toFixed(1)+'M';
-  if(v>=1e3) return (v/1e3).toFixed(0)+'K';
-  return v;
+  v = Number(v);
+  if(!isFinite(v)) return '—';
+  if(v >= 1e9) return (v/1e9).toFixed(1)+'B';
+  if(v >= 1e6) return (v/1e6).toFixed(1)+'M';
+  if(v >= 1e3) return (v/1e3).toFixed(0)+'K';
+  return String(v);
 }
 
-document.getElementById('detailClose').addEventListener('click',closeDetail);
-document.getElementById('detailOverlay').addEventListener('click',e=>{
-  if(e.target===e.currentTarget) closeDetail();
+document.getElementById('detailClose').addEventListener('click', closeDetail);
+document.getElementById('detailOverlay').addEventListener('click', e => {
+  if(e.target === e.currentTarget) closeDetail();
 });
 
 // ===== PORTFOLIO =====
 function getPortfolio(){
-  return JSON.parse(localStorage.getItem('stockai-portfolio')||'[]');
+  try{
+    const raw = localStorage.getItem('stockai-portfolio');
+    if(!raw) return [];
+    const parsed = JSON.parse(raw);
+    if(!Array.isArray(parsed)) return [];
+    // Validate each entry
+    return parsed.filter(p => p && typeof p.ticker === 'string' && isFinite(p.buyPrice) && isFinite(p.shares));
+  } catch(e){
+    console.warn('Portfolio parse error:', e);
+    return [];
+  }
 }
+
 function savePortfolio(portfolio){
-  localStorage.setItem('stockai-portfolio',JSON.stringify(portfolio));
+  try{
+    localStorage.setItem('stockai-portfolio', JSON.stringify(portfolio));
+  } catch(e){
+    console.warn('Portfolio save error:', e);
+    showToast('❌ 保存失败');
+  }
 }
 
 function renderPortfolio(){
-  const c=document.getElementById('portfolioContent');
-  const portfolio=getPortfolio();
+  const c = document.getElementById('portfolioContent');
+  const portfolio = getPortfolio();
 
-  if(portfolio.length===0){
-    c.innerHTML=`
+  if(portfolio.length === 0){
+    c.innerHTML = `
       <div class="empty-state" style="padding-top:30px">
         <div class="empty-icon">💼</div>
         <div class="empty-title">暂无持仓</div>
@@ -1156,25 +1623,37 @@ function renderPortfolio(){
     return;
   }
 
-  // Calculate totals
-  let totalCost=0, totalValue=0;
-  const positions=portfolio.map(pos=>{
-    const p=prices[pos.ticker];
-    const currentPrice=p?.price||pos.buyPrice;
-    const cost=pos.buyPrice*pos.shares;
-    const value=currentPrice*pos.shares;
-    const pl=value-cost;
-    const plPct=cost>0?((value-cost)/cost)*100:0;
-    totalCost+=cost;
-    totalValue+=value;
-    return {...pos,currentPrice,cost,value,pl,plPct};
+  // Calculate totals with NaN guards
+  let totalCost = 0, totalValue = 0;
+  const positions = portfolio.map((pos, idx) => {
+    const p = prices[pos.ticker];
+    const currentPrice = (p && p.price != null && isFinite(p.price)) ? p.price : pos.buyPrice;
+    const buyPrice = isFinite(pos.buyPrice) ? pos.buyPrice : 0;
+    const shares = isFinite(pos.shares) ? pos.shares : 0;
+    const cost = buyPrice * shares;
+    const value = currentPrice * shares;
+    const pl = value - cost;
+    const plPct = cost > 0 ? ((value - cost) / cost) * 100 : 0;
+
+    // NaN final guard
+    const safeCost = isFinite(cost) ? cost : 0;
+    const safeValue = isFinite(value) ? value : 0;
+    const safePL = isFinite(pl) ? pl : 0;
+    const safePLPct = isFinite(plPct) ? plPct : 0;
+
+    totalCost += safeCost;
+    totalValue += safeValue;
+
+    const hasLivePrice = p && p.price != null && isFinite(p.price);
+
+    return {...pos, currentPrice, cost:safeCost, value:safeValue, pl:safePL, plPct:safePLPct, idx, hasLivePrice};
   });
 
-  const totalPL=totalValue-totalCost;
-  const totalPLPct=totalCost>0?((totalValue-totalCost)/totalCost)*100:0;
-  const plUp=totalPL>=0;
+  const totalPL = totalValue - totalCost;
+  const totalPLPct = totalCost > 0 ? ((totalValue - totalCost) / totalCost) * 100 : 0;
+  const plUp = totalPL >= 0;
 
-  c.innerHTML=`
+  c.innerHTML = `
     <div class="portfolio-summary">
       <div class="portfolio-total-label">总市值</div>
       <div class="portfolio-total-value">$${totalValue.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
@@ -1183,29 +1662,41 @@ function renderPortfolio(){
       </div>
       <div style="font-size:11px;color:var(--dim);margin-top:6px">成本 $${totalCost.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
     </div>
-    ${positions.map((pos,i)=>{
-      const up=pos.pl>=0;
-      return `<div class="position-row" onclick="showDetail('${pos.ticker}')">
-        <div class="position-left">
-          <div class="position-ticker">${pos.ticker} <span style="font-size:11px;color:var(--dim)">${pos.shares}股</span></div>
+    ${positions.map(pos => {
+      const up = pos.pl >= 0;
+      return `<div class="position-row">
+        <div class="position-left" onclick="showDetail('${pos.ticker}')">
+          <div class="position-ticker">${pos.ticker} <span style="font-size:11px;color:var(--dim)">${pos.shares}股</span>${!pos.hasLivePrice?'<span style="font-size:10px;color:var(--amber);margin-left:4px">📡</span>':''}</div>
           <div class="position-detail">成本 $${pos.buyPrice.toFixed(2)} · ${pos.date||'—'}</div>
         </div>
-        <div class="position-right">
+        <div class="position-right" onclick="showDetail('${pos.ticker}')">
           <div class="position-value">$${pos.value.toFixed(2)}</div>
           <div class="position-pl ${up?'text-up':'text-dn'}">${up?'+':''}$${pos.pl.toFixed(2)} (${up?'+':''}${pos.plPct.toFixed(1)}%)</div>
         </div>
+        <button class="position-delete" onclick="deletePosition(${pos.idx})" aria-label="删除持仓">🗑</button>
       </div>`;
     }).join('')}
     <button class="add-btn" onclick="openAddModal()">＋ 添加持仓</button>
-    <button class="btn-danger" onclick="clearPortfolio()" style="margin-bottom:20px">🗑 清空所有持仓</button>
+    ${portfolio.length > 1 ? `<button class="btn-danger" onclick="clearPortfolio()" style="margin-bottom:20px">🗑 清空所有持仓</button>` : ''}
   `;
 }
 
+function deletePosition(index){
+  const portfolio = getPortfolio();
+  if(index < 0 || index >= portfolio.length) return;
+  const ticker = portfolio[index].ticker;
+  if(!confirm(`确定删除 ${ticker} 的持仓记录？`)) return;
+  portfolio.splice(index, 1);
+  savePortfolio(portfolio);
+  renderPortfolio();
+  showToast(`已删除 ${ticker}`);
+}
+
 function openAddModal(){
-  document.getElementById('formTicker').value='';
-  document.getElementById('formPrice').value='';
-  document.getElementById('formShares').value='';
-  document.getElementById('formDate').value=new Date().toISOString().slice(0,10);
+  document.getElementById('formTicker').value = '';
+  document.getElementById('formPrice').value = '';
+  document.getElementById('formShares').value = '';
+  document.getElementById('formDate').value = new Date().toISOString().slice(0,10);
   document.getElementById('addModal').classList.add('open');
 }
 
@@ -1215,63 +1706,75 @@ function closeAddModal(){
 
 function quickAddPosition(ticker){
   closeDetail();
-  setTimeout(()=>{
-    document.getElementById('formTicker').value=ticker;
-    document.getElementById('formPrice').value=prices[ticker]?.price?.toFixed(2)||'';
-    document.getElementById('formShares').value='';
-    document.getElementById('formDate').value=new Date().toISOString().slice(0,10);
+  setTimeout(() => {
+    document.getElementById('formTicker').value = ticker;
+    document.getElementById('formPrice').value = prices[ticker]?.price?.toFixed(2) || '';
+    document.getElementById('formShares').value = '';
+    document.getElementById('formDate').value = new Date().toISOString().slice(0,10);
     document.getElementById('addModal').classList.add('open');
-  },350);
+  }, 350);
 }
 
-document.getElementById('formSubmit').addEventListener('click',()=>{
-  const ticker=document.getElementById('formTicker').value.trim().toUpperCase();
-  const buyPrice=parseFloat(document.getElementById('formPrice').value);
-  const shares=parseFloat(document.getElementById('formShares').value);
-  const date=document.getElementById('formDate').value;
+document.getElementById('formSubmit').addEventListener('click', () => {
+  const ticker = document.getElementById('formTicker').value.trim().toUpperCase();
+  const buyPrice = parseFloat(document.getElementById('formPrice').value);
+  const shares = parseFloat(document.getElementById('formShares').value);
+  const date = document.getElementById('formDate').value;
 
-  if(!ticker||isNaN(buyPrice)||isNaN(shares)||buyPrice<=0||shares<=0){
-    alert('请填写完整信息');return;
+  if(!ticker){
+    showToast('请输入股票代码'); return;
+  }
+  if(!isFinite(buyPrice) || buyPrice <= 0){
+    showToast('请输入有效的买入价格'); return;
+  }
+  if(!isFinite(shares) || shares <= 0){
+    showToast('请输入有效的股数'); return;
   }
 
-  const portfolio=getPortfolio();
-  portfolio.push({ticker,buyPrice,shares,date});
+  const portfolio = getPortfolio();
+  portfolio.push({ticker, buyPrice, shares, date});
   savePortfolio(portfolio);
   closeAddModal();
   renderPortfolio();
+  showToast(`✅ 已添加 ${ticker}`);
 });
 
-document.getElementById('formCancel').addEventListener('click',closeAddModal);
-document.getElementById('addModal').addEventListener('click',e=>{
-  if(e.target===e.currentTarget) closeAddModal();
+document.getElementById('formCancel').addEventListener('click', closeAddModal);
+document.getElementById('addModal').addEventListener('click', e => {
+  if(e.target === e.currentTarget) closeAddModal();
 });
 
 function clearPortfolio(){
-  if(confirm('确定清空所有持仓数据？此操作不可恢复。')){
-    localStorage.removeItem('stockai-portfolio');
-    renderPortfolio();
-  }
+  if(!confirm('确定清空所有持仓数据？此操作不可恢复。')) return;
+  localStorage.removeItem('stockai-portfolio');
+  renderPortfolio();
+  showToast('已清空持仓');
 }
 
 // ===== ME PAGE =====
 function renderMe(){
-  const c=document.getElementById('meContent');
-  const portfolio=getPortfolio();
-  const posCount=portfolio.length;
-  const totalValue=portfolio.reduce((sum,pos)=>{
-    const p=prices[pos.ticker]?.price||pos.buyPrice;
-    return sum+p*pos.shares;
-  },0);
+  const c = document.getElementById('meContent');
+  const portfolio = getPortfolio();
+  const posCount = portfolio.length;
+  const totalValue = portfolio.reduce((sum, pos) => {
+    const p = prices[pos.ticker];
+    const price = (p && p.price != null && isFinite(p.price)) ? p.price : (isFinite(pos.buyPrice) ? pos.buyPrice : 0);
+    const shares = isFinite(pos.shares) ? pos.shares : 0;
+    return sum + price * shares;
+  }, 0);
 
   // News section embedded
-  const news=generateNews();
+  const news = generateNews();
 
-  c.innerHTML=`
+  const ms = getMarketState();
+  const marketInfo = `${ms.label}`;
+
+  c.innerHTML = `
     <div class="glass-card">
       <div style="display:flex;justify-content:space-around;text-align:center">
         <div><div style="font-size:20px;font-weight:800">${posCount}</div><div style="font-size:11px;color:var(--dim)">持仓数</div></div>
         <div><div style="font-size:20px;font-weight:800">${ALL.length}</div><div style="font-size:11px;color:var(--dim)">追踪股票</div></div>
-        <div><div style="font-size:20px;font-weight:800">$${totalValue>0?(totalValue/1000).toFixed(1)+'k':'0'}</div><div style="font-size:11px;color:var(--dim)">总市值</div></div>
+        <div><div style="font-size:20px;font-weight:800">$${totalValue > 0 ? (totalValue/1000).toFixed(1)+'k' : '0'}</div><div style="font-size:11px;color:var(--dim)">总市值</div></div>
       </div>
     </div>
 
@@ -1285,7 +1788,7 @@ function renderMe(){
     </div>
 
     <div class="section-title" style="margin-top:20px">📰 新闻信号</div>
-    ${news.map(n=>`<div class="news-card">
+    ${news.map(n => `<div class="news-card">
       <div class="news-meta">
         <span class="news-source">${n.source}</span>
         <span class="news-time">${n.time}</span>
@@ -1294,7 +1797,7 @@ function renderMe(){
       <div class="news-body">${n.body}</div>
       <div class="news-tags">
         <span class="news-tag ${n.sentiment}">${n.sentiment==='bullish'?'📈 利好':n.sentiment==='bearish'?'📉 利空':'💡 资讯'}</span>
-        ${n.tags.map(t=>`<span class="news-tag ticker">${t}</span>`).join('')}
+        ${n.tags.map(t => `<span class="news-tag ticker">${t}</span>`).join('')}
       </div>
     </div>`).join('')}
 
@@ -1306,16 +1809,19 @@ function renderMe(){
       <div class="me-menu-left"><span class="me-menu-icon">📖</span><span class="me-menu-text">关于 StockAI</span></div>
       <span class="me-menu-arrow">›</span>
     </div>
-    <div style="text-align:center;padding:24px 0;font-size:11px;color:var(--dim2)">StockAI v2.0 · Made with 🤖 by OpenClaw</div>
+    <div style="text-align:center;padding:24px 0;font-size:11px;color:var(--dim2)">
+      StockAI v3.0 · Made with 🤖 by OpenClaw<br>
+      <span style="color:var(--amber);font-size:10px;margin-top:4px;display:inline-block">⚠️ 所有数据和建议仅供参考，不构成投资建议</span>
+    </div>
   `;
 }
 
 // ===== PAGE & TAB NAVIGATION =====
 function switchPage(page){
-  currentPage=page;
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  currentPage = page;
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-'+page).classList.add('active');
-  document.querySelectorAll('.tab-item').forEach(t=>t.classList.toggle('on',t.dataset.page===page));
+  document.querySelectorAll('.tab-item').forEach(t => t.classList.toggle('on', t.dataset.page === page));
 
   switch(page){
     case 'quotes': renderQuotes(); break;
@@ -1326,51 +1832,69 @@ function switchPage(page){
 }
 
 // Tab bar clicks
-document.getElementById('tabBar').addEventListener('click',e=>{
-  const tab=e.target.closest('.tab-item');
+document.getElementById('tabBar').addEventListener('click', e => {
+  const tab = e.target.closest('.tab-item');
   if(!tab) return;
   switchPage(tab.dataset.page);
 });
 
 // Quote sub-tabs
-document.getElementById('quoteTabs').addEventListener('click',e=>{
-  const tab=e.target.closest('.sub-tab');
+document.getElementById('quoteTabs').addEventListener('click', e => {
+  const tab = e.target.closest('.sub-tab');
   if(!tab) return;
-  document.querySelectorAll('#quoteTabs .sub-tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('#quoteTabs .sub-tab').forEach(t => t.classList.remove('on'));
   tab.classList.add('on');
-  currentSubTab=tab.dataset.stab;
+  currentSubTab = tab.dataset.stab;
   renderQuotes();
 });
 
 // Advisor sub-tabs
-document.getElementById('advisorTabs').addEventListener('click',e=>{
-  const tab=e.target.closest('.sub-tab');
+document.getElementById('advisorTabs').addEventListener('click', e => {
+  const tab = e.target.closest('.sub-tab');
   if(!tab) return;
-  document.querySelectorAll('#advisorTabs .sub-tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('#advisorTabs .sub-tab').forEach(t => t.classList.remove('on'));
   tab.classList.add('on');
-  currentAdvisorTab=tab.dataset.atab;
+  currentAdvisorTab = tab.dataset.atab;
   renderAdvisor();
 });
 
 // ===== INIT =====
 async function init(){
-  renderQuotes();
+  updateMarketStatus();
+  updateStatusBanner();
+  renderQuotes(); // show skeleton
+
   await fetchPrices();
   renderQuotes();
 
-  // Auto refresh
-  const interval=isMarketOpen()?60000:300000;
-  setInterval(async()=>{
-    await fetchPrices();
-    if(currentPage==='quotes') renderQuotes();
-    else if(currentPage==='advisor') renderAdvisor();
-    else if(currentPage==='portfolio') renderPortfolio();
-  },interval);
+  // Keyboard shortcut: R to refresh
+  document.addEventListener('keydown', e => {
+    if(e.key === 'r' && !e.metaKey && !e.ctrlKey && !e.altKey && document.activeElement.tagName !== 'INPUT'){
+      refreshData();
+    }
+  });
+
+  // Auto refresh — faster when market is open
+  function scheduleRefresh(){
+    const interval = isMarketOpen() ? 60000 : 300000;
+    clearTimeout(refreshTimer);
+    refreshTimer = setTimeout(async () => {
+      await fetchPrices();
+      if(currentPage === 'quotes') renderQuotes();
+      else if(currentPage === 'advisor') renderAdvisor();
+      else if(currentPage === 'portfolio') renderPortfolio();
+      scheduleRefresh();
+    }, interval);
+  }
+  scheduleRefresh();
+
+  // Update market status every minute
+  setInterval(updateMarketStatus, 60000);
 }
 
 // PWA Service Worker
 if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
 }
 
 init();
