@@ -657,6 +657,282 @@ html,body{
 
 /* Fix chain node clickable area */
 .chain-svg g[style*="cursor:pointer"]:active{opacity:.8}
+
+/* ============================================================
+   PREMIUM VISUAL OVERHAUL — Bloomberg × Apple Finance
+   ============================================================ */
+
+/* 1. COLOR PALETTE — deep space gradient + premium accents */
+:root,[data-theme="dark"]{
+  --bg:#0a0e17;--bg2:#111827;
+  --card:rgba(255,255,255,.04);--card-solid:rgba(20,27,45,.85);
+  --glass:rgba(255,255,255,.04);--glass-border:rgba(255,255,255,.06);
+  --pri:#00d395;--up:#00d395;--dn:#ff4757;--red:#ff4757;
+  --acc:#f5a623;--amber:#f5a623;
+  --txt:#e2e8f0;--txt2:#94a3b8;--dim:#64748b;--dim2:#475569;
+  --shadow:0 2px 24px rgba(0,0,0,.45),0 0 1px rgba(255,255,255,.05);
+  --tab-bg:rgba(10,14,23,.82);
+  --glow-up:0 0 20px rgba(0,211,149,.25),0 0 6px rgba(0,211,149,.15);
+  --glow-dn:0 0 20px rgba(255,71,87,.25),0 0 6px rgba(255,71,87,.15);
+  --glow-gold:0 0 18px rgba(245,166,35,.3),0 0 6px rgba(245,166,35,.15);
+}
+
+html,[data-theme="dark"] body{
+  background:linear-gradient(168deg,#0a0e17 0%,#141b2d 100%);
+}
+
+/* 6. MONOSPACE FINANCIAL NUMBERS */
+.stock-price,.stock-change,.detail-price-big,.detail-change-abs,.detail-change-pct,
+.portfolio-total-value,.portfolio-pl,.position-value,.position-pl,
+.fg-score,.chain-stat-value,.detail-metric-value,.advisor-price,
+.advisor-metric,.form-input[type="number"]{
+  font-family:'SF Mono',ui-monospace,Menlo,'Cascadia Mono',monospace!important;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.02em;
+}
+
+/* 2. STOCK CARDS — glass morphism + directional tinting */
+.stock-row{
+  background:rgba(255,255,255,.035);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:0 1px 3px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.04);
+  transition:transform .15s cubic-bezier(.25,.1,.25,1),box-shadow .2s,background .25s;
+}
+.stock-row:active{
+  transform:scale(.98);
+  box-shadow:0 4px 24px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.02);
+  background:rgba(255,255,255,.055);
+}
+/* Green/red tint on price change badges */
+.stock-change.up{
+  background:linear-gradient(135deg,rgba(0,211,149,.14),rgba(0,211,149,.06));
+  color:#00d395;text-shadow:0 0 12px rgba(0,211,149,.3);
+}
+.stock-change.dn{
+  background:linear-gradient(135deg,rgba(255,71,87,.14),rgba(255,71,87,.06));
+  color:#ff4757;text-shadow:0 0 12px rgba(255,71,87,.3);
+}
+/* Subtle price pulse */
+@keyframes pricePulse{
+  0%,100%{text-shadow:none}
+  50%{text-shadow:0 0 8px rgba(226,232,240,.15)}
+}
+.stock-price{animation:pricePulse 3s ease-in-out infinite}
+
+/* 8. CARDS / MODALS — multi-layer shadow + frosted glass */
+.glass-card,.advisor-card,.news-card,.chain-insight,.chain-stat-card{
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(40px) saturate(1.3);-webkit-backdrop-filter:blur(40px) saturate(1.3);
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:0 2px 8px rgba(0,0,0,.25),0 8px 32px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.04);
+  transition:transform .18s cubic-bezier(.25,.1,.25,1),box-shadow .25s;
+}
+.glass-card:active{
+  transform:scale(.98);
+  box-shadow:0 4px 16px rgba(0,0,0,.45),0 12px 48px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.02);
+}
+.modal-sheet{
+  background:linear-gradient(180deg,#1a2236 0%,#141b2d 100%);
+  backdrop-filter:blur(60px) saturate(1.4);-webkit-backdrop-filter:blur(60px) saturate(1.4);
+  box-shadow:0 -8px 40px rgba(0,0,0,.5),0 -2px 12px rgba(0,0,0,.3);
+  border:1px solid rgba(255,255,255,.08);border-bottom:none;
+}
+.modal-backdrop.open{
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.detail-overlay{
+  background:linear-gradient(168deg,#0a0e17 0%,#141b2d 100%);
+}
+
+/* 5. TAB BAR — frosted glass + gold active underline */
+.tab-bar{
+  background:rgba(10,14,23,.78);
+  backdrop-filter:blur(40px) saturate(1.5);-webkit-backdrop-filter:blur(40px) saturate(1.5);
+  border-top:1px solid rgba(255,255,255,.06);
+  box-shadow:0 -2px 20px rgba(0,0,0,.3);
+}
+.tab-item.on{color:#f5a623}
+.tab-item.on::before{
+  content:'';position:absolute;top:-6px;width:24px;height:2.5px;
+  background:#f5a623;border-radius:2px;
+  box-shadow:0 0 10px rgba(245,166,35,.5),0 0 4px rgba(245,166,35,.3);
+}
+.tab-item{transition:color .2s,transform .12s}
+.tab-item:active{transform:scale(.92)}
+
+/* Sub-tabs gold active */
+.sub-tab.on{background:#f5a623;color:#0a0e17;font-weight:700;box-shadow:var(--glow-gold)}
+.sub-tab{transition:all .2s cubic-bezier(.25,.1,.25,1)}
+.sub-tab:active{transform:scale(.95)}
+
+/* 3. SUPPLY CHAIN SVG — radial glow + animated flow lines + gold ripple */
+.chain-node-bg{
+  fill:url(#nodeGradient) !important;
+  filter:drop-shadow(0 0 8px rgba(99,102,241,.15));
+  transition:fill .3s,filter .3s;
+}
+@keyframes dashFlow{
+  to{stroke-dashoffset:-20}
+}
+.chain-link-path{
+  stroke:rgba(255,255,255,.06);stroke-width:1.2;
+  stroke-dasharray:6 4;
+  animation:dashFlow 1.5s linear infinite;
+}
+.chain-link-active{
+  stroke:rgba(0,211,149,.35)!important;stroke-width:2!important;
+  filter:drop-shadow(0 0 4px rgba(0,211,149,.2));
+}
+@keyframes rippleGold{
+  0%{stroke-opacity:1;r:18}
+  100%{stroke-opacity:0;r:28}
+}
+/* Gold ring pulse for highlighted nodes — apply via JS adding class .node-ripple */
+.node-ripple circle.ripple{
+  stroke:#f5a623;stroke-width:2;fill:none;
+  animation:rippleGold 1.8s ease-out infinite;
+}
+
+/* 4. CHARTS — gradient fill + dotted grid + glass tooltip */
+.detail-chart svg{filter:drop-shadow(0 0 6px rgba(0,211,149,.08))}
+/* (chart gradient fills applied inline via JS — this handles tooltip) */
+
+/* 7. LOADING — skeleton shimmer rows */
+@keyframes shimmerPremium{
+  0%{background-position:200% 0}
+  100%{background-position:-200% 0}
+}
+.shimmer,.skeleton-row{
+  background:linear-gradient(90deg,rgba(255,255,255,.02) 25%,rgba(255,255,255,.07) 50%,rgba(255,255,255,.02) 75%);
+  background-size:200% 100%;
+  animation:shimmerPremium 1.8s ease-in-out infinite;
+}
+.skeleton-row{
+  border:1px solid rgba(255,255,255,.04);
+  box-shadow:0 1px 4px rgba(0,0,0,.15);
+}
+
+/* Signal banner glow boost */
+.signal-banner.bull{
+  background:linear-gradient(135deg,rgba(0,211,149,.08),rgba(0,211,149,.03));
+  border:1px solid rgba(0,211,149,.15);
+  box-shadow:inset 0 0 30px rgba(0,211,149,.04);
+}
+.signal-banner.bear{
+  background:linear-gradient(135deg,rgba(255,71,87,.08),rgba(255,71,87,.03));
+  border:1px solid rgba(255,71,87,.15);
+  box-shadow:inset 0 0 30px rgba(255,71,87,.04);
+}
+.signal-banner.neutral{
+  background:linear-gradient(135deg,rgba(245,166,35,.06),rgba(99,102,241,.04));
+  border:1px solid rgba(245,166,35,.12);
+}
+
+/* Advisor card glow accents */
+.advisor-card.buy{border-left-color:#00d395;box-shadow:inset 3px 0 12px -4px rgba(0,211,149,.15)}
+.advisor-card.sell{border-left-color:#ff4757;box-shadow:inset 3px 0 12px -4px rgba(255,71,87,.15)}
+.advisor-card.hold{border-left-color:#f5a623;box-shadow:inset 3px 0 12px -4px rgba(245,166,35,.15)}
+.advisor-card.dca{border-left-color:#6366f1;box-shadow:inset 3px 0 12px -4px rgba(99,102,241,.15)}
+.advisor-badge.buy{background:rgba(0,211,149,.12);color:#00d395}
+.advisor-badge.sell{background:rgba(255,71,87,.12);color:#ff4757}
+.advisor-badge.hold{background:rgba(245,166,35,.12);color:#f5a623}
+
+/* Fear & greed gauge glow */
+.fg-fill{box-shadow:0 0 8px rgba(var(--fg-r,0),var(--fg-g,211),var(--fg-b,149),.35)}
+
+/* Portfolio summary premium gradient */
+.portfolio-summary{
+  background:linear-gradient(135deg,rgba(245,166,35,.08),rgba(0,211,149,.05));
+  border:1px solid rgba(245,166,35,.12);
+  box-shadow:0 4px 24px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+/* Header gradient + glow title */
+.hdr h1 span{
+  background:linear-gradient(135deg,#00d395,#f5a623);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 8px rgba(0,211,149,.2));
+}
+
+/* Market dot premium glow */
+.market-dot.open{
+  background:#00d395;
+  box-shadow:0 0 10px rgba(0,211,149,.6),0 0 4px rgba(0,211,149,.4);
+}
+
+/* Detail page premium */
+.detail-metrics{
+  background:rgba(255,255,255,.03);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+}
+.detail-metric{background:rgba(10,14,23,.6)}
+.detail-price-big{
+  text-shadow:0 0 20px rgba(226,232,240,.08);
+  letter-spacing:-.8px;
+}
+
+/* 9. MICRO-ANIMATIONS — smooth everything */
+*{transition-timing-function:cubic-bezier(.25,.1,.25,1)}
+.page{animation:pageIn .38s cubic-bezier(.22,1,.36,1)}
+.me-menu-item{transition:transform .12s,background .2s}
+.me-menu-item:active{transform:scale(.98);background:rgba(255,255,255,.06)}
+.me-avatar{
+  box-shadow:0 0 20px rgba(245,166,35,.2),0 0 40px rgba(0,211,149,.1);
+  background:linear-gradient(135deg,#f5a623,#00d395);
+}
+.btn-primary{
+  background:linear-gradient(135deg,#f5a623,#e09520);
+  box-shadow:0 2px 12px rgba(245,166,35,.25);
+  transition:transform .12s,box-shadow .2s,opacity .2s;
+}
+.btn-primary:active{transform:scale(.97);box-shadow:0 4px 20px rgba(245,166,35,.35)}
+.add-btn{border-color:rgba(255,255,255,.08);transition:all .2s}
+.add-btn:active{border-color:#f5a623;color:#f5a623;background:rgba(245,166,35,.04)}
+
+/* Form inputs premium */
+.form-input{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  transition:border-color .25s,box-shadow .25s;
+}
+.form-input:focus{
+  border-color:#f5a623;
+  box-shadow:0 0 0 3px rgba(245,166,35,.1),0 0 12px rgba(245,166,35,.08);
+}
+
+/* Search bar glow */
+.search-bar input:focus,.watchlist-search input:focus{
+  border-color:#f5a623;
+  box-shadow:0 0 0 3px rgba(245,166,35,.1);
+}
+
+/* Risk option premium */
+.risk-opt.selected{
+  border-color:#f5a623;
+  background:rgba(245,166,35,.08);
+  box-shadow:0 0 12px rgba(245,166,35,.12);
+}
+
+/* Toast premium */
+.toast{
+  background:linear-gradient(135deg,#1a2236,#141b2d);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 8px 32px rgba(0,0,0,.4),0 2px 8px rgba(0,0,0,.2);
+}
+
+/* News tag glows */
+.news-tag.bullish{color:#00d395;background:rgba(0,211,149,.1)}
+.news-tag.bearish{color:#ff4757;background:rgba(255,71,87,.1)}
+
+/* Scrollbar invisible */
+::-webkit-scrollbar{width:0;height:0}
+
+/* Selection color */
+::selection{background:rgba(245,166,35,.25);color:#fff}
+
+/* END PREMIUM OVERHAUL */
 </style>
 </head>
 <body>

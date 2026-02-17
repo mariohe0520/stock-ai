@@ -1,10 +1,10 @@
 {
-  "updated": "2026-02-17T12:24:26Z",
-  "count": 8,
+  "updated": "2026-02-17T13:11:40Z",
+  "count": 9,
   "news": [
     {
       "headline": "美股三大指数大幅下跌 — S&P -1.8% 纳指-4.9% 道指+0.6%",
-      "summary": "标普500报6,836点，收跌1.8%。纳斯达克综合指数-4.9%，道琼斯工业指数+0.6%。",
+      "summary": "标普500报6,836点，收跌1.8%。纳斯达克-4.9%，道指+0.6%。",
       "category": "market",
       "sentiment": "bearish",
       "tickers": [
@@ -12,47 +12,59 @@
         "^IXIC",
         "^DJI"
       ],
-      "time": "2026-02-17T12:24:26Z",
+      "time": "2026-02-17T13:11:40Z",
       "priority": 10
     },
     {
-      "headline": "Palantir Technologies Inc.(PLTR)暴跌26.6% 受财报不及预期拖累",
-      "summary": "Palantir Technologies Inc.报$131.41，跌26.6%。受财报不及预期拖累，成为今日跌幅最深个股之一。",
+      "headline": "Palantir Technologies Inc.(PLTR)暴跌26.6% 受竞争加剧担忧",
+      "summary": "Palantir Technologies Inc.报$131.41，跌26.6%。成为今日跌幅最深个股之一。",
       "category": "stock",
       "sentiment": "bearish",
       "tickers": [
         "PLTR"
       ],
-      "time": "2026-02-17T12:24:26Z",
+      "time": "2026-02-17T13:11:40Z",
       "priority": 8
     },
     {
-      "headline": "VIX指数升至21.6 市场波动加剧需警惕风险",
-      "summary": "恐慌指数VIX报21.6（+35.5%），高于20的警戒线。市场不确定性上升，短线操作需注意仓位管理。",
+      "headline": "📊 板块轮动信号：资金从金融流向能源 价差20.4%",
+      "summary": "能源板块领涨+15.6%，金融板块垫底-4.8%。板块间价差达20.4%，轮动信号明显。",
+      "category": "rotation",
+      "sentiment": "neutral",
+      "tickers": [
+        "XLE",
+        "XLF"
+      ],
+      "time": "2026-02-17T13:11:40Z",
+      "priority": 8
+    },
+    {
+      "headline": "VIX升至22.1 市场波动加剧",
+      "summary": "恐慌指数报22.1（+38.5%），高于20警戒线。注意仓位管理。",
       "category": "volatility",
       "sentiment": "bearish",
       "tickers": [
         "^VIX"
       ],
-      "time": "2026-02-17T12:24:26Z",
+      "time": "2026-02-17T13:11:40Z",
       "priority": 7
     },
     {
-      "headline": "板块轮动：能源板块领涨(+15.6%) 金融板块垫底(-4.8%)",
-      "summary": "今日板块表现：能源板块+15.6%、医疗板块+0.6%、科技板块-4.7%、金融板块-4.8%。板块分化明显。",
+      "headline": "板块轮动：能源领涨(+15.6%) 金融垫底(-4.8%)",
+      "summary": "今日板块：能源+15.6%、医疗+0.6%、科技-4.7%、金融-4.8%。分化明显。",
       "category": "sector",
-      "sentiment": "bearish",
+      "sentiment": "neutral",
       "tickers": [
         "XLK",
         "XLF",
         "XLE",
         "XLV"
       ],
-      "time": "2026-02-17T12:24:26Z",
+      "time": "2026-02-17T13:11:40Z",
       "priority": 7
     },
     {
-      "headline": "今日领涨：TSM、META AI板块分化",
+      "headline": "今日领涨：TSM、META",
       "summary": "涨幅居前：Taiwan Semiconductor Manufacturing Company Limited(TSM) +10.6%；Meta Platforms, Inc.(META) +1.4%。",
       "category": "movers",
       "sentiment": "bullish",
@@ -60,11 +72,11 @@
         "TSM",
         "META"
       ],
-      "time": "2026-02-17T12:24:26Z",
+      "time": "2026-02-17T13:11:40Z",
       "priority": 6
     },
     {
-      "headline": "跌幅居前：PLTR、NOW、CRM 承受抛压",
+      "headline": "跌幅居前：PLTR、NOW、CRM",
       "summary": "跌幅居前：Palantir Technologies Inc.(PLTR) -26.6%；ServiceNow, Inc.(NOW) -22.5%；Salesforce, Inc.(CRM) -21.3%。",
       "category": "movers",
       "sentiment": "bearish",
@@ -73,32 +85,33 @@
         "NOW",
         "CRM"
       ],
-      "time": "2026-02-17T12:24:26Z",
+      "time": "2026-02-17T13:11:40Z",
       "priority": 6
     },
     {
-      "headline": "科技巨头齐跌 平均-10.1%",
-      "summary": "Microsoft Corporation(MSFT) -14.7%、Amazon.com, Inc.(AMZN) -18.1%、Alphabet Inc.(GOOG) -9.0%、Meta Platforms, Inc.(META) +1.4%。",
+      "headline": "科技巨头齐跌 平均-8.4%",
+      "summary": "Microsoft Corporation(MSFT) -14.7%、Alphabet Inc.(GOOG) -9.0%、Amazon.com, Inc.(AMZN) -18.1%、Meta Platforms, Inc.(META) +1.4%、NVIDIA Corporation(NVDA) -1.6%。",
       "category": "theme",
       "sentiment": "bearish",
       "tickers": [
         "MSFT",
-        "AMZN",
         "GOOG",
-        "META"
+        "AMZN",
+        "META",
+        "NVDA"
       ],
-      "time": "2026-02-17T12:24:26Z",
+      "time": "2026-02-17T13:11:40Z",
       "priority": 6
     },
     {
-      "headline": "30日趋势：标普500温和上行 近5日均价高于前5日0.0%",
-      "summary": "市场维持上行态势但力度有限。标普500近5日均价6,903，前5日均价6,902。",
+      "headline": "30日趋势：标普500温和上行 近5日高于前5日0.0%",
+      "summary": "维持上行但力度有限。近5日均价6,903，前5日均价6,902。",
       "category": "analysis",
       "sentiment": "neutral",
       "tickers": [
         "^GSPC"
       ],
-      "time": "2026-02-17T12:24:26Z",
+      "time": "2026-02-17T13:11:40Z",
       "priority": 5
     }
   ]
