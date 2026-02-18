@@ -1,10 +1,10 @@
 {
-  "updated": "2026-02-18T19:43:37Z",
+  "updated": "2026-02-18T20:13:36Z",
   "count": 13,
   "news": [
     {
-      "headline": "美股三大指数承压下行 — S&P -1.0% 纳指-3.4% 道指+0.5%",
-      "summary": "标普500报6,870点，收跌1.0%。纳斯达克-3.4%，道指+0.5%。",
+      "headline": "美股三大指数承压下行 — S&P -1.1% 纳指-3.6% 道指+0.4%",
+      "summary": "标普500报6,860点，收跌1.1%。纳斯达克-3.6%，道指+0.4%。",
       "category": "market",
       "sentiment": "bearish",
       "tickers": [
@@ -12,35 +12,46 @@
         "^IXIC",
         "^DJI"
       ],
-      "time": "2026-02-18T19:43:37Z",
+      "time": "2026-02-18T20:13:36Z",
       "priority": 10
     },
     {
-      "headline": "PayPal Holdings, Inc.(PYPL)暴跌27.1% 受财报不及预期拖累",
-      "summary": "PayPal Holdings, Inc.报$41.50，跌27.1%。成为今日跌幅最深个股之一。",
+      "headline": "PayPal Holdings, Inc.(PYPL)暴跌27.1% 受分析师下调评级",
+      "summary": "PayPal Holdings, Inc.报$41.48，跌27.1%。成为今日跌幅最深个股之一。",
       "category": "stock",
       "sentiment": "bearish",
       "tickers": [
         "PYPL"
       ],
-      "time": "2026-02-18T19:43:37Z",
+      "time": "2026-02-18T20:13:36Z",
       "priority": 8
     },
     {
-      "headline": "📊 板块轮动信号：资金从创新流向能源 价差27.3%",
-      "summary": "能源板块领涨+14.5%，创新板块垫底-12.7%。板块间价差达27.3%，轮动信号明显。",
+      "headline": "📊 板块轮动信号：资金从创新流向能源 价差27.5%",
+      "summary": "能源板块领涨+14.6%，创新板块垫底-12.9%。板块间价差达27.5%，轮动信号明显。",
       "category": "rotation",
       "sentiment": "neutral",
       "tickers": [
         "XLE",
         "ARKK"
       ],
-      "time": "2026-02-18T19:43:37Z",
+      "time": "2026-02-18T20:13:36Z",
       "priority": 8
     },
     {
-      "headline": "板块轮动：能源领涨(+14.5%) 创新垫底(-12.7%)",
-      "summary": "今日板块：能源+14.5%、半导体+4.3%、医疗+1.0%、科技-3.4%、金融-3.4%、创新-12.7%。分化明显。",
+      "headline": "VIX升至20.1 市场波动加剧",
+      "summary": "恐慌指数报20.1（+27.1%），高于20警戒线。注意仓位管理。",
+      "category": "volatility",
+      "sentiment": "bearish",
+      "tickers": [
+        "^VIX"
+      ],
+      "time": "2026-02-18T20:13:36Z",
+      "priority": 7
+    },
+    {
+      "headline": "板块轮动：能源领涨(+14.6%) 创新垫底(-12.9%)",
+      "summary": "今日板块：能源+14.6%、半导体+3.8%、医疗+0.8%、金融-3.4%、科技-3.7%、创新-12.9%。分化明显。",
       "category": "sector",
       "sentiment": "neutral",
       "tickers": [
@@ -51,12 +62,12 @@
         "SOXX",
         "ARKK"
       ],
-      "time": "2026-02-18T19:43:37Z",
+      "time": "2026-02-18T20:13:36Z",
       "priority": 7
     },
     {
-      "headline": "半导体板块集体走强 NVDA涨0.9%",
-      "summary": "芯片股集体走强，板块均涨2.4%。英伟达$187.85。AI算力需求持续为焦点。",
+      "headline": "半导体板块集体走强 NVDA涨0.4%",
+      "summary": "芯片股集体走强，板块均涨2.0%。英伟达$186.95。AI算力需求持续为焦点。",
       "category": "theme",
       "sentiment": "bullish",
       "tickers": [
@@ -66,12 +77,12 @@
         "AVGO",
         "ASML"
       ],
-      "time": "2026-02-18T19:43:37Z",
+      "time": "2026-02-18T20:13:36Z",
       "priority": 7
     },
     {
-      "headline": "中概股下挫 板块均-3.3% — 2/9只上涨",
-      "summary": "阿里-5.8%，拼多多-3.3%。海外监管不确定性持续。",
+      "headline": "中概股下挫 板块均-3.4% — 2/9只上涨",
+      "summary": "阿里-5.8%，拼多多-3.2%。海外监管不确定性持续。",
       "category": "theme",
       "sentiment": "bearish",
       "tickers": [
@@ -81,12 +92,12 @@
         "BIDU",
         "NIO"
       ],
-      "time": "2026-02-18T19:43:37Z",
+      "time": "2026-02-18T20:13:36Z",
       "priority": 7
     },
     {
       "headline": "今日领涨：ARM、ON、LI",
-      "summary": "涨幅居前：Arm Holdings plc(ARM) +20.2%；ON Semiconductor Corporation(ON) +16.9%；Li Auto Inc.(LI) +13.5%。",
+      "summary": "涨幅居前：Arm Holdings plc(ARM) +19.7%；ON Semiconductor Corporation(ON) +16.3%；Li Auto Inc.(LI) +13.2%。",
       "category": "movers",
       "sentiment": "bullish",
       "tickers": [
@@ -94,12 +105,12 @@
         "ON",
         "LI"
       ],
-      "time": "2026-02-18T19:43:37Z",
+      "time": "2026-02-18T20:13:36Z",
       "priority": 6
     },
     {
       "headline": "跌幅居前：PYPL、PATH、SHOP",
-      "summary": "跌幅居前：PayPal Holdings, Inc.(PYPL) -27.1%；UiPath, Inc.(PATH) -21.5%；Shopify Inc.(SHOP) -21.1%。",
+      "summary": "跌幅居前：PayPal Holdings, Inc.(PYPL) -27.1%；UiPath, Inc.(PATH) -22.1%；Shopify Inc.(SHOP) -21.4%。",
       "category": "movers",
       "sentiment": "bearish",
       "tickers": [
@@ -107,7 +118,7 @@
         "PATH",
         "SHOP"
       ],
-      "time": "2026-02-18T19:43:37Z",
+      "time": "2026-02-18T20:13:36Z",
       "priority": 6
     },
     {
@@ -120,7 +131,7 @@
         "MA",
         "PYPL"
       ],
-      "time": "2026-02-18T19:43:37Z",
+      "time": "2026-02-18T20:13:36Z",
       "priority": 6
     },
     {
@@ -131,12 +142,12 @@
       "tickers": [
         "ISRG"
       ],
-      "time": "2026-02-18T19:43:37Z",
+      "time": "2026-02-18T20:13:36Z",
       "priority": 6
     },
     {
-      "headline": "科技巨头齐跌 平均-5.5%",
-      "summary": "Apple Inc.(AAPL) +3.3%、Microsoft Corporation(MSFT) -13.1%、Amazon.com, Inc.(AMZN) -14.4%、Meta Platforms, Inc.(META) +2.8%、NVIDIA Corporation(NVDA) +0.9%、Tesla, Inc.(TSLA) -6.2%、Netflix, Inc.(NFLX) -11.9%。",
+      "headline": "科技巨头齐跌 平均-5.6%",
+      "summary": "Apple Inc.(AAPL) +3.0%、Microsoft Corporation(MSFT) -13.1%、Amazon.com, Inc.(AMZN) -14.5%、Meta Platforms, Inc.(META) +3.0%、NVIDIA Corporation(NVDA) +0.4%、Tesla, Inc.(TSLA) -6.1%、Netflix, Inc.(NFLX) -11.6%。",
       "category": "theme",
       "sentiment": "bearish",
       "tickers": [
@@ -147,30 +158,19 @@
         "NVDA",
         "TSLA"
       ],
-      "time": "2026-02-18T19:43:37Z",
+      "time": "2026-02-18T20:13:36Z",
       "priority": 6
     },
     {
       "headline": "30日趋势：标普500高位整理 近5日低于前5日0.6%",
-      "summary": "多空博弈加剧。近5日均价6,865，前5日均价6,904。",
+      "summary": "多空博弈加剧。近5日均价6,863，前5日均价6,904。",
       "category": "analysis",
       "sentiment": "neutral",
       "tickers": [
         "^GSPC"
       ],
-      "time": "2026-02-18T19:43:37Z",
+      "time": "2026-02-18T20:13:36Z",
       "priority": 5
-    },
-    {
-      "headline": "VIX报19.5（+22.9%）波动正常",
-      "summary": "恐慌指数处于15-20正常区间。",
-      "category": "volatility",
-      "sentiment": "neutral",
-      "tickers": [
-        "^VIX"
-      ],
-      "time": "2026-02-18T19:43:37Z",
-      "priority": 3
     }
   ]
 }
