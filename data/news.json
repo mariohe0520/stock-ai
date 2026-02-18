@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-18T21:13:35Z",
+  "updated": "2026-02-18T21:43:34Z",
   "count": 13,
   "news": [
     {
@@ -12,35 +12,35 @@
         "^IXIC",
         "^DJI"
       ],
-      "time": "2026-02-18T21:13:35Z",
+      "time": "2026-02-18T21:43:34Z",
       "priority": 10
     },
     {
-      "headline": "PayPal Holdings, Inc.(PYPL)暴跌27.1% 受宏观数据影响",
+      "headline": "PayPal Holdings, Inc.(PYPL)暴跌27.1% 受竞争加剧担忧",
       "summary": "PayPal Holdings, Inc.报$41.45，跌27.1%。成为今日跌幅最深个股之一。",
       "category": "stock",
       "sentiment": "bearish",
       "tickers": [
         "PYPL"
       ],
-      "time": "2026-02-18T21:13:35Z",
+      "time": "2026-02-18T21:43:34Z",
       "priority": 8
     },
     {
-      "headline": "📊 板块轮动信号：资金从创新流向能源 价差27.4%",
-      "summary": "能源板块领涨+14.9%，创新板块垫底-12.5%。板块间价差达27.4%，轮动信号明显。",
+      "headline": "📊 板块轮动信号：资金从创新流向能源 价差27.5%",
+      "summary": "能源板块领涨+14.9%，创新板块垫底-12.6%。板块间价差达27.5%，轮动信号明显。",
       "category": "rotation",
       "sentiment": "neutral",
       "tickers": [
         "XLE",
         "ARKK"
       ],
-      "time": "2026-02-18T21:13:35Z",
+      "time": "2026-02-18T21:43:34Z",
       "priority": 8
     },
     {
-      "headline": "板块轮动：能源领涨(+14.9%) 创新垫底(-12.5%)",
-      "summary": "今日板块：能源+14.9%、半导体+4.5%、医疗+1.2%、科技-3.2%、金融-3.4%、创新-12.5%。分化明显。",
+      "headline": "板块轮动：能源领涨(+14.9%) 创新垫底(-12.6%)",
+      "summary": "今日板块：能源+14.9%、半导体+4.5%、医疗+1.2%、科技-3.2%、金融-3.4%、创新-12.6%。分化明显。",
       "category": "sector",
       "sentiment": "neutral",
       "tickers": [
@@ -51,7 +51,7 @@
         "SOXX",
         "ARKK"
       ],
-      "time": "2026-02-18T21:13:35Z",
+      "time": "2026-02-18T21:43:34Z",
       "priority": 7
     },
     {
@@ -66,7 +66,7 @@
         "AVGO",
         "ASML"
       ],
-      "time": "2026-02-18T21:13:35Z",
+      "time": "2026-02-18T21:43:34Z",
       "priority": 7
     },
     {
@@ -81,7 +81,7 @@
         "BIDU",
         "NIO"
       ],
-      "time": "2026-02-18T21:13:35Z",
+      "time": "2026-02-18T21:43:34Z",
       "priority": 7
     },
     {
@@ -94,7 +94,7 @@
         "ON",
         "LI"
       ],
-      "time": "2026-02-18T21:13:35Z",
+      "time": "2026-02-18T21:43:34Z",
       "priority": 6
     },
     {
@@ -107,7 +107,7 @@
         "PATH",
         "SHOP"
       ],
-      "time": "2026-02-18T21:13:35Z",
+      "time": "2026-02-18T21:43:34Z",
       "priority": 6
     },
     {
@@ -120,7 +120,7 @@
         "MA",
         "PYPL"
       ],
-      "time": "2026-02-18T21:13:35Z",
+      "time": "2026-02-18T21:43:34Z",
       "priority": 6
     },
     {
@@ -131,11 +131,11 @@
       "tickers": [
         "ISRG"
       ],
-      "time": "2026-02-18T21:13:35Z",
+      "time": "2026-02-18T21:43:34Z",
       "priority": 6
     },
     {
-      "headline": "科技巨头齐跌 平均-5.3%",
+      "headline": "科技巨头齐跌 平均-5.2%",
       "summary": "Apple Inc.(AAPL) +3.5%、Microsoft Corporation(MSFT) -13.1%、Amazon.com, Inc.(AMZN) -14.4%、Meta Platforms, Inc.(META) +3.7%、NVIDIA Corporation(NVDA) +0.9%、Tesla, Inc.(TSLA) -6.0%、Netflix, Inc.(NFLX) -11.4%。",
       "category": "theme",
       "sentiment": "bearish",
@@ -147,7 +147,7 @@
         "NVDA",
         "TSLA"
       ],
-      "time": "2026-02-18T21:13:35Z",
+      "time": "2026-02-18T21:43:34Z",
       "priority": 6
     },
     {
@@ -158,18 +158,18 @@
       "tickers": [
         "^GSPC"
       ],
-      "time": "2026-02-18T21:13:35Z",
+      "time": "2026-02-18T21:43:34Z",
       "priority": 5
     },
     {
-      "headline": "VIX报19.4（+22.1%）波动正常",
+      "headline": "VIX报19.6（+23.7%）波动正常",
       "summary": "恐慌指数处于15-20正常区间。",
       "category": "volatility",
       "sentiment": "neutral",
       "tickers": [
         "^VIX"
       ],
-      "time": "2026-02-18T21:13:35Z",
+      "time": "2026-02-18T21:43:34Z",
       "priority": 3
     }
   ]
