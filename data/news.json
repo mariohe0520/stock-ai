@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-18T12:43:35Z",
+  "updated": "2026-02-18T13:15:38Z",
   "count": 13,
   "news": [
     {
@@ -12,18 +12,18 @@
         "^IXIC",
         "^DJI"
       ],
-      "time": "2026-02-18T12:43:35Z",
+      "time": "2026-02-18T13:15:38Z",
       "priority": 10
     },
     {
-      "headline": "PayPal Holdings, Inc.(PYPL)暴跌28.3% 受监管消息影响",
+      "headline": "PayPal Holdings, Inc.(PYPL)暴跌28.3% 受竞争加剧担忧",
       "summary": "PayPal Holdings, Inc.报$40.81，跌28.3%。成为今日跌幅最深个股之一。",
       "category": "stock",
       "sentiment": "bearish",
       "tickers": [
         "PYPL"
       ],
-      "time": "2026-02-18T12:43:35Z",
+      "time": "2026-02-18T13:15:38Z",
       "priority": 8
     },
     {
@@ -35,7 +35,7 @@
         "XLE",
         "ARKK"
       ],
-      "time": "2026-02-18T12:43:35Z",
+      "time": "2026-02-18T13:15:38Z",
       "priority": 8
     },
     {
@@ -51,7 +51,7 @@
         "SOXX",
         "ARKK"
       ],
-      "time": "2026-02-18T12:43:35Z",
+      "time": "2026-02-18T13:15:38Z",
       "priority": 7
     },
     {
@@ -66,7 +66,7 @@
         "AVGO",
         "ASML"
       ],
-      "time": "2026-02-18T12:43:35Z",
+      "time": "2026-02-18T13:15:38Z",
       "priority": 7
     },
     {
@@ -81,7 +81,7 @@
         "BIDU",
         "NIO"
       ],
-      "time": "2026-02-18T12:43:35Z",
+      "time": "2026-02-18T13:15:38Z",
       "priority": 7
     },
     {
@@ -94,7 +94,7 @@
         "ON",
         "LI"
       ],
-      "time": "2026-02-18T12:43:35Z",
+      "time": "2026-02-18T13:15:38Z",
       "priority": 6
     },
     {
@@ -107,7 +107,7 @@
         "SHOP",
         "PATH"
       ],
-      "time": "2026-02-18T12:43:35Z",
+      "time": "2026-02-18T13:15:38Z",
       "priority": 6
     },
     {
@@ -120,7 +120,7 @@
         "MA",
         "PYPL"
       ],
-      "time": "2026-02-18T12:43:35Z",
+      "time": "2026-02-18T13:15:38Z",
       "priority": 6
     },
     {
@@ -131,7 +131,7 @@
       "tickers": [
         "ISRG"
       ],
-      "time": "2026-02-18T12:43:35Z",
+      "time": "2026-02-18T13:15:38Z",
       "priority": 6
     },
     {
@@ -147,7 +147,7 @@
         "NVDA",
         "TSLA"
       ],
-      "time": "2026-02-18T12:43:35Z",
+      "time": "2026-02-18T13:15:38Z",
       "priority": 6
     },
     {
@@ -158,18 +158,18 @@
       "tickers": [
         "^GSPC"
       ],
-      "time": "2026-02-18T12:43:35Z",
+      "time": "2026-02-18T13:15:38Z",
       "priority": 5
     },
     {
-      "headline": "VIX报19.9（+25.7%）波动正常",
+      "headline": "VIX报20.0（+25.9%）波动正常",
       "summary": "恐慌指数处于15-20正常区间。",
       "category": "volatility",
       "sentiment": "neutral",
       "tickers": [
         "^VIX"
       ],
-      "time": "2026-02-18T12:43:35Z",
+      "time": "2026-02-18T13:15:38Z",
       "priority": 3
     }
   ]
