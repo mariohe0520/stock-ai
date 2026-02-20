@@ -1,5 +1,5 @@
 {
-  "updated": "2026-02-20T12:13:37Z",
+  "updated": "2026-02-20T12:43:35Z",
   "count": 13,
   "news": [
     {
@@ -12,18 +12,18 @@
         "^IXIC",
         "^DJI"
       ],
-      "time": "2026-02-20T12:13:37Z",
+      "time": "2026-02-20T12:43:35Z",
       "priority": 10
     },
     {
-      "headline": "PayPal Holdings, Inc.(PYPL)暴跌26.6% 受宏观数据影响",
+      "headline": "PayPal Holdings, Inc.(PYPL)暴跌26.6% 受分析师下调评级",
       "summary": "PayPal Holdings, Inc.报$41.73，跌26.6%。成为今日跌幅最深个股之一。",
       "category": "stock",
       "sentiment": "bearish",
       "tickers": [
         "PYPL"
       ],
-      "time": "2026-02-20T12:13:37Z",
+      "time": "2026-02-20T12:43:35Z",
       "priority": 8
     },
     {
@@ -35,18 +35,18 @@
         "XLE",
         "ARKK"
       ],
-      "time": "2026-02-20T12:13:37Z",
+      "time": "2026-02-20T12:43:35Z",
       "priority": 8
     },
     {
-      "headline": "VIX升至20.7 市场波动加剧",
-      "summary": "恐慌指数报20.7（+3.1%），高于20警戒线。注意仓位管理。",
+      "headline": "VIX升至20.6 市场波动加剧",
+      "summary": "恐慌指数报20.6（+2.8%），高于20警戒线。注意仓位管理。",
       "category": "volatility",
       "sentiment": "neutral",
       "tickers": [
         "^VIX"
       ],
-      "time": "2026-02-20T12:13:37Z",
+      "time": "2026-02-20T12:43:35Z",
       "priority": 7
     },
     {
@@ -62,22 +62,22 @@
         "SOXX",
         "ARKK"
       ],
-      "time": "2026-02-20T12:13:37Z",
+      "time": "2026-02-20T12:43:35Z",
       "priority": 7
     },
     {
       "headline": "半导体板块集体走强 NVDA涨0.9%",
-      "summary": "芯片股集体走强，板块均涨3.1%。英伟达$187.90。AI算力需求持续为焦点。",
+      "summary": "芯片股集体走强，板块均涨1.9%。英伟达$187.90。AI算力需求持续为焦点。",
       "category": "theme",
       "sentiment": "bullish",
       "tickers": [
         "NVDA",
+        "AMD",
         "TSM",
         "AVGO",
-        "ASML",
-        "INTC"
+        "ASML"
       ],
-      "time": "2026-02-20T12:13:37Z",
+      "time": "2026-02-20T12:43:35Z",
       "priority": 7
     },
     {
@@ -92,7 +92,7 @@
         "BIDU",
         "NIO"
       ],
-      "time": "2026-02-20T12:13:37Z",
+      "time": "2026-02-20T12:43:35Z",
       "priority": 7
     },
     {
@@ -105,7 +105,7 @@
         "LI",
         "AMAT"
       ],
-      "time": "2026-02-20T12:13:37Z",
+      "time": "2026-02-20T12:43:35Z",
       "priority": 6
     },
     {
@@ -118,7 +118,7 @@
         "PATH",
         "PLTR"
       ],
-      "time": "2026-02-20T12:13:37Z",
+      "time": "2026-02-20T12:43:35Z",
       "priority": 6
     },
     {
@@ -131,7 +131,7 @@
         "MA",
         "PYPL"
       ],
-      "time": "2026-02-20T12:13:37Z",
+      "time": "2026-02-20T12:43:35Z",
       "priority": 6
     },
     {
@@ -142,7 +142,7 @@
       "tickers": [
         "ISRG"
       ],
-      "time": "2026-02-20T12:13:37Z",
+      "time": "2026-02-20T12:43:35Z",
       "priority": 6
     },
     {
@@ -158,7 +158,7 @@
         "NVDA",
         "TSLA"
       ],
-      "time": "2026-02-20T12:13:37Z",
+      "time": "2026-02-20T12:43:35Z",
       "priority": 6
     },
     {
@@ -169,7 +169,7 @@
       "tickers": [
         "^GSPC"
       ],
-      "time": "2026-02-20T12:13:37Z",
+      "time": "2026-02-20T12:43:35Z",
       "priority": 5
     }
   ]
