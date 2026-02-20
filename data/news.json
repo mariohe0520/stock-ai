@@ -1,10 +1,10 @@
 {
-  "updated": "2026-02-20T14:43:37Z",
+  "updated": "2026-02-20T15:13:36Z",
   "count": 13,
   "news": [
     {
-      "headline": "美股三大指数温和走高 — S&P +1.0% 纳指-0.9% 道指+1.6%",
-      "summary": "标普500报6,865点，收涨1.0%。纳斯达克-0.9%，道指+1.6%。",
+      "headline": "美股三大指数温和走高 — S&P +1.2% 纳指-0.7% 道指+2.0%",
+      "summary": "标普500报6,879点，收涨1.2%。纳斯达克-0.7%，道指+2.0%。",
       "category": "market",
       "sentiment": "bullish",
       "tickers": [
@@ -12,46 +12,46 @@
         "^IXIC",
         "^DJI"
       ],
-      "time": "2026-02-20T14:43:37Z",
+      "time": "2026-02-20T15:13:36Z",
       "priority": 10
     },
     {
-      "headline": "PayPal Holdings, Inc.(PYPL)暴跌23.5% 受竞争加剧担忧",
-      "summary": "PayPal Holdings, Inc.报$42.13，跌23.5%。成为今日跌幅最深个股之一。",
+      "headline": "PayPal Holdings, Inc.(PYPL)暴跌22.9% 受财报不及预期拖累",
+      "summary": "PayPal Holdings, Inc.报$42.46，跌22.9%。成为今日跌幅最深个股之一。",
       "category": "stock",
       "sentiment": "bearish",
       "tickers": [
         "PYPL"
       ],
-      "time": "2026-02-20T14:43:37Z",
+      "time": "2026-02-20T15:13:36Z",
       "priority": 8
     },
     {
-      "headline": "📊 板块轮动信号：资金从创新流向能源 价差24.9%",
-      "summary": "能源板块领涨+15.8%，创新板块垫底-9.1%。板块间价差达24.9%，轮动信号明显。",
+      "headline": "📊 板块轮动信号：资金从创新流向能源 价差24.5%",
+      "summary": "能源板块领涨+15.2%，创新板块垫底-9.3%。板块间价差达24.5%，轮动信号明显。",
       "category": "rotation",
       "sentiment": "neutral",
       "tickers": [
         "XLE",
         "ARKK"
       ],
-      "time": "2026-02-20T14:43:37Z",
+      "time": "2026-02-20T15:13:36Z",
       "priority": 8
     },
     {
-      "headline": "VIX升至21.1 市场波动加剧",
-      "summary": "恐慌指数报21.1（+5.2%），高于20警戒线。注意仓位管理。",
+      "headline": "VIX升至20.4 市场波动加剧",
+      "summary": "恐慌指数报20.4（+1.7%），高于20警戒线。注意仓位管理。",
       "category": "volatility",
-      "sentiment": "bearish",
+      "sentiment": "neutral",
       "tickers": [
         "^VIX"
       ],
-      "time": "2026-02-20T14:43:37Z",
+      "time": "2026-02-20T15:13:36Z",
       "priority": 7
     },
     {
-      "headline": "板块轮动：能源领涨(+15.8%) 创新垫底(-9.1%)",
-      "summary": "今日板块：能源+15.8%、半导体+6.3%、医疗+0.8%、科技-0.9%、金融-2.6%、创新-9.1%。分化明显。",
+      "headline": "板块轮动：能源领涨(+15.2%) 创新垫底(-9.3%)",
+      "summary": "今日板块：能源+15.2%、半导体+5.9%、医疗+0.4%、科技-0.8%、金融-2.1%、创新-9.3%。分化明显。",
       "category": "sector",
       "sentiment": "neutral",
       "tickers": [
@@ -62,12 +62,12 @@
         "SOXX",
         "ARKK"
       ],
-      "time": "2026-02-20T14:43:37Z",
+      "time": "2026-02-20T15:13:36Z",
       "priority": 7
     },
     {
-      "headline": "半导体板块集体走强 NVDA涨5.7%",
-      "summary": "芯片股集体走强，板块均涨4.4%。英伟达$188.20。AI算力需求持续为焦点。",
+      "headline": "半导体板块集体走强 NVDA涨5.3%",
+      "summary": "芯片股集体走强，板块均涨4.4%。英伟达$187.45。AI算力需求持续为焦点。",
       "category": "theme",
       "sentiment": "bullish",
       "tickers": [
@@ -77,12 +77,12 @@
         "AVGO",
         "ASML"
       ],
-      "time": "2026-02-20T14:43:37Z",
+      "time": "2026-02-20T15:13:36Z",
       "priority": 7
     },
     {
-      "headline": "中概股下挫 板块均-2.6% — 2/9只上涨",
-      "summary": "阿里-6.4%，拼多多-2.8%。海外监管不确定性持续。",
+      "headline": "中概股下挫 板块均-2.1% — 2/9只上涨",
+      "summary": "阿里-5.5%，拼多多-0.8%。海外监管不确定性持续。",
       "category": "theme",
       "sentiment": "bearish",
       "tickers": [
@@ -92,37 +92,37 @@
         "BIDU",
         "NIO"
       ],
-      "time": "2026-02-20T14:43:37Z",
+      "time": "2026-02-20T15:13:36Z",
       "priority": 7
     },
     {
-      "headline": "今日领涨：ARM、AMAT、LI",
-      "summary": "涨幅居前：Arm Holdings plc(ARM) +18.8%；Applied Materials, Inc.(AMAT) +18.0%；Li Auto Inc.(LI) +14.7%。",
+      "headline": "今日领涨：ARM、AMAT、ON",
+      "summary": "涨幅居前：Arm Holdings plc(ARM) +19.0%；Applied Materials, Inc.(AMAT) +16.8%；ON Semiconductor Corporation(ON) +15.2%。",
       "category": "movers",
       "sentiment": "bullish",
       "tickers": [
         "ARM",
         "AMAT",
-        "LI"
+        "ON"
       ],
-      "time": "2026-02-20T14:43:37Z",
+      "time": "2026-02-20T15:13:36Z",
       "priority": 6
     },
     {
-      "headline": "跌幅居前：PYPL、PATH、PLTR",
-      "summary": "跌幅居前：PayPal Holdings, Inc.(PYPL) -23.5%；UiPath, Inc.(PATH) -22.4%；Palantir Technologies Inc.(PLTR) -21.1%。",
+      "headline": "跌幅居前：PYPL、PLTR、PATH",
+      "summary": "跌幅居前：PayPal Holdings, Inc.(PYPL) -22.9%；Palantir Technologies Inc.(PLTR) -21.1%；UiPath, Inc.(PATH) -20.2%。",
       "category": "movers",
       "sentiment": "bearish",
       "tickers": [
         "PYPL",
-        "PATH",
-        "PLTR"
+        "PLTR",
+        "PATH"
       ],
-      "time": "2026-02-20T14:43:37Z",
+      "time": "2026-02-20T15:13:36Z",
       "priority": 6
     },
     {
-      "headline": "金融板块走弱 均-9.3% 摩根大通+0.0%",
+      "headline": "金融板块走弱 均-8.9% 摩根大通+0.0%",
       "summary": "金融股受利率下行和信贷担忧拖累。",
       "category": "theme",
       "sentiment": "bearish",
@@ -131,23 +131,23 @@
         "MA",
         "PYPL"
       ],
-      "time": "2026-02-20T14:43:37Z",
+      "time": "2026-02-20T15:13:36Z",
       "priority": 6
     },
     {
       "headline": "医疗板块承压 礼来+0.0% 联合健康+0.0%",
-      "summary": "医疗健康板块均-5.4%。药品定价压力和监管不确定性。",
+      "summary": "医疗健康板块均-5.5%。药品定价压力和监管不确定性。",
       "category": "theme",
       "sentiment": "bearish",
       "tickers": [
         "ISRG"
       ],
-      "time": "2026-02-20T14:43:37Z",
+      "time": "2026-02-20T15:13:36Z",
       "priority": 6
     },
     {
-      "headline": "科技巨头齐跌 平均-2.7%",
-      "summary": "Apple Inc.(AAPL) +5.2%、Microsoft Corporation(MSFT) -12.4%、Amazon.com, Inc.(AMZN) -10.7%、Meta Platforms, Inc.(META) +7.3%、NVIDIA Corporation(NVDA) +5.7%、Tesla, Inc.(TSLA) -2.3%、Netflix, Inc.(NFLX) -12.0%。",
+      "headline": "科技巨头齐跌 平均-2.3%",
+      "summary": "Apple Inc.(AAPL) +5.9%、Microsoft Corporation(MSFT) -12.3%、Amazon.com, Inc.(AMZN) -9.3%、Meta Platforms, Inc.(META) +8.3%、NVIDIA Corporation(NVDA) +5.3%、Tesla, Inc.(TSLA) -2.3%、Netflix, Inc.(NFLX) -11.2%。",
       "category": "theme",
       "sentiment": "bearish",
       "tickers": [
@@ -158,18 +158,18 @@
         "NVDA",
         "TSLA"
       ],
-      "time": "2026-02-20T14:43:37Z",
+      "time": "2026-02-20T15:13:36Z",
       "priority": 6
     },
     {
       "headline": "30日趋势：标普500高位整理 近5日低于前5日0.9%",
-      "summary": "多空博弈加剧。近5日均价6,858，前5日均价6,923。",
+      "summary": "多空博弈加剧。近5日均价6,860，前5日均价6,923。",
       "category": "analysis",
       "sentiment": "neutral",
       "tickers": [
         "^GSPC"
       ],
-      "time": "2026-02-20T14:43:37Z",
+      "time": "2026-02-20T15:13:36Z",
       "priority": 5
     }
   ]
